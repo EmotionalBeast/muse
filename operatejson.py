@@ -1,3 +1,5 @@
+# -*- coding: uft-8 -*-
+#author: Jhin Yao
 import json
 
 #加载Json文件的模块

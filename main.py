@@ -2,9 +2,8 @@
 #author: Jhin Yao
 
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QTableWidgetItem, QAbstractItemView, QComboBox
-#from PyQt5.QtGui import 
-#from PyQt5.QtCore import QTextStream, QFile
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QFileDialog, QMessageBox, 
+													QTableWidgetItem, QAbstractItemView, QComboBox)
 import json
 from mainwindow import Ui_MainWindow
 from operatejson import OperateJson
