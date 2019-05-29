@@ -12,6 +12,7 @@ class Ui_PaintWindow(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(800, 600)
+        Form.setFixedSize(800, 600)
         Form.setWindowIcon(QtGui.QIcon("./images/tool.png"))
         #定义界面控件
         self.pushButton = QtWidgets.QPushButton(Form)
@@ -23,9 +24,17 @@ class Ui_PaintWindow(object):
         self.pushButton_3 = QtWidgets.QPushButton(Form)
         self.pushButton_3.setGeometry(QtCore.QRect(30, 330, 100, 30))
         self.pushButton_3.setObjectName("pushButton_3")
+        # self.lineEdit = QtWidgets.QLineEdit(Form)
+        # self.lineEdit.setGeometry(QtCore.QRect(30, 100, 100, 30))
+        # self.lineEdit.setObjectName("lineEdit")
+        # self.pushButton_4 = QtWidgets.QPushButton(Form)
+        # self.pushButton_4.setGeometry(QtCore.QRect(30,130,100,30))
+        # self.pushButton_4.setObjectName("pushButton_4")
+        
         self.graphicsView = QtWidgets.QGraphicsView(Form)
         self.graphicsView.setGeometry(QtCore.QRect(160, 10, 610, 580))
         self.graphicsView.setObjectName("graphicsView")
+
         #定义button的点击操作
         # self.pushButton.clicked.connect(self.)
         # self.pushButton.clicked.connect(self.)

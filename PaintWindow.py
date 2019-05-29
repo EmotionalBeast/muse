@@ -7,7 +7,7 @@ class MyPaintWindow(QWidget):
         QWidget.__init__(self)
         self.paintWindow = Ui_PaintWindow()
         self.paintWindow.setupUi(self)
-
+    # def 
 
 
 

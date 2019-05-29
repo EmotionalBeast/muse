@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c1b99dd4-c20f-4c8f-b941-ca4f922d6678" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/images/main.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PaintWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/PaintWindow.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/Setup.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,7 +17,7 @@
         <entry file="file://$PROJECT_DIR$/MainWindow.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="345">
-              <caret line="267" lean-forward="true" selection-start-line="267" selection-end-line="267" />
+              <caret line="266" lean-forward="true" selection-start-line="266" selection-end-line="266" />
               <folding>
                 <element signature="e#43#53#0" expanded="true" />
               </folding>
@@ -59,7 +59,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="302" />
     <option name="y" value="167" />
     <option name="width" value="1400" />
@@ -169,7 +169,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="70" y="-8" width="1858" height="1096" extended-state="7" />
+    <frame x="70" y="-8" width="1858" height="1096" extended-state="6" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -242,7 +242,7 @@
     <entry file="file://$PROJECT_DIR$/MainWindow.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
-          <caret line="267" lean-forward="true" selection-start-line="267" selection-end-line="267" />
+          <caret line="266" lean-forward="true" selection-start-line="266" selection-end-line="266" />
           <folding>
             <element signature="e#43#53#0" expanded="true" />
           </folding>
