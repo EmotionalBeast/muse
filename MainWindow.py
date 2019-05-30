@@ -4,6 +4,7 @@
 import json
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QFileDialog, QMessageBox, 
 													QTableWidgetItem, QAbstractItemView, QComboBox)
+from PyQt5.QtCore import Qt
 from MainWindowUi import Ui_MainWindow
 from OperateData import OperateJson
 from PaintWindow import MyPaintWindow
@@ -14,9 +15,11 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 	def __init__(self):
 		super(MyMainWindow,self).__init__()
 		self.setupUi(self)
+		
 		with open("./font.json", 'r') as lf:
 			jsonStr = lf.read()
 			self.dict1 = json.loads(jsonStr, strict = False)
+		#反转字典，赋值给新的字典
 		self.dict2 = {v:k for k,v in self.dict1.items()}
 
 
@@ -74,15 +77,17 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		for i in range(len(bg_list)):
 			self.tableWidget_3.setItem(i,0,QTableWidgetItem(bg_list[i]['id']))
 			self.tableWidget_3.setItem(i,1,QTableWidgetItem(bg_list[i]['type']))
-			self.tableWidget_3.setItem(i,2,QTableWidgetItem(bg_list[i]['imageName']))
-			self.tableWidget_3.setItem(i,3,QTableWidgetItem(str(bg_list[i]['constraints']['left']['percentage'])))
-			self.tableWidget_3.setItem(i,4,QTableWidgetItem(str(bg_list[i]['constraints']['left']['constant'])))
-			self.tableWidget_3.setItem(i,5,QTableWidgetItem(str(bg_list[i]['constraints']['right']['percentage'])))
-			self.tableWidget_3.setItem(i,6,QTableWidgetItem(str(bg_list[i]['constraints']['right']['constant'])))
-			self.tableWidget_3.setItem(i,7,QTableWidgetItem(str(bg_list[i]['constraints']['top']['percentage'])))
-			self.tableWidget_3.setItem(i,8,QTableWidgetItem(str(bg_list[i]['constraints']['top']['constant'])))
-			self.tableWidget_3.setItem(i,9,QTableWidgetItem(str(bg_list[i]['constraints']['bottom']['percentage'])))
-			self.tableWidget_3.setItem(i,10,QTableWidgetItem(str(bg_list[i]['constraints']['bottom']['constant'])))
+			self.tableWidget_3.setItem(i,2,QTableWidgetItem(str(bg_list[i]['blur'])))
+			self.tableWidget_3.setItem(i,3,QTableWidgetItem(bg_list[i]['refId']))
+			self.tableWidget_3.setItem(i,4,QTableWidgetItem(bg_list[i]['imageName']))
+			self.tableWidget_3.setItem(i,5,QTableWidgetItem(str(bg_list[i]['constraints']['left']['percentage'])))
+			self.tableWidget_3.setItem(i,6,QTableWidgetItem(str(bg_list[i]['constraints']['left']['constant'])))
+			self.tableWidget_3.setItem(i,7,QTableWidgetItem(str(bg_list[i]['constraints']['right']['percentage'])))
+			self.tableWidget_3.setItem(i,8,QTableWidgetItem(str(bg_list[i]['constraints']['right']['constant'])))
+			self.tableWidget_3.setItem(i,9,QTableWidgetItem(str(bg_list[i]['constraints']['top']['percentage'])))
+			self.tableWidget_3.setItem(i,10,QTableWidgetItem(str(bg_list[i]['constraints']['top']['constant'])))
+			self.tableWidget_3.setItem(i,11,QTableWidgetItem(str(bg_list[i]['constraints']['bottom']['percentage'])))
+			self.tableWidget_3.setItem(i,12,QTableWidgetItem(str(bg_list[i]['constraints']['bottom']['constant'])))
 
 		for i in range(len(text_list)):
 			self.tableWidget.setItem(i,0,QTableWidgetItem(text_list[i]['id']))
@@ -160,15 +165,17 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				bg_dic = {}
 				bg_dic['id'] = self.tableWidget_3.item(i, 0).text()
 				bg_dic['type'] = self.tableWidget_3.item(i, 1).text()
-				bg_dic['imageName'] = self.tableWidget_3.item(i, 2).text()
-				item_1 = self.tableWidget_3.item(i,3).text()
-				item_2 = self.tableWidget_3.item(i,4).text()
-				item_3 = self.tableWidget_3.item(i,5).text()
-				item_4 = self.tableWidget_3.item(i,6).text()
-				item_5 = self.tableWidget_3.item(i,7).text()
-				item_6 = self.tableWidget_3.item(i,8).text()
-				item_7 = self.tableWidget_3.item(i,9).text()
-				item_8 = self.tableWidget_3.item(i,10).text()
+				bg_dic['blur'] = int(self.tableWidget_3.item(i, 2).text())
+				bg_dic['refId'] = self.tableWidget_3.item(i, 3).text()
+				bg_dic['imageName'] = self.tableWidget_3.item(i, 4).text()
+				item_1 = self.tableWidget_3.item(i,5).text()
+				item_2 = self.tableWidget_3.item(i,6).text()
+				item_3 = self.tableWidget_3.item(i,7).text()
+				item_4 = self.tableWidget_3.item(i,8).text()
+				item_5 = self.tableWidget_3.item(i,9).text()
+				item_6 = self.tableWidget_3.item(i,10).text()
+				item_7 = self.tableWidget_3.item(i,11).text()
+				item_8 = self.tableWidget_3.item(i,12).text()
 				bg_dic['constraints'] = {"left":{
 												 "percentage": float(item_1),
 												 "constant": float(item_2)
@@ -257,10 +264,11 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			if i != 3:
 				for j in range(self.tableWidget.rowCount()):
 					self.tableWidget.takeItem(j,i)
+
 	
 	def openPaintWindow(self):
 		self.myPaintWindow = MyPaintWindow()
-		# self.myPaintWindow.setWindowModality(Qt.ApplicationModal)
+		self.myPaintWindow.setWindowModality(Qt.ApplicationModal)
 		self.myPaintWindow.show()
 
 
