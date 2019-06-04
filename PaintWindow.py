@@ -12,7 +12,7 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 
 	def chooseImage(self):
 		fileName, fileType = QFileDialog.getOpenFileName(self,
-				"File System", './', "Image Files(*.png *.jpg )")
+				"File System", './', "Image Files(*.png *.jpg *.ico )")
 
 		if len(fileName) == 0:
 			QMessageBox.information(self, "Tips", "No file selected!")
@@ -20,11 +20,15 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 			self.lineEdit.setText(fileName)
 
 	def ratio_4_3(self):
-		label_4_3 = QLabel(self)
-		label_4_3.setObjectName("label_4_3")
 		pro = Production()
-		label_4_3 = pro.getBg(self.lineEdit.text(), label_4_3)
-		label_4_3.setGeometry(QRect(315, 120, 300, 400))
+		width_ = 300
+		height_ = 400
+		scene = pro.getBgScene(self.lineEdit.text(), width_, height_)
+		self.graphicsView.setScene(scene)
+		scene.setSceneRect(200, 100, 300, 400)
+
+
+
 
 
 
