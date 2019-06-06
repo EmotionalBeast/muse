@@ -1,0 +1,36 @@
+# -*- mode: python -*-
+
+block_cipher = None
+
+
+a = Analysis(['Setup.py'],
+             pathex=['MainWindow.py', 'MainWindowUi.py', 'Material.py', 'PaintWindow.py', 'PaintWindowUi.py', 'OperateData.py', '/Users/mac/Desktop/git/muse'],
+             binaries=[],
+             datas=[],
+             hiddenimports=[],
+             hookspath=[],
+             runtime_hooks=[],
+             excludes=[],
+             win_no_prefer_redirects=False,
+             win_private_assemblies=False,
+             cipher=block_cipher,
+             noarchive=False)
+pyz = PYZ(a.pure, a.zipped_data,
+             cipher=block_cipher)
+exe = EXE(pyz,
+          a.scripts,
+          a.binaries,
+          a.zipfiles,
+          a.datas,
+          [],
+          name='Setup',
+          debug=False,
+          bootloader_ignore_signals=False,
+          strip=False,
+          upx=True,
+          runtime_tmpdir=None,
+          console=False , icon='icon.ico')
+app = BUNDLE(exe,
+             name='Setup.app',
+             icon='icon.ico',
+             bundle_identifier=None)
