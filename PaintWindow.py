@@ -29,6 +29,7 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		self.graphicsView.setScene(scene)
 		scene.setSceneRect(0, 0, width_, height_)
 		#添加cell
+		#get table's value in MainWindow
 
 		#添加文字
 		

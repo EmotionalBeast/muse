@@ -172,8 +172,9 @@ class Ui_MainWindow(object):
         self.tabWidget.addTab(self.tab_3, "")
 
         #设置列宽
-        self.tableWidget.setColumnWidth(3,210)
+        self.tableWidget.setColumnWidth(3,230)
         self.tableWidget.setColumnWidth(7,600)
+        self.tableWidget_3.setColumnWidth(4,200)
        
 
         #将comBox放入相应的table中

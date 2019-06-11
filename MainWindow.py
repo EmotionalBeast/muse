@@ -41,8 +41,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			QMessageBox.information(self,"Tips","No file selected!")
 		else:
 			jsonFile = OperateJson(fileName)
-			dic = jsonFile.loadJson()
-			self.valuedTable(dic)
+			self.dic = jsonFile.loadJson()
+			self.valuedTable(self.dic)
 		self.nonEditable()
 
 	def valuedTable(self, dic):
