@@ -267,8 +267,39 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 
 	
 	def openPaintWindow(self):
-		self.myPaintWindow = MyPaintWindow()
+		tup = self.getTableValue()
+		self.myPaintWindow = MyPaintWindow(tup)
 		self.myPaintWindow.setWindowModality(Qt.ApplicationModal)
 		self.myPaintWindow.show()
+
+
+	def getTableValue(self):
+		cell_list = []
+		text_list = []
+		for i in range(self.tableWidget_2.columnCount()):
+			if self.tableWidget_2.item(i,1) != None:
+				cell_dic = {}
+				for j in range(self.tableWidget_2.rowCount()-3):
+					key = self.tableWidget_2.horizontalHeaderItem(j+3).text()
+					value = self.tableWidget_2.item(i, j+3).text()
+					cell_dic[key] = value
+				cell_list.append(cell_dic)
+
+		for i in range(self.tableWidget.columnCount()):
+			if self.tableWidget.item(i, 1) != None:
+				text_dic = {}
+				for j in range(self.tableWidget.rowCount()-4):
+					key = self.tableWidget.horizontalHeaderItem(j+4).text()
+					value = self.tableWidget.item(i, j+4).text()
+					text_dic[key] = value
+				text_list.append(text_dic)
+
+		return (cell_list, text_list)
+
+
+
+
+
+
 
 

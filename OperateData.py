@@ -18,7 +18,7 @@ class OperateJson:
 
 	def dumpJson(self,dic):
 		with open(self.filePath_, 'w') as dump_f:
-			jsonStr = json.dumps(dic)
+			jsonStr = json.dumps(dic, sort_keys=True, indent=2)
 			dump_f.write(jsonStr)
 
 
