@@ -77,38 +77,37 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		for i in range(len(bg_list)):
 			self.tableWidget_3.setItem(i,0,QTableWidgetItem(bg_list[i]['id']))
 			self.tableWidget_3.setItem(i,1,QTableWidgetItem(bg_list[i]['type']))
-			self.tableWidget_3.setItem(i,2,QTableWidgetItem(str(bg_list[i]['blur'])))
-			self.tableWidget_3.setItem(i,3,QTableWidgetItem(bg_list[i]['refId']))
-			self.tableWidget_3.setItem(i,4,QTableWidgetItem(bg_list[i]['imageName']))
-			self.tableWidget_3.setItem(i,5,QTableWidgetItem(str(bg_list[i]['constraints']['left']['percentage'])))
-			self.tableWidget_3.setItem(i,6,QTableWidgetItem(str(bg_list[i]['constraints']['left']['constant'])))
-			self.tableWidget_3.setItem(i,7,QTableWidgetItem(str(bg_list[i]['constraints']['right']['percentage'])))
-			self.tableWidget_3.setItem(i,8,QTableWidgetItem(str(bg_list[i]['constraints']['right']['constant'])))
-			self.tableWidget_3.setItem(i,9,QTableWidgetItem(str(bg_list[i]['constraints']['top']['percentage'])))
-			self.tableWidget_3.setItem(i,10,QTableWidgetItem(str(bg_list[i]['constraints']['top']['constant'])))
-			self.tableWidget_3.setItem(i,11,QTableWidgetItem(str(bg_list[i]['constraints']['bottom']['percentage'])))
-			self.tableWidget_3.setItem(i,12,QTableWidgetItem(str(bg_list[i]['constraints']['bottom']['constant'])))
+			self.tableWidget_3.setItem(i,2,QTableWidgetItem(bg_list[i]['imageName']))
+			self.tableWidget_3.setItem(i,3,QTableWidgetItem(str(bg_list[i]['constraints']['left']['percentage'])))
+			self.tableWidget_3.setItem(i,4,QTableWidgetItem(str(bg_list[i]['constraints']['left']['constant'])))
+			self.tableWidget_3.setItem(i,5,QTableWidgetItem(str(bg_list[i]['constraints']['right']['percentage'])))
+			self.tableWidget_3.setItem(i,6,QTableWidgetItem(str(bg_list[i]['constraints']['right']['constant'])))
+			self.tableWidget_3.setItem(i,7,QTableWidgetItem(str(bg_list[i]['constraints']['top']['percentage'])))
+			self.tableWidget_3.setItem(i,8,QTableWidgetItem(str(bg_list[i]['constraints']['top']['constant'])))
+			self.tableWidget_3.setItem(i,9,QTableWidgetItem(str(bg_list[i]['constraints']['bottom']['percentage'])))
+			self.tableWidget_3.setItem(i,10,QTableWidgetItem(str(bg_list[i]['constraints']['bottom']['constant'])))
 
 		for i in range(len(text_list)):
-			self.tableWidget.setItem(i,0,QTableWidgetItem(text_list[i]['id']))
-			self.tableWidget.setItem(i,1,QTableWidgetItem(text_list[i]['type']))
-			self.tableWidget.setItem(i,2,QTableWidgetItem(text_list[i]['textId']))
-			self.tableWidget.cellWidget(i,3).setCurrentText(self.dict2[text_list[i]["fontName"]])
-			self.tableWidget.setItem(i,4,QTableWidgetItem(str(text_list[i]['fontSize'])))
-			self.tableWidget.setItem(i,5,QTableWidgetItem(str(text_list[i]['canvasWidth'])))
-			self.tableWidget.setItem(i,6,QTableWidgetItem(text_list[i]['textColor']))
-			self.tableWidget.setItem(i,7,QTableWidgetItem(text_list[i]['placeHolder']))
-			self.tableWidget.setItem(i,8,QTableWidgetItem(text_list[i]['textAlignment']))
-			self.tableWidget.setItem(i,9,QTableWidgetItem(str(text_list[i]['constraints']['left']['percentage'])))
-			self.tableWidget.setItem(i,10,QTableWidgetItem(str(text_list[i]['constraints']['left']['constant'])))
-			self.tableWidget.setItem(i,11,QTableWidgetItem(str(text_list[i]['constraints']['right']['percentage'])))
-			self.tableWidget.setItem(i,12,QTableWidgetItem(str(text_list[i]['constraints']['right']['constant'])))
-			self.tableWidget.setItem(i,13,QTableWidgetItem(str(text_list[i]['constraints']['top']['percentage'])))
-			self.tableWidget.setItem(i,14,QTableWidgetItem(str(text_list[i]['constraints']['top']['constant'])))
+			self.tableWidget_4.setItem(i,0,QTableWidgetItem(text_list[i]['id']))
+			self.tableWidget_4.setItem(i,1,QTableWidgetItem(text_list[i]['type']))
+			self.tableWidget_4.setItem(i,2,QTableWidgetItem(text_list[i]['textId']))
+			self.tableWidget_4.cellWidget(i,3).setCurrentText(self.dict2[text_list[i]["fontName"]])
+			self.tableWidget_4.setItem(i,4,QTableWidgetItem(str(text_list[i]['fontSize'])))
+			self.tableWidget_4.setItem(i,5,QTableWidgetItem(str(text_list[i]['canvasWidth'])))
+			self.tableWidget_4.setItem(i,6,QTableWidgetItem(text_list[i]['textColor']))
+			self.tableWidget_4.setItem(i,7,QTableWidgetItem(text_list[i]['placeHolder']))
+			self.tableWidget_4.setItem(i,8,QTableWidgetItem(text_list[i]['textAlignment']))
+			self.tableWidget_4.setItem(i,9,QTableWidgetItem(str(text_list[i]['constraints']['left']['percentage'])))
+			self.tableWidget_4.setItem(i,10,QTableWidgetItem(str(text_list[i]['constraints']['left']['constant'])))
+			self.tableWidget_4.setItem(i,11,QTableWidgetItem(str(text_list[i]['constraints']['right']['percentage'])))
+			self.tableWidget_4.setItem(i,12,QTableWidgetItem(str(text_list[i]['constraints']['right']['constant'])))
+			self.tableWidget_4.setItem(i,13,QTableWidgetItem(str(text_list[i]['constraints']['top']['percentage'])))
+			self.tableWidget_4.setItem(i,14,QTableWidgetItem(str(text_list[i]['constraints']['top']['constant'])))
 
 
 
 	def saveTable(self):
+		self.nonEditable()
 		fileName, fileType = QFileDialog.getSaveFileName(self, 'Save File', './', "Text Files(*.json)")
 
 		if len(fileName) == 0:
@@ -165,17 +164,15 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				bg_dic = {}
 				bg_dic['id'] = self.tableWidget_3.item(i, 0).text()
 				bg_dic['type'] = self.tableWidget_3.item(i, 1).text()
-				bg_dic['blur'] = int(self.tableWidget_3.item(i, 2).text())
-				bg_dic['refId'] = self.tableWidget_3.item(i, 3).text()
-				bg_dic['imageName'] = self.tableWidget_3.item(i, 4).text()
-				item_1 = self.tableWidget_3.item(i,5).text()
-				item_2 = self.tableWidget_3.item(i,6).text()
-				item_3 = self.tableWidget_3.item(i,7).text()
-				item_4 = self.tableWidget_3.item(i,8).text()
-				item_5 = self.tableWidget_3.item(i,9).text()
-				item_6 = self.tableWidget_3.item(i,10).text()
-				item_7 = self.tableWidget_3.item(i,11).text()
-				item_8 = self.tableWidget_3.item(i,12).text()
+				bg_dic['imageName'] = self.tableWidget_3.item(i, 2).text()
+				item_1 = self.tableWidget_3.item(i,3).text()
+				item_2 = self.tableWidget_3.item(i,4).text()
+				item_3 = self.tableWidget_3.item(i,5).text()
+				item_4 = self.tableWidget_3.item(i,6).text()
+				item_5 = self.tableWidget_3.item(i,7).text()
+				item_6 = self.tableWidget_3.item(i,8).text()
+				item_7 = self.tableWidget_3.item(i,9).text()
+				item_8 = self.tableWidget_3.item(i,10).text()
 				bg_dic['constraints'] = {"left":{
 												 "percentage": float(item_1),
 												 "constant": float(item_2)
@@ -195,24 +192,24 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 												 }
 				dic["elements"].append(bg_dic)
 
-		for i in range(self.tableWidget.rowCount()):
-			if self.tableWidget.item(i, 1) != None:
+		for i in range(self.tableWidget_4.rowCount()):
+			if self.tableWidget_4.item(i, 1) != None:
 				text_dic = {}
-				text_dic['id'] = self.tableWidget.item(i, 0).text()
-				text_dic['type'] = self.tableWidget.item(i, 1).text()
-				text_dic['textId'] = self.tableWidget.item(i, 2).text()
-				text_dic['fontName'] = self.dict1[self.tableWidget.cellWidget(i, 3).currentText()]
-				text_dic['fontSize'] = int(self.tableWidget.item(i, 4).text())
-				text_dic['canvasWidth'] = int(self.tableWidget.item(i, 5).text())
-				text_dic['textColor'] = self.tableWidget.item(i, 6).text()
-				text_dic['placeHolder'] = self.tableWidget.item(i, 7).text()
-				text_dic['textAlignment'] = self.tableWidget.item(i, 8).text()
-				item_1 = self.tableWidget.item(i,9).text()
-				item_2 = self.tableWidget.item(i,10).text()
-				item_3 = self.tableWidget.item(i,11).text()
-				item_4 = self.tableWidget.item(i,12).text()
-				item_5 = self.tableWidget.item(i,13).text()
-				item_6 = self.tableWidget.item(i,14).text()
+				text_dic['id'] = self.tableWidget_4.item(i, 0).text()
+				text_dic['type'] = self.tableWidget_4.item(i, 1).text()
+				text_dic['textId'] = self.tableWidget_4.item(i, 2).text()
+				text_dic['fontName'] = self.dict1[self.tableWidget_4.cellWidget(i, 3).currentText()]
+				text_dic['fontSize'] = int(self.tableWidget_4.item(i, 4).text())
+				text_dic['canvasWidth'] = int(self.tableWidget_4.item(i, 5).text())
+				text_dic['textColor'] = self.tableWidget_4.item(i, 6).text()
+				text_dic['placeHolder'] = self.tableWidget_4.item(i, 7).text()
+				text_dic['textAlignment'] = self.tableWidget_4.item(i, 8).text()
+				item_1 = self.tableWidget_4.item(i,9).text()
+				item_2 = self.tableWidget_4.item(i,10).text()
+				item_3 = self.tableWidget_4.item(i,11).text()
+				item_4 = self.tableWidget_4.item(i,12).text()
+				item_5 = self.tableWidget_4.item(i,13).text()
+				item_6 = self.tableWidget_4.item(i,14).text()
 				text_dic['constraints'] = {"left":{
 												 "percentage": float(item_1),
 												 "constant": float(item_2)

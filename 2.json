@@ -1,0 +1,78 @@
+{
+  "elements": [
+    {
+      "constraints": {
+        "height": {
+          "constant": 0.0,
+          "percentage": 0.45
+        },
+        "left": {
+          "constant": 0.0,
+          "percentage": 0.2
+        },
+        "right": {
+          "constant": 0.0,
+          "percentage": 0.2
+        },
+        "top": {
+          "constant": 0.0,
+          "percentage": 0.34
+        }
+      },
+      "id": "0",
+      "mediaId": "0",
+      "type": "media"
+    },
+    {
+      "blur": 100,
+      "constraints": {
+        "bottom": {
+          "constant": 0.0,
+          "percentage": 0.0
+        },
+        "left": {
+          "constant": 0.0,
+          "percentage": 0.0
+        },
+        "right": {
+          "constant": 0.0,
+          "percentage": 0.0
+        },
+        "top": {
+          "constant": 0.0,
+          "percentage": 0.0
+        }
+      },
+      "id": "1",
+      "imageName": "1232.png",
+      "refId": "0",
+      "type": "image"
+    },
+    {
+      "canvasWidth": 375,
+      "constraints": {
+        "left": {
+          "constant": 0.0,
+          "percentage": 0.2
+        },
+        "right": {
+          "constant": 0.0,
+          "percentage": 0.2
+        },
+        "top": {
+          "constant": 0.0,
+          "percentage": 0.2
+        }
+      },
+      "fontName": "Freestyle Script",
+      "fontSize": 24,
+      "id": "2",
+      "placeHolder": "Oh yes!",
+      "textAlignment": "center",
+      "textColor": "FFFFFF",
+      "textId": "0",
+      "type": "text"
+    }
+  ],
+  "templateId": 1223
+}
