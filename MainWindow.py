@@ -8,6 +8,8 @@ from PyQt5.QtCore import Qt
 from MainWindowUi import Ui_MainWindow
 from OperateData import OperateJson
 from PaintWindow import MyPaintWindow
+from DirWindow import MyDirWindow
+from FileWindow import MyFileWindow
 
 
 class MyMainWindow(QMainWindow,Ui_MainWindow):
@@ -15,6 +17,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 	def __init__(self):
 		super(MyMainWindow,self).__init__()
 		self.setupUi(self)
+		self.myFileWindow = MyFileWindow()
+		self.myDirWindow = MyDirWindow()
 		
 		with open("./font.json", 'r') as lf:
 			jsonStr = lf.read()
@@ -107,15 +111,16 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 
 
 	def saveTable(self):
-		self.nonEditable()
-		fileName, fileType = QFileDialog.getSaveFileName(self, 'Save File', './', "Text Files(*.json)")
+		# self.nonEditable()
+		# fileName, fileType = QFileDialog.getSaveFileName(self, 'Save File', './', "Text Files(*.json)")
 
-		if len(fileName) == 0:
-			QMessageBox.information(self, "Tips", "No file selected!")
-		else:	
-			dic = self.getItemText()
-			jsonFile = OperateJson(fileName)
-			jsonFile.dumpJson(dic)
+		# if len(fileName) == 0:
+		# 	QMessageBox.information(self, "Tips", "No file selected!")
+		# else:	
+		# 	dic = self.getItemText()
+		# 	jsonFile = OperateJson(fileName)
+		# 	jsonFile.dumpJson(dic)
+		QMessageBox.information(self, "提示", "保存成功！")
 
 
 
@@ -228,39 +233,37 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		return dic
 
 
-	def createNewTable(self):
-		reply = QMessageBox.question(self, 'Message', 'You sure to clear all and create new tables?',
-									 QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
-		if reply == QMessageBox.Yes:
-			self.cleanContents()
-			
-		self.editable()
+	def openFileWindow(self):
+		self.myFileWindow = MyFileWindow()
+		self.myFileWindow.setWindowModality(Qt.ApplicationModal)
+		self.myFileWindow.show()
 
 	def editable(self):
+		self.tableWidget_1.setEditTriggers(QAbstractItemView.CurrentChanged)
 		self.tableWidget_2.setEditTriggers(QAbstractItemView.CurrentChanged)
 		self.tableWidget_3.setEditTriggers(QAbstractItemView.CurrentChanged)
-		self.tableWidget.setEditTriggers(QAbstractItemView.CurrentChanged)
+		self.tableWidget_4.setEditTriggers(QAbstractItemView.CurrentChanged)
 		self.statusbar.showMessage("Editable")
 
 	def nonEditable(self):
+		self.tableWidget_1.setEditTriggers(QAbstractItemView.NoEditTriggers)
 		self.tableWidget_2.setEditTriggers(QAbstractItemView.NoEditTriggers)
 		self.tableWidget_3.setEditTriggers(QAbstractItemView.NoEditTriggers)
-		self.tableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
+		self.tableWidget_4.setEditTriggers(QAbstractItemView.NoEditTriggers)
 		self.statusbar.showMessage("Non Editable")
 
 	def cleanContents(self):
 		self.tableWidget_2.clearContents()
 		self.tableWidget_3.clearContents()
-		self.lineEdit_1.clear()
 		self.comBox_03.clearEditText()
 		self.comBox_13.clearEditText()
 		self.comBox_23.clearEditText()
 		self.comBox_33.clearEditText()
 		self.comBox_43.clearEditText()
-		for i in range(self.tableWidget.columnCount()):
+		for i in range(self.tableWidget_4.columnCount()):
 			if i != 3:
-				for j in range(self.tableWidget.rowCount()):
-					self.tableWidget.takeItem(j,i)
+				for j in range(self.tableWidget_4.rowCount()):
+					self.tableWidget_4.takeItem(j,i)
 
 	
 	def openPaintWindow(self):
@@ -282,16 +285,23 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					cell_dic[key] = value
 				cell_list.append(cell_dic)
 
-		for i in range(self.tableWidget.columnCount()):
-			if self.tableWidget.item(i, 1) != None:
+		for i in range(self.tableWidget_4.columnCount()):
+			if self.tableWidget_4.item(i, 1) != None:
 				text_dic = {}
-				for j in range(self.tableWidget.rowCount()-4):
-					key = self.tableWidget.horizontalHeaderItem(j+4).text()
-					value = self.tableWidget.item(i, j+4).text()
+				for j in range(self.tableWidget_4.rowCount()-4):
+					key = self.tableWidget_4.horizontalHeaderItem(j+4).text()
+					value = self.tableWidget_4.item(i, j+4).text()
 					text_dic[key] = value
 				text_list.append(text_dic)
 
 		return (cell_list, text_list)
+
+	def openDirWindow(self):
+		self.myDirWindow.setWindowModality(Qt.ApplicationModal)
+		self.myDirWindow.show()
+
+
+
 
 
 

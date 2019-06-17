@@ -231,22 +231,11 @@ class Ui_MainWindow(object):
         #
         MainWindow.setCentralWidget(self.centralwidget)
 
-        #菜单栏
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1000, 23))
-
-        self.menubar.setObjectName("menubar")
-        self.menuFile = QtWidgets.QMenu(self.menubar)
-        self.menuFile.setObjectName("menuFile")
-        self.menuTools = QtWidgets.QMenu(self.menubar)
-        self.menuTools.setObjectName("menuTools")
-        MainWindow.setMenuBar(self.menubar)
-
         #选择素材组
         self.label_1 = QtWidgets.QLabel(self.centralwidget)
         self.label_1.setGeometry(QtCore.QRect(45,10,100,30))
         self.label_1.setText("素材组：")
-        self.label_1.setAlignment(QtCore.Qt.AlignHCenter)
+        self.label_1.setAlignment(QtCore.Qt.AlignCenter)
         self.label_1.setObjectName("label_1")
         self.comBox_1 = QtWidgets.QComboBox(self.centralwidget)
         self.comBox_1.setGeometry(QtCore.QRect(155, 10, 300, 30))
@@ -257,7 +246,7 @@ class Ui_MainWindow(object):
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(545,10,100,30))
         self.label_2.setText("json文件：")
-        self.label_2.setAlignment(QtCore.Qt.AlignHCenter)
+        self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
         self.comBox_1 = QtWidgets.QComboBox(self.centralwidget)
         self.comBox_1.setGeometry(QtCore.QRect(645, 10, 300, 30))
@@ -267,59 +256,64 @@ class Ui_MainWindow(object):
 
         #选择素材的组件部分:blur,cell,background,text,picturelevel(控制图层）
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
-        self.label_3.setGeometry(QtCore.QRect(30, 50, 40, 30))
+        self.label_3.setGeometry(QtCore.QRect(30, 50, 60, 30))
         self.label_3.setText("Blur:")
-        self.label_3.setAlignment(QtCore.Qt.AlignHCenter)
+        self.label_3.setAlignment(QtCore.Qt.AlignCenter)
         self.label_3.setObjectName("label_3")
         self.spinBox_1 = QtWidgets.QSpinBox(self.centralwidget)
-        self.spinBox_1.setGeometry(QtCore.QRect(80,50,50,30))
+        self.spinBox_1.setGeometry(QtCore.QRect(100,50,50,30))
 
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
-        self.label_4.setGeometry(QtCore.QRect(150, 50, 40, 30))
+        self.label_4.setGeometry(QtCore.QRect(170, 50, 60, 30))
         self.label_4.setText("Cell:")
-        self.label_4.setAlignment(QtCore.Qt.AlignHCenter)
+        self.label_4.setAlignment(QtCore.Qt.AlignCenter)
         self.label_4.setObjectName("label_4")
         self.spinBox_2 = QtWidgets.QSpinBox(self.centralwidget)
-        self.spinBox_2.setGeometry(QtCore.QRect(200, 50, 50, 30))
+        self.spinBox_2.setGeometry(QtCore.QRect(240, 50, 50, 30))
 
         self.label_5 = QtWidgets.QLabel(self.centralwidget)
-        self.label_5.setGeometry(QtCore.QRect(270, 50, 40, 30))
+        self.label_5.setGeometry(QtCore.QRect(310, 50, 90, 30))
         self.label_5.setText("Background:")
-        self.label_5.setAlignment(QtCore.Qt.AlignHCenter)
+        self.label_5.setAlignment(QtCore.Qt.AlignCenter)
         self.label_5.setObjectName("label_5")
         self.spinBox_3 = QtWidgets.QSpinBox(self.centralwidget)
-        self.spinBox_3.setGeometry(QtCore.QRect(320, 50, 50, 30))
+        self.spinBox_3.setGeometry(QtCore.QRect(410, 50, 50, 30))
 
         self.label_6 = QtWidgets.QLabel(self.centralwidget)
-        self.label_6.setGeometry(QtCore.QRect(390, 50, 40, 30))
+        self.label_6.setGeometry(QtCore.QRect(480, 50, 60, 30))
         self.label_6.setText("Text:")
-        self.label_6.setAlignment(QtCore.Qt.AlignHCenter)
+        self.label_6.setAlignment(QtCore.Qt.AlignCenter)
         self.label_6.setObjectName("label_6")
         self.spinBox_4 = QtWidgets.QSpinBox(self.centralwidget)
-        self.spinBox_4.setGeometry(QtCore.QRect(440, 50, 50, 30))
+        self.spinBox_4.setGeometry(QtCore.QRect(550, 50, 50, 30))
 
-        self.label_7 = QtWidgets.QLabel(self.centralwidget)
-        self.label_7.setGeometry(QtCore.QRect(510, 50, 40, 30))
-        self.label_7.setText("Level:")
-        self.label_7.setAlignment(QtCore.Qt.AlignHCenter)
-        self.label_7.setObjectName("label_7")
-        self.spinBox_5 = QtWidgets.QSpinBox(self.centralwidget)
-        self.spinBox_5.setGeometry(QtCore.QRect(560, 50, 50, 30))
+        #增加RadioButton
+        self.rbtn_1 = QtWidgets.QRadioButton(self.centralwidget)
+        self.rbtn_1.setGeometry(QtCore.QRect(620,50,60,30))
+        self.rbtn_1.setText("Level")
+        self.rbtn_1.setObjectName("rbtn_1")
 
-
-        # self.label_1 = QtWidgets.QLabel(self.centralwidget)
-        # self.label_1.setGeometry(QtCore.QRect(460,390,80,20))
-        # self.label_1.setText("templatedId:")
-        # self.label_1.setObjectName("label_1")
-        # self.lineEdit_1 = QtWidgets.QLineEdit(self.centralwidget)
-        # self.lineEdit_1.setGeometry(QtCore.QRect(400,420,200,20))
-        # self.lineEdit_1.setObjectName("lineEdit_1")
+        #增加button
+        self.pbtn_1 = QtWidgets.QPushButton(self.centralwidget)
+        self.pbtn_1.setGeometry(QtCore.QRect(870,50,100,30))
+        self.pbtn_1.setText("生成")
+        self.pbtn_1.setObjectName("pbtn_1")
 
         #状态栏
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
         self.statusbar.showMessage("Non Editable")
+
+        #菜单栏
+        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1000, 23))
+        self.menubar.setObjectName("menubar")
+        self.menuFile = QtWidgets.QMenu(self.menubar)
+        self.menuFile.setObjectName("menuFile")
+        self.menuTools = QtWidgets.QMenu(self.menubar)
+        self.menuTools.setObjectName("menuTools")
+        MainWindow.setMenuBar(self.menubar)
 
         #工具栏
         self.toolBar = QtWidgets.QToolBar(MainWindow)
@@ -342,15 +336,19 @@ class Ui_MainWindow(object):
         self.actionNew.setObjectName("actionNew")
         self.actionSave = QtWidgets.QAction(QtGui.QIcon('./images/save_as.png'), '&Save', self)
         self.actionSave.setObjectName("actionSave")
+        self.actionSetting = QtWidgets.QAction(QtGui.QIcon('./images/setting.png'), '&Setting', self)
+        self.actionSetting.setObjectName("actionSetting")
         self.actionQuit = QtWidgets.QAction(QtGui.QIcon('./images/quit.png'), '&Quit', self)
         self.actionQuit.setObjectName("actionQuit")
         self.actionPaint = QtWidgets.QAction(QtGui.QIcon('./images/paint.png'), '&Paint', self)
         self.actionPaint.setObjectName("actionPaint")
 
+        
         #将动作信息添加到菜单栏
         self.menuFile.addAction(self.actionOpen)
         self.menuFile.addAction(self.actionNew)
         self.menuFile.addAction(self.actionSave)
+        self.menuFile.addAction(self.actionSetting)
         self.menuFile.addAction(self.actionQuit)
         self.menuTools.addAction(self.actionPaint)
         self.menubar.addAction(self.menuFile.menuAction())
@@ -361,14 +359,15 @@ class Ui_MainWindow(object):
 
         #菜单栏的功能定义
         self.actionOpen.triggered.connect(self.openFile)
-        self.actionNew.triggered.connect(self.createNewTable)
+        self.actionNew.triggered.connect(self.openFileWindow)
         self.actionSave.triggered.connect(self.saveTable)
+        self.actionSetting.triggered.connect(self.openDirWindow)
         self.actionQuit.triggered.connect(QtWidgets.qApp.quit)
         self.actionPaint.triggered.connect(self.openPaintWindow)
 
         #工具栏的功能定义
         self.open_.triggered.connect(self.openFile)
-        self.new.triggered.connect(self.createNewTable)
+        self.new.triggered.connect(self.openFileWindow)
         self.edit.triggered.connect(self.editable)
         self.save.triggered.connect(self.saveTable)
 
@@ -381,8 +380,6 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     
-
-        
 
     #设置控件的各种属性
     def retranslateUi(self, MainWindow):
@@ -515,10 +512,12 @@ class Ui_MainWindow(object):
         self.actionNew.setShortcut(_translate("MainWindow", "Ctrl+N"))
         self.actionSave.setText(_translate("MainWindow", "Save"))
         self.actionSave.setShortcut(_translate("MainWindow", "Ctrl+S"))
+        self.actionSetting.setText(_translate("MainWindow", "Setting"))
+        self.actionSetting.setShortcut(_translate("MainWindow", "Ctrl+U"))
         self.actionQuit.setText(_translate("MainWindow", "Quit"))
         self.actionQuit.setShortcut(_translate("MainWindow", "Ctrl+Q"))
         self.actionPaint.setText(_translate("MainWindow", "Paint"))
-        self.actionPaint.setShortcut(_translate("MainWindow", "Ctrl+P"))
+        self.actionPaint.setShortcut(_translate("MainWindow", "Ctrl+R"))
 
 
     def itemList(self):
