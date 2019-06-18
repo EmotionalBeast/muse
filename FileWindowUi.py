@@ -14,8 +14,8 @@ class Ui_FileWindow(object):
 
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(500, 130)
-        Form.setFixedSize(500, 130)
+        Form.resize(500, 170)
+        Form.setFixedSize(500, 170)
         
         #定义界面控件UI
         #第一行
@@ -40,16 +40,29 @@ class Ui_FileWindow(object):
         self.lineEdit_3.setObjectName("lineEdit_3")
 
         #第三行
+        self.label_3 = QtWidgets.QLabel(Form)
+        self.label_3.setGeometry(QtCore.QRect(30, 90, 100, 30))
+        self.label_3.setObjectName("label_3")
+        self.label_3.setAlignment(QtCore.Qt.AlignCenter)
+        self.lineEdit_4 = QtWidgets.QLineEdit(Form)
+        self.lineEdit_4.setGeometry(QtCore.QRect(150, 90, 200, 30))
+        self.lineEdit_4.setObjectName("lineEdit_4")
         self.pushButton_1 = QtWidgets.QPushButton(Form)
-        self.pushButton_1.setGeometry(QtCore.QRect(130,90,100,30))
+        self.pushButton_1.setGeometry(QtCore.QRect(370, 90, 100, 30))
         self.pushButton_1.setObjectName("pushButton_1")
+
+        #第四行
         self.pushButton_2 = QtWidgets.QPushButton(Form)
-        self.pushButton_2.setGeometry(QtCore.QRect(250, 90, 100, 30))
+        self.pushButton_2.setGeometry(QtCore.QRect(130, 130, 100, 30))
         self.pushButton_2.setObjectName("pushButton_2")
+        self.pushButton_3 = QtWidgets.QPushButton(Form)
+        self.pushButton_3.setGeometry(QtCore.QRect(250, 130, 100, 30))
+        self.pushButton_3.setObjectName("pushButton_3")
 
         #定义button的点击操作
-        self.pushButton_1.clicked.connect(self.close)
-        # self.pushButton_2.clicked.connect(self.getContent)
+        self.pushButton_1.clicked.connect(self.chooseDir)
+        self.pushButton_2.clicked.connect(self.close)
+        self.pushButton_3.clicked.connect(self.makeDir)
         
 
 
@@ -62,10 +75,11 @@ class Ui_FileWindow(object):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "创建素材组"))
         self.label_1.setText(_translate("Form", "素材组名："))
-        self.label_2.setText(_translate("Form", "分组："))
-        self.pushButton_1.setText(_translate("Form", "取消"))
-        self.pushButton_2.setText(_translate("Form", "创建"))
-        
+        self.label_2.setText(_translate("Form", "素材序号："))
+        self.label_3.setText(_translate("Form", "png位置："))
+        self.pushButton_1.setText(_translate("Form", "选择"))
+        self.pushButton_2.setText(_translate("Form", "返回"))
+        self.pushButton_3.setText(_translate("Form", "创建"))
 
 
 

@@ -52,6 +52,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 	def valuedTable(self, dic):
 		self.lineEdit_1.setText(str(dic['templateId']))
 		list_ = dic['elements']
+		blur_list = []
 		cell_list = []
 		bg_list = []
 		text_list = []
@@ -65,48 +66,48 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				text_list.append(list_[i])
 
 		for i in range(len(cell_list)):
-			self.tableWidget_2.setItem(i,0,QTableWidgetItem(cell_list[i]['id']))
-			self.tableWidget_2.setItem(i,1,QTableWidgetItem(cell_list[i]['type']))
-			self.tableWidget_2.setItem(i,2,QTableWidgetItem(cell_list[i]['mediaId']))
+			# self.tableWidget_2.setItem(i,0,QTableWidgetItem(cell_list[i]['id']))
+			# self.tableWidget_2.setItem(i,1,QTableWidgetItem(cell_list[i]['type']))
+			# self.tableWidget_2.setItem(i,2,QTableWidgetItem(cell_list[i]['mediaId']))
 			self.tableWidget_2.setItem(i,3,QTableWidgetItem(str(cell_list[i]['constraints']['left']['percentage'])))
-			self.tableWidget_2.setItem(i,4,QTableWidgetItem(str(cell_list[i]['constraints']['left']['constant'])))
+			# self.tableWidget_2.setItem(i,4,QTableWidgetItem(str(cell_list[i]['constraints']['left']['constant'])))
 			self.tableWidget_2.setItem(i,5,QTableWidgetItem(str(cell_list[i]['constraints']['right']['percentage'])))
-			self.tableWidget_2.setItem(i,6,QTableWidgetItem(str(cell_list[i]['constraints']['right']['constant'])))
+			# self.tableWidget_2.setItem(i,6,QTableWidgetItem(str(cell_list[i]['constraints']['right']['constant'])))
 			self.tableWidget_2.setItem(i,7,QTableWidgetItem(str(cell_list[i]['constraints']['top']['percentage'])))
-			self.tableWidget_2.setItem(i,8,QTableWidgetItem(str(cell_list[i]['constraints']['top']['constant'])))
+			# self.tableWidget_2.setItem(i,8,QTableWidgetItem(str(cell_list[i]['constraints']['top']['constant'])))
 			self.tableWidget_2.setItem(i,9,QTableWidgetItem(str(cell_list[i]['constraints']['height']['percentage'])))
-			self.tableWidget_2.setItem(i,10,QTableWidgetItem(str(cell_list[i]['constraints']['height']['constant'])))
+			# self.tableWidget_2.setItem(i,10,QTableWidgetItem(str(cell_list[i]['constraints']['height']['constant'])))
 
 		
 		for i in range(len(bg_list)):
-			self.tableWidget_3.setItem(i,0,QTableWidgetItem(bg_list[i]['id']))
-			self.tableWidget_3.setItem(i,1,QTableWidgetItem(bg_list[i]['type']))
+			# self.tableWidget_3.setItem(i,0,QTableWidgetItem(bg_list[i]['id']))
+			# self.tableWidget_3.setItem(i,1,QTableWidgetItem(bg_list[i]['type']))
 			self.tableWidget_3.setItem(i,2,QTableWidgetItem(bg_list[i]['imageName']))
 			self.tableWidget_3.setItem(i,3,QTableWidgetItem(str(bg_list[i]['constraints']['left']['percentage'])))
-			self.tableWidget_3.setItem(i,4,QTableWidgetItem(str(bg_list[i]['constraints']['left']['constant'])))
+			# self.tableWidget_3.setItem(i,4,QTableWidgetItem(str(bg_list[i]['constraints']['left']['constant'])))
 			self.tableWidget_3.setItem(i,5,QTableWidgetItem(str(bg_list[i]['constraints']['right']['percentage'])))
-			self.tableWidget_3.setItem(i,6,QTableWidgetItem(str(bg_list[i]['constraints']['right']['constant'])))
+			# self.tableWidget_3.setItem(i,6,QTableWidgetItem(str(bg_list[i]['constraints']['right']['constant'])))
 			self.tableWidget_3.setItem(i,7,QTableWidgetItem(str(bg_list[i]['constraints']['top']['percentage'])))
-			self.tableWidget_3.setItem(i,8,QTableWidgetItem(str(bg_list[i]['constraints']['top']['constant'])))
+			# self.tableWidget_3.setItem(i,8,QTableWidgetItem(str(bg_list[i]['constraints']['top']['constant'])))
 			self.tableWidget_3.setItem(i,9,QTableWidgetItem(str(bg_list[i]['constraints']['bottom']['percentage'])))
-			self.tableWidget_3.setItem(i,10,QTableWidgetItem(str(bg_list[i]['constraints']['bottom']['constant'])))
+			# self.tableWidget_3.setItem(i,10,QTableWidgetItem(str(bg_list[i]['constraints']['bottom']['constant'])))
 
 		for i in range(len(text_list)):
-			self.tableWidget_4.setItem(i,0,QTableWidgetItem(text_list[i]['id']))
-			self.tableWidget_4.setItem(i,1,QTableWidgetItem(text_list[i]['type']))
-			self.tableWidget_4.setItem(i,2,QTableWidgetItem(text_list[i]['textId']))
+			# self.tableWidget_4.setItem(i,0,QTableWidgetItem(text_list[i]['id']))
+			# self.tableWidget_4.setItem(i,1,QTableWidgetItem(text_list[i]['type']))
+			# self.tableWidget_4.setItem(i,2,QTableWidgetItem(text_list[i]['textId']))
 			self.tableWidget_4.cellWidget(i,3).setCurrentText(self.dict2[text_list[i]["fontName"]])
 			self.tableWidget_4.setItem(i,4,QTableWidgetItem(str(text_list[i]['fontSize'])))
-			self.tableWidget_4.setItem(i,5,QTableWidgetItem(str(text_list[i]['canvasWidth'])))
+			# self.tableWidget_4.setItem(i,5,QTableWidgetItem(str(text_list[i]['canvasWidth'])))
 			self.tableWidget_4.setItem(i,6,QTableWidgetItem(text_list[i]['textColor']))
 			self.tableWidget_4.setItem(i,7,QTableWidgetItem(text_list[i]['placeHolder']))
 			self.tableWidget_4.setItem(i,8,QTableWidgetItem(text_list[i]['textAlignment']))
 			self.tableWidget_4.setItem(i,9,QTableWidgetItem(str(text_list[i]['constraints']['left']['percentage'])))
-			self.tableWidget_4.setItem(i,10,QTableWidgetItem(str(text_list[i]['constraints']['left']['constant'])))
+			# self.tableWidget_4.setItem(i,10,QTableWidgetItem(str(text_list[i]['constraints']['left']['constant'])))
 			self.tableWidget_4.setItem(i,11,QTableWidgetItem(str(text_list[i]['constraints']['right']['percentage'])))
-			self.tableWidget_4.setItem(i,12,QTableWidgetItem(str(text_list[i]['constraints']['right']['constant'])))
+			# self.tableWidget_4.setItem(i,12,QTableWidgetItem(str(text_list[i]['constraints']['right']['constant'])))
 			self.tableWidget_4.setItem(i,13,QTableWidgetItem(str(text_list[i]['constraints']['top']['percentage'])))
-			self.tableWidget_4.setItem(i,14,QTableWidgetItem(str(text_list[i]['constraints']['top']['constant'])))
+			# self.tableWidget_4.setItem(i,14,QTableWidgetItem(str(text_list[i]['constraints']['top']['constant'])))
 
 
 
@@ -299,6 +300,37 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 	def openDirWindow(self):
 		self.myDirWindow.setWindowModality(Qt.ApplicationModal)
 		self.myDirWindow.show()
+
+	def templateList(self,text):
+		self.list_3 = []
+		with open("./setting.json", "r") as lf:
+			jsonStr = lf.read()
+			dic = json.loads(jsonStr, strict = False)
+		path = dic["directory"] + "/" + text + "/in"
+		for root,dirs,files in os.walk(path):
+			for file in files:
+				if file == "template.json":
+					name = file + "-" + root[-4:]
+					self.list_3.append(name)
+		self.comBox_2.addItems(self.list_3)
+
+	# def readJson(self):
+	# 	with open("./setting.json", "r") as lf:
+	# 		jsonStr = lf.read()
+	# 		dic = json.loads(jsonStr, strict = False)
+	# 	path = dicp["directory"] + "/" + self.comBox_1.currentText() + "/in"
+
+	# 	for root,dirs,files in os.walk(path):
+	# 		for file in files:
+	# 			if file == "template.json":
+	# 				temp = os.path.join(root, file)
+	# 				with open(temp, "r") as lf:
+	# 					jsonStr = lf.read()
+	# 					if jsonStr == None:
+		
+	# def initDate()
+
+        
 
 
 

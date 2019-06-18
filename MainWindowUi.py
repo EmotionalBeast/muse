@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import json
+import json, os
 
 
 class Ui_MainWindow(object):
@@ -63,7 +63,7 @@ class Ui_MainWindow(object):
         self.tableWidget_1 = QtWidgets.QTableWidget(self.tab_1)
         self.tableWidget_1.setColumnCount(12)
         self.tableWidget_1.setRowCount(5)
-        self.tableWidget_1.setGeometry(QtCore.QRect(0, 0, 1000, 340))
+        self.tableWidget_1.setGeometry(QtCore.QRect(0, 0, 1000, 450))
         self.tableWidget_1.setObjectName("tableWidget_1")
 
         item = QtWidgets.QTableWidgetItem()
@@ -98,7 +98,7 @@ class Ui_MainWindow(object):
         self.tableWidget_2 = QtWidgets.QTableWidget(self.tab_2)
         self.tableWidget_2.setColumnCount(11)
         self.tableWidget_2.setRowCount(5)
-        self.tableWidget_2.setGeometry(QtCore.QRect(0, 0, 1000, 340))
+        self.tableWidget_2.setGeometry(QtCore.QRect(0, 0, 1000, 450))
         self.tableWidget_2.setObjectName("tableWidget_2")
 
         item = QtWidgets.QTableWidgetItem()
@@ -131,7 +131,7 @@ class Ui_MainWindow(object):
         self.tableWidget_3 = QtWidgets.QTableWidget(self.tab_3)
         self.tableWidget_3.setColumnCount(11)
         self.tableWidget_3.setRowCount(5)
-        self.tableWidget_3.setGeometry(QtCore.QRect(0, 0, 1000, 340))
+        self.tableWidget_3.setGeometry(QtCore.QRect(0, 0, 1000, 450))
         self.tableWidget_3.setObjectName("tableWidget_3")
 
         item = QtWidgets.QTableWidgetItem()
@@ -164,7 +164,7 @@ class Ui_MainWindow(object):
         self.tableWidget_4 = QtWidgets.QTableWidget(self.tab_4)
         self.tableWidget_4.setColumnCount(15)
         self.tableWidget_4.setRowCount(5)
-        self.tableWidget_4.setGeometry(QtCore.QRect(0, 0, 1000, 340))
+        self.tableWidget_4.setGeometry(QtCore.QRect(0, 0, 1000, 450))
         self.tableWidget_4.setObjectName("tableWidget_4")
 
 
@@ -239,7 +239,8 @@ class Ui_MainWindow(object):
         self.label_1.setObjectName("label_1")
         self.comBox_1 = QtWidgets.QComboBox(self.centralwidget)
         self.comBox_1.setGeometry(QtCore.QRect(155, 10, 300, 30))
-        self.comBox_1.setEditable(True)
+        self.comBox_1.addItems(self.dirList())
+        self.comBox_1.activated.connect(lambda: self.templateList(self.comBox_1.currentText()))
         self.comBox_1.setCurrentIndex(-1)
         self.comBox_1.setObjectName("comBox_1")
 
@@ -248,11 +249,12 @@ class Ui_MainWindow(object):
         self.label_2.setText("json文件：")
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
-        self.comBox_1 = QtWidgets.QComboBox(self.centralwidget)
-        self.comBox_1.setGeometry(QtCore.QRect(645, 10, 300, 30))
-        self.comBox_1.setEditable(True)
-        self.comBox_1.setCurrentIndex(-1)
-        self.comBox_1.setObjectName("comBox_1")
+        self.comBox_2 = QtWidgets.QComboBox(self.centralwidget)
+        self.comBox_2.setGeometry(QtCore.QRect(645, 10, 300, 30))
+        # self.comBox_2.activated.connect(lambda: self.readJson())
+        # self.comBox_2.setEditable(True)
+        self.comBox_2.setCurrentIndex(-1)
+        self.comBox_2.setObjectName("comBox_2")
 
         #选择素材的组件部分:blur,cell,background,text,picturelevel(控制图层）
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
@@ -524,9 +526,31 @@ class Ui_MainWindow(object):
         with open("./font.json", "r") as lf:
             jsonStr = lf.read()
             dic = json.loads(jsonStr,strict = False)
-            self.Lis = dic.keys()
+            self.list_1 = dic.keys()
            
-        return self.Lis
+        return self.list_1
+
+    def dirList(self):
+        self.list_2 = []
+        with open("./setting.json", "r") as lf:
+            jsonStr = lf.read()
+            dic = json.loads(jsonStr, strict = False)
+        path = dic["directory"]
+        for root,dirs,files in os.walk(path):
+            for dir in dirs:
+                if root == path:
+                    self.list_2.append(dir)
+        return self.list_2
+
+
+
+                
+
+
+
+        
+
+
 
 
 

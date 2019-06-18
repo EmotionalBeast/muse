@@ -8,6 +8,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import json
+
 
 class Ui_DirWindow(object):
 
@@ -15,7 +17,11 @@ class Ui_DirWindow(object):
         Form.setObjectName("Form")
         Form.resize(680, 90)
         Form.setFixedSize(680, 90)
-      
+
+        with open("./setting.json", "r") as lf:
+            jsonStr = lf.read()
+            dic = json.loads(jsonStr,strict = False)
+
         #定义界面控件UI
         self.label = QtWidgets.QLabel(Form)
         self.label.setGeometry(QtCore.QRect(30, 10, 100, 30))
@@ -23,7 +29,7 @@ class Ui_DirWindow(object):
         self.label.setObjectName("label")
         self.lineEdit = QtWidgets.QLineEdit(Form)
         self.lineEdit.setGeometry(QtCore.QRect(140, 10, 400, 30))
-        self.lineEdit.setText("./workspace")
+        self.lineEdit.setText(dic["directory"])
         self.lineEdit.setObjectName("lineEdit")
         self.pushButton_1 = QtWidgets.QPushButton(Form)
         self.pushButton_1.setGeometry(QtCore.QRect(550, 10, 100, 30))
@@ -38,7 +44,7 @@ class Ui_DirWindow(object):
         #按钮信号槽链接
         self.pushButton_1.clicked.connect(self.chooseDir)
         self.pushButton_2.clicked.connect(self.close)
-        self.pushButton_3.clicked.connect(self.getDir)
+        self.pushButton_3.clicked.connect(self.comfirmDir)
 
 
 
@@ -53,5 +59,9 @@ class Ui_DirWindow(object):
         self.pushButton_1.setText(_translate("Form", "选择"))
         self.pushButton_2.setText(_translate("Form", "取消"))
         self.pushButton_3.setText(_translate("Form", "确认"))
+
+
+
+
  
 

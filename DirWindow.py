@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QWidget, QApplication, QFileDialog, QMessageBox, QGr
 from PyQt5.QtGui import QPixmap, QImage
 from PyQt5.QtCore import QRect, Qt
 from DirWindowUi import Ui_DirWindow
+import json
 
 class MyDirWindow(QWidget, Ui_DirWindow):
 	def __init__(self):
@@ -11,9 +12,19 @@ class MyDirWindow(QWidget, Ui_DirWindow):
 		self.setupUi(self)
 
 	def chooseDir(self):
-		dir = QFileDialog.getExistingDirectory(self, "选择工作路径", "./")
-		self.lineEdit.setText(dir)
+		directory = QFileDialog.getExistingDirectory(self, "选择工作路径", "./")
+		self.lineEdit.setText(directory)
 
 
-	def getDir(self):
-		return self.lineEdit.text()
+
+	def comfirmDir(self):
+		dic = {}
+		dic["directory"] = self.lineEdit.text()
+		with open("./setting.json", 'w') as dump_f:
+			jsonStr = json.dumps(dic,indent = 4)
+			dump_f.write(jsonStr)
+
+		QMessageBox.information(self, "提示", "修改成功！")
+		self.close()
+		
+
