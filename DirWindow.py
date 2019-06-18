@@ -17,8 +17,3 @@ class MyDirWindow(QWidget, Ui_DirWindow):
 
 	def getDir(self):
 		return self.lineEdit.text()
-
-
-
-
-
