@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #author: Jhin Yao
-import json
+import json, os
 
 #加载Json文件的模块
 class OperateJson:
@@ -15,11 +15,17 @@ class OperateJson:
 		
 		return self.dic 
 
-
 	def dumpJson(self,dic):
 		with open(self.filePath_, 'w') as dump_f:
 			jsonStr = json.dumps(dic, sort_keys=True, indent=2)
 			dump_f.write(jsonStr)
+
+	@staticmethod
+	def getDirectory(self):
+		with open("./setting.json", "r") as lf:
+			jsonStr = lf.read()
+			dic = json.loads(jsonStr, strict = False)
+		return dic["directory"]
 
 
 

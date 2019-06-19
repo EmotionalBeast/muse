@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import json, os
+# import json, os
 
 
 class Ui_MainWindow(object):
@@ -56,13 +56,26 @@ class Ui_MainWindow(object):
         self.comBox_43.setEditable(True)
         self.comBox_43.setCurrentIndex(-1)
 
+        self.comBox_53 = QtWidgets.QComboBox()
+        self.comBox_53.addItems(self.itemList())
+        self.comBox_53.setEditable(True)
+        self.comBox_53.setCurrentIndex(-1)
+
+        self.comBox_63 = QtWidgets.QComboBox()
+        self.comBox_63.addItems(self.itemList())
+        self.comBox_63.setEditable(True)
+        self.comBox_63.setCurrentIndex(-1)
+
+        self.comBox_73 = QtWidgets.QComboBox()
+        self.comBox_73.addItems(self.itemList())
+        self.comBox_73.setEditable(True)
+        self.comBox_73.setCurrentIndex(-1)
 
         #虚化背景的json参数表格
         self.tab_1 = QtWidgets.QWidget()
         self.tab_1.setObjectName("tab_1")
         self.tableWidget_1 = QtWidgets.QTableWidget(self.tab_1)
         self.tableWidget_1.setColumnCount(12)
-        self.tableWidget_1.setRowCount(5)
         self.tableWidget_1.setGeometry(QtCore.QRect(0, 0, 1000, 450))
         self.tableWidget_1.setObjectName("tableWidget_1")
 
@@ -97,7 +110,6 @@ class Ui_MainWindow(object):
         self.tab_2.setObjectName("tab_2")
         self.tableWidget_2 = QtWidgets.QTableWidget(self.tab_2)
         self.tableWidget_2.setColumnCount(11)
-        self.tableWidget_2.setRowCount(5)
         self.tableWidget_2.setGeometry(QtCore.QRect(0, 0, 1000, 450))
         self.tableWidget_2.setObjectName("tableWidget_2")
 
@@ -130,7 +142,6 @@ class Ui_MainWindow(object):
         self.tab_3.setObjectName("tab_3")
         self.tableWidget_3 = QtWidgets.QTableWidget(self.tab_3)
         self.tableWidget_3.setColumnCount(11)
-        self.tableWidget_3.setRowCount(5)
         self.tableWidget_3.setGeometry(QtCore.QRect(0, 0, 1000, 450))
         self.tableWidget_3.setObjectName("tableWidget_3")
 
@@ -163,7 +174,6 @@ class Ui_MainWindow(object):
         self.tab_4.setObjectName("tab_4")
         self.tableWidget_4 = QtWidgets.QTableWidget(self.tab_4)
         self.tableWidget_4.setColumnCount(15)
-        self.tableWidget_4.setRowCount(5)
         self.tableWidget_4.setGeometry(QtCore.QRect(0, 0, 1000, 450))
         self.tableWidget_4.setObjectName("tableWidget_4")
 
@@ -200,6 +210,39 @@ class Ui_MainWindow(object):
         self.tableWidget_4.setHorizontalHeaderItem(14,item)
         self.tabWidget.addTab(self.tab_4, "")
 
+        #分层图片的参数列表
+        self.tab_5 = QtWidgets.QWidget()
+        self.tab_5.setObjectName("tab_5")
+        self.tableWidget_5 = QtWidgets.QTableWidget(self.tab_5)
+        self.tableWidget_5.setColumnCount(11)
+        self.tableWidget_5.setGeometry(QtCore.QRect(0, 0, 1000, 450))
+        self.tableWidget_5.setObjectName("tableWidget_5")
+
+
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_5.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_5.setHorizontalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_5.setHorizontalHeaderItem(2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_5.setHorizontalHeaderItem(3, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_5.setHorizontalHeaderItem(4, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_5.setHorizontalHeaderItem(5, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_5.setHorizontalHeaderItem(6, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_5.setHorizontalHeaderItem(7, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_5.setHorizontalHeaderItem(8, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_5.setHorizontalHeaderItem(9, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_5.setHorizontalHeaderItem(10, item)
+        self.tabWidget.addTab(self.tab_5, "")
+
         #设置列宽
         self.tableWidget_1.setColumnWidth(10,120)
         self.tableWidget_1.setColumnWidth(11,120)
@@ -207,21 +250,11 @@ class Ui_MainWindow(object):
         self.tableWidget_2.setColumnWidth(10,120)
         self.tableWidget_3.setColumnWidth(9,120)
         self.tableWidget_3.setColumnWidth(10,120)
+        self.tableWidget_3.setColumnWidth(2,200)
         self.tableWidget_4.setColumnWidth(3,230)
         self.tableWidget_4.setColumnWidth(7,600)
-        
-
-       
-
-        #将comBox放入相应的table中
-        self.tableWidget_4.setCellWidget(0, 3, self.comBox_03)
-        self.tableWidget_4.setCellWidget(1, 3, self.comBox_13)
-        self.tableWidget_4.setCellWidget(2, 3, self.comBox_23)
-        self.tableWidget_4.setCellWidget(3, 3, self.comBox_33)
-        self.tableWidget_4.setCellWidget(4, 3, self.comBox_43)
-
-
-
+        self.tableWidget_5.setColumnWidth(7,120)
+        self.tableWidget_5.setColumnWidth(8,120)
         #设置tablewidget为不可编辑的状态
         self.tableWidget_1.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.tableWidget_2.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
@@ -251,9 +284,7 @@ class Ui_MainWindow(object):
         self.label_2.setObjectName("label_2")
         self.comBox_2 = QtWidgets.QComboBox(self.centralwidget)
         self.comBox_2.setGeometry(QtCore.QRect(645, 10, 300, 30))
-        # self.comBox_2.activated.connect(lambda: self.readJson())
-        # self.comBox_2.setEditable(True)
-        self.comBox_2.setCurrentIndex(-1)
+        self.comBox_2.activated.connect(lambda: self.initDate())
         self.comBox_2.setObjectName("comBox_2")
 
         #选择素材的组件部分:blur,cell,background,text,picturelevel(控制图层）
@@ -373,7 +404,8 @@ class Ui_MainWindow(object):
         self.edit.triggered.connect(self.editable)
         self.save.triggered.connect(self.saveTable)
 
-
+        #按钮点击操作
+        self.pbtn_1.clicked.connect(self.createTable)
 
 
         #调用方法重命名控件
@@ -498,6 +530,30 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "top_constant"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("MainWindow", "Text"))
 
+        item = self.tableWidget_5.horizontalHeaderItem(0)
+        item.setText(_translate("MainWindow", "id"))
+        item = self.tableWidget_5.horizontalHeaderItem(1)
+        item.setText(_translate("MainWindow", "type"))
+        item = self.tableWidget_5.horizontalHeaderItem(2)
+        item.setText(_translate("MainWindow", "contentMode"))
+        item = self.tableWidget_5.horizontalHeaderItem(3)
+        item.setText(_translate("MainWindow", "right_percentage"))
+        item = self.tableWidget_5.horizontalHeaderItem(4)
+        item.setText(_translate("MainWindow", "right_constant"))
+        item = self.tableWidget_5.horizontalHeaderItem(5)
+        item.setText(_translate("MainWindow", "top_percentage"))
+        item = self.tableWidget_5.horizontalHeaderItem(6)
+        item.setText(_translate("MainWindow", "top_constant"))
+        item = self.tableWidget_5.horizontalHeaderItem(7)
+        item.setText(_translate("MainWindow", "height_percentage"))
+        item = self.tableWidget_5.horizontalHeaderItem(8)
+        item.setText(_translate("MainWindow", "height_constant"))
+        item = self.tableWidget_5.horizontalHeaderItem(9)
+        item.setText(_translate("MainWindow", "width_percentage"))
+        item = self.tableWidget_5.horizontalHeaderItem(10)
+        item.setText(_translate("MainWindow", "width_constant"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_5), _translate("MainWindow", "level"))
+
         #设置菜单栏的属性
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.menuTools.setTitle(_translate("MainWindow", "Tools"))
@@ -522,25 +578,8 @@ class Ui_MainWindow(object):
         self.actionPaint.setShortcut(_translate("MainWindow", "Ctrl+R"))
 
 
-    def itemList(self):
-        with open("./font.json", "r") as lf:
-            jsonStr = lf.read()
-            dic = json.loads(jsonStr,strict = False)
-            self.list_1 = dic.keys()
-           
-        return self.list_1
 
-    def dirList(self):
-        self.list_2 = []
-        with open("./setting.json", "r") as lf:
-            jsonStr = lf.read()
-            dic = json.loads(jsonStr, strict = False)
-        path = dic["directory"]
-        for root,dirs,files in os.walk(path):
-            for dir in dirs:
-                if root == path:
-                    self.list_2.append(dir)
-        return self.list_2
+
 
 
 
