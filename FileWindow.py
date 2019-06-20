@@ -41,12 +41,13 @@ class MyFileWindow(QWidget, Ui_FileWindow):
 		return dic["directory"]
 
 	def copyFile(self):
+		count = len(self.lineEdit_2.text())
 		path = self.lineEdit_4.text()
 		for root,dirs,files in os.walk(path):
 			for file in files:
-				if len(file) == 8:
+				if len(file) == count+4 and file[-3:] == "png":
 					old = root + "/" + file
-					new = self.getDirectory() + '/' + self.lineEdit_1.text() + "/in/" + file[:4] + "/" + "template_widget_" + file[:4] + ".png" 
+					new = self.getDirectory() + '/' + self.lineEdit_1.text() + "/in/" + file[:count] + "/" + "template_widget_" + file[:count] + ".png" 
 					shutil.copyfile(old,new)
 
 

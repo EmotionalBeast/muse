@@ -29,47 +29,6 @@ class Ui_MainWindow(object):
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
         self.tabWidget.setGeometry(QtCore.QRect(0, 90, 1000, 550))
         self.tabWidget.setObjectName("tabWidget")
-      
-        #定义type的comBox
-        self.comBox_03 = QtWidgets.QComboBox()
-        self.comBox_03.addItems(self.itemList())
-        self.comBox_03.setEditable(True)
-        self.comBox_03.setCurrentIndex(-1)
-
-        self.comBox_13 = QtWidgets.QComboBox()
-        self.comBox_13.addItems(self.itemList())
-        self.comBox_13.setEditable(True)
-        self.comBox_13.setCurrentIndex(-1)
-
-        self.comBox_23 = QtWidgets.QComboBox()
-        self.comBox_23.addItems(self.itemList())
-        self.comBox_23.setEditable(True)
-        self.comBox_23.setCurrentIndex(-1)
-
-        self.comBox_33 = QtWidgets.QComboBox()
-        self.comBox_33.addItems(self.itemList())
-        self.comBox_33.setEditable(True)
-        self.comBox_33.setCurrentIndex(-1)
-
-        self.comBox_43 = QtWidgets.QComboBox()
-        self.comBox_43.addItems(self.itemList())
-        self.comBox_43.setEditable(True)
-        self.comBox_43.setCurrentIndex(-1)
-
-        self.comBox_53 = QtWidgets.QComboBox()
-        self.comBox_53.addItems(self.itemList())
-        self.comBox_53.setEditable(True)
-        self.comBox_53.setCurrentIndex(-1)
-
-        self.comBox_63 = QtWidgets.QComboBox()
-        self.comBox_63.addItems(self.itemList())
-        self.comBox_63.setEditable(True)
-        self.comBox_63.setCurrentIndex(-1)
-
-        self.comBox_73 = QtWidgets.QComboBox()
-        self.comBox_73.addItems(self.itemList())
-        self.comBox_73.setEditable(True)
-        self.comBox_73.setCurrentIndex(-1)
 
         #虚化背景的json参数表格
         self.tab_1 = QtWidgets.QWidget()
@@ -352,14 +311,16 @@ class Ui_MainWindow(object):
         self.toolBar = QtWidgets.QToolBar(MainWindow)
         self.toolBar.setObjectName("toolBar")
         MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.toolBar)
-        self.open_ = QtWidgets.QAction(QtGui.QIcon('./images/open.png'), '&open', self)
+        # self.open_ = QtWidgets.QAction(QtGui.QIcon('./images/open.png'), '&open', self)
         self.new = QtWidgets.QAction(QtGui.QIcon('./images/new.png'), '&new', self)
         self.edit = QtWidgets.QAction(QtGui.QIcon('./images/edit.png'),'&edit', self)
         self.save = QtWidgets.QAction(QtGui.QIcon('./images/save.png'), '&save', self)
-        self.toolBar.addAction(self.open_)
+        # self.refresh = QtWidgets.QAction(QtGui.QIcon('./images/refresh.png'), '&refresh', self)
+        # self.toolBar.addAction(self.open_)
         self.toolBar.addAction(self.new)
         self.toolBar.addAction(self.edit)
         self.toolBar.addAction(self.save)
+        # self.toolBar.addAction(self.refresh)
 
 
         #定义动作信息
@@ -391,7 +352,7 @@ class Ui_MainWindow(object):
         self.tabWidget.setCurrentIndex(0)
 
         #菜单栏的功能定义
-        self.actionOpen.triggered.connect(self.openFile)
+        # self.actionOpen.triggered.connect(self.openFile)
         self.actionNew.triggered.connect(self.openFileWindow)
         self.actionSave.triggered.connect(self.saveTable)
         self.actionSetting.triggered.connect(self.openDirWindow)
@@ -399,10 +360,11 @@ class Ui_MainWindow(object):
         self.actionPaint.triggered.connect(self.openPaintWindow)
 
         #工具栏的功能定义
-        self.open_.triggered.connect(self.openFile)
+        # self.open_.triggered.connect(self.openFile)
         self.new.triggered.connect(self.openFileWindow)
         self.edit.triggered.connect(self.editable)
         self.save.triggered.connect(self.saveTable)
+
 
         #按钮点击操作
         self.pbtn_1.clicked.connect(self.createTable)

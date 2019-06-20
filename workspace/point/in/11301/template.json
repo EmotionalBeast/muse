@@ -4,19 +4,19 @@
       "constraints": {
         "height": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.3606
         },
         "left": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.1773
         },
         "right": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.1773
         },
         "top": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.5397
         }
       },
       "id": "0",
@@ -43,7 +43,7 @@
         }
       },
       "id": "1",
-      "imageName": "template_widget_1360.png",
+      "imageName": "template_widget_11301.png",
       "type": "image"
     },
     {
@@ -51,49 +51,26 @@
       "constraints": {
         "left": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.2293
         },
         "right": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.1933
         },
         "top": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.2369
         }
       },
-      "fontName": "570-CAI978",
-      "fontSize": 24,
+      "fontName": "Carten",
+      "fontSize": 22,
       "id": "2",
-      "placeHolder": "Hi",
-      "textAlignment": "left",
-      "textColor": "FFFFFF",
+      "placeHolder": "There is only one happiness in this life, to love and be loved.",
+      "textAlignment": "center",
+      "textColor": "302927",
       "textId": "0",
       "type": "text"
-    },
-    {
-      "constraints": {
-        "height": {
-          "constant": 0.0,
-          "percentage": 0.0
-        },
-        "right": {
-          "constant": 0.0,
-          "percentage": 0.0
-        },
-        "top": {
-          "constant": 0.0,
-          "percentage": 0.0
-        },
-        "width": {
-          "constant": 0.0,
-          "percentage": 0.0
-        }
-      },
-      "contentMode": "aspectFit",
-      "id": "3",
-      "type": "mediaIcon"
     }
   ],
-  "templateId": 1360
+  "templateId": 11301
 }

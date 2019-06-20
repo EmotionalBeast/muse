@@ -1,0 +1,101 @@
+{
+  "elements": [
+    {
+      "constraints": {
+        "height": {
+          "constant": 0.0,
+          "percentage": 0.2
+        },
+        "left": {
+          "constant": 0.0,
+          "percentage": 0.2
+        },
+        "right": {
+          "constant": 0.0,
+          "percentage": 0.2
+        },
+        "top": {
+          "constant": 0.0,
+          "percentage": 0.2
+        }
+      },
+      "id": "0",
+      "mediaId": "0",
+      "type": "media"
+    },
+    {
+      "constraints": {
+        "bottom": {
+          "constant": 0.0,
+          "percentage": 0.0
+        },
+        "left": {
+          "constant": 0.0,
+          "percentage": 0.0
+        },
+        "right": {
+          "constant": 0.0,
+          "percentage": 0.0
+        },
+        "top": {
+          "constant": 0.0,
+          "percentage": 0.0
+        }
+      },
+      "id": "1",
+      "imageName": "template_widget_1367.png",
+      "type": "image"
+    },
+    {
+      "canvasWidth": 375,
+      "constraints": {
+        "left": {
+          "constant": 0.0,
+          "percentage": 0.2
+        },
+        "right": {
+          "constant": 0.0,
+          "percentage": 0.2
+        },
+        "top": {
+          "constant": 0.0,
+          "percentage": 0.2
+        }
+      },
+      "fontName": "570-CAI978",
+      "fontSize": 24,
+      "id": "2",
+      "placeHolder": "happy",
+      "textAlignment": "left",
+      "textColor": "000000",
+      "textId": "0",
+      "type": "text"
+    },
+    {
+      "canvasWidth": 375,
+      "constraints": {
+        "left": {
+          "constant": 0.0,
+          "percentage": 0.2
+        },
+        "right": {
+          "constant": 0.0,
+          "percentage": 0.2
+        },
+        "top": {
+          "constant": 0.0,
+          "percentage": 0.2
+        }
+      },
+      "fontName": "570-CAI978",
+      "fontSize": 24,
+      "id": "3",
+      "placeHolder": "sad",
+      "textAlignment": "right",
+      "textColor": "FFFFFF",
+      "textId": "1",
+      "type": "text"
+    }
+  ],
+  "templateId": 1367
+}

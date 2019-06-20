@@ -4,19 +4,19 @@
       "constraints": {
         "height": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.3711
         },
         "left": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.1707
         },
         "right": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.1773
         },
         "top": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.3178
         }
       },
       "id": "0",
@@ -43,7 +43,7 @@
         }
       },
       "id": "1",
-      "imageName": "template_widget_1360.png",
+      "imageName": "template_widget_11305.png",
       "type": "image"
     },
     {
@@ -51,49 +51,26 @@
       "constraints": {
         "left": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.208
         },
         "right": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.1813
         },
         "top": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.1084
         }
       },
-      "fontName": "570-CAI978",
+      "fontName": "Freestyle Script",
       "fontSize": 24,
       "id": "2",
-      "placeHolder": "Hi",
+      "placeHolder": "I surround myself with good people",
       "textAlignment": "left",
-      "textColor": "FFFFFF",
+      "textColor": "191817",
       "textId": "0",
       "type": "text"
-    },
-    {
-      "constraints": {
-        "height": {
-          "constant": 0.0,
-          "percentage": 0.0
-        },
-        "right": {
-          "constant": 0.0,
-          "percentage": 0.0
-        },
-        "top": {
-          "constant": 0.0,
-          "percentage": 0.0
-        },
-        "width": {
-          "constant": 0.0,
-          "percentage": 0.0
-        }
-      },
-      "contentMode": "aspectFit",
-      "id": "3",
-      "type": "mediaIcon"
     }
   ],
-  "templateId": 1360
+  "templateId": 11305
 }

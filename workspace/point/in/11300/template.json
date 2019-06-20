@@ -1,49 +1,25 @@
 {
   "elements": [
     {
-      "blur": 10,
-      "constraints": {
-        "bottom": {
-          "constant": 0.0,
-          "percentage": 0.0
-        },
-        "left": {
-          "constant": 0.0,
-          "percentage": 0.0
-        },
-        "right": {
-          "constant": 0.0,
-          "percentage": 0.0
-        },
-        "top": {
-          "constant": 0.0,
-          "percentage": 0.0
-        }
-      },
-      "id": "0",
-      "refId": "1",
-      "type": "image"
-    },
-    {
       "constraints": {
         "height": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.4805
         },
         "left": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.2333
         },
         "right": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.232
         },
         "top": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.2736
         }
       },
-      "id": "1",
+      "id": "0",
       "mediaId": "0",
       "type": "media"
     },
@@ -66,10 +42,10 @@
           "percentage": 0.0
         }
       },
-      "id": "2",
-      "imageName": "template_widget_1369.png",
+      "id": "1",
+      "imageName": "template_widget_11300.png",
       "type": "image"
     }
   ],
-  "templateId": 1369
+  "templateId": 11300
 }

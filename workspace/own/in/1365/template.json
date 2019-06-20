@@ -1,0 +1,101 @@
+{
+  "elements": [
+    {
+      "constraints": {
+        "height": {
+          "constant": 0.0,
+          "percentage": 0.5104
+        },
+        "left": {
+          "constant": 0.0,
+          "percentage": 0.1067
+        },
+        "right": {
+          "constant": 0.0,
+          "percentage": 0.1067
+        },
+        "top": {
+          "constant": 0.0,
+          "percentage": 0.09
+        }
+      },
+      "id": "0",
+      "mediaId": "0",
+      "type": "media"
+    },
+    {
+      "constraints": {
+        "bottom": {
+          "constant": 0.0,
+          "percentage": 0.0
+        },
+        "left": {
+          "constant": 0.0,
+          "percentage": 0.0
+        },
+        "right": {
+          "constant": 0.0,
+          "percentage": 0.0
+        },
+        "top": {
+          "constant": 0.0,
+          "percentage": 0.0
+        }
+      },
+      "id": "1",
+      "imageName": "template_widget_1365.png",
+      "type": "image"
+    },
+    {
+      "canvasWidth": 375,
+      "constraints": {
+        "left": {
+          "constant": 0.0,
+          "percentage": 0.1867
+        },
+        "right": {
+          "constant": 0.0,
+          "percentage": 0.1733
+        },
+        "top": {
+          "constant": 0.0,
+          "percentage": 0.6303
+        }
+      },
+      "fontName": "Perpetua",
+      "fontSize": 26,
+      "id": "2",
+      "placeHolder": "Wherever you go, go with all your heart.",
+      "textAlignment": "center",
+      "textColor": "FFFFFF",
+      "textId": "0",
+      "type": "text"
+    },
+    {
+      "canvasWidth": 375,
+      "constraints": {
+        "left": {
+          "constant": 0.0,
+          "percentage": 0.2467
+        },
+        "right": {
+          "constant": 0.0,
+          "percentage": 0.2467
+        },
+        "top": {
+          "constant": 0.0,
+          "percentage": 0.8358
+        }
+      },
+      "fontName": "PerpetuaTitlingMT-Light",
+      "fontSize": 18,
+      "id": "3",
+      "placeHolder": "travel the world",
+      "textAlignment": "center",
+      "textColor": "FFFEFE",
+      "textId": "1",
+      "type": "text"
+    }
+  ],
+  "templateId": 1365
+}

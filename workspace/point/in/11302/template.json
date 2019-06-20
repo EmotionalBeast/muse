@@ -4,19 +4,19 @@
       "constraints": {
         "height": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.5593
         },
         "left": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.0093
         },
         "right": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.012
         },
         "top": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.2331
         }
       },
       "id": "0",
@@ -43,7 +43,7 @@
         }
       },
       "id": "1",
-      "imageName": "template_widget_1360.png",
+      "imageName": "template_widget_11302.png",
       "type": "image"
     },
     {
@@ -51,49 +51,51 @@
       "constraints": {
         "left": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.3913
         },
         "right": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.3753
         },
         "top": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.0637
         }
       },
-      "fontName": "570-CAI978",
-      "fontSize": 24,
+      "fontName": "Freestyle Script",
+      "fontSize": 72,
       "id": "2",
-      "placeHolder": "Hi",
-      "textAlignment": "left",
-      "textColor": "FFFFFF",
+      "placeHolder": "leaf",
+      "textAlignment": "center",
+      "textColor": "000000",
       "textId": "0",
       "type": "text"
     },
     {
+      "canvasWidth": 375,
       "constraints": {
-        "height": {
+        "left": {
           "constant": 0.0,
-          "percentage": 0.0
+          "percentage": 0.1227
         },
         "right": {
           "constant": 0.0,
-          "percentage": 0.0
+          "percentage": 0.1573
         },
         "top": {
           "constant": 0.0,
-          "percentage": 0.0
-        },
-        "width": {
-          "constant": 0.0,
-          "percentage": 0.0
+          "percentage": 0.8633
         }
       },
-      "contentMode": "aspectFit",
+      "fontName": "Freestyle Script",
+      "fontSize": 24,
       "id": "3",
-      "type": "mediaIcon"
+      "placeHolder": "The Whole point is to live life and be - to use all the colors in the crayon box.",
+      "textAlignment": "center",
+      "textColor": "000000",
+      "textId": "1",
+      "type": "text"
     }
   ],
-  "templateId": 1360
+  "templateId": 11302
 }

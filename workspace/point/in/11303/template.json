@@ -4,19 +4,19 @@
       "constraints": {
         "height": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.6599
         },
         "left": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.0
         },
         "right": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.0
         },
         "top": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.1759
         }
       },
       "id": "0",
@@ -43,7 +43,7 @@
         }
       },
       "id": "1",
-      "imageName": "template_widget_1360.png",
+      "imageName": "template_widget_11303.png",
       "type": "image"
     },
     {
@@ -51,49 +51,26 @@
       "constraints": {
         "left": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.04
         },
         "right": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.356
         },
         "top": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.1784
         }
       },
-      "fontName": "570-CAI978",
-      "fontSize": 24,
+      "fontName": "Carten",
+      "fontSize": 18,
       "id": "2",
-      "placeHolder": "Hi",
+      "placeHolder": "Every beloved object is the center point of a paradise.",
       "textAlignment": "left",
-      "textColor": "FFFFFF",
+      "textColor": "000000",
       "textId": "0",
       "type": "text"
-    },
-    {
-      "constraints": {
-        "height": {
-          "constant": 0.0,
-          "percentage": 0.0
-        },
-        "right": {
-          "constant": 0.0,
-          "percentage": 0.0
-        },
-        "top": {
-          "constant": 0.0,
-          "percentage": 0.0
-        },
-        "width": {
-          "constant": 0.0,
-          "percentage": 0.0
-        }
-      },
-      "contentMode": "aspectFit",
-      "id": "3",
-      "type": "mediaIcon"
     }
   ],
-  "templateId": 1360
+  "templateId": 11303
 }
