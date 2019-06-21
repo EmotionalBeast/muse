@@ -4,9 +4,9 @@
 import json, os
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QFileDialog, QMessageBox, 
 													QTableWidgetItem, QAbstractItemView, QComboBox)
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QUrl
+from PyQt5.QtGui import QDesktopServices
 from MainWindowUi import Ui_MainWindow
-from OperateData import OperateJson
 from PaintWindow import MyPaintWindow
 from DirWindow import MyDirWindow
 from FileWindow import MyFileWindow
@@ -50,7 +50,6 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		self.comBox_2.addItems(list_3)
 		self.comBox_2.setCurrentIndex(-1)
 
-
 	def itemList(self):
 		with open("./font.json", "r") as lf:
 			jsonStr = lf.read()
@@ -69,6 +68,19 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				if root == path:
 					list_2.append(dir)
 		return list_2
+
+	def setRefresh(self):
+		bc = self.comBox_1.count()
+		text_1 = self.comBox_1.currentText()
+		self.comBox_1.clear()
+		self.comBox_1.addItems(self.dirList())
+		ac = self.comBox_1.count()
+		if bc != ac:
+			self.comBox_1.setCurrentIndex(-1)
+			self.comBox_2.setCurrentIndex(-1)
+		else:
+			self.comBox_1.setCurrentText(text_1)
+		
 
 	#打开关联的窗口
 	def openFileWindow(self):
@@ -411,7 +423,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 
 	def saveTable(self):
 		self.nonEditable()
-		if self.checkValues() == True:
+		if self.checkValues():
 			if self.spinBox_2 != 0:
 				self.tableValues()
 				dic = {}
@@ -427,30 +439,37 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					df.write(jsonStr)
 
 				self.item = []
-
 				QMessageBox.information(self, "提示", "保存成功！")
+		else:
+			QMessageBox.information(self,"提示",self.info)
 
 	def checkValues(self):
 		if self.spinBox_1.value() != 0:
 			for i in range(self.spinBox_1.value()):
-				if self.tableWidget_1.item(i,0) == None:
+				if self.tableWidget_1.item(i,2) == None or self.tableWidget_1.item(i,2).text() == "":
+
+					self.info = "blur表中第 "+str(i+1)+" 行第 3 列未填值！"
 					return False
+
 		if self.spinBox_2.value() != 0:
 			for i in range(self.spinBox_2.value()):
-				if self.tableWidget_2.item(i,0) == None:
-					return False
-		if self.spinBox_3.value() != 0:
-			for i in range(self.spinBox_3.value()):
-				if self.tableWidget_3.item(i,0) == None:
-					return False
+				for j in range(self.tableWidget_2.columnCount()):
+					if self.tableWidget_2.item(i,j) == None or self.tableWidget_2.item(i,j).text() == "":
+						self.info = "cell表中第 "+str(i+1)+" 行第 "+str(j+1)+" 列未填值！"
+						return False
+
 		if self.spinBox_4.value() != 0:
+			print("3")
 			for i in range(self.spinBox_4.value()):
-				if self.tableWidget_4.item(i,0) == None:
+				for j in range(self.tableWidget_4.columnCount()-4):
+					if self.tableWidget_4.item(i,j+4) == None or self.tableWidget_4.item(i,j+4).text() == "":
+						self.info = "text表中第 "+str(i+1)+" 行第 "+str(j+1)+" 列未填值！"
+						return False
+				if self.tableWidget_4.cellWidget(i,3).currentText() == "":
+					print("1")
+					self.info = "text表中第 "+str(i+1)+" 行第 4 列未填值！"
 					return False
-		if self.rbtn_1.isChecked() == True:
-			for i in range(1):
-				if self.tableWidget_5.item(i,0) == None:
-					return False
+		
 		return True
 
 	def tableValues(self):
@@ -619,6 +638,46 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 															}
 													}
 				self.item.append(level_dic)
+			if self.spinBox_1.value() == 0:
+				self.item[0]["customIconId"] = level_dic["id"]
+
+	def encryption(self):
+		if self.comBox_1.currentText() != "":
+			pathIn = self.path
+			pathOut = self.path[:-2] + "out"
+			pathJar = "./jar/encrypt.jar" 
+			command = "java -jar " + pathJar + " " + pathIn + " " + pathOut
+			os.system(command)
+			QMessageBox.information(self,"提示","加密到out文件夹成功！")
+		else:
+			QMessageBox.information(self, "提示", "请选择素材组！")
+
+	def compressing(self):
+		self.encryption()
+		pathOut = self.path[:-2] + "out"
+		pathOrigin = self.path[:-2] + "origin"
+		for root,dirs,files in os.walk(pathOut):
+			for dir in dirs:
+				pathNeed = pathOut + "/" + dir + "/"
+				targetFile = pathOrigin + "/" + dir + ".7z"
+				command = "7z a " + targetFile + " " + pathNeed
+				os.system(command)
+		QMessageBox.information(self, "提示", "已压缩到origin文件夹！")
+
+	def openOrigin(self):
+		if self.comBox_1.currentText() != "":
+			pathOrigin ="file:///" + self.path[:-2] + "origin/"
+			QDesktopServices.openUrl(QUrl(pathOrigin))
+		else:
+			QMessageBox.information(self, "提示", "请选择素材组！")
+
+
+
+
+
+
+
+
 
 
 

@@ -45,31 +45,6 @@
       "id": "1",
       "imageName": "template_widget_11303.png",
       "type": "image"
-    },
-    {
-      "canvasWidth": 375,
-      "constraints": {
-        "left": {
-          "constant": 0.0,
-          "percentage": 0.04
-        },
-        "right": {
-          "constant": 0.0,
-          "percentage": 0.356
-        },
-        "top": {
-          "constant": 0.0,
-          "percentage": 0.1784
-        }
-      },
-      "fontName": "Carten",
-      "fontSize": 18,
-      "id": "2",
-      "placeHolder": "Every beloved object is the center point of a paradise.",
-      "textAlignment": "left",
-      "textColor": "000000",
-      "textId": "0",
-      "type": "text"
     }
   ],
   "templateId": 11303

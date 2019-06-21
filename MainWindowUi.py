@@ -311,21 +311,19 @@ class Ui_MainWindow(object):
         self.toolBar = QtWidgets.QToolBar(MainWindow)
         self.toolBar.setObjectName("toolBar")
         MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.toolBar)
-        # self.open_ = QtWidgets.QAction(QtGui.QIcon('./images/open.png'), '&open', self)
         self.new = QtWidgets.QAction(QtGui.QIcon('./images/new.png'), '&new', self)
         self.edit = QtWidgets.QAction(QtGui.QIcon('./images/edit.png'),'&edit', self)
         self.save = QtWidgets.QAction(QtGui.QIcon('./images/save.png'), '&save', self)
-        # self.refresh = QtWidgets.QAction(QtGui.QIcon('./images/refresh.png'), '&refresh', self)
-        # self.toolBar.addAction(self.open_)
+        self.refresh = QtWidgets.QAction(QtGui.QIcon('./images/refresh.png'), '&refresh', self)
+        self.open = QtWidgets.QAction(QtGui.QIcon('./images/open.png'), '&open', self)
         self.toolBar.addAction(self.new)
         self.toolBar.addAction(self.edit)
         self.toolBar.addAction(self.save)
-        # self.toolBar.addAction(self.refresh)
+        self.toolBar.addAction(self.refresh)
+        self.toolBar.addAction(self.open)
 
 
         #定义动作信息
-        self.actionOpen = QtWidgets.QAction(QtGui.QIcon('./images/open.png'), '&Open', self)
-        self.actionOpen.setObjectName("actionOpen")
         self.actionNew = QtWidgets.QAction(QtGui.QIcon('./images/new.png'), '&New', self)
         self.actionNew.setObjectName("actionNew")
         self.actionSave = QtWidgets.QAction(QtGui.QIcon('./images/save_as.png'), '&Save', self)
@@ -336,15 +334,20 @@ class Ui_MainWindow(object):
         self.actionQuit.setObjectName("actionQuit")
         self.actionPaint = QtWidgets.QAction(QtGui.QIcon('./images/paint.png'), '&Paint', self)
         self.actionPaint.setObjectName("actionPaint")
+        self.actionEncrypt = QtWidgets.QAction(QtGui.QIcon('./images/encrypt.png'), '&Encrypt', self)
+        self.actionEncrypt.setObjectName("actionEncrypt")
+        self.actionCompress = QtWidgets.QAction(QtGui.QIcon('./images/compress.png'), '&Compress', self)
+        self.actionCompress.setObjectName("actionCompress")
 
         
         #将动作信息添加到菜单栏
-        self.menuFile.addAction(self.actionOpen)
         self.menuFile.addAction(self.actionNew)
         self.menuFile.addAction(self.actionSave)
         self.menuFile.addAction(self.actionSetting)
         self.menuFile.addAction(self.actionQuit)
         self.menuTools.addAction(self.actionPaint)
+        self.menuTools.addAction(self.actionEncrypt)
+        self.menuTools.addAction(self.actionCompress)
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuTools.menuAction())
 
@@ -352,18 +355,20 @@ class Ui_MainWindow(object):
         self.tabWidget.setCurrentIndex(0)
 
         #菜单栏的功能定义
-        # self.actionOpen.triggered.connect(self.openFile)
         self.actionNew.triggered.connect(self.openFileWindow)
         self.actionSave.triggered.connect(self.saveTable)
         self.actionSetting.triggered.connect(self.openDirWindow)
         self.actionQuit.triggered.connect(QtWidgets.qApp.quit)
         self.actionPaint.triggered.connect(self.openPaintWindow)
+        self.actionEncrypt.triggered.connect(self.encryption)
+        self.actionCompress.triggered.connect(self.compressing)
 
         #工具栏的功能定义
-        # self.open_.triggered.connect(self.openFile)
         self.new.triggered.connect(self.openFileWindow)
         self.edit.triggered.connect(self.editable)
         self.save.triggered.connect(self.saveTable)
+        self.refresh.triggered.connect(self.setRefresh)
+        self.open.triggered.connect(self.openOrigin)
 
 
         #按钮点击操作
@@ -526,18 +531,21 @@ class Ui_MainWindow(object):
 
 
         #设置动作属性
-        self.actionOpen.setText(_translate("MainWindow", "Open"))
-        self.actionOpen.setShortcut(_translate("MainWindow", "Ctrl+O"))
-        self.actionNew.setText(_translate("MainWindow", "New"))
+        self.actionNew.setText(_translate("MainWindow", "新建"))
         self.actionNew.setShortcut(_translate("MainWindow", "Ctrl+N"))
-        self.actionSave.setText(_translate("MainWindow", "Save"))
+        self.actionSave.setText(_translate("MainWindow", "保存"))
         self.actionSave.setShortcut(_translate("MainWindow", "Ctrl+S"))
-        self.actionSetting.setText(_translate("MainWindow", "Setting"))
+        self.actionSetting.setText(_translate("MainWindow", "设置"))
         self.actionSetting.setShortcut(_translate("MainWindow", "Ctrl+U"))
-        self.actionQuit.setText(_translate("MainWindow", "Quit"))
+        self.actionQuit.setText(_translate("MainWindow", "退出"))
         self.actionQuit.setShortcut(_translate("MainWindow", "Ctrl+Q"))
-        self.actionPaint.setText(_translate("MainWindow", "Paint"))
+        self.actionPaint.setText(_translate("MainWindow", "展示"))
         self.actionPaint.setShortcut(_translate("MainWindow", "Ctrl+R"))
+        self.actionEncrypt.setText(_translate("MainWindow", "加密"))
+        self.actionEncrypt.setShortcut(_translate("MainWindow", "Ctrl+E"))
+        self.actionCompress.setText(_translate("MainWindow", "压缩"))
+        self.actionCompress.setShortcut(_translate("MainWindow", "Ctrl+K"))
+
 
 
 
