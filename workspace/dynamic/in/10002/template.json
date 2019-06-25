@@ -4,7 +4,7 @@
       "constraints": {
         "height": {
           "constant": 0.0,
-          "percentage": 1.0
+          "percentage": 0.5112
         },
         "left": {
           "constant": 0.0,
@@ -12,40 +12,89 @@
         },
         "right": {
           "constant": 0.0,
-          "percentage": 0.0
+          "percentage": 0.504
         },
         "top": {
           "constant": 0.0,
           "percentage": 0.0
         }
       },
-      "customIconId": "4",
       "id": "0",
       "mediaId": "0",
-      "type": "media"
+      "type": "media",
+      "keyPath": "形状图层 1"
     },
     {
       "constraints": {
         "height": {
           "constant": 0.0,
-          "percentage": 0.5
+          "percentage": 0.5112
         },
         "left": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.5146
         },
         "right": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.0
         },
         "top": {
           "constant": 0.0,
-          "percentage": 0.2
+          "percentage": 0.0
         }
       },
       "id": "1",
       "mediaId": "1",
-      "type": "media"
+      "type": "media",
+      "keyPath": "形状图层 2"
+    },
+    {
+      "constraints": {
+        "height": {
+          "constant": 0.0,
+          "percentage": 0.5022
+        },
+        "left": {
+          "constant": 0.0,
+          "percentage": 0.0
+        },
+        "right": {
+          "constant": 0.0,
+          "percentage": 0.504
+        },
+        "top": {
+          "constant": 0.0,
+          "percentage": 0.4977
+        }
+      },
+      "id": "2",
+      "mediaId": "2",
+      "type": "media",
+      "keyPath": "形状图层 4"
+    },
+    {
+      "constraints": {
+        "height": {
+          "constant": 0.0,
+          "percentage": 0.5022
+        },
+        "left": {
+          "constant": 0.0,
+          "percentage": 0.5146
+        },
+        "right": {
+          "constant": 0.0,
+          "percentage": 0.0
+        },
+        "top": {
+          "constant": 0.0,
+          "percentage": 0.4977
+        }
+      },
+      "id": "3",
+      "mediaId": "3",
+      "type": "media",
+      "keyPath": "形状图层 3"
     },
     {
       "constraints": {
@@ -66,58 +115,11 @@
           "percentage": 0.0
         }
       },
-      "id": "2",
-      "imageName": "template_widget_11305.png",
-      "type": "image"
-    },
-    {
-      "canvasWidth": 375,
-      "constraints": {
-        "left": {
-          "constant": 0.0,
-          "percentage": 0.2
-        },
-        "right": {
-          "constant": 0.0,
-          "percentage": 0.2
-        },
-        "top": {
-          "constant": 0.0,
-          "percentage": 0.1
-        }
-      },
-      "fontName": "570-CAI978",
-      "fontSize": 24,
-      "id": "3",
-      "placeHolder": "make it!",
-      "textAlignment": "left",
-      "textColor": "FFFFFF",
-      "textId": "0",
-      "type": "text"
-    },
-    {
-      "constraints": {
-        "height": {
-          "constant": 0.0,
-          "percentage": 0.0
-        },
-        "right": {
-          "constant": 0.0,
-          "percentage": 0.0
-        },
-        "top": {
-          "constant": 0.0,
-          "percentage": 0.0
-        },
-        "width": {
-          "constant": 0.0,
-          "percentage": 0.0
-        }
-      },
-      "contentMode": "aspectFit",
       "id": "4",
-      "type": "mediaIcon"
+      "imageName": "template_widget_10002.png",
+      "type": "image",
+      "keyPath": "矩形 1"
     }
   ],
-  "templateId": 11305
+  "templateId": 10002
 }

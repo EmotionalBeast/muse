@@ -18,7 +18,7 @@ class MyDirWindow(QWidget, Ui_DirWindow):
 	def comfirmDir(self):
 		dic = {}
 		dic["directory"] = self.lineEdit.text()
-		with open("./setting.json", 'w') as dump_f:
+		with open("./resources/json/setting.json", 'w') as dump_f:
 			jsonStr = json.dumps(dic,indent = 4)
 			dump_f.write(jsonStr)
 

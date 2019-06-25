@@ -18,7 +18,7 @@ class Ui_DirWindow(object):
         Form.resize(680, 90)
         Form.setFixedSize(680, 90)
 
-        with open("./setting.json", "r") as lf:
+        with open("./resources/json/setting.json", "r") as lf:
             jsonStr = lf.read()
             dic = json.loads(jsonStr,strict = False)
 

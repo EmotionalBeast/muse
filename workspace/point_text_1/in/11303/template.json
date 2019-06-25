@@ -1,0 +1,74 @@
+{
+  "elements": [
+    {
+      "constraints": {
+        "height": {
+          "constant": 0.0,
+          "percentage": 0.2135
+        },
+        "left": {
+          "constant": 0.0,
+          "percentage": 0.2
+        },
+        "right": {
+          "constant": 0.0,
+          "percentage": 0.2
+        },
+        "top": {
+          "constant": 0.0,
+          "percentage": 0.21
+        }
+      },
+      "id": "0",
+      "mediaId": "0",
+      "type": "media"
+    },
+    {
+      "constraints": {
+        "height": {
+          "constant": 0.0,
+          "percentage": 0.2456
+        },
+        "left": {
+          "constant": 0.0,
+          "percentage": 0.3
+        },
+        "right": {
+          "constant": 0.0,
+          "percentage": 0.21
+        },
+        "top": {
+          "constant": 0.0,
+          "percentage": 0.215
+        }
+      },
+      "id": "1",
+      "mediaId": "1",
+      "type": "media"
+    },
+    {
+      "constraints": {
+        "bottom": {
+          "constant": 0.0,
+          "percentage": 0.0
+        },
+        "left": {
+          "constant": 0.0,
+          "percentage": 0.0
+        },
+        "right": {
+          "constant": 0.0,
+          "percentage": 0.0
+        },
+        "top": {
+          "constant": 0.0,
+          "percentage": 0.0
+        }
+      },
+      "id": "2",
+      "imageName": "template_widget_11303.png",
+      "type": "image"
+    }
+  ],
+  "templateId": 11303
+}

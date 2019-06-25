@@ -35,7 +35,7 @@ class MyFileWindow(QWidget, Ui_FileWindow):
 			os.mkdir(tempPath)
 
 	def getDirectory(self):
-		with open("./setting.json", "r") as lf:
+		with open("./resources/json/setting.json", "r") as lf:
 			jsonStr = lf.read()
 			dic = json.loads(jsonStr, strict = False)
 		return dic["directory"]

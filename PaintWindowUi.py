@@ -14,12 +14,12 @@ class Ui_PaintWindow(object):
 
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(600, 800)
-        Form.setFixedSize(600, 800)
+        Form.resize(270, 480)
+        Form.setFixedSize(270, 480)
         
         #定义界面控件
         self.graphicsView = QtWidgets.QGraphicsView(Form)
-        self.graphicsView.setGeometry(QtCore.QRect(0, 0, 600, 800))
+        self.graphicsView.setGeometry(QtCore.QRect(0, 0, 270, 480))
         self.graphicsView.setObjectName("graphicsView")
 
 
@@ -29,7 +29,7 @@ class Ui_PaintWindow(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "效果显示"))
+        Form.setWindowTitle(_translate("Form", "效果展示"))
         
 
 

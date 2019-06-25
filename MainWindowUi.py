@@ -17,7 +17,7 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1000, 640)
         MainWindow.setFixedSize(1000, 640)
-        MainWindow.setWindowIcon(QtGui.QIcon('./images/tool.png'))
+        MainWindow.setWindowIcon(QtGui.QIcon('./resources/images/tool.png'))
 
         
 
@@ -249,41 +249,46 @@ class Ui_MainWindow(object):
         #选择素材的组件部分:blur,cell,background,text,picturelevel(控制图层）
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(30, 50, 60, 30))
-        self.label_3.setText("Blur:")
+        self.label_3.setText("Cell:")
         self.label_3.setAlignment(QtCore.Qt.AlignCenter)
         self.label_3.setObjectName("label_3")
         self.spinBox_1 = QtWidgets.QSpinBox(self.centralwidget)
         self.spinBox_1.setGeometry(QtCore.QRect(100,50,50,30))
 
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
-        self.label_4.setGeometry(QtCore.QRect(170, 50, 60, 30))
-        self.label_4.setText("Cell:")
+        self.label_4.setGeometry(QtCore.QRect(170, 50, 90, 30))
+        self.label_4.setText("Background:")
         self.label_4.setAlignment(QtCore.Qt.AlignCenter)
         self.label_4.setObjectName("label_4")
         self.spinBox_2 = QtWidgets.QSpinBox(self.centralwidget)
-        self.spinBox_2.setGeometry(QtCore.QRect(240, 50, 50, 30))
+        self.spinBox_2.setGeometry(QtCore.QRect(280, 50, 50, 30))
 
         self.label_5 = QtWidgets.QLabel(self.centralwidget)
-        self.label_5.setGeometry(QtCore.QRect(310, 50, 90, 30))
-        self.label_5.setText("Background:")
+        self.label_5.setGeometry(QtCore.QRect(350, 50, 50, 30))
+        self.label_5.setText("Text:")
         self.label_5.setAlignment(QtCore.Qt.AlignCenter)
         self.label_5.setObjectName("label_5")
         self.spinBox_3 = QtWidgets.QSpinBox(self.centralwidget)
-        self.spinBox_3.setGeometry(QtCore.QRect(410, 50, 50, 30))
+        self.spinBox_3.setGeometry(QtCore.QRect(420, 50, 50, 30))
 
-        self.label_6 = QtWidgets.QLabel(self.centralwidget)
-        self.label_6.setGeometry(QtCore.QRect(480, 50, 60, 30))
-        self.label_6.setText("Text:")
-        self.label_6.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_6.setObjectName("label_6")
-        self.spinBox_4 = QtWidgets.QSpinBox(self.centralwidget)
-        self.spinBox_4.setGeometry(QtCore.QRect(550, 50, 50, 30))
 
         #增加RadioButton
-        self.rbtn_1 = QtWidgets.QRadioButton(self.centralwidget)
-        self.rbtn_1.setGeometry(QtCore.QRect(620,50,60,30))
-        self.rbtn_1.setText("Level")
-        self.rbtn_1.setObjectName("rbtn_1")
+        self.cbox_1 = QtWidgets.QCheckBox(self.centralwidget)
+        self.cbox_1.setGeometry(QtCore.QRect(520,50,80,30))
+        self.cbox_1.setText("Blur")
+        self.cbox_1.setObjectName("cbox_1")
+
+        self.cbox_2 = QtWidgets.QCheckBox(self.centralwidget)
+        self.cbox_2.setGeometry(QtCore.QRect(610,50,80,30))
+        self.cbox_2.setText("Level")
+        self.cbox_2.setObjectName("cbox_2")
+
+        self.cbox_3 = QtWidgets.QCheckBox(self.centralwidget)
+        self.cbox_3.setGeometry(QtCore.QRect(700,50,100,30))
+        self.cbox_3.setText("dynamic")
+        self.cbox_3.setObjectName("cbox_3")
+
+
 
         #增加button
         self.pbtn_1 = QtWidgets.QPushButton(self.centralwidget)
@@ -311,11 +316,11 @@ class Ui_MainWindow(object):
         self.toolBar = QtWidgets.QToolBar(MainWindow)
         self.toolBar.setObjectName("toolBar")
         MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.toolBar)
-        self.new = QtWidgets.QAction(QtGui.QIcon('./images/new.png'), '&new', self)
-        self.edit = QtWidgets.QAction(QtGui.QIcon('./images/edit.png'),'&edit', self)
-        self.save = QtWidgets.QAction(QtGui.QIcon('./images/save.png'), '&save', self)
-        self.refresh = QtWidgets.QAction(QtGui.QIcon('./images/refresh.png'), '&refresh', self)
-        self.open = QtWidgets.QAction(QtGui.QIcon('./images/open.png'), '&open', self)
+        self.new = QtWidgets.QAction(QtGui.QIcon('./resources/images/new.png'), '&new', self)
+        self.edit = QtWidgets.QAction(QtGui.QIcon('./resources/images/edit.png'),'&edit', self)
+        self.save = QtWidgets.QAction(QtGui.QIcon('./resources/images/save.png'), '&save', self)
+        self.refresh = QtWidgets.QAction(QtGui.QIcon('./resources/images/refresh.png'), '&refresh', self)
+        self.open = QtWidgets.QAction(QtGui.QIcon('./resources/images/open.png'), '&open', self)
         self.toolBar.addAction(self.new)
         self.toolBar.addAction(self.edit)
         self.toolBar.addAction(self.save)
@@ -324,19 +329,19 @@ class Ui_MainWindow(object):
 
 
         #定义动作信息
-        self.actionNew = QtWidgets.QAction(QtGui.QIcon('./images/new.png'), '&New', self)
+        self.actionNew = QtWidgets.QAction(QtGui.QIcon('./resources/images/new.png'), '&New', self)
         self.actionNew.setObjectName("actionNew")
-        self.actionSave = QtWidgets.QAction(QtGui.QIcon('./images/save_as.png'), '&Save', self)
+        self.actionSave = QtWidgets.QAction(QtGui.QIcon('./resources/images/save_as.png'), '&Save', self)
         self.actionSave.setObjectName("actionSave")
-        self.actionSetting = QtWidgets.QAction(QtGui.QIcon('./images/setting.png'), '&Setting', self)
+        self.actionSetting = QtWidgets.QAction(QtGui.QIcon('./resources/images/setting.png'), '&Setting', self)
         self.actionSetting.setObjectName("actionSetting")
-        self.actionQuit = QtWidgets.QAction(QtGui.QIcon('./images/quit.png'), '&Quit', self)
+        self.actionQuit = QtWidgets.QAction(QtGui.QIcon('./resources/images/quit.png'), '&Quit', self)
         self.actionQuit.setObjectName("actionQuit")
-        self.actionPaint = QtWidgets.QAction(QtGui.QIcon('./images/paint.png'), '&Paint', self)
+        self.actionPaint = QtWidgets.QAction(QtGui.QIcon('./resources/images/paint.png'), '&Paint', self)
         self.actionPaint.setObjectName("actionPaint")
-        self.actionEncrypt = QtWidgets.QAction(QtGui.QIcon('./images/encrypt.png'), '&Encrypt', self)
+        self.actionEncrypt = QtWidgets.QAction(QtGui.QIcon('./resources/images/encrypt.png'), '&Encrypt', self)
         self.actionEncrypt.setObjectName("actionEncrypt")
-        self.actionCompress = QtWidgets.QAction(QtGui.QIcon('./images/compress.png'), '&Compress', self)
+        self.actionCompress = QtWidgets.QAction(QtGui.QIcon('./resources/images/compress.png'), '&Compress', self)
         self.actionCompress.setObjectName("actionCompress")
 
         
@@ -354,7 +359,7 @@ class Ui_MainWindow(object):
         #动作连接到相应的方法
         self.tabWidget.setCurrentIndex(0)
 
-        #菜单栏的功能定义
+        # 菜单栏的功能定义
         self.actionNew.triggered.connect(self.openFileWindow)
         self.actionSave.triggered.connect(self.saveTable)
         self.actionSetting.triggered.connect(self.openDirWindow)

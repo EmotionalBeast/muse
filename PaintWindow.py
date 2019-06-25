@@ -7,12 +7,10 @@ from PaintWindowUi import Ui_PaintWindow
 
 width = 360
 class MyPaintWindow(QWidget, Ui_PaintWindow):
-	def __init__(self,tup):
+	def __init__(self,dic):
 		super(MyPaintWindow,self).__init__()
 		self.setupUi(self)
-		self.cell_list = tup[0]
-		self.text_list = tup[1]
-
+		self.dic = dic
 	
 
 	def getScene(self, bgName, width, height):
@@ -27,19 +25,11 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		#添加cell
 
 
-
-
-
-
 		#添加文字
 		for i in range(len(self.text_list)):
 			label = QLabel()
 			label.setText(self.text_list[i]["placeHolder"])
 			scene.addItem(label)
-
-
-
-
 
 		return scene
 
