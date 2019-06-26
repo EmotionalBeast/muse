@@ -1,0 +1,100 @@
+{
+	"templateId": 1192,
+	"elements": [
+		{
+			"id": "0",
+			"type": "image",
+			"blur": 10,
+			"refId": "1",
+			"constraints":{
+				"left":{
+					"percentage": 0,
+					"constant": 0
+				},
+				"right":{
+					"percentage": 0,
+					"constant": 0
+				},
+				"top":{
+					"percentage": 0,
+					"constant": 0
+				},
+				"bottom":{
+					"percentage": 0,
+					"constant": 0
+				}
+			}
+		},
+		{
+			"id": "1",
+			"type": "media",
+			"mediaId": "0",
+			"constraints": {
+				"left": {
+					"percentage": 0.0947,
+					"constant": 0
+				},
+				"right": {
+					"percentage": 0.0907,
+					"constant": 0
+				},
+				"top": {
+					"percentage": 0.2039,
+					"constant": 0
+				},
+				"height": {
+					"percentage": 0.4955,
+					"constant": 0
+				}
+			}
+		},
+		{
+			"id": "3",
+			"type": "image",
+			"imageName": "template_widget_1192.png",
+			"constraints": {
+				"left": {
+					"percentage": 0,
+					"constant": 0
+				},
+				"right": {
+					"percentage": 0,
+					"constant": 0
+				},
+				"top": {
+					"percentage": 0,
+					"constant": 0
+				},
+				"bottom": {
+					"percentage": 0,
+					"constant": 0
+				}
+			}
+		},
+		{
+			"id": "4",
+			"type": "text",
+			"textId": "0",
+			"fontName": "VNI-Thufap1",
+			"fontSize": 15,
+			"canvasWidth": 375,
+			"textColor": "FDF8F9",
+			"placeHolder": "The power of imagination makes us infinite.",
+			"constraints": {
+				"left": {
+					"percentage": 0.05,
+					"constant": 0
+				},
+				"right": {
+					"percentage": 0.05,
+					"constant": 0
+				},
+				"top": {
+					"percentage": 0.7524,
+					"constant": 0
+				}
+			}
+		}
+	]
+
+}
