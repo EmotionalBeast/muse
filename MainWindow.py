@@ -1274,6 +1274,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					temp = self.comBox_2.currentText()
 					dic["templateId"] = int(temp[self.count:])
 					dic["elements"] = []
+					if self.cbox_3.isChecked():
+						dic['animation'] = self.ani_dic
 					for i in range(len(self.item)):
 						dic["elements"].append(self.item[i])
 					name = self.comBox_2.currentText()
@@ -1431,16 +1433,17 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					cell_dic["id"] = self.tableWidget_2.item(i, 0).text()
 					cell_dic["type"] = self.tableWidget_2.item(i, 1).text()
 					cell_dic["mediaId"] = self.tableWidget_2.item(i, 2).text()
-					cell_dic["keyPath"] = self.tableWidget_2.item(i,2).text()
-					cell_dic["cen"]
-					item_1 = self.tableWidget_2.item(i,3).text()
-					item_2 = self.tableWidget_2.item(i,4).text()
-					item_3 = self.tableWidget_2.item(i,5).text()
-					item_4 = self.tableWidget_2.item(i,6).text()
-					item_5 = self.tableWidget_2.item(i,7).text()
-					item_6 = self.tableWidget_2.item(i,8).text()
-					item_7 = self.tableWidget_2.item(i,9).text()
-					item_8 = self.tableWidget_2.item(i,10).text()
+					cell_dic["keyPath"] = self.tableWidget_2.item(i,3).text()
+					cell_dic["contentSize"][0] = int(self.tableWidget_2.item(i,4).text())
+					cell_dic["contentSize"][1] = int(self.tableWidget_2.item(i,5).text())
+					item_1 = self.tableWidget_2.item(i,6).text()
+					item_2 = self.tableWidget_2.item(i,7).text()
+					item_3 = self.tableWidget_2.item(i,8).text()
+					item_4 = self.tableWidget_2.item(i,9).text()
+					item_5 = self.tableWidget_2.item(i,10).text()
+					item_6 = self.tableWidget_2.item(i,11).text()
+					item_7 = self.tableWidget_2.item(i,12).text()
+					item_8 = self.tableWidget_2.item(i,13).text()
 					cell_dic["constraints"] = {"left":{
 																"percentage": float(item_1),
 																"constant": float(item_2)
@@ -1459,73 +1462,154 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 																}
 														}
 					self.item.append(cell_dic)
+			else:
+				QMessageBox.information(self, "提示", "不能多选！")
 
 
 		if self.spinBox_2.value() != 0:
-			for i in range(self.spinBox_2.value()):
-				bg_dic = {}
-				bg_dic["id"] = self.tableWidget_3.item(i, 0).text()
-				bg_dic["type"] = self.tableWidget_3.item(i, 1).text()
-				bg_dic["imageName"] = self.tableWidget_3.item(i, 2).text()
-				item_1 = self.tableWidget_3.item(i,3).text()
-				item_2 = self.tableWidget_3.item(i,4).text()
-				item_3 = self.tableWidget_3.item(i,5).text()
-				item_4 = self.tableWidget_3.item(i,6).text()
-				item_5 = self.tableWidget_3.item(i,7).text()
-				item_6 = self.tableWidget_3.item(i,8).text()
-				item_7 = self.tableWidget_3.item(i,9).text()
-				item_8 = self.tableWidget_3.item(i,10).text()
-				bg_dic["constraints"] = {"left":{
-															"percentage": float(item_1),
-															"constant": float(item_2)
-															},
-													"right":{
-															"percentage": float(item_3),
-															"constant": float(item_4)
-															},
-													"top":{
-															"percentage": float(item_5),
-															"constant": float(item_6)
-															},
-													"bottom":{
-															"percentage": float(item_7),
-															"constant": float(item_8)
-															}
-													}
-				self.item.append(bg_dic)
+			if not self.cbox_3.isChecked():
+				for i in range(self.spinBox_2.value()):
+					bg_dic = {}
+					bg_dic["id"] = self.tableWidget_3.item(i, 0).text()
+					bg_dic["type"] = self.tableWidget_3.item(i, 1).text()
+					bg_dic["imageName"] = self.tableWidget_3.item(i, 2).text()
+					item_1 = self.tableWidget_3.item(i,3).text()
+					item_2 = self.tableWidget_3.item(i,4).text()
+					item_3 = self.tableWidget_3.item(i,5).text()
+					item_4 = self.tableWidget_3.item(i,6).text()
+					item_5 = self.tableWidget_3.item(i,7).text()
+					item_6 = self.tableWidget_3.item(i,8).text()
+					item_7 = self.tableWidget_3.item(i,9).text()
+					item_8 = self.tableWidget_3.item(i,10).text()
+					bg_dic["constraints"] = {"left":{
+																"percentage": float(item_1),
+																"constant": float(item_2)
+																},
+														"right":{
+																"percentage": float(item_3),
+																"constant": float(item_4)
+																},
+														"top":{
+																"percentage": float(item_5),
+																"constant": float(item_6)
+																},
+														"bottom":{
+																"percentage": float(item_7),
+																"constant": float(item_8)
+																}
+														}
+					self.item.append(bg_dic)
+				else: 
+					for i in range(self.spinBox_2.value()):
+					bg_dic = {}
+					bg_dic["id"] = self.tableWidget_3.item(i, 0).text()
+					bg_dic["type"] = self.tableWidget_3.item(i, 1).text()
+					bg_dic["imageName"] = self.tableWidget_3.item(i, 2).text()
+					bg_dic["keyPath"] = self.tableWidget_3.item(i,3).text()
+					bg_dic["contentSize"][0] = int(self.tableWidget_3.item(i,4).text())
+					bg_dic["contentSize"][1] = int(self.tableWidget_3.item(i,5).text())
+					item_1 = self.tableWidget_3.item(i,6).text()
+					item_2 = self.tableWidget_3.item(i,7).text()
+					item_3 = self.tableWidget_3.item(i,8).text()
+					item_4 = self.tableWidget_3.item(i,9).text()
+					item_5 = self.tableWidget_3.item(i,10).text()
+					item_6 = self.tableWidget_3.item(i,11).text()
+					item_7 = self.tableWidget_3.item(i,12).text()
+					item_8 = self.tableWidget_3.item(i,13).text()
+					bg_dic["constraints"] = {"left":{
+																"percentage": float(item_1),
+																"constant": float(item_2)
+																},
+														"right":{
+																"percentage": float(item_3),
+																"constant": float(item_4)
+																},
+														"top":{
+																"percentage": float(item_5),
+																"constant": float(item_6)
+																},
+														"bottom":{
+																"percentage": float(item_7),
+																"constant": float(item_8)
+																}
+														}
+					self.item.append(bg_dic)
 
 		if self.spinBox_3.value() != 0:
-			for i in range(self.spinBox_3.value()):
-				text_dic = {}
-				text_dic['id'] = self.tableWidget_4.item(i, 0).text()
-				text_dic['type'] = self.tableWidget_4.item(i, 1).text()
-				text_dic['textId'] = self.tableWidget_4.item(i, 2).text()
-				text_dic['fontName'] = self.dict1[self.tableWidget_4.cellWidget(i, 3).currentText()]
-				text_dic['fontSize'] = int(self.tableWidget_4.item(i, 4).text())
-				text_dic['canvasWidth'] = int(self.tableWidget_4.item(i, 5).text())
-				text_dic['textColor'] = self.tableWidget_4.item(i, 6).text()
-				text_dic['placeHolder'] = self.tableWidget_4.item(i, 7).text()
-				text_dic['textAlignment'] = self.tableWidget_4.item(i, 8).text()
-				item_1 = self.tableWidget_4.item(i,9).text()
-				item_2 = self.tableWidget_4.item(i,10).text()
-				item_3 = self.tableWidget_4.item(i,11).text()
-				item_4 = self.tableWidget_4.item(i,12).text()
-				item_5 = self.tableWidget_4.item(i,13).text()
-				item_6 = self.tableWidget_4.item(i,14).text()
-				text_dic['constraints'] = {"left":{
-												 "percentage": float(item_1),
-												 "constant": float(item_2)
-												 },
-												 "right":{
-												  "percentage": float(item_3),
-												  "constant": float(item_4)
-												  },
-												  "top":{
-												   "percentage": float(item_5),
-												   "constant": float(item_6)
-												  }
-												 }
-				self.item.append(text_dic)
+			if not self.cbox_3.isChecked():
+				for i in range(self.spinBox_3.value()):
+					text_dic = {}
+					text_dic['id'] = self.tableWidget_4.item(i, 0).text()
+					text_dic['type'] = self.tableWidget_4.item(i, 1).text()
+					text_dic['textId'] = self.tableWidget_4.item(i, 2).text()
+					text_dic['fontName'] = self.dict1[self.tableWidget_4.cellWidget(i, 3).currentText()]
+					text_dic['fontSize'] = int(self.tableWidget_4.item(i, 4).text())
+					text_dic['canvasWidth'] = int(self.tableWidget_4.item(i, 5).text())
+					text_dic['textColor'] = self.tableWidget_4.item(i, 6).text()
+					text_dic['placeHolder'] = self.tableWidget_4.item(i, 7).text()
+					text_dic['textAlignment'] = self.tableWidget_4.item(i, 8).text()
+					item_1 = self.tableWidget_4.item(i,9).text()
+					item_2 = self.tableWidget_4.item(i,10).text()
+					item_3 = self.tableWidget_4.item(i,11).text()
+					item_4 = self.tableWidget_4.item(i,12).text()
+					item_5 = self.tableWidget_4.item(i,13).text()
+					item_6 = self.tableWidget_4.item(i,14).text()
+					text_dic['constraints'] = {"left":{
+													 "percentage": float(item_1),
+													 "constant": float(item_2)
+													 },
+													 "right":{
+													  "percentage": float(item_3),
+													  "constant": float(item_4)
+													  },
+													  "top":{
+													   "percentage": float(item_5),
+													   "constant": float(item_6)
+													  }
+													 }
+					self.item.append(text_dic)
+
+			else:
+				for i in range(self.spinBox_3.value()):
+					text_dic = {}
+					text_dic['id'] = self.tableWidget_4.item(i, 0).text()
+					text_dic['type'] = self.tableWidget_4.item(i, 1).text()
+					text_dic['textId'] = self.tableWidget_4.item(i, 2).text()
+					text_dic['fontName'] = self.dict1[self.tableWidget_4.cellWidget(i, 3).currentText()]
+					text_dic['fontSize'] = int(self.tableWidget_4.item(i, 4).text())
+					text_dic['canvasWidth'] = int(self.tableWidget_4.item(i, 5).text())
+					text_dic['textColor'] = self.tableWidget_4.item(i, 6).text()
+					text_dic['placeHolder'] = self.tableWidget_4.item(i, 7).text()
+					text_dic['textAlignment'] = self.tableWidget_4.item(i, 8).text()
+					item_1 = self.tableWidget_4.item(i,9).text()
+					item_2 = self.tableWidget_4.item(i,10).text()
+					item_3 = self.tableWidget_4.item(i,11).text()
+					item_4 = self.tableWidget_4.item(i,12).text()
+					item_5 = self.tableWidget_4.item(i,13).text()
+					item_6 = self.tableWidget_4.item(i,14).text()
+					text_dic['constraints'] = {"left":{
+													 "percentage": float(item_1),
+													 "constant": float(item_2)
+													 },
+													 "right":{
+													  "percentage": float(item_3),
+													  "constant": float(item_4)
+													  },
+													  "top":{
+													   "percentage": float(item_5),
+													   "constant": float(item_6)
+													  }
+													 }
+					text_dic["keyPath"] = self.tableWidget_4.item(i,15).text()
+					text_dic["contentSize"][0] = self.tableWidget_4.item(i,16).text()
+					text_dic["contentSize"][1] = self.tableWidget_4.item(i,17).text()
+					item_7 = self.tableWidget_4.item(i,18).text()
+					item_8 = self.tableWidget_4.item(i,19).text()
+					item_9 = self.tableWidget_4.item(i,20).text()
+					text_dic['animation'] = {'name': item_7, 'type': int(item_8), 'resourceDirectory': item_9}
+					self.item.append(text_dic)
+
+
 
 		if self.cbox_2.isChecked() == True:
 			for i in range(1):
@@ -1559,8 +1643,15 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 															}
 													}
 				self.item.append(level_dic)
-			if self.spinBox_1.value() == 0:
-				self.item[0]["customIconId"] = level_dic["id"]
+
+		if self.cbox_3.isChecked():
+			for i in range(1):
+				self.ani_dic = {}
+				self.ani_dic['name'] = self.tableWidget_6.item(i,0).text()
+				self.ani_dic['type'] = int(self.tableWidget_6.item(i,1).text())
+				self.ani_dic['resourceDirectory'] = self.tableWidget_6.item(i,2).text()
+
+
 
 	def encryption(self):
 		if self.comBox_1.currentText() != "":
