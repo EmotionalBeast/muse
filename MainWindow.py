@@ -20,7 +20,9 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		self.setupUi(self)
 		self.myFileWindow = MyFileWindow()
 		self.myDirWindow = MyDirWindow()
-		
+		# self.tabCount = 0
+		self.index = 0
+
 		with open("./resources/json/font.json", 'r') as lf:
 			jsonStr = lf.read()
 			self.dict1 = json.loads(jsonStr, strict = False)
@@ -112,19 +114,29 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 
 	#表格的可编辑性
 	def editable(self):
-		self.tableWidget_1.setEditTriggers(QAbstractItemView.CurrentChanged)
+		if self.cbox_1.isChecked():
+			self.tableWidget_1.setEditTriggers(QAbstractItemView.CurrentChanged)
 		self.tableWidget_2.setEditTriggers(QAbstractItemView.CurrentChanged)
 		self.tableWidget_3.setEditTriggers(QAbstractItemView.CurrentChanged)
-		self.tableWidget_4.setEditTriggers(QAbstractItemView.CurrentChanged)
-		self.tableWidget_5.setEditTriggers(QAbstractItemView.CurrentChanged)
+		if self.spinBox_3 != 0:
+			self.tableWidget_4.setEditTriggers(QAbstractItemView.CurrentChanged)
+		if self.cbox_2.isChecked():
+			self.tableWidget_5.setEditTriggers(QAbstractItemView.CurrentChanged)
+		if self.cbox_3.isChecked():
+			self.tableWidget_6.setEditTriggers(QAbstractItemView.CurrentChanged)
 		self.statusbar.showMessage("Editable")
 
 	def nonEditable(self):
-		self.tableWidget_1.setEditTriggers(QAbstractItemView.NoEditTriggers)
+		if self.cbox_1.isChecked():
+			self.tableWidget_1.setEditTriggers(QAbstractItemView.NoEditTriggers)
 		self.tableWidget_2.setEditTriggers(QAbstractItemView.NoEditTriggers)
 		self.tableWidget_3.setEditTriggers(QAbstractItemView.NoEditTriggers)
-		self.tableWidget_4.setEditTriggers(QAbstractItemView.NoEditTriggers)
-		self.tableWidget_5.setEditTriggers(QAbstractItemView.NoEditTriggers)
+		if self.spinBox_3 != 0:
+			self.tableWidget_4.setEditTriggers(QAbstractItemView.NoEditTriggers)
+		if self.cbox_2.isChecked():
+			self.tableWidget_5.setEditTriggers(QAbstractItemView.NoEditTriggers)
+		if self.cbox_3.isChecked():
+			self.tableWidget_6.setEditTriggers(QAbstractItemView.NoEditTriggers)
 		self.statusbar.showMessage("Non Editable")
 
 
@@ -182,48 +194,46 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		self.tableWidget_4.setCellWidget(7, 3, self.comBox_73)
 
 	def initTable(self):
+		if self.index > 0:
+			self.tabWidget.close()
+		self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
+		self.tabWidget.setGeometry(QtCore.QRect(0, 90, 1000, 550))
+		self.tabWidget.setObjectName("tabWidget")
 		#初始化普通模版的table
 		if self.cbox_1.isChecked() == False and self.cbox_2.isChecked() == False and self.cbox_3.isChecked() == False:
-			if self.spinBox_3.value() != 0:
+			if self.spinBox_1.value() != 0:
 				self.initNormalCellTable()
-				self.initNormalBgTableI()
-				self.initNormalTextTable()
-			else:
-				self.initNormalCellTable()
-				self.initNormalBgTableI()
+				self.initNormalBgTable()
+				if self.spinBox_3.value() != 0:
+					self.initNormalTextTable()
+
 		#初始化背景自动虚化模板的table
 		if self.cbox_1.isChecked() == True and self.cbox_2.isChecked() == False and self.cbox_3.isChecked() == False:
-			if self.spinBox_3.value() != 0:
+			if self.spinBox_1.value() != 0:
 				self.initBlurTable()
 				self.initNormalCellTable()
 				self.initNormalBgTable()
-				self.initNormalTextTable()
-			else:
-				self.initBlurTable()
-				self.initNormalCellTable()
-				self.initNormalBgTableI()
+				if self.spinBox_3.value() != 0:
+					self.initNormalTextTable()
 		#初始化图片有上下层次模板的table
 		if self.cbox_1.isChecked() == False and self.cbox_2.isChecked() == True and self.cbox_3.isChecked() == False:
-			if self.spinBox_3.value() != 0:
+			if self.spinBox_1.value() != 0:
 				self.initLevelCellTable()
 				self.initNormalBgTable()
-				self.initNormalTextTable()
-				self.initLevelTable()
-			else:
-				self.initLevelCellTable()
-				self.initNormalBgTable()
+				if self.spinBox_3.value() != 0:
+					self.initNormalTextTable()
 				self.initLevelTable()
 		#初始化动态模板的table
 		if self.cbox_1.isChecked() == False and self.cbox_2.isChecked() == False and self.cbox_3.isChecked() == True:
 			if self.spinBox_3.value() != 0:
 				self.initDynamicCellTable()
 				self.initDynamicBgTable()
-				self.initDynamicTextTable()
+				if self.spinBox_3.value() != 0:
+					self.initDynamicTextTable()
 				self.initDynamicTable()
-			else:
-				self.initDynamicCellTable()
-				self.initDynamicBgTable()
-				self.initDynamicTable()
+
+		self.tabWidget.show()
+		self.index +=1
 
 	def initBlurTable(self):
 		self.tab_1 = QtWidgets.QWidget()
@@ -290,6 +300,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		item.setText(_translate("MainWindow", "bottom_constant"))
 		self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_1), _translate("MainWindow", "Blur"))
 
+		self.tableWidget_1.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+
 	def initNormalCellTable(self):
 		#cell表格的json参数列表
 		self.tab_2 = QtWidgets.QWidget()
@@ -350,6 +362,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		item = self.tableWidget_2.horizontalHeaderItem(10)
 		item.setText(_translate("MainWindow", "height_constant"))
 		self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "Cell"))
+
+		self.tableWidget_2.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
 
 	def initLevelCellTable(self):
 		#cell表格的json参数列表
@@ -415,6 +429,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		item = self.tableWidget_2.horizontalHeaderItem(11)
 		item.setText(_translate("MainWindow", "height_constant"))
 		self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "Cell"))
+
+		self.tableWidget_2.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
 
 	def initDynamicCellTable(self):
 		#cell表格的json参数列表
@@ -489,6 +505,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		item.setText(_translate("MainWindow", "height_constant"))
 		self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "Cell"))
 
+		self.tableWidget_2.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+
 	def initNormalBgTable(self):
 		#背景图片的json参数列表
 		self.tab_3 = QtWidgets.QWidget()
@@ -550,6 +568,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		item = self.tableWidget_3.horizontalHeaderItem(10)
 		item.setText(_translate("MainWindow", "bottom_constant"))
 		self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("MainWindow", "Background"))
+
+		self.tableWidget_3.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
 
 	def initDynamicBgTable(self):
 		#背景图片的json参数列表
@@ -624,6 +644,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		item = self.tableWidget_3.horizontalHeaderItem(13)
 		item.setText(_translate("MainWindow", "bottom_constant"))
 		self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("MainWindow", "Background"))
+
+		self.tableWidget_3.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
 
 	def initNormalTextTable(self):
 		#文字的json参数列表
@@ -701,6 +723,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		item = self.tableWidget_4.horizontalHeaderItem(14)
 		item.setText(_translate("MainWindow", "top_constant"))
 		self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("MainWindow", "Text"))
+
+		self.tableWidget_4.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
 
 	def initDynamicTextTable(self):
 		#文字的json参数列表
@@ -804,6 +828,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		item.setText(_translate("MainWindow", "animation_resourceDirectory"))
 		self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("MainWindow", "Text"))
 
+		self.tableWidget_4.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+
 	def initLevelTable(self):
 		#分层图片的参数列表
 		self.tab_5 = QtWidgets.QWidget()
@@ -865,6 +891,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		item.setText(_translate("MainWindow", "width_constant"))
 		self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_5), _translate("MainWindow", "level"))
 
+		self.tableWidget_5.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+
 	def initDynamicTable(self):
 		self.tab_6 = QtWidgets.QWidget()
 		self.tab_6.setObjectName("tab_6")
@@ -891,6 +919,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		item = self.tableWidget_6.horizontalHeaderItem(2)
 		item.setText(_translate("MainWindow", "animation_resourceDirectory"))
 		self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_6), _translate("MainWindow", "Dynamic"))
+
+		self.tableWidget_6.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
 
 	#读入json文件，显示在页面中
 	def readJson(self):
@@ -964,8 +994,6 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_1.setItem(i,9,QTableWidgetItem(str(self.blur_list[i]['constraints']['top']['constant'])))
 				self.tableWidget_1.setItem(i,10,QTableWidgetItem(str(self.blur_list[i]['constraints']['bottom']['percentage'])))
 				self.tableWidget_1.setItem(i,11,QTableWidgetItem(str(self.blur_list[i]['constraints']['bottom']['constant'])))
-		else:
-			self.tableWidget_1.setRowCount(0)
 
 		if self.spinBox_1.value() != 0:
 			if self.cbox_2.isChecked() == False and self.cbox_3.isChecked() == False:
@@ -1016,8 +1044,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					self.tableWidget_2.setItem(i,13,QTableWidgetItem(str(self.cell_list[i]['constraints']['height']['constant'])))
 			else:
 				QMessageBox.information(self,"提示","只能选择一个！")
-		else:
-			self.tableWidget_2.setRowCount(self.spinBox_1.value())
+
 
 		if self.spinBox_2.value() != 0:
 			if self.cbox_3.isChecked() == False:
@@ -1051,8 +1078,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					self.tableWidget_3.setItem(i,11,QTableWidgetItem(str(self.bg_list[i]['constraints']['top']['constant'])))
 					self.tableWidget_3.setItem(i,12,QTableWidgetItem(str(self.bg_list[i]['constraints']['bottom']['percentage'])))
 					self.tableWidget_3.setItem(i,13,QTableWidgetItem(str(self.bg_list[i]['constraints']['bottom']['constant'])))
-		else:
-			self.tableWidget_3.setRowCount(self.spinBox_2.value())
+
 
 		if self.spinBox_3.value() != 0:
 			if self.cbox_3.isChecked() == False:
@@ -1099,8 +1125,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					self.tableWidget_4.setItem(i,18,QTableWidgetItem(self.text_list[i]['animation']['name']))
 					self.tableWidget_4.setItem(i,19,QTableWidgetItem(str(self.text_list[i]['animation']['type'])))
 					self.tableWidget_4.setItem(i,20,QTableWidgetItem(self.text_list[i]['animation']['resourceDirectory']))
-		else:
-			self.tableWidget_4.setRowCount(self.spinBox_3.value())
+
 
 		if self.cbox_2.isChecked() == True:
 			self.tableWidget_5.setRowCount(1)
@@ -1116,22 +1141,18 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_5.setItem(i,8,QTableWidgetItem(str(self.level_list[i]['constraints']['height']['constant'])))
 				self.tableWidget_5.setItem(i,9,QTableWidgetItem(str(self.level_list[i]['constraints']['width']['percentage'])))
 				self.tableWidget_5.setItem(i,10,QTableWidgetItem(str(self.level_list[i]['constraints']['width']['constant'])))
-		else:
-			self.tableWidget_5.setRowCount(0)
+
 
 		if self.cbox_3.isChecked() == True:
 			self.tableWidget_6.setRowCount(1)
 			self.tableWidget_6.setItem(i,0,QTableWidgetItem(self.dic['animation']['name']))
 			self.tableWidget_6.setItem(i,1,QTableWidgetItem(str(self.dic['animation']['type'])))
 			self.tableWidget_6.setItem(i,2,QTableWidgetItem(self.dic['animation']['resourceDirectory']))
-		else:
-			self.tableWidget_6.setRowCount(0)
-
 
 	#点击生成按钮的槽函数
 	def createTable(self):
-		self.nonEditable()
 		self.initTable()
+		self.nonEditable()
 		count_1 = 0
 		count_2 = self.spinBox_1.value()
 		count_3 = self.spinBox_2.value()
@@ -1146,6 +1167,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		#将comBox放到tablewidget中	
 		self.initComBox()
 		name = self.comBox_2.currentText()
+
 		if self.cbox_1.isChecked() == True:
 			count_1 = 1
 			self.tableWidget_1.setRowCount(count_1)
@@ -1161,7 +1183,9 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_1.setItem(i,9,QTableWidgetItem("0"))
 				self.tableWidget_1.setItem(i,10,QTableWidgetItem("0"))
 				self.tableWidget_1.setItem(i,11,QTableWidgetItem("0"))
+
 		if self.cbox_2.isChecked() == False and self.cbox_3.isChecked() == False:
+			self.tableWidget_2.setRowCount(count_2)
 			for i in range(count_2):
 				self.tableWidget_2.setItem(i,0,QTableWidgetItem(str(count_1+i)))
 				self.tableWidget_2.setItem(i,1,QTableWidgetItem("media"))
@@ -1171,6 +1195,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_2.setItem(i,8,QTableWidgetItem("0"))
 				self.tableWidget_2.setItem(i,10,QTableWidgetItem("0"))
 		elif self.cbox_2.isChecked() == True and self.cbox_3.isChecked() == False:
+			self.tableWidget_2.setRowCount(count_2)
 			for i in range(count_2):
 				self.tableWidget_2.setItem(i,0,QTableWidgetItem(str(count_1+i)))
 				self.tableWidget_2.setItem(i,2,QTableWidgetItem("media"))
@@ -1180,6 +1205,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_2.setItem(i,9,QTableWidgetItem("0"))
 				self.tableWidget_2.setItem(i,11,QTableWidgetItem("0"))
 		elif self.cbox_2.isChecked() == False and self.cbox_3.isChecked() == True:
+			self.tableWidget_2.setRowCount(count_2)
 			for i in range(count_2):
 				self.tableWidget_2.setItem(i,0,QTableWidgetItem(str(count_1+i)))
 				self.tableWidget_2.setItem(i,1,QTableWidgetItem("media"))
@@ -1193,6 +1219,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 
 
 		if self.cbox_3.isChecked() == False:
+			self.tableWidget_3.setRowCount(count_3)
 			for i in range(count_3):
 				self.tableWidget_3.setItem(i,0,QTableWidgetItem(str(count_1+count_2+i)))
 				self.tableWidget_3.setItem(i,1,QTableWidgetItem("image"))
@@ -1206,6 +1233,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_3.setItem(i,9,QTableWidgetItem("0"))
 				self.tableWidget_3.setItem(i,10,QTableWidgetItem("0"))
 		else:
+			self.tableWidget_3.setRowCount(count_3)
 			for i in range(count_3):
 				self.tableWidget_3.setItem(i,0,QTableWidgetItem(str(count_1+count_2+i)))
 				self.tableWidget_3.setItem(i,1,QTableWidgetItem("image"))
@@ -1218,7 +1246,9 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_3.setItem(i,11,QTableWidgetItem("0"))
 				self.tableWidget_3.setItem(i,12,QTableWidgetItem("0"))
 				self.tableWidget_3.setItem(i,13,QTableWidgetItem("0"))
+
 		if self.cbox_3.isChecked() == False:
+			self.tableWidget_4.setRowCount(count_4)
 			for i in range(count_4):
 				self.tableWidget_4.setItem(i,0,QTableWidgetItem(str(count_1+count_2+count_3+i)))
 				self.tableWidget_4.setItem(i,1,QTableWidgetItem("text"))
@@ -1228,6 +1258,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_4.setItem(i,12,QTableWidgetItem("0"))
 				self.tableWidget_4.setItem(i,14,QTableWidgetItem("0"))
 		else:
+			self.tableWidget_4.setRowCount(count_4)
 			for i in range(count_4):
 				self.tableWidget_4.setItem(i,0,QTableWidgetItem(str(count_1+count_2+count_3+i)))
 				self.tableWidget_4.setItem(i,1,QTableWidgetItem("text"))
@@ -1236,10 +1267,11 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_4.setItem(i,10,QTableWidgetItem("0"))
 				self.tableWidget_4.setItem(i,12,QTableWidgetItem("0"))
 				self.tableWidget_4.setItem(i,14,QTableWidgetItem("0"))
-				self.tableWidget_5.setItem(i,15,QTableWidgetItem("字 " + str(i+1)))
-				self.tableWidget_5.setItem(i,18,QTableWidgetItem("data.json"))
-				self.tableWidget_5.setItem(i,19,QTableWidgetItem("1"))
-				self.tableWidget_5.setItem(i,20,QTableWidgetItem("/字" + str(i+1)))				
+				self.tableWidget_4.setItem(i,15,QTableWidgetItem("字" + str(i+1)))
+				self.tableWidget_4.setItem(i,18,QTableWidgetItem("data.json"))
+				self.tableWidget_4.setItem(i,19,QTableWidgetItem("1"))
+				self.tableWidget_4.setItem(i,20,QTableWidgetItem("/字" + str(i+1)))
+
 		if self.cbox_2.isChecked() == True:
 			count_5 = 1
 			self.tableWidget_5.setRowCount(count_5)
@@ -1256,10 +1288,11 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_5.setItem(i,8,QTableWidgetItem("0"))
 				self.tableWidget_5.setItem(i,9,QTableWidgetItem("0"))
 				self.tableWidget_5.setItem(i,10,QTableWidgetItem("0"))
+
 		if self.cbox_3.isChecked() == True:
 			count_6 = 1
 			self.tableWidget_6.setRowCount(count_6)
-			for in range(count_6):
+			for i in range(count_6):
 				self.tableWidget_6.setItem(i,0,QTableWidgetItem("data.json"))
 				self.tableWidget_6.setItem(i,1,QTableWidgetItem("1"))
 				self.tableWidget_6.setItem(i,2,QTableWidgetItem("/"))
@@ -1281,7 +1314,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					name = self.comBox_2.currentText()
 					path = self.path + "/" + name[self.count:] + "/" + name[:13]			
 					with open(path, "w") as df:
-						jsonStr = json.dumps(dic, sort_keys=True, indent=2)
+						jsonStr = json.dumps(dic, sort_keys=True, indent=2, ensure_ascii=False)
 						df.write(jsonStr)
 
 					self.item = []
@@ -1307,7 +1340,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			
 		if self.spinBox_2.value() != 0:
 			for i in range(self.spinBox_1.value()):
-				for j in range(self.tableWidget_2.columnCount()):
+				for j in range(self.tableWidget_3.columnCount()):
 					if self.tableWidget_3.item(i,j) == None or self.tableWidget_3.item(i,j).text() == "":
 						self.info = "background表中第 "+str(i+1)+" 行第 "+str(j+1)+" 列未填值！"
 						return False
@@ -1362,7 +1395,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.item.append(blur_dic)
 
 		if self.spinBox_1.value() != 0:
-			if self.cbox_2.isChecked == False and self.cbox_3.isChecked() == False:
+			if self.cbox_2.isChecked() == False and self.cbox_3.isChecked() == False:
 				for i in range(self.spinBox_1.value()):
 					cell_dic = {}
 					cell_dic["id"] = self.tableWidget_2.item(i, 0).text()
@@ -1394,7 +1427,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 																}
 														}
 					self.item.append(cell_dic)
-			elif self.cbox_2.isChecked == True and self.cbox_3.isChecked() == False:
+			elif self.cbox_2.isChecked() == True and self.cbox_3.isChecked() == False:
 				for i in range(self.spinBox_1.value()):
 					cell_dic = {}
 					cell_dic["id"] = self.tableWidget_2.item(i, 0).text()
@@ -1427,15 +1460,16 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 																}
 														}
 					self.item.append(cell_dic)
-			elif self.cbox_2.isChecked == False and self.cbox_3.isChecked() == True:
+			elif self.cbox_2.isChecked() == False and self.cbox_3.isChecked() == True:
 				for i in range(self.spinBox_1.value()):
 					cell_dic = {}
+					cell_dic["contentSize"] = []
 					cell_dic["id"] = self.tableWidget_2.item(i, 0).text()
 					cell_dic["type"] = self.tableWidget_2.item(i, 1).text()
 					cell_dic["mediaId"] = self.tableWidget_2.item(i, 2).text()
 					cell_dic["keyPath"] = self.tableWidget_2.item(i,3).text()
-					cell_dic["contentSize"][0] = int(self.tableWidget_2.item(i,4).text())
-					cell_dic["contentSize"][1] = int(self.tableWidget_2.item(i,5).text())
+					cell_dic["contentSize"].append(int(self.tableWidget_2.item(i,4).text()))
+					cell_dic["contentSize"].append(int(self.tableWidget_2.item(i,5).text()))
 					item_1 = self.tableWidget_2.item(i,6).text()
 					item_2 = self.tableWidget_2.item(i,7).text()
 					item_3 = self.tableWidget_2.item(i,8).text()
@@ -1465,9 +1499,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			else:
 				QMessageBox.information(self, "提示", "不能多选！")
 
-
 		if self.spinBox_2.value() != 0:
-			if not self.cbox_3.isChecked():
+			if self.cbox_3.isChecked() == False:
 				for i in range(self.spinBox_2.value()):
 					bg_dic = {}
 					bg_dic["id"] = self.tableWidget_3.item(i, 0).text()
@@ -1499,15 +1532,16 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 																}
 														}
 					self.item.append(bg_dic)
-				else: 
-					for i in range(self.spinBox_2.value()):
+			else: 
+				for i in range(self.spinBox_2.value()):
 					bg_dic = {}
+					bg_dic["contentSize"] = []
 					bg_dic["id"] = self.tableWidget_3.item(i, 0).text()
 					bg_dic["type"] = self.tableWidget_3.item(i, 1).text()
 					bg_dic["imageName"] = self.tableWidget_3.item(i, 2).text()
 					bg_dic["keyPath"] = self.tableWidget_3.item(i,3).text()
-					bg_dic["contentSize"][0] = int(self.tableWidget_3.item(i,4).text())
-					bg_dic["contentSize"][1] = int(self.tableWidget_3.item(i,5).text())
+					bg_dic["contentSize"].append(int(self.tableWidget_3.item(i,4).text()))
+					bg_dic["contentSize"].append(int(self.tableWidget_3.item(i,5).text()))
 					item_1 = self.tableWidget_3.item(i,6).text()
 					item_2 = self.tableWidget_3.item(i,7).text()
 					item_3 = self.tableWidget_3.item(i,8).text()
@@ -1536,7 +1570,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					self.item.append(bg_dic)
 
 		if self.spinBox_3.value() != 0:
-			if not self.cbox_3.isChecked():
+			if self.cbox_3.isChecked() == False:
 				for i in range(self.spinBox_3.value()):
 					text_dic = {}
 					text_dic['id'] = self.tableWidget_4.item(i, 0).text()
@@ -1572,6 +1606,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			else:
 				for i in range(self.spinBox_3.value()):
 					text_dic = {}
+					text_dic['contentSize'] = []
 					text_dic['id'] = self.tableWidget_4.item(i, 0).text()
 					text_dic['type'] = self.tableWidget_4.item(i, 1).text()
 					text_dic['textId'] = self.tableWidget_4.item(i, 2).text()
@@ -1601,15 +1636,13 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 													  }
 													 }
 					text_dic["keyPath"] = self.tableWidget_4.item(i,15).text()
-					text_dic["contentSize"][0] = self.tableWidget_4.item(i,16).text()
-					text_dic["contentSize"][1] = self.tableWidget_4.item(i,17).text()
+					text_dic["contentSize"].append(int(self.tableWidget_4.item(i,16).text()))
+					text_dic["contentSize"].append(int(self.tableWidget_4.item(i,17).text()))
 					item_7 = self.tableWidget_4.item(i,18).text()
 					item_8 = self.tableWidget_4.item(i,19).text()
 					item_9 = self.tableWidget_4.item(i,20).text()
 					text_dic['animation'] = {'name': item_7, 'type': int(item_8), 'resourceDirectory': item_9}
 					self.item.append(text_dic)
-
-
 
 		if self.cbox_2.isChecked() == True:
 			for i in range(1):
@@ -1644,15 +1677,14 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 													}
 				self.item.append(level_dic)
 
-		if self.cbox_3.isChecked():
+		if self.cbox_3.isChecked() == True:
 			for i in range(1):
 				self.ani_dic = {}
 				self.ani_dic['name'] = self.tableWidget_6.item(i,0).text()
 				self.ani_dic['type'] = int(self.tableWidget_6.item(i,1).text())
 				self.ani_dic['resourceDirectory'] = self.tableWidget_6.item(i,2).text()
 
-
-
+	#加密压缩功能
 	def encryption(self):
 		if self.comBox_1.currentText() != "":
 			pathIn = self.path

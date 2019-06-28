@@ -1,0 +1,100 @@
+{
+  "elements": [
+    {
+      "blur": 10,
+      "constraints": {
+        "bottom": {
+          "constant": 0.0,
+          "percentage": 0.0
+        },
+        "left": {
+          "constant": 0.0,
+          "percentage": 0.0
+        },
+        "right": {
+          "constant": 0.0,
+          "percentage": 0.0
+        },
+        "top": {
+          "constant": 0.0,
+          "percentage": 0.0
+        }
+      },
+      "id": "0",
+      "refId": "1",
+      "type": "image"
+    },
+    {
+      "constraints": {
+        "height": {
+          "constant": 0.0,
+          "percentage": 0.4
+        },
+        "left": {
+          "constant": 0.0,
+          "percentage": 0.1
+        },
+        "right": {
+          "constant": 0.0,
+          "percentage": 0.2
+        },
+        "top": {
+          "constant": 0.0,
+          "percentage": 0.3
+        }
+      },
+      "id": "1",
+      "mediaId": "0",
+      "type": "media"
+    },
+    {
+      "constraints": {
+        "bottom": {
+          "constant": 0.0,
+          "percentage": 0.0
+        },
+        "left": {
+          "constant": 0.0,
+          "percentage": 0.0
+        },
+        "right": {
+          "constant": 0.0,
+          "percentage": 0.0
+        },
+        "top": {
+          "constant": 0.0,
+          "percentage": 0.0
+        }
+      },
+      "id": "2",
+      "imageName": "template_widget_11302.png",
+      "type": "image"
+    },
+    {
+      "canvasWidth": 375,
+      "constraints": {
+        "left": {
+          "constant": 0.0,
+          "percentage": 0.2
+        },
+        "right": {
+          "constant": 0.0,
+          "percentage": 0.3
+        },
+        "top": {
+          "constant": 0.0,
+          "percentage": 0.5
+        }
+      },
+      "fontName": "Carten",
+      "fontSize": 24,
+      "id": "3",
+      "placeHolder": "Hi",
+      "textAlignment": "left",
+      "textColor": "000000",
+      "textId": "0",
+      "type": "text"
+    }
+  ],
+  "templateId": 11302
+}

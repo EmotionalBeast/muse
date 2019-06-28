@@ -1,0 +1,101 @@
+{
+  "animation": {
+    "name": "data.json",
+    "resourceDirectory": "/",
+    "type": 1
+  },
+  "elements": [
+    {
+      "constraints": {
+        "height": {
+          "constant": 0.0,
+          "percentage": 0.3
+        },
+        "left": {
+          "constant": 0.0,
+          "percentage": 0.2
+        },
+        "right": {
+          "constant": 0.0,
+          "percentage": 0.3
+        },
+        "top": {
+          "constant": 0.0,
+          "percentage": 0.2
+        }
+      },
+      "contentSize": [
+        568,
+        620
+      ],
+      "id": "0",
+      "keyPath": "1",
+      "mediaId": "0",
+      "type": "media"
+    },
+    {
+      "constraints": {
+        "bottom": {
+          "constant": 0.0,
+          "percentage": 0.0
+        },
+        "left": {
+          "constant": 0.0,
+          "percentage": 0.0
+        },
+        "right": {
+          "constant": 0.0,
+          "percentage": 0.0
+        },
+        "top": {
+          "constant": 0.0,
+          "percentage": 0.0
+        }
+      },
+      "contentSize": [
+        562,
+        526
+      ],
+      "id": "1",
+      "imageName": "template_widget_11304.png",
+      "keyPath": "矩形1",
+      "type": "image"
+    },
+    {
+      "animation": {
+        "name": "data.json",
+        "resourceDirectory": "/字1",
+        "type": 1
+      },
+      "canvasWidth": 375,
+      "constraints": {
+        "left": {
+          "constant": 0.0,
+          "percentage": 0.23
+        },
+        "right": {
+          "constant": 0.0,
+          "percentage": 0.56
+        },
+        "top": {
+          "constant": 0.0,
+          "percentage": 0.78
+        }
+      },
+      "contentSize": [
+        562,
+        653
+      ],
+      "fontName": "570-CAI978",
+      "fontSize": 23,
+      "id": "2",
+      "keyPath": "字1",
+      "placeHolder": "Hi ",
+      "textAlignment": "left",
+      "textColor": "000000",
+      "textId": "0",
+      "type": "text"
+    }
+  ],
+  "templateId": 11304
+}
