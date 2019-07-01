@@ -1151,6 +1151,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 
 	#点击生成按钮的槽函数
 	def createTable(self):
+
 		self.initTable()
 		self.nonEditable()
 		count_1 = 0
@@ -1339,7 +1340,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 						return False
 			
 		if self.spinBox_2.value() != 0:
-			for i in range(self.spinBox_1.value()):
+			for i in range(self.spinBox_2.value()):
 				for j in range(self.tableWidget_3.columnCount()):
 					if self.tableWidget_3.item(i,j) == None or self.tableWidget_3.item(i,j).text() == "":
 						self.info = "background表中第 "+str(i+1)+" 行第 "+str(j+1)+" 列未填值！"

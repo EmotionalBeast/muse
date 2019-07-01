@@ -21,8 +21,7 @@
       },
       "id": "0",
       "mediaId": "0",
-      "type": "media",
-      "keyPath": "形状图层 1"
+      "type": "media"
     },
     {
       "constraints": {
@@ -45,8 +44,7 @@
       },
       "id": "1",
       "mediaId": "1",
-      "type": "media",
-      "keyPath": "形状图层 2"
+      "type": "media"
     },
     {
       "constraints": {
@@ -69,8 +67,7 @@
       },
       "id": "2",
       "mediaId": "2",
-      "type": "media",
-      "keyPath": "形状图层 4"
+      "type": "media"
     },
     {
       "constraints": {
@@ -93,8 +90,7 @@
       },
       "id": "3",
       "mediaId": "3",
-      "type": "media",
-      "keyPath": "形状图层 3"
+      "type": "media"
     },
     {
       "constraints": {
@@ -117,8 +113,7 @@
       },
       "id": "4",
       "imageName": "template_widget_10002.png",
-      "type": "image",
-      "keyPath": "矩形 1"
+      "type": "image"
     }
   ],
   "templateId": 10002

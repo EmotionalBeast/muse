@@ -21,8 +21,7 @@
       },
       "id": "0",
       "mediaId": "0",
-      "type": "media",
-      "keyPath": "形状图层 1"
+      "type": "media"
     },
     {
       "constraints": {
@@ -45,8 +44,7 @@
       },
       "id": "1",
       "imageName": "template_widget_10001.png",
-      "type": "image",
-      "keyPath": "矩形 1"
+      "type": "image"
     },
     {
       "canvasWidth": 375,
@@ -71,8 +69,7 @@
       "textAlignment": "center",
       "textColor": "010101",
       "textId": "0",
-      "type": "text",
-      "keyPath": "字 1"
+      "type": "text"
     },
     {
       "canvasWidth": 375,
@@ -97,8 +94,7 @@
       "textAlignment": "center",
       "textColor": "010101",
       "textId": "1",
-      "type": "text",
-      "keyPath": "字 2"
+      "type": "text"
     },
     {
       "canvasWidth": 375,
@@ -123,8 +119,7 @@
       "textAlignment": "center",
       "textColor": "010101",
       "textId": "2",
-      "type": "text",
-      "keyPath":"字 3"
+      "type": "text"
     }
   ],
   "templateId": 10001
