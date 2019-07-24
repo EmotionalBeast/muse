@@ -1,0 +1,97 @@
+{
+  "elements": [
+    {
+      "constraints": {
+        "height": {
+          "constant": 0.0, 
+          "percentage": 0.7016
+        }, 
+        "left": {
+          "constant": 0.0, 
+          "percentage": 0.052
+        }, 
+        "right": {
+          "constant": 0.0, 
+          "percentage": 0.0507
+        }, 
+        "top": {
+          "constant": 0.0, 
+          "percentage": 0.1492
+        }
+      }, 
+      "id": "0", 
+      "mediaId": "0",
+      "imageId": "image_1",
+      "type": "media",
+      "keyPath": "figure",
+      "contentSize": [
+        678,
+        953
+      ]
+    }, 
+    {
+      "constraints": {
+        "bottom": {
+          "constant": 0.0, 
+          "percentage": 0.0
+        }, 
+        "left": {
+          "constant": 0.0, 
+          "percentage": 0.0
+        }, 
+        "right": {
+          "constant": 0.0, 
+          "percentage": 0.0
+        }, 
+        "top": {
+          "constant": 0.0, 
+          "percentage": 0.0
+        }
+      }, 
+      "id": "1", 
+      "imageName": "template_widget_10005.png", 
+      "type": "image"
+    }, 
+    {
+      "canvasWidth": 375, 
+      "constraints": {
+        "left": {
+          "constant": 0.0, 
+          "percentage": 0.1587
+        }, 
+        "right": {
+          "constant": 0.0, 
+          "percentage": 0.1587
+        }, 
+        "top": {
+          "constant": 0.0, 
+          "percentage": 0.8875
+        }
+      }, 
+      "fontName": "youngerthanme", 
+      "fontSize": 18, 
+      "id": "2", 
+      "placeHolder": "Life is full of beauty.", 
+      "textAlignment": "center", 
+      "textColor": "000000", 
+      "textId": "0", 
+      "type": "text",
+      "keyPath": "text",
+      "contentSize":[
+        528,
+        65
+      ],
+      "animation":{
+        "name":"data.json",
+        "type": 1,
+        "resourceDirectory": "/text"
+      }
+    }
+  ], 
+  "animation":{
+    "name":"data.json",
+    "type": 1,
+    "resourceDirectory": "/"
+  },
+  "templateId": 10005
+}
