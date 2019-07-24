@@ -1,0 +1,150 @@
+{
+  "elements": [
+    {
+      "blur": 10,
+      "constraints": {
+        "bottom": {
+          "constant": 0.0,
+          "percentage": 0.0
+        },
+        "left": {
+          "constant": 0.0,
+          "percentage": 0.0
+        },
+        "right": {
+          "constant": 0.0,
+          "percentage": 0.0
+        },
+        "top": {
+          "constant": 0.0,
+          "percentage": 0.0
+        }
+      },
+      "id": "0",
+      "refId": "1",
+      "type": "image"
+    },
+    {
+      "constraints": {
+        "height": {
+          "constant": 0.0,
+          "percentage": 0.5637
+        },
+        "left": {
+          "constant": 0.0,
+          "percentage": 0.0733
+        },
+        "right": {
+          "constant": 0.0,
+          "percentage": 0.072
+        },
+        "top": {
+          "constant": 0.0,
+          "percentage": 0.1544
+        }
+      },
+      "id": "1",
+      "mediaId": "0",
+      "type": "media"
+    },
+    {
+      "constraints": {
+        "bottom": {
+          "constant": 0.0,
+          "percentage": 0.0
+        },
+        "left": {
+          "constant": 0.0,
+          "percentage": 0.0
+        },
+        "right": {
+          "constant": 0.0,
+          "percentage": 0.0
+        },
+        "top": {
+          "constant": 0.0,
+          "percentage": 0.0
+        }
+      },
+      "id": "2",
+      "imageName": "template_widget_1405.png",
+      "type": "image"
+    },
+    {
+      "canvasWidth": 375,
+      "constraints": {
+        "left": {
+          "constant": 0.0,
+          "percentage": 0.758
+        },
+        "right": {
+          "constant": 0.0,
+          "percentage": 0.1487
+        },
+        "top": {
+          "constant": 0.0,
+          "percentage": 0.7721
+        }
+      },
+      "fontName": "PerpetuaTitlingMT-Light",
+      "fontSize": 8,
+      "id": "3",
+      "placeHolder": "happy",
+      "textAlignment": "left",
+      "textColor": "040404",
+      "textId": "0",
+      "type": "text"
+    },
+    {
+      "canvasWidth": 375,
+      "constraints": {
+        "left": {
+          "constant": 0.0,
+          "percentage": 0.6758
+        },
+        "right": {
+          "constant": 0.0,
+          "percentage": 0.0607
+        },
+        "top": {
+          "constant": 0.0,
+          "percentage": 0.7861
+        }
+      },
+      "fontName": "Freestyle Script",
+      "fontSize": 24,
+      "id": "4",
+      "placeHolder": "4Th of July",
+      "textAlignment": "left",
+      "textColor": "040404",
+      "textId": "1",
+      "type": "text"
+    },
+    {
+      "canvasWidth": 375,
+      "constraints": {
+        "left": {
+          "constant": 0.0,
+          "percentage": 0.6907
+        },
+        "right": {
+          "constant": 0.0,
+          "percentage": 0.0853
+        },
+        "top": {
+          "constant": 0.0,
+          "percentage": 0.83
+        }
+      },
+      "fontName": "PerpetuaTitlingMT-Light",
+      "fontSize": 8,
+      "id": "5",
+      "placeHolder": "INDENDENCE DAY",
+      "textAlignment": "left",
+      "textColor": "040404",
+      "textId": "2",
+      "type": "text"
+    }
+  ],
+  "templateId": 1405
+}

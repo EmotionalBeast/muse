@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 #author: Jhin Yao
 
-import json, os
+import json, os, sys
+from PIL import Image
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QFileDialog, QMessageBox, 
 													QTableWidgetItem, QAbstractItemView, QComboBox)
 from PyQt5.QtCore import Qt, QUrl
@@ -139,7 +140,6 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			self.tableWidget_6.setEditTriggers(QAbstractItemView.NoEditTriggers)
 		self.statusbar.showMessage("Non Editable")
 
-
 	#动态初始化界面的一些控件	
 	def initComBox(self):
 		#定义type的comBox
@@ -192,48 +192,6 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		self.tableWidget_4.setCellWidget(5, 3, self.comBox_53)
 		self.tableWidget_4.setCellWidget(6, 3, self.comBox_63)
 		self.tableWidget_4.setCellWidget(7, 3, self.comBox_73)
-
-	def initTable(self):
-		if self.index > 0:
-			self.tabWidget.close()
-		self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
-		self.tabWidget.setGeometry(QtCore.QRect(0, 90, 1000, 550))
-		self.tabWidget.setObjectName("tabWidget")
-		#初始化普通模版的table
-		if self.cbox_1.isChecked() == False and self.cbox_2.isChecked() == False and self.cbox_3.isChecked() == False:
-			if self.spinBox_1.value() != 0:
-				self.initNormalCellTable()
-				self.initNormalBgTable()
-				if self.spinBox_3.value() != 0:
-					self.initNormalTextTable()
-
-		#初始化背景自动虚化模板的table
-		if self.cbox_1.isChecked() == True and self.cbox_2.isChecked() == False and self.cbox_3.isChecked() == False:
-			if self.spinBox_1.value() != 0:
-				self.initBlurTable()
-				self.initNormalCellTable()
-				self.initNormalBgTable()
-				if self.spinBox_3.value() != 0:
-					self.initNormalTextTable()
-		#初始化图片有上下层次模板的table
-		if self.cbox_1.isChecked() == False and self.cbox_2.isChecked() == True and self.cbox_3.isChecked() == False:
-			if self.spinBox_1.value() != 0:
-				self.initLevelCellTable()
-				self.initNormalBgTable()
-				if self.spinBox_3.value() != 0:
-					self.initNormalTextTable()
-				self.initLevelTable()
-		#初始化动态模板的table
-		if self.cbox_1.isChecked() == False and self.cbox_2.isChecked() == False and self.cbox_3.isChecked() == True:
-			if self.spinBox_3.value() != 0:
-				self.initDynamicCellTable()
-				self.initDynamicBgTable()
-				if self.spinBox_3.value() != 0:
-					self.initDynamicTextTable()
-				self.initDynamicTable()
-
-		self.tabWidget.show()
-		self.index +=1
 
 	def initBlurTable(self):
 		self.tab_1 = QtWidgets.QWidget()
@@ -365,79 +323,12 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 
 		self.tableWidget_2.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
 
-	def initLevelCellTable(self):
-		#cell表格的json参数列表
-		self.tab_2 = QtWidgets.QWidget()
-		self.tab_2.setObjectName("tab_2")
-		self.tableWidget_2 = QtWidgets.QTableWidget(self.tab_2)
-		self.tableWidget_2.setColumnCount(12)
-		self.tableWidget_2.setGeometry(QtCore.QRect(0, 0, 1000, 450))
-		self.tableWidget_2.setObjectName("tableWidget_2")
-
-		item = QtWidgets.QTableWidgetItem()
-		self.tableWidget_2.setHorizontalHeaderItem(0, item)
-		item = QtWidgets.QTableWidgetItem()
-		self.tableWidget_2.setHorizontalHeaderItem(1, item)
-		item = QtWidgets.QTableWidgetItem()
-		self.tableWidget_2.setHorizontalHeaderItem(2, item)
-		item = QtWidgets.QTableWidgetItem()
-		self.tableWidget_2.setHorizontalHeaderItem(3, item)
-		item = QtWidgets.QTableWidgetItem()
-		self.tableWidget_2.setHorizontalHeaderItem(4, item)
-		item = QtWidgets.QTableWidgetItem()
-		self.tableWidget_2.setHorizontalHeaderItem(5, item)
-		item = QtWidgets.QTableWidgetItem()
-		self.tableWidget_2.setHorizontalHeaderItem(6, item)
-		item = QtWidgets.QTableWidgetItem()
-		self.tableWidget_2.setHorizontalHeaderItem(7, item)
-		item = QtWidgets.QTableWidgetItem()
-		self.tableWidget_2.setHorizontalHeaderItem(8, item)
-		item = QtWidgets.QTableWidgetItem()
-		self.tableWidget_2.setHorizontalHeaderItem(9, item)
-		item = QtWidgets.QTableWidgetItem()
-		self.tableWidget_2.setHorizontalHeaderItem(10, item)
-		item = QtWidgets.QTableWidgetItem()
-		self.tableWidget_2.setHorizontalHeaderItem(11, item)
-		self.tabWidget.addTab(self.tab_2, "")
-		#设置列宽
-		self.tableWidget_2.setColumnWidth(10,120)
-		self.tableWidget_2.setColumnWidth(11,120)
-		_translate = QtCore.QCoreApplication.translate
-		#cell顶栏字段
-		item = self.tableWidget_2.horizontalHeaderItem(0)
-		item.setText(_translate("MainWindow", "id"))
-		item = self.tableWidget_2.horizontalHeaderItem(1)
-		item.setText(_translate("MainWindow", "customIconId"))
-		item = self.tableWidget_2.horizontalHeaderItem(2)
-		item.setText(_translate("MainWindow", "type"))
-		item = self.tableWidget_2.horizontalHeaderItem(3)
-		item.setText(_translate("MainWindow", "mediaId"))
-		item = self.tableWidget_2.horizontalHeaderItem(4)
-		item.setText(_translate("MainWindow", "left_percentage"))
-		item = self.tableWidget_2.horizontalHeaderItem(5)
-		item.setText(_translate("MainWindow", "left_constant"))
-		item = self.tableWidget_2.horizontalHeaderItem(6)
-		item.setText(_translate("MainWindow", "right_percentage"))
-		item = self.tableWidget_2.horizontalHeaderItem(7)
-		item.setText(_translate("MainWindow", "right_constant"))
-		item = self.tableWidget_2.horizontalHeaderItem(8)
-		item.setText(_translate("MainWindow", "top_percentage"))
-		item = self.tableWidget_2.horizontalHeaderItem(9)
-		item.setText(_translate("MainWindow", "top_constant"))
-		item = self.tableWidget_2.horizontalHeaderItem(10)
-		item.setText(_translate("MainWindow", "height_percentage"))
-		item = self.tableWidget_2.horizontalHeaderItem(11)
-		item.setText(_translate("MainWindow", "height_constant"))
-		self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "Cell"))
-
-		self.tableWidget_2.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
-
 	def initDynamicCellTable(self):
 		#cell表格的json参数列表
 		self.tab_2 = QtWidgets.QWidget()
 		self.tab_2.setObjectName("tab_2")
 		self.tableWidget_2 = QtWidgets.QTableWidget(self.tab_2)
-		self.tableWidget_2.setColumnCount(14)
+		self.tableWidget_2.setColumnCount(15)
 		self.tableWidget_2.setGeometry(QtCore.QRect(0, 0, 1000, 450))
 		self.tableWidget_2.setObjectName("tableWidget_2")
 
@@ -469,6 +360,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		self.tableWidget_2.setHorizontalHeaderItem(12, item)
 		item = QtWidgets.QTableWidgetItem()
 		self.tableWidget_2.setHorizontalHeaderItem(13, item)
+		item = QtWidgets.QTableWidgetItem()
+		self.tableWidget_2.setHorizontalHeaderItem(14, item)
 		self.tabWidget.addTab(self.tab_2, "")
 		#设置列宽
 		self.tableWidget_2.setColumnWidth(12,120)
@@ -480,28 +373,30 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		item = self.tableWidget_2.horizontalHeaderItem(1)
 		item.setText(_translate("MainWindow", "type"))
 		item = self.tableWidget_2.horizontalHeaderItem(2)
-		item.setText(_translate("MainWindow", "mediaId"))
+		item.setText(_translate("MainWindow", "imageId"))
 		item = self.tableWidget_2.horizontalHeaderItem(3)
-		item.setText(_translate("MainWindow", "keyPath"))
+		item.setText(_translate("MainWindow", "mediaId"))
 		item = self.tableWidget_2.horizontalHeaderItem(4)
-		item.setText(_translate("MainWindow", "contentSize_x"))
+		item.setText(_translate("MainWindow", "keyPath"))
 		item = self.tableWidget_2.horizontalHeaderItem(5)
-		item.setText(_translate("MainWindow", "contentSize_y"))
+		item.setText(_translate("MainWindow", "contentSize_x"))
 		item = self.tableWidget_2.horizontalHeaderItem(6)
-		item.setText(_translate("MainWindow", "lelft_percentage"))
+		item.setText(_translate("MainWindow", "contentSize_y"))
 		item = self.tableWidget_2.horizontalHeaderItem(7)
-		item.setText(_translate("MainWindow", "left_constant"))
+		item.setText(_translate("MainWindow", "lelft_percentage"))
 		item = self.tableWidget_2.horizontalHeaderItem(8)
-		item.setText(_translate("MainWindow", "right_percentage"))
+		item.setText(_translate("MainWindow", "left_constant"))
 		item = self.tableWidget_2.horizontalHeaderItem(9)
-		item.setText(_translate("MainWindow", "right_constant"))
+		item.setText(_translate("MainWindow", "right_percentage"))
 		item = self.tableWidget_2.horizontalHeaderItem(10)
-		item.setText(_translate("MainWindow", "top_percentage"))
+		item.setText(_translate("MainWindow", "right_constant"))
 		item = self.tableWidget_2.horizontalHeaderItem(11)
-		item.setText(_translate("MainWindow", "top_constant"))
+		item.setText(_translate("MainWindow", "top_percentage"))
 		item = self.tableWidget_2.horizontalHeaderItem(12)
-		item.setText(_translate("MainWindow", "height_percentage"))
+		item.setText(_translate("MainWindow", "top_constant"))
 		item = self.tableWidget_2.horizontalHeaderItem(13)
+		item.setText(_translate("MainWindow", "height_percentage"))
+		item = self.tableWidget_2.horizontalHeaderItem(14)
 		item.setText(_translate("MainWindow", "height_constant"))
 		self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "Cell"))
 
@@ -566,82 +461,6 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		item = self.tableWidget_3.horizontalHeaderItem(9)
 		item.setText(_translate("MainWindow", "bottom_percentage"))
 		item = self.tableWidget_3.horizontalHeaderItem(10)
-		item.setText(_translate("MainWindow", "bottom_constant"))
-		self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("MainWindow", "Background"))
-
-		self.tableWidget_3.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
-
-	def initDynamicBgTable(self):
-		#背景图片的json参数列表
-		self.tab_3 = QtWidgets.QWidget()
-		self.tab_3.setObjectName("tab_3")
-		self.tableWidget_3 = QtWidgets.QTableWidget(self.tab_3)
-		self.tableWidget_3.setColumnCount(14)
-		self.tableWidget_3.setGeometry(QtCore.QRect(0, 0, 1000, 450))
-		self.tableWidget_3.setObjectName("tableWidget_3")
-
-		item = QtWidgets.QTableWidgetItem()
-		self.tableWidget_3.setHorizontalHeaderItem(0, item)
-		item = QtWidgets.QTableWidgetItem()
-		self.tableWidget_3.setHorizontalHeaderItem(1, item)
-		item = QtWidgets.QTableWidgetItem()
-		self.tableWidget_3.setHorizontalHeaderItem(2, item)
-		item = QtWidgets.QTableWidgetItem()
-		self.tableWidget_3.setHorizontalHeaderItem(3, item)
-		item = QtWidgets.QTableWidgetItem()
-		self.tableWidget_3.setHorizontalHeaderItem(4, item)
-		item = QtWidgets.QTableWidgetItem()
-		self.tableWidget_3.setHorizontalHeaderItem(5, item)
-		item = QtWidgets.QTableWidgetItem()
-		self.tableWidget_3.setHorizontalHeaderItem(6, item)
-		item = QtWidgets.QTableWidgetItem()
-		self.tableWidget_3.setHorizontalHeaderItem(7, item)
-		item = QtWidgets.QTableWidgetItem()
-		self.tableWidget_3.setHorizontalHeaderItem(8, item)
-		item = QtWidgets.QTableWidgetItem()
-		self.tableWidget_3.setHorizontalHeaderItem(9, item)
-		item = QtWidgets.QTableWidgetItem()
-		self.tableWidget_3.setHorizontalHeaderItem(10, item)
-		item = QtWidgets.QTableWidgetItem()
-		self.tableWidget_3.setHorizontalHeaderItem(11, item)
-		item = QtWidgets.QTableWidgetItem()
-		self.tableWidget_3.setHorizontalHeaderItem(12, item)
-		item = QtWidgets.QTableWidgetItem()
-		self.tableWidget_3.setHorizontalHeaderItem(13, item)
-		self.tabWidget.addTab(self.tab_3, "")
-		#设置列宽
-		self.tableWidget_3.setColumnWidth(12,120)
-		self.tableWidget_3.setColumnWidth(13,120)
-		self.tableWidget_3.setColumnWidth(2,200)
-		_translate = QtCore.QCoreApplication.translate
-		#背景图片的顶栏字段
-		item = self.tableWidget_3.horizontalHeaderItem(0)
-		item.setText(_translate("MainWindow", "id"))
-		item = self.tableWidget_3.horizontalHeaderItem(1)
-		item.setText(_translate("MainWindow", "type"))
-		item = self.tableWidget_3.horizontalHeaderItem(2)
-		item.setText(_translate("MainWindow", "imageName"))
-		item = self.tableWidget_3.horizontalHeaderItem(3)
-		item.setText(_translate("MainWindow", "keyPath"))
-		item = self.tableWidget_3.horizontalHeaderItem(4)
-		item.setText(_translate("MainWindow", "contentSize_x"))
-		item = self.tableWidget_3.horizontalHeaderItem(5)
-		item.setText(_translate("MainWindow", "contentSize_y"))
-		item = self.tableWidget_3.horizontalHeaderItem(6)
-		item.setText(_translate("MainWindow", "left_percentage"))
-		item = self.tableWidget_3.horizontalHeaderItem(7)
-		item.setText(_translate("MainWindow", "left_constant"))
-		item = self.tableWidget_3.horizontalHeaderItem(8)
-		item.setText(_translate("MainWindow", "right_percentage"))
-		item = self.tableWidget_3.horizontalHeaderItem(9)
-		item.setText(_translate("MainWindow", "right_constant"))
-		item = self.tableWidget_3.horizontalHeaderItem(10)
-		item.setText(_translate("MainWindow", "top_percentage"))
-		item = self.tableWidget_3.horizontalHeaderItem(11)
-		item.setText(_translate("MainWindow", "top_constant"))
-		item = self.tableWidget_3.horizontalHeaderItem(12)
-		item.setText(_translate("MainWindow", "bottom_percentage"))
-		item = self.tableWidget_3.horizontalHeaderItem(13)
 		item.setText(_translate("MainWindow", "bottom_constant"))
 		self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("MainWindow", "Background"))
 
@@ -922,6 +741,62 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 
 		self.tableWidget_6.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
 
+	def initTable(self):
+		if self.index > 0:
+			self.tabWidget.close()
+		self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
+		self.tabWidget.setGeometry(QtCore.QRect(0, 90, 1000, 550))
+		self.tabWidget.setObjectName("tabWidget")
+		#初始化普通模版的table
+		if self.cbox_1.isChecked() == False and self.cbox_2.isChecked() == False and self.cbox_3.isChecked() == False:
+			if self.spinBox_1.value() != 0:
+				self.initNormalCellTable()
+				self.initNormalBgTable()
+				if self.spinBox_3.value() != 0:
+					self.initNormalTextTable()
+
+		#初始化背景自动虚化模板的table
+		if self.cbox_1.isChecked() == True and self.cbox_2.isChecked() == False and self.cbox_3.isChecked() == False:
+			if self.spinBox_1.value() != 0:
+				self.initBlurTable()
+				self.initNormalCellTable()
+				self.initNormalBgTable()
+				if self.spinBox_3.value() != 0:
+					self.initNormalTextTable()
+
+		#初始化图片有上下层次模板的table
+		if self.cbox_1.isChecked() == False and self.cbox_2.isChecked() == True and self.cbox_3.isChecked() == False:
+			if self.spinBox_1.value() != 0:
+				self.initNormalCellTable()
+				self.initNormalBgTable()
+				self.initLevelTable()
+				if self.spinBox_3.value() != 0:
+					self.initNormalTextTable()
+				
+
+		#初始化动态模板的table
+		if self.cbox_1.isChecked() == False and self.cbox_2.isChecked() == False and self.cbox_3.isChecked() == True:
+			if self.spinBox_1.value() != 0:
+				self.initDynamicCellTable()
+				self.initNormalBgTable()
+				self.initDynamicTable()
+				if self.spinBox_3.value() != 0:
+					self.initDynamicTextTable()
+				
+
+		#初始化图片有上下层次的动态模版
+		if self.cbox_1.isChecked() == False and self.cbox_2.isChecked() == True and self.cbox_3.isChecked() == True:
+			if self.spinBox_1.value() != 0:
+				self.initDynamicCellTable()
+				self.initNormalBgTable()
+				self.initDynamicTable()
+				self.initLevelTable()
+				if self.spinBox_3.value() != 0:
+					self.initDynamicTextTable()
+
+		self.tabWidget.show()
+		self.index +=1
+
 	#读入json文件，显示在页面中
 	def readJson(self):
 		temp_1 = self.comBox_1.currentText()
@@ -979,6 +854,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 	def initDate(self):
 		self.resolveJson()
 		self.initTable()
+		#赋值blur表
 		if self.cbox_1.isChecked() == True:
 			self.tableWidget_1.setRowCount(1)
 			for i in range(len(self.blur_list)):
@@ -994,9 +870,9 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_1.setItem(i,9,QTableWidgetItem(str(self.blur_list[i]['constraints']['top']['constant'])))
 				self.tableWidget_1.setItem(i,10,QTableWidgetItem(str(self.blur_list[i]['constraints']['bottom']['percentage'])))
 				self.tableWidget_1.setItem(i,11,QTableWidgetItem(str(self.blur_list[i]['constraints']['bottom']['constant'])))
-
+		#赋值cell表
 		if self.spinBox_1.value() != 0:
-			if self.cbox_2.isChecked() == False and self.cbox_3.isChecked() == False:
+			if self.cbox_3.isChecked() == False:
 				self.tableWidget_2.setRowCount(self.spinBox_1.value())
 				for i in range(len(self.cell_list)):
 					self.tableWidget_2.setItem(i,0,QTableWidgetItem(self.cell_list[i]['id']))
@@ -1010,76 +886,41 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					self.tableWidget_2.setItem(i,8,QTableWidgetItem(str(self.cell_list[i]['constraints']['top']['constant'])))
 					self.tableWidget_2.setItem(i,9,QTableWidgetItem(str(self.cell_list[i]['constraints']['height']['percentage'])))
 					self.tableWidget_2.setItem(i,10,QTableWidgetItem(str(self.cell_list[i]['constraints']['height']['constant'])))
-			elif self.cbox_2.isChecked() == True and self.cbox_3.isChecked() == False: 
-				self.tableWidget_2.setRowCount(self.spinBox_1.value())
-				for i in range(len(self.cell_list)):
-					self.tableWidget_2.setItem(i,0,QTableWidgetItem(self.cell_list[i]['id']))
-					self.tableWidget_2.setItem(i,1,QTableWidgetItem(self.cell_list[i]['customIconId']))
-					self.tableWidget_2.setItem(i,2,QTableWidgetItem(self.cell_list[i]['type']))
-					self.tableWidget_2.setItem(i,3,QTableWidgetItem(self.cell_list[i]['mediaId']))
-					self.tableWidget_2.setItem(i,4,QTableWidgetItem(str(self.cell_list[i]['constraints']['left']['percentage'])))
-					self.tableWidget_2.setItem(i,5,QTableWidgetItem(str(self.cell_list[i]['constraints']['left']['constant'])))
-					self.tableWidget_2.setItem(i,6,QTableWidgetItem(str(self.cell_list[i]['constraints']['right']['percentage'])))
-					self.tableWidget_2.setItem(i,7,QTableWidgetItem(str(self.cell_list[i]['constraints']['right']['constant'])))
-					self.tableWidget_2.setItem(i,8,QTableWidgetItem(str(self.cell_list[i]['constraints']['top']['percentage'])))
-					self.tableWidget_2.setItem(i,9,QTableWidgetItem(str(self.cell_list[i]['constraints']['top']['constant'])))
-					self.tableWidget_2.setItem(i,10,QTableWidgetItem(str(self.cell_list[i]['constraints']['height']['percentage'])))
-					self.tableWidget_2.setItem(i,11,QTableWidgetItem(str(self.cell_list[i]['constraints']['height']['constant'])))
-			elif self.cbox_2.isChecked() == False and self.cbox_3.isChecked() == True:
+			else:
 				self.tableWidget_2.setRowCount(self.spinBox_1.value())
 				for i in range(len(self.cell_list)):
 					self.tableWidget_2.setItem(i,0,QTableWidgetItem(self.cell_list[i]['id']))
 					self.tableWidget_2.setItem(i,1,QTableWidgetItem(self.cell_list[i]['type']))
-					self.tableWidget_2.setItem(i,2,QTableWidgetItem(self.cell_list[i]['mediaId']))
-					self.tableWidget_2.setItem(i,3,QTableWidgetItem(self.cell_list[i]['keyPath']))
-					self.tableWidget_2.setItem(i,4,QTableWidgetItem(str(self.cell_list[i]['contentSize'][0])))
-					self.tableWidget_2.setItem(i,5,QTableWidgetItem(str(self.cell_list[i]['contentSize'][1])))
-					self.tableWidget_2.setItem(i,6,QTableWidgetItem(str(self.cell_list[i]['constraints']['left']['percentage'])))
-					self.tableWidget_2.setItem(i,7,QTableWidgetItem(str(self.cell_list[i]['constraints']['left']['constant'])))
-					self.tableWidget_2.setItem(i,8,QTableWidgetItem(str(self.cell_list[i]['constraints']['right']['percentage'])))
-					self.tableWidget_2.setItem(i,9,QTableWidgetItem(str(self.cell_list[i]['constraints']['right']['constant'])))
-					self.tableWidget_2.setItem(i,10,QTableWidgetItem(str(self.cell_list[i]['constraints']['top']['percentage'])))
-					self.tableWidget_2.setItem(i,11,QTableWidgetItem(str(self.cell_list[i]['constraints']['top']['constant'])))
-					self.tableWidget_2.setItem(i,12,QTableWidgetItem(str(self.cell_list[i]['constraints']['height']['percentage'])))
-					self.tableWidget_2.setItem(i,13,QTableWidgetItem(str(self.cell_list[i]['constraints']['height']['constant'])))
-			else:
-				QMessageBox.information(self,"提示","只能选择一个！")
+					self.tableWidget_2.setItem(i,2,QTableWidgetItem(self.cell_list[i]['imageId']))
+					self.tableWidget_2.setItem(i,3,QTableWidgetItem(self.cell_list[i]['mediaId']))
+					self.tableWidget_2.setItem(i,4,QTableWidgetItem(self.cell_list[i]['keyPath']))
+					self.tableWidget_2.setItem(i,5,QTableWidgetItem(str(self.cell_list[i]['contentSize'][0])))
+					self.tableWidget_2.setItem(i,6,QTableWidgetItem(str(self.cell_list[i]['contentSize'][1])))
+					self.tableWidget_2.setItem(i,7,QTableWidgetItem(str(self.cell_list[i]['constraints']['left']['percentage'])))
+					self.tableWidget_2.setItem(i,8,QTableWidgetItem(str(self.cell_list[i]['constraints']['left']['constant'])))
+					self.tableWidget_2.setItem(i,9,QTableWidgetItem(str(self.cell_list[i]['constraints']['right']['percentage'])))
+					self.tableWidget_2.setItem(i,10,QTableWidgetItem(str(self.cell_list[i]['constraints']['right']['constant'])))
+					self.tableWidget_2.setItem(i,11,QTableWidgetItem(str(self.cell_list[i]['constraints']['top']['percentage'])))
+					self.tableWidget_2.setItem(i,12,QTableWidgetItem(str(self.cell_list[i]['constraints']['top']['constant'])))
+					self.tableWidget_2.setItem(i,13,QTableWidgetItem(str(self.cell_list[i]['constraints']['height']['percentage'])))
+					self.tableWidget_2.setItem(i,14,QTableWidgetItem(str(self.cell_list[i]['constraints']['height']['constant'])))
 
-
+		#赋值bg表
 		if self.spinBox_2.value() != 0:
-			if self.cbox_3.isChecked() == False:
-				self.tableWidget_3.setRowCount(self.spinBox_2.value())
-				for i in range(len(self.bg_list)):
-					self.tableWidget_3.setItem(i,0,QTableWidgetItem(self.bg_list[i]['id']))
-					self.tableWidget_3.setItem(i,1,QTableWidgetItem(self.bg_list[i]['type']))
-					self.tableWidget_3.setItem(i,2,QTableWidgetItem(self.bg_list[i]['imageName']))
-					self.tableWidget_3.setItem(i,3,QTableWidgetItem(str(self.bg_list[i]['constraints']['left']['percentage'])))
-					self.tableWidget_3.setItem(i,4,QTableWidgetItem(str(self.bg_list[i]['constraints']['left']['constant'])))
-					self.tableWidget_3.setItem(i,5,QTableWidgetItem(str(self.bg_list[i]['constraints']['right']['percentage'])))
-					self.tableWidget_3.setItem(i,6,QTableWidgetItem(str(self.bg_list[i]['constraints']['right']['constant'])))
-					self.tableWidget_3.setItem(i,7,QTableWidgetItem(str(self.bg_list[i]['constraints']['top']['percentage'])))
-					self.tableWidget_3.setItem(i,8,QTableWidgetItem(str(self.bg_list[i]['constraints']['top']['constant'])))
-					self.tableWidget_3.setItem(i,9,QTableWidgetItem(str(self.bg_list[i]['constraints']['bottom']['percentage'])))
-					self.tableWidget_3.setItem(i,10,QTableWidgetItem(str(self.bg_list[i]['constraints']['bottom']['constant'])))
-			else:
-				self.tableWidget_3.setRowCount(self.spinBox_2.value())
-				for i in range(len(self.bg_list)):
-					self.tableWidget_3.setItem(i,0,QTableWidgetItem(self.bg_list[i]['id']))
-					self.tableWidget_3.setItem(i,1,QTableWidgetItem(self.bg_list[i]['type']))
-					self.tableWidget_3.setItem(i,2,QTableWidgetItem(self.bg_list[i]['imageName']))
-					self.tableWidget_3.setItem(i,3,QTableWidgetItem(self.bg_list[i]['keyPath']))
-					self.tableWidget_3.setItem(i,4,QTableWidgetItem(str(self.bg_list[i]['contentSize'][0])))
-					self.tableWidget_3.setItem(i,5,QTableWidgetItem(str(self.bg_list[i]['imageName'][0])))
-					self.tableWidget_3.setItem(i,6,QTableWidgetItem(str(self.bg_list[i]['constraints']['left']['percentage'])))
-					self.tableWidget_3.setItem(i,7,QTableWidgetItem(str(self.bg_list[i]['constraints']['left']['constant'])))
-					self.tableWidget_3.setItem(i,8,QTableWidgetItem(str(self.bg_list[i]['constraints']['right']['percentage'])))
-					self.tableWidget_3.setItem(i,9,QTableWidgetItem(str(self.bg_list[i]['constraints']['right']['constant'])))
-					self.tableWidget_3.setItem(i,10,QTableWidgetItem(str(self.bg_list[i]['constraints']['top']['percentage'])))
-					self.tableWidget_3.setItem(i,11,QTableWidgetItem(str(self.bg_list[i]['constraints']['top']['constant'])))
-					self.tableWidget_3.setItem(i,12,QTableWidgetItem(str(self.bg_list[i]['constraints']['bottom']['percentage'])))
-					self.tableWidget_3.setItem(i,13,QTableWidgetItem(str(self.bg_list[i]['constraints']['bottom']['constant'])))
-
-
+			self.tableWidget_3.setRowCount(self.spinBox_2.value())
+			for i in range(len(self.bg_list)):
+				self.tableWidget_3.setItem(i,0,QTableWidgetItem(self.bg_list[i]['id']))
+				self.tableWidget_3.setItem(i,1,QTableWidgetItem(self.bg_list[i]['type']))
+				self.tableWidget_3.setItem(i,2,QTableWidgetItem(self.bg_list[i]['imageName']))
+				self.tableWidget_3.setItem(i,3,QTableWidgetItem(str(self.bg_list[i]['constraints']['left']['percentage'])))
+				self.tableWidget_3.setItem(i,4,QTableWidgetItem(str(self.bg_list[i]['constraints']['left']['constant'])))
+				self.tableWidget_3.setItem(i,5,QTableWidgetItem(str(self.bg_list[i]['constraints']['right']['percentage'])))
+				self.tableWidget_3.setItem(i,6,QTableWidgetItem(str(self.bg_list[i]['constraints']['right']['constant'])))
+				self.tableWidget_3.setItem(i,7,QTableWidgetItem(str(self.bg_list[i]['constraints']['top']['percentage'])))
+				self.tableWidget_3.setItem(i,8,QTableWidgetItem(str(self.bg_list[i]['constraints']['top']['constant'])))
+				self.tableWidget_3.setItem(i,9,QTableWidgetItem(str(self.bg_list[i]['constraints']['bottom']['percentage'])))
+				self.tableWidget_3.setItem(i,10,QTableWidgetItem(str(self.bg_list[i]['constraints']['bottom']['constant'])))
+		#赋值text表
 		if self.spinBox_3.value() != 0:
 			if self.cbox_3.isChecked() == False:
 				self.tableWidget_4.setRowCount(self.spinBox_3.value())
@@ -1126,7 +967,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					self.tableWidget_4.setItem(i,19,QTableWidgetItem(str(self.text_list[i]['animation']['type'])))
 					self.tableWidget_4.setItem(i,20,QTableWidgetItem(self.text_list[i]['animation']['resourceDirectory']))
 
-
+		#赋值level表
 		if self.cbox_2.isChecked() == True:
 			self.tableWidget_5.setRowCount(1)
 			for i in range(1):
@@ -1142,7 +983,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_5.setItem(i,9,QTableWidgetItem(str(self.level_list[i]['constraints']['width']['percentage'])))
 				self.tableWidget_5.setItem(i,10,QTableWidgetItem(str(self.level_list[i]['constraints']['width']['constant'])))
 
-
+		#赋值animation表
 		if self.cbox_3.isChecked() == True:
 			self.tableWidget_6.setRowCount(1)
 			self.tableWidget_6.setItem(i,0,QTableWidgetItem(self.dic['animation']['name']))
@@ -1161,14 +1002,14 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		count_5 = 0
 		count_6 = 0
 		#设置table的行数
-		self.tableWidget_2.setRowCount(count_1)
-		self.tableWidget_3.setRowCount(count_2)
+		self.tableWidget_2.setRowCount(count_2)
+		self.tableWidget_3.setRowCount(count_3)
 		if count_4 != 0:
 			self.tableWidget_4.setRowCount(count_4)	
 		#将comBox放到tablewidget中	
 		self.initComBox()
 		name = self.comBox_2.currentText()
-
+		#初始化blur表
 		if self.cbox_1.isChecked() == True:
 			count_1 = 1
 			self.tableWidget_1.setRowCount(count_1)
@@ -1184,8 +1025,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_1.setItem(i,9,QTableWidgetItem("0"))
 				self.tableWidget_1.setItem(i,10,QTableWidgetItem("0"))
 				self.tableWidget_1.setItem(i,11,QTableWidgetItem("0"))
-
-		if self.cbox_2.isChecked() == False and self.cbox_3.isChecked() == False:
+		#初始化cell表
+		if  self.cbox_3.isChecked() == False:
 			self.tableWidget_2.setRowCount(count_2)
 			for i in range(count_2):
 				self.tableWidget_2.setItem(i,0,QTableWidgetItem(str(count_1+i)))
@@ -1194,32 +1035,19 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_2.setItem(i,4,QTableWidgetItem("0"))
 				self.tableWidget_2.setItem(i,6,QTableWidgetItem("0"))
 				self.tableWidget_2.setItem(i,8,QTableWidgetItem("0"))
-				self.tableWidget_2.setItem(i,10,QTableWidgetItem("0"))
-		elif self.cbox_2.isChecked() == True and self.cbox_3.isChecked() == False:
-			self.tableWidget_2.setRowCount(count_2)
-			for i in range(count_2):
-				self.tableWidget_2.setItem(i,0,QTableWidgetItem(str(count_1+i)))
-				self.tableWidget_2.setItem(i,2,QTableWidgetItem("media"))
-				self.tableWidget_2.setItem(i,3,QTableWidgetItem(str(i)))
-				self.tableWidget_2.setItem(i,5,QTableWidgetItem("0"))
-				self.tableWidget_2.setItem(i,7,QTableWidgetItem("0"))
-				self.tableWidget_2.setItem(i,9,QTableWidgetItem("0"))
-				self.tableWidget_2.setItem(i,11,QTableWidgetItem("0"))
-		elif self.cbox_2.isChecked() == False and self.cbox_3.isChecked() == True:
+				self.tableWidget_2.setItem(i,10,QTableWidgetItem("0"))			
+		else:
 			self.tableWidget_2.setRowCount(count_2)
 			for i in range(count_2):
 				self.tableWidget_2.setItem(i,0,QTableWidgetItem(str(count_1+i)))
 				self.tableWidget_2.setItem(i,1,QTableWidgetItem("media"))
-				self.tableWidget_2.setItem(i,2,QTableWidgetItem(str(i)))
-				self.tableWidget_2.setItem(i,7,QTableWidgetItem("0"))
-				self.tableWidget_2.setItem(i,9,QTableWidgetItem("0"))
-				self.tableWidget_2.setItem(i,11,QTableWidgetItem("0"))
-				self.tableWidget_2.setItem(i,13,QTableWidgetItem("0"))
-		else:
-			QMessageBox.information(self, "提示", "不能多选")
-
-
-		if self.cbox_3.isChecked() == False:
+				self.tableWidget_2.setItem(i,3,QTableWidgetItem(str(i)))
+				self.tableWidget_2.setItem(i,8,QTableWidgetItem("0"))
+				self.tableWidget_2.setItem(i,10,QTableWidgetItem("0"))
+				self.tableWidget_2.setItem(i,12,QTableWidgetItem("0"))
+				self.tableWidget_2.setItem(i,14,QTableWidgetItem("0"))
+		#初始化bg表
+		if count_3 != 0:
 			self.tableWidget_3.setRowCount(count_3)
 			for i in range(count_3):
 				self.tableWidget_3.setItem(i,0,QTableWidgetItem(str(count_1+count_2+i)))
@@ -1233,21 +1061,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_3.setItem(i,8,QTableWidgetItem("0"))
 				self.tableWidget_3.setItem(i,9,QTableWidgetItem("0"))
 				self.tableWidget_3.setItem(i,10,QTableWidgetItem("0"))
-		else:
-			self.tableWidget_3.setRowCount(count_3)
-			for i in range(count_3):
-				self.tableWidget_3.setItem(i,0,QTableWidgetItem(str(count_1+count_2+i)))
-				self.tableWidget_3.setItem(i,1,QTableWidgetItem("image"))
-				self.tableWidget_3.setItem(i,2,QTableWidgetItem("template_widget_"+name[self.count:]+".png"))
-				self.tableWidget_3.setItem(i,6,QTableWidgetItem("0"))
-				self.tableWidget_3.setItem(i,7,QTableWidgetItem("0"))
-				self.tableWidget_3.setItem(i,8,QTableWidgetItem("0"))
-				self.tableWidget_3.setItem(i,9,QTableWidgetItem("0"))
-				self.tableWidget_3.setItem(i,10,QTableWidgetItem("0"))
-				self.tableWidget_3.setItem(i,11,QTableWidgetItem("0"))
-				self.tableWidget_3.setItem(i,12,QTableWidgetItem("0"))
-				self.tableWidget_3.setItem(i,13,QTableWidgetItem("0"))
 
+		#初始化text表
 		if self.cbox_3.isChecked() == False:
 			self.tableWidget_4.setRowCount(count_4)
 			for i in range(count_4):
@@ -1268,17 +1083,16 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_4.setItem(i,10,QTableWidgetItem("0"))
 				self.tableWidget_4.setItem(i,12,QTableWidgetItem("0"))
 				self.tableWidget_4.setItem(i,14,QTableWidgetItem("0"))
-				self.tableWidget_4.setItem(i,15,QTableWidgetItem("字" + str(i+1)))
+				self.tableWidget_4.setItem(i,15,QTableWidgetItem("text" + str(i+1)))
 				self.tableWidget_4.setItem(i,18,QTableWidgetItem("data.json"))
 				self.tableWidget_4.setItem(i,19,QTableWidgetItem("1"))
-				self.tableWidget_4.setItem(i,20,QTableWidgetItem("/字" + str(i+1)))
-
+				self.tableWidget_4.setItem(i,20,QTableWidgetItem("/text" + str(i+1)))
+		#初始化level表
 		if self.cbox_2.isChecked() == True:
 			count_5 = 1
 			self.tableWidget_5.setRowCount(count_5)
 			for i in range(count_5):
 				self.tableWidget_5.setItem(i,0,QTableWidgetItem(str(count_1+count_2+count_3+count_4+i)))
-				self.tableWidget_2.setItem(i,1,QTableWidgetItem(str(count_1+count_2+count_3+count_4+i)))
 				self.tableWidget_5.setItem(i,1,QTableWidgetItem("mediaIcon"))
 				self.tableWidget_5.setItem(i,2,QTableWidgetItem("aspectFit"))
 				self.tableWidget_5.setItem(i,3,QTableWidgetItem("0"))
@@ -1289,7 +1103,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_5.setItem(i,8,QTableWidgetItem("0"))
 				self.tableWidget_5.setItem(i,9,QTableWidgetItem("0"))
 				self.tableWidget_5.setItem(i,10,QTableWidgetItem("0"))
-
+		#初始化animotion表
 		if self.cbox_3.isChecked() == True:
 			count_6 = 1
 			self.tableWidget_6.setRowCount(count_6)
@@ -1324,6 +1138,10 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				QMessageBox.information(self,"提示",self.info)
 		else:
 			QMessageBox.information(self,"提示","请选择json文件！")
+
+		if self.cbox_3.isChecked() == True:
+			self.convertFormat()
+			QMessageBox.information(self, "提示", "转化成功！")
 
 	def checkValues(self):
 		if self.cbox_1.isChecked() == True:
@@ -1396,7 +1214,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.item.append(blur_dic)
 
 		if self.spinBox_1.value() != 0:
-			if self.cbox_2.isChecked() == False and self.cbox_3.isChecked() == False:
+			if self.cbox_3.isChecked() == False:
 				for i in range(self.spinBox_1.value()):
 					cell_dic = {}
 					cell_dic["id"] = self.tableWidget_2.item(i, 0).text()
@@ -1428,57 +1246,25 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 																}
 														}
 					self.item.append(cell_dic)
-			elif self.cbox_2.isChecked() == True and self.cbox_3.isChecked() == False:
-				for i in range(self.spinBox_1.value()):
-					cell_dic = {}
-					cell_dic["id"] = self.tableWidget_2.item(i, 0).text()
-					cell_dic["customIconId"] = self.tableWidget_2.item(i,1).text()
-					cell_dic["type"] = self.tableWidget_2.item(i, 2).text()
-					cell_dic["mediaId"] = self.tableWidget_2.item(i, 3).text()
-					item_1 = self.tableWidget_2.item(i,4).text()
-					item_2 = self.tableWidget_2.item(i,5).text()
-					item_3 = self.tableWidget_2.item(i,6).text()
-					item_4 = self.tableWidget_2.item(i,7).text()
-					item_5 = self.tableWidget_2.item(i,8).text()
-					item_6 = self.tableWidget_2.item(i,9).text()
-					item_7 = self.tableWidget_2.item(i,10).text()
-					item_8 = self.tableWidget_2.item(i,11).text()
-					cell_dic["constraints"] = {"left":{
-																"percentage": float(item_1),
-																"constant": float(item_2)
-																},
-														"right":{
-																"percentage": float(item_3),
-																"constant": float(item_4)
-																},
-														"top":{
-																"percentage": float(item_5),
-																"constant": float(item_6)
-																},
-														"height":{
-																"percentage": float(item_7),
-																"constant": float(item_8)
-																}
-														}
-					self.item.append(cell_dic)
-			elif self.cbox_2.isChecked() == False and self.cbox_3.isChecked() == True:
+			else:
 				for i in range(self.spinBox_1.value()):
 					cell_dic = {}
 					cell_dic["contentSize"] = []
 					cell_dic["id"] = self.tableWidget_2.item(i, 0).text()
 					cell_dic["type"] = self.tableWidget_2.item(i, 1).text()
-					cell_dic["mediaId"] = self.tableWidget_2.item(i, 2).text()
-					cell_dic["keyPath"] = self.tableWidget_2.item(i,3).text()
-					cell_dic["contentSize"].append(int(self.tableWidget_2.item(i,4).text()))
+					cell_dic["imageId"] = self.tableWidget_2.item(i, 2).text()
+					cell_dic["mediaId"] = self.tableWidget_2.item(i, 3).text()
+					cell_dic["keyPath"] = self.tableWidget_2.item(i,4).text()
 					cell_dic["contentSize"].append(int(self.tableWidget_2.item(i,5).text()))
-					item_1 = self.tableWidget_2.item(i,6).text()
-					item_2 = self.tableWidget_2.item(i,7).text()
-					item_3 = self.tableWidget_2.item(i,8).text()
-					item_4 = self.tableWidget_2.item(i,9).text()
-					item_5 = self.tableWidget_2.item(i,10).text()
-					item_6 = self.tableWidget_2.item(i,11).text()
-					item_7 = self.tableWidget_2.item(i,12).text()
-					item_8 = self.tableWidget_2.item(i,13).text()
+					cell_dic["contentSize"].append(int(self.tableWidget_2.item(i,6).text()))
+					item_1 = self.tableWidget_2.item(i,7).text()
+					item_2 = self.tableWidget_2.item(i,8).text()
+					item_3 = self.tableWidget_2.item(i,9).text()
+					item_4 = self.tableWidget_2.item(i,10).text()
+					item_5 = self.tableWidget_2.item(i,11).text()
+					item_6 = self.tableWidget_2.item(i,12).text()
+					item_7 = self.tableWidget_2.item(i,13).text()
+					item_8 = self.tableWidget_2.item(i,14).text()
 					cell_dic["constraints"] = {"left":{
 																"percentage": float(item_1),
 																"constant": float(item_2)
@@ -1497,29 +1283,27 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 																}
 														}
 					self.item.append(cell_dic)
-			else:
-				QMessageBox.information(self, "提示", "不能多选！")
+				
 
 		if self.spinBox_2.value() != 0:
-			if self.cbox_3.isChecked() == False:
-				for i in range(self.spinBox_2.value()):
-					bg_dic = {}
-					bg_dic["id"] = self.tableWidget_3.item(i, 0).text()
-					bg_dic["type"] = self.tableWidget_3.item(i, 1).text()
-					bg_dic["imageName"] = self.tableWidget_3.item(i, 2).text()
-					item_1 = self.tableWidget_3.item(i,3).text()
-					item_2 = self.tableWidget_3.item(i,4).text()
-					item_3 = self.tableWidget_3.item(i,5).text()
-					item_4 = self.tableWidget_3.item(i,6).text()
-					item_5 = self.tableWidget_3.item(i,7).text()
-					item_6 = self.tableWidget_3.item(i,8).text()
-					item_7 = self.tableWidget_3.item(i,9).text()
-					item_8 = self.tableWidget_3.item(i,10).text()
-					bg_dic["constraints"] = {"left":{
-																"percentage": float(item_1),
-																"constant": float(item_2)
-																},
-														"right":{
+			for i in range(self.spinBox_2.value()):
+				bg_dic = {}
+				bg_dic["id"] = self.tableWidget_3.item(i, 0).text()
+				bg_dic["type"] = self.tableWidget_3.item(i, 1).text()
+				bg_dic["imageName"] = self.tableWidget_3.item(i, 2).text()
+				item_1 = self.tableWidget_3.item(i,3).text()
+				item_2 = self.tableWidget_3.item(i,4).text()
+				item_3 = self.tableWidget_3.item(i,5).text()
+				item_4 = self.tableWidget_3.item(i,6).text()
+				item_5 = self.tableWidget_3.item(i,7).text()
+				item_6 = self.tableWidget_3.item(i,8).text()
+				item_7 = self.tableWidget_3.item(i,9).text()
+				item_8 = self.tableWidget_3.item(i,10).text()
+				bg_dic["constraints"] = {"left":{
+														"percentage": float(item_1),
+														"constant": float(item_2)
+															},
+													"right":{
 																"percentage": float(item_3),
 																"constant": float(item_4)
 																},
@@ -1532,43 +1316,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 																"constant": float(item_8)
 																}
 														}
-					self.item.append(bg_dic)
-			else: 
-				for i in range(self.spinBox_2.value()):
-					bg_dic = {}
-					bg_dic["contentSize"] = []
-					bg_dic["id"] = self.tableWidget_3.item(i, 0).text()
-					bg_dic["type"] = self.tableWidget_3.item(i, 1).text()
-					bg_dic["imageName"] = self.tableWidget_3.item(i, 2).text()
-					bg_dic["keyPath"] = self.tableWidget_3.item(i,3).text()
-					bg_dic["contentSize"].append(int(self.tableWidget_3.item(i,4).text()))
-					bg_dic["contentSize"].append(int(self.tableWidget_3.item(i,5).text()))
-					item_1 = self.tableWidget_3.item(i,6).text()
-					item_2 = self.tableWidget_3.item(i,7).text()
-					item_3 = self.tableWidget_3.item(i,8).text()
-					item_4 = self.tableWidget_3.item(i,9).text()
-					item_5 = self.tableWidget_3.item(i,10).text()
-					item_6 = self.tableWidget_3.item(i,11).text()
-					item_7 = self.tableWidget_3.item(i,12).text()
-					item_8 = self.tableWidget_3.item(i,13).text()
-					bg_dic["constraints"] = {"left":{
-																"percentage": float(item_1),
-																"constant": float(item_2)
-																},
-														"right":{
-																"percentage": float(item_3),
-																"constant": float(item_4)
-																},
-														"top":{
-																"percentage": float(item_5),
-																"constant": float(item_6)
-																},
-														"bottom":{
-																"percentage": float(item_7),
-																"constant": float(item_8)
-																}
-														}
-					self.item.append(bg_dic)
+				self.item.append(bg_dic)
+			
 
 		if self.spinBox_3.value() != 0:
 			if self.cbox_3.isChecked() == False:
@@ -1677,7 +1426,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 															}
 													}
 				self.item.append(level_dic)
-
+			self.item[0]["customIconId"] = self.tableWidget_5.item(0,0).text()
+			
 		if self.cbox_3.isChecked() == True:
 			for i in range(1):
 				self.ani_dic = {}
@@ -1715,6 +1465,41 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			QDesktopServices.openUrl(QUrl(pathOrigin))
 		else:
 			QMessageBox.information(self, "提示", "请选择素材组！")
+
+	#转化指定图片的格式
+	def convertFormat(self):
+		# tempPath = [root + "/" + dir for root,dirs,files in os.walk(self.path) for dir in dirs if root[-5:-1] != 'text' and dir == "images"]
+		# img = ["img_" +self.tableWidget_2.item(i, 2).text()[-1:]+ ".png" for i in range(self.spinBox_1.value())]
+		imgPath = []
+		img = []
+		tempPath = self.comBox_2.currentText().rsplit("-",1)
+		for i in range(self.spinBox_1.value()):
+			tempStr = self.tableWidget_2.item(i, 2).text()
+			img.append("img_" + tempStr[-1:] + ".png")
+
+		for root,dirs,files in os.walk(self.path + "/" + tempPath[1]):
+			for dir in dirs:
+				if root[-5:-1] != 'text' and dir == "images":
+					imgPath.append(root + "/" + dir)
+
+		for path in imgPath:
+			for root,dirs,files in os.walk(path):
+				for file in files:
+					if file[-3:] == "png" and (file in img):
+						tempPathIn = root + "/" + file
+						str1 = file.rsplit(".",1)
+						tempPathOut = root + "/" + str1[0] + ".jpg"
+						im = Image.open(tempPathIn)
+						im = im.convert("RGB")
+						im.save(tempPathOut)
+						os.remove(tempPathIn)
+
+		
+
+
+
+
+
 
 
 

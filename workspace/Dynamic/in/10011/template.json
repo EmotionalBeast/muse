@@ -1,0 +1,150 @@
+{
+  "animation": {
+    "name": "data.json", 
+    "resourceDirectory": "/", 
+    "type": 1
+  }, 
+  "elements": [
+    {
+      "constraints": {
+        "height": {
+          "constant": 0.0, 
+          "percentage": 0.8058
+        }, 
+        "left": {
+          "constant": 0.0, 
+          "percentage": 0.0
+        }, 
+        "right": {
+          "constant": 0.0, 
+          "percentage": 0.0
+        }, 
+        "top": {
+          "constant": 0.0, 
+          "percentage": 0.0
+        }
+      }, 
+      "contentSize": [
+        753, 
+        1079
+      ], 
+      "customIconId": "4", 
+      "id": "0", 
+      "imageId": "Image_3", 
+      "keyPath": "image2", 
+      "mediaId": "0", 
+      "type": "media"
+    }, 
+    {
+      "constraints": {
+        "height": {
+          "constant": 0.0, 
+          "percentage": 0.7482
+        }, 
+        "left": {
+          "constant": 0.0, 
+          "percentage": 0.1
+        }, 
+        "right": {
+          "constant": 0.0, 
+          "percentage": 0.0987
+        }, 
+        "top": {
+          "constant": 0.0, 
+          "percentage": 0.1259
+        }
+      }, 
+      "contentSize": [
+        601, 
+        998
+      ], 
+      "id": "1", 
+      "imageId": "Image_2", 
+      "keyPath": "image1", 
+      "mediaId": "1", 
+      "type": "media"
+    }, 
+    {
+      "constraints": {
+        "bottom": {
+          "constant": 0.0, 
+          "percentage": 0.0
+        }, 
+        "left": {
+          "constant": 0.0, 
+          "percentage": 0.0
+        }, 
+        "right": {
+          "constant": 0.0, 
+          "percentage": 0.0
+        }, 
+        "top": {
+          "constant": 0.0, 
+          "percentage": 0.0
+        }
+      }, 
+      "id": "2", 
+      "imageName": "template_widget_10011.png", 
+      "type": "image"
+    }, 
+    {
+      "animation": {
+        "name": "data.json", 
+        "resourceDirectory": "/text1", 
+        "type": 1
+      }, 
+      "canvasWidth": 375, 
+      "constraints": {
+        "left": {
+          "constant": 0.0, 
+          "percentage": 0.2507
+        }, 
+        "right": {
+          "constant": 0.0, 
+          "percentage": 0.248
+        }, 
+        "top": {
+          "constant": 0.0, 
+          "percentage": 0.9185
+        }
+      }, 
+      "contentSize": [
+        386, 
+        70
+      ], 
+      "fontName": "Impact", 
+      "fontSize": 20, 
+      "id": "3", 
+      "keyPath": "text1", 
+      "placeHolder": "Enjoy everything I do", 
+      "textAlignment": "center", 
+      "textColor": "010101", 
+      "textId": "0", 
+      "type": "text"
+    }, 
+    {
+      "constraints": {
+        "height": {
+          "constant": 0.0, 
+          "percentage": 0.0
+        }, 
+        "right": {
+          "constant": 0.0, 
+          "percentage": 0.0
+        }, 
+        "top": {
+          "constant": 0.0, 
+          "percentage": 0.0
+        }, 
+        "width": {
+          "constant": 0.0, 
+          "percentage": 0.0
+        }
+      }, 
+      "contentMode": "aspectFit", 
+      "id": "4", 
+      "type": "mediaIcon"
+    }
+  ], 
+  "templateId": 10011
+}

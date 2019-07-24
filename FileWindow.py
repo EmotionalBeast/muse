@@ -34,6 +34,21 @@ class MyFileWindow(QWidget, Ui_FileWindow):
 			tempPath = pathIn + "/" + str(i)
 			os.mkdir(tempPath)
 
+		if self.judgement():
+			for i in range(int(self.lineEdit_2.text()), int(self.lineEdit_3.text())+1):
+				tempPath = pathIn + "/" + str(i) + "/images"
+				os.mkdir(tempPath)
+
+			for path in self.ai:
+				tempPath = path + "/android/text"
+				for root,dirs,files in os.walk(tempPath):
+					for dir in dirs:
+						if dir[:4] == "text":
+							tempPath = pathIn + "/" + path[-len(self.lineEdit_2.text()):] + "/" + dir
+							os.mkdir(tempPath)
+							tempPath = pathIn + "/" + path[-len(self.lineEdit_2.text()):] + "/" + dir + "/images"
+							os.mkdir(tempPath)
+				
 	def getDirectory(self):
 		with open("./resources/json/setting.json", "r") as lf:
 			jsonStr = lf.read()
@@ -43,20 +58,67 @@ class MyFileWindow(QWidget, Ui_FileWindow):
 	def copyFile(self):
 		count = len(self.lineEdit_2.text())
 		path = self.lineEdit_4.text()
+		#复制静态文件
 		for root,dirs,files in os.walk(path):
 			for file in files:
-				if len(file) == count+4 and file[-3:] == "png":
+				if root[-3:] == "png" and file[-3:] == "png":
 					old = root + "/" + file
 					new = self.getDirectory() + '/' + self.lineEdit_1.text() + "/in/" + file[:count] + "/" + "template_widget_" + file[:count] + ".png" 
 					shutil.copyfile(old,new)
-
+		if len(self.ai) != 0:
+			#复制android文件夹下的文件
+			for path in self.ai:
+				for root,dirs,files in os.walk(path + "/android/image"):
+					for file in files:
+						if file[-4:] == "json":
+							old = root + "/" + file
+							new = self.getDirectory() + "/" + self.lineEdit_1.text() + "/in/" + path[-count:] + "/" + file
+							shutil.copyfile(old,new)
+						if file[-3:] == "png":
+							old = root + "/" + file
+							new = self.getDirectory() + "/" + self.lineEdit_1.text() + "/in/" + path[-count:] + "/images/" + file
+							shutil.copyfile(old,new)
+				for root,dirs,files in os.walk(path + "/android/text"):
+					for file in files:
+						if file[-4:] == "json":
+							old = root + "/" + file
+							new = self.getDirectory() + "/" + self.lineEdit_1.text() + "/in/" + path[-count:] + "/" + root[-5:] + "/" + file[:4] + "_a.json"
+							shutil.copyfile(old,new)
+				#复制ios文件夹下的文件
+				for root,dirs,files in os.walk(path + "/ios/text"):
+					for file in files:
+						if file == "data.json":
+							old = root + "/" + file
+							new = self.getDirectory() + "/" + self.lineEdit_1.text() + "/in/" + path[-count:] + "/" + root[-5:] + "/" + file
+							shutil.copyfile(old,new)
+						if file[-3:] == "png":
+							old = root + "/" + file
+							new = self.getDirectory() + "/" + self.lineEdit_1.text() + "/in/" + path[-count:] + "/" + root[-12:] + "/" + file
+							shutil.copyfile(old,new)
 
 	def createJson(self):
 		path = self.getDirectory() + '/' + self.lineEdit_1.text() + "/in"
 		for root,dirs,files in os.walk(path):
 			for dir in dirs:
-				tempPath = os.path.join(root,dir)
-				open(tempPath + "/" + "template.json", "w")
+				if root == path:
+					tempPath = os.path.join(root,dir)
+					open(tempPath + "/" + "template.json", "w")
+
+	def judgement(self):
+		self.ai = []
+		path = self.lineEdit_4.text()
+		for root,dirs,files in os.walk(path):
+			for dir in dirs:
+				if dir == "android":
+					self.ai.append(root)
+		if len(self.ai) != 0:
+			return True
+		else:
+			return False
+
+
+
+
 
 
 

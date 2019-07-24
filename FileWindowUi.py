@@ -76,7 +76,7 @@ class Ui_FileWindow(object):
         Form.setWindowTitle(_translate("Form", "创建素材组"))
         self.label_1.setText(_translate("Form", "素材组名："))
         self.label_2.setText(_translate("Form", "素材序号："))
-        self.label_3.setText(_translate("Form", "png位置："))
+        self.label_3.setText(_translate("Form", "素材位置："))
         self.pushButton_1.setText(_translate("Form", "选择"))
         self.pushButton_2.setText(_translate("Form", "返回"))
         self.pushButton_3.setText(_translate("Form", "创建"))
