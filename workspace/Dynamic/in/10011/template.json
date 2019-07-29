@@ -9,29 +9,28 @@
       "constraints": {
         "height": {
           "constant": 0.0, 
-          "percentage": 0.8058
+          "percentage": 0.3756
         }, 
         "left": {
           "constant": 0.0, 
-          "percentage": 0.0
+          "percentage": 0.06
         }, 
         "right": {
           "constant": 0.0, 
-          "percentage": 0.0
+          "percentage": 0.0613
         }, 
         "top": {
           "constant": 0.0, 
-          "percentage": 0.0
+          "percentage": 0.1177
         }
       }, 
       "contentSize": [
-        753, 
-        1079
+        660, 
+        501
       ], 
-      "customIconId": "4", 
       "id": "0", 
-      "imageId": "Image_3", 
-      "keyPath": "image2", 
+      "imageId": "image_5", 
+      "keyPath": "image1", 
       "mediaId": "0", 
       "type": "media"
     }, 
@@ -39,28 +38,28 @@
       "constraints": {
         "height": {
           "constant": 0.0, 
-          "percentage": 0.7482
+          "percentage": 0.3756
         }, 
         "left": {
           "constant": 0.0, 
-          "percentage": 0.1
+          "percentage": 0.0587
         }, 
         "right": {
           "constant": 0.0, 
-          "percentage": 0.0987
+          "percentage": 0.0613
         }, 
         "top": {
           "constant": 0.0, 
-          "percentage": 0.1259
+          "percentage": 0.5052
         }
       }, 
       "contentSize": [
-        601, 
-        998
+        660, 
+        501
       ], 
       "id": "1", 
-      "imageId": "Image_2", 
-      "keyPath": "image1", 
+      "imageId": "image_9", 
+      "keyPath": "image2", 
       "mediaId": "1", 
       "type": "media"
     }, 
@@ -97,53 +96,65 @@
       "constraints": {
         "left": {
           "constant": 0.0, 
-          "percentage": 0.2507
+          "percentage": 0.2627
         }, 
         "right": {
           "constant": 0.0, 
-          "percentage": 0.248
+          "percentage": 0.26
         }, 
         "top": {
           "constant": 0.0, 
-          "percentage": 0.9185
+          "percentage": 0.036
         }
       }, 
       "contentSize": [
-        386, 
-        70
+        370, 
+        75
       ], 
       "fontName": "Impact", 
-      "fontSize": 20, 
+      "fontSize": 28, 
       "id": "3", 
       "keyPath": "text1", 
-      "placeHolder": "Enjoy everything I do", 
+      "placeHolder": "FASHION DAILY", 
       "textAlignment": "center", 
       "textColor": "010101", 
       "textId": "0", 
       "type": "text"
     }, 
     {
+      "animation": {
+        "name": "data.json", 
+        "resourceDirectory": "/text2", 
+        "type": 1
+      }, 
+      "canvasWidth": 375, 
       "constraints": {
-        "height": {
+        "left": {
           "constant": 0.0, 
-          "percentage": 0.0
+          "percentage": 0.0613
         }, 
         "right": {
           "constant": 0.0, 
-          "percentage": 0.0
+          "percentage": 0.0627
         }, 
         "top": {
           "constant": 0.0, 
-          "percentage": 0.0
-        }, 
-        "width": {
-          "constant": 0.0, 
-          "percentage": 0.0
+          "percentage": 0.9245
         }
       }, 
-      "contentMode": "aspectFit", 
+      "contentSize": [
+        667, 
+        54
+      ], 
+      "fontName": "Impact", 
+      "fontSize": 17, 
       "id": "4", 
-      "type": "mediaIcon"
+      "keyPath": "text2", 
+      "placeHolder": "Fashion is a mirror, reflecting the culture.", 
+      "textAlignment": "center", 
+      "textColor": "010101", 
+      "textId": "1", 
+      "type": "text"
     }
   ], 
   "templateId": 10011

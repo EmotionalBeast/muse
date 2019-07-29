@@ -85,7 +85,6 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		else:
 			self.comBox_1.setCurrentText(text_1)
 		
-
 	#打开关联的窗口
 	def openFileWindow(self):
 		self.myFileWindow = MyFileWindow()
@@ -93,15 +92,16 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		self.myFileWindow.show()
 
 	def openPaintWindow(self):
-		dic = self.getTableValue()
-		self.myPaintWindow = MyPaintWindow(dic)
-		self.myPaintWindow.setWindowModality(Qt.ApplicationModal)
-		self.myPaintWindow.show()
-
+		if self.comBox_2.currentText() != "":
+			self.myPaintWindow = MyPaintWindow(self.comBox_1.currentText())
+			self.myPaintWindow.setWindowModality(Qt.ApplicationModal)
+			self.myPaintWindow.show()
+		else:
+			QMessageBox.information(self,"提示","请选择json文件!")
+			
 	def openDirWindow(self):
 		self.myDirWindow.setWindowModality(Qt.ApplicationModal)
 		self.myDirWindow.show()
-
 
 	#关闭主窗口提示
 	def closeEvent(self, event):
@@ -379,9 +379,9 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		item = self.tableWidget_2.horizontalHeaderItem(4)
 		item.setText(_translate("MainWindow", "keyPath"))
 		item = self.tableWidget_2.horizontalHeaderItem(5)
-		item.setText(_translate("MainWindow", "contentSize_x"))
+		item.setText(_translate("MainWindow", "contentSize_w"))
 		item = self.tableWidget_2.horizontalHeaderItem(6)
-		item.setText(_translate("MainWindow", "contentSize_y"))
+		item.setText(_translate("MainWindow", "contentSize_h"))
 		item = self.tableWidget_2.horizontalHeaderItem(7)
 		item.setText(_translate("MainWindow", "lelft_percentage"))
 		item = self.tableWidget_2.horizontalHeaderItem(8)
@@ -636,9 +636,9 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		item = self.tableWidget_4.horizontalHeaderItem(15)
 		item.setText(_translate("MainWindow", "keyPath"))
 		item = self.tableWidget_4.horizontalHeaderItem(16)
-		item.setText(_translate("MainWindow", "contentSize_x"))
+		item.setText(_translate("MainWindow", "contentSize_w"))
 		item = self.tableWidget_4.horizontalHeaderItem(17)
-		item.setText(_translate("MainWindow", "contentSize_y"))
+		item.setText(_translate("MainWindow", "contentSize_h"))
 		item = self.tableWidget_4.horizontalHeaderItem(18)
 		item.setText(_translate("MainWindow", "animation_name"))
 		item = self.tableWidget_4.horizontalHeaderItem(19)
@@ -986,9 +986,10 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		#赋值animation表
 		if self.cbox_3.isChecked() == True:
 			self.tableWidget_6.setRowCount(1)
-			self.tableWidget_6.setItem(i,0,QTableWidgetItem(self.dic['animation']['name']))
-			self.tableWidget_6.setItem(i,1,QTableWidgetItem(str(self.dic['animation']['type'])))
-			self.tableWidget_6.setItem(i,2,QTableWidgetItem(self.dic['animation']['resourceDirectory']))
+			for i in range(1):
+				self.tableWidget_6.setItem(i,0,QTableWidgetItem(self.dic['animation']['name']))
+				self.tableWidget_6.setItem(i,1,QTableWidgetItem(str(self.dic['animation']['type'])))
+				self.tableWidget_6.setItem(i,2,QTableWidgetItem(self.dic['animation']['resourceDirectory']))
 
 	#点击生成按钮的槽函数
 	def createTable(self):
@@ -1141,7 +1142,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 
 		if self.cbox_3.isChecked() == True:
 			self.convertFormat()
-			QMessageBox.information(self, "提示", "转化成功！")
+			QMessageBox.information(self, "提示", "jpg转化完成！")
 
 	def checkValues(self):
 		if self.cbox_1.isChecked() == True:
@@ -1161,7 +1162,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			for i in range(self.spinBox_2.value()):
 				for j in range(self.tableWidget_3.columnCount()):
 					if self.tableWidget_3.item(i,j) == None or self.tableWidget_3.item(i,j).text() == "":
-						self.info = "background表中第 "+str(i+1)+" 行第 "+str(j+1)+" 列未填值！"
+						self.info = "background表中第 " + str(i+1)+" 行第 "+str(j+1)+" 列未填值！"
 						return False
 
 		if self.spinBox_3.value() != 0:
@@ -1174,8 +1175,20 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					print("1")
 					self.info = "text表中第 "+str(i+1)+" 行第 4 列未填值！"
 					return False
-	
-		
+
+		if self.cbox_2.isChecked() == True:
+			for i in range(1):
+				for j in range(self.tableWidget_5.columnCount()):
+					if self.tableWidget_5.item(i,j) == None or self.tableWidget_5.item(i,j).text() == "":
+						self.info = "level表中第 " + str(i+1) + " 行第 " + str(j+1) + " 列未填值！"
+						return False
+
+		if self.cbox_2.isChecked() == True:
+			for i in range(1):
+				for j in range(self.tableWidget_6.columnCount()):
+					if self.tableWidget_6.item(i,j) == None or self.tableWidget_6.item(i,j).text() == "":
+						self.info = "Dynamic表中第 " + str(i+1) + " 行第 " + str(j+1) + " 列未填值！"
+						return False	
 		return True
 
 	def tableValues(self):
@@ -1453,10 +1466,11 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		pathOrigin = self.path[:-2] + "origin"
 		for root,dirs,files in os.walk(pathOut):
 			for dir in dirs:
-				pathNeed = pathOut + "/" + dir + "/"
-				targetFile = pathOrigin + "/" + dir + ".7z"
-				command = "7z a " + targetFile + " " + pathNeed
-				os.system(command)
+				if root == pathOut:
+					pathNeed = pathOut + "/" + dir + "/"
+					targetFile = pathOrigin + "/" + dir + ".7z"
+					command = "7z a " + targetFile + " " + pathNeed
+					os.system(command)
 		QMessageBox.information(self, "提示", "已压缩到origin文件夹！")
 
 	def openOrigin(self):

@@ -1,0 +1,126 @@
+{
+  "animation": {
+    "name": "data.json", 
+    "resourceDirectory": "/", 
+    "type": 1
+  }, 
+  "elements": [
+    {
+      "constraints": {
+        "height": {
+          "constant": 0.0, 
+          "percentage": 0.431
+        }, 
+        "left": {
+          "constant": 0.0, 
+          "percentage": 0.372
+        }, 
+        "right": {
+          "constant": 0.0, 
+          "percentage": 0.0787
+        }, 
+        "top": {
+          "constant": 0.0, 
+          "percentage": 0.0967
+        }
+      }, 
+      "contentSize": [
+        412, 
+        575
+      ], 
+      "id": "0", 
+      "imageId": "image_4", 
+      "keyPath": "image", 
+      "mediaId": "0", 
+      "type": "media"
+    }, 
+    {
+      "constraints": {
+        "height": {
+          "constant": 0.0, 
+          "percentage": 0.4311
+        }, 
+        "left": {
+          "constant": 0.0, 
+          "percentage": 0.0853
+        }, 
+        "right": {
+          "constant": 0.0, 
+          "percentage": 0.3627
+        }, 
+        "top": {
+          "constant": 0.0, 
+          "percentage": 0.4115
+        }
+      }, 
+      "contentSize": [
+        414, 
+        575
+      ], 
+      "id": "1", 
+      "imageId": "image_1", 
+      "keyPath": "image2", 
+      "mediaId": "1", 
+      "type": "media"
+    }, 
+    {
+      "constraints": {
+        "bottom": {
+          "constant": 0.0, 
+          "percentage": 0.0
+        }, 
+        "left": {
+          "constant": 0.0, 
+          "percentage": 0.0
+        }, 
+        "right": {
+          "constant": 0.0, 
+          "percentage": 0.0
+        }, 
+        "top": {
+          "constant": 0.0, 
+          "percentage": 0.0
+        }
+      }, 
+      "id": "2", 
+      "imageName": "template_widget_10013.png", 
+      "type": "image"
+    }, 
+    {
+      "animation": {
+        "name": "data.json", 
+        "resourceDirectory": "/text1", 
+        "type": 1
+      }, 
+      "canvasWidth": 375, 
+      "constraints": {
+        "left": {
+          "constant": 0.0, 
+          "percentage": 0.1333
+        }, 
+        "right": {
+          "constant": 0.0, 
+          "percentage": 0.132
+        }, 
+        "top": {
+          "constant": 0.0, 
+          "percentage": 0.8974
+        }
+      }, 
+      "contentSize": [
+        656, 
+        148
+      ], 
+      "fontName": "Impact", 
+      "fontSize": 15, 
+      "id": "3", 
+      "keyPath": "text1", 
+      "placeHolder": "comfort and simplicity are two keys that \nI follow when it comes to fashion.", 
+      "textAlignment": "center", 
+      "textColor": "010101", 
+      "textId": "0", 
+      "type": "text"
+    }
+  ], 
+  "templateId": 10013
+}
