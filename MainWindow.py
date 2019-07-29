@@ -93,7 +93,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 
 	def openPaintWindow(self):
 		if self.comBox_2.currentText() != "":
-			self.myPaintWindow = MyPaintWindow(self.comBox_1.currentText())
+			self.myPaintWindow = MyPaintWindow(self.comBox_1.currentText(),self.comBox_2.currentText())
 			self.myPaintWindow.setWindowModality(Qt.ApplicationModal)
 			self.myPaintWindow.show()
 		else:

@@ -11,16 +11,19 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		super(MyPaintWindow,self).__init__()
 		self.setupUi(self)
 		
-		#读取setting.json,获取workspace路径
+		# 读取setting.json,获取workspace路径
 		with open("./resources/json/setting.json") as lf:
 			jsonStr = lf.read()
 			dic = json.loads(jsonStr, strict = False)
-		temp = templatePath.rsplit("-",1)
-		self.path = dic["directory"] + "/" + objPath + "/in/" + temp[1] + "/template.json"
+		self.num = templatePath.rsplit("-",1)[1]
+		self.path = dic["directory"] + "/" + objPath + "/in/" + self.num
 
-	#获取已经保存的template.json
+		self.analyseJson()
+		self.setLayout()
+
+	# 获取已经保存的template.json
 	def getJsonDic(self):
-		with open(self.path) as lf:
+		with open(self.path + "/template.json") as lf:
 			size = os.path.getsize(self.path)
 			if size != 0:
 				jsonStr = lf.read()
@@ -29,36 +32,56 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 			else:
 				return 0
 
-	#分解json
-	# def analyseJson(self):
-	# 	self.cell = []
-	# 	self.text = []
-	# 	dic = self.getJsonDic()
-	# 	for i in len(dic["elements"]):
-	# 		if ""
+	# 分解json
+	def analyseJson(self):
+		self.cell = []
+		self.text = []
+		dic = self.getJsonDic()
+		if dic != 0:
+			for i in range(len(dic["elements"])):
+				if "mediaId" in dic["elements"][i]:
+					self.cell.append(dic["elements"][i])
+				if "textId" in dic["elements"][i]:
+					self.text.append([dic["elements"][i]])
+
+	def setLayout(self):	
+		# 添加cell
+		# for i in range(len(self.cell)):
+		# 	left = self.cell[i]["constraints"]["left"]["percentage"] 
+		# 	right = self.cell[i]["constraints"]["right"]["percentage"]
+		# 	top = self.cell[i]["constraints"]["top"]["percentage"]
+		# 	height = self.cell[i]["constraints"]["height"]["percentage"]
+		# 	per = {"left":left, "right":right, "top":top, "height":height}
+		# 	self.setCell(**per)
+
+		# 添加背景
+		self.setBg()
+ 
+		# 添加文字
+		
+
+	def setCell(self, **per):
+		pass
+
+	def setText(self, **per):
+		pass
+
+	def setBg(self):
+		pic = self.path + "/template_widget_" + self.num + ".png"
+		print(pic)
+		image = QImage()
+		image.load(pic)
+		pixmap = QPixmap.fromImage(image)
+		fitPixmap = pixmap.scaled(270, 480, Qt.IgnoreAspectRatio, Qt.SmoothTransformation)
+		scene = QGraphicsScene()
+		scene.addPixmap(fitPixmap)
+		self.graphicsView.setScene(scene)
 
 
 
-	#
-	# def getScene(self, bgName, width, height):
-	# 	#添加背景图片
-	# 	image = QImage()
-	# 	image.load(bgName)
-	# 	pixmap = QPixmap.fromImage(image)
-	# 	fitPixmap = pixmap.scaled(width, height, Qt.IgnoreAspectRatio, Qt.SmoothTransformation)  # 饱满填充
-	# 	scene = QGraphicsScene()
-	# 	scene.addPixmap(fitPixmap)
-	#
-	# 	#添加cell
+		
+		
 
-
-		#添加文字
-		for i in range(len(self.text_list)):
-			label = QLabel()
-			label.setText(self.text_list[i]["placeHolder"])
-			scene.addItem(label)
-
-		return scene
 
 	
 

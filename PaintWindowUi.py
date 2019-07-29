@@ -21,6 +21,7 @@ class Ui_PaintWindow(object):
         self.graphicsView = QtWidgets.QGraphicsView(Form)
         self.graphicsView.setGeometry(QtCore.QRect(0, 0, 270, 480))
         self.graphicsView.setObjectName("graphicsView")
+        self.graphicsView.setStyleSheet("padding: 0px; border: 0px;")
 
 
         self.retranslateUi(Form)
