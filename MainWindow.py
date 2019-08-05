@@ -1509,6 +1509,22 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 						im.save(tempPathOut)
 						os.remove(tempPathIn)
 
+	def reduceSize(self):
+		imgPath = []
+		tempPath = self.comBox_2.currentText().rsplit("-",1)
+
+		for root,dirs,files in os.walk(self.path + "/" + tempPath[1] + "/images"):
+			for file in files:
+				if file[-3:] == "png"
+					imgPath.append(root + "/" + file)
+
+		for path in imgPath:
+			pass
+				
+		
+
+
+
 		
 
 
