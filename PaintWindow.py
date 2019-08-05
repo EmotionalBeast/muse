@@ -62,20 +62,24 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 
 	def setCell(self, **per):
 		pass
+		# self.scene.addItem()
 
 	def setText(self, **per):
 		pass
+		# self.scene.addItem()
 
 	def setBg(self):
 		pic = self.path + "/template_widget_" + self.num + ".png"
-		print(pic)
 		image = QImage()
 		image.load(pic)
 		pixmap = QPixmap.fromImage(image)
 		fitPixmap = pixmap.scaled(270, 480, Qt.IgnoreAspectRatio, Qt.SmoothTransformation)
-		scene = QGraphicsScene()
-		scene.addPixmap(fitPixmap)
-		self.graphicsView.setScene(scene)
+		self.scene = QGraphicsScene()
+		self.scene.addPixmap(fitPixmap)
+
+		self.graphicsView.setScene(self.scene)
+
+		
 
 
 

@@ -119,7 +119,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			self.tableWidget_1.setEditTriggers(QAbstractItemView.CurrentChanged)
 		self.tableWidget_2.setEditTriggers(QAbstractItemView.CurrentChanged)
 		self.tableWidget_3.setEditTriggers(QAbstractItemView.CurrentChanged)
-		if self.spinBox_3 != 0:
+		if self.spinBox_3.value() != 0:
 			self.tableWidget_4.setEditTriggers(QAbstractItemView.CurrentChanged)
 		if self.cbox_2.isChecked():
 			self.tableWidget_5.setEditTriggers(QAbstractItemView.CurrentChanged)
@@ -132,7 +132,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			self.tableWidget_1.setEditTriggers(QAbstractItemView.NoEditTriggers)
 		self.tableWidget_2.setEditTriggers(QAbstractItemView.NoEditTriggers)
 		self.tableWidget_3.setEditTriggers(QAbstractItemView.NoEditTriggers)
-		if self.spinBox_3 != 0:
+		if self.spinBox_3.value() != 0 :
 			self.tableWidget_4.setEditTriggers(QAbstractItemView.NoEditTriggers)
 		if self.cbox_2.isChecked():
 			self.tableWidget_5.setEditTriggers(QAbstractItemView.NoEditTriggers)
@@ -1008,7 +1008,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		if count_4 != 0:
 			self.tableWidget_4.setRowCount(count_4)	
 		#将comBox放到tablewidget中	
-		self.initComBox()
+			self.initComBox()
 		name = self.comBox_2.currentText()
 		#初始化blur表
 		if self.cbox_1.isChecked() == True:
@@ -1064,30 +1064,31 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_3.setItem(i,10,QTableWidgetItem("0"))
 
 		#初始化text表
-		if self.cbox_3.isChecked() == False:
-			self.tableWidget_4.setRowCount(count_4)
-			for i in range(count_4):
-				self.tableWidget_4.setItem(i,0,QTableWidgetItem(str(count_1+count_2+count_3+i)))
-				self.tableWidget_4.setItem(i,1,QTableWidgetItem("text"))
-				self.tableWidget_4.setItem(i,2,QTableWidgetItem(str(i)))
-				self.tableWidget_4.setItem(i,5,QTableWidgetItem("375"))
-				self.tableWidget_4.setItem(i,10,QTableWidgetItem("0"))
-				self.tableWidget_4.setItem(i,12,QTableWidgetItem("0"))
-				self.tableWidget_4.setItem(i,14,QTableWidgetItem("0"))
-		else:
-			self.tableWidget_4.setRowCount(count_4)
-			for i in range(count_4):
-				self.tableWidget_4.setItem(i,0,QTableWidgetItem(str(count_1+count_2+count_3+i)))
-				self.tableWidget_4.setItem(i,1,QTableWidgetItem("text"))
-				self.tableWidget_4.setItem(i,2,QTableWidgetItem(str(i)))
-				self.tableWidget_4.setItem(i,5,QTableWidgetItem("375"))
-				self.tableWidget_4.setItem(i,10,QTableWidgetItem("0"))
-				self.tableWidget_4.setItem(i,12,QTableWidgetItem("0"))
-				self.tableWidget_4.setItem(i,14,QTableWidgetItem("0"))
-				self.tableWidget_4.setItem(i,15,QTableWidgetItem("text" + str(i+1)))
-				self.tableWidget_4.setItem(i,18,QTableWidgetItem("data.json"))
-				self.tableWidget_4.setItem(i,19,QTableWidgetItem("1"))
-				self.tableWidget_4.setItem(i,20,QTableWidgetItem("/text" + str(i+1)))
+		if self.spinBox_3.value() != 0:
+			if self.cbox_3.isChecked() == False:
+				self.tableWidget_4.setRowCount(count_4)
+				for i in range(count_4):
+					self.tableWidget_4.setItem(i,0,QTableWidgetItem(str(count_1+count_2+count_3+i)))
+					self.tableWidget_4.setItem(i,1,QTableWidgetItem("text"))
+					self.tableWidget_4.setItem(i,2,QTableWidgetItem(str(i)))
+					self.tableWidget_4.setItem(i,5,QTableWidgetItem("375"))
+					self.tableWidget_4.setItem(i,10,QTableWidgetItem("0"))
+					self.tableWidget_4.setItem(i,12,QTableWidgetItem("0"))
+					self.tableWidget_4.setItem(i,14,QTableWidgetItem("0"))
+			else:
+				self.tableWidget_4.setRowCount(count_4)
+				for i in range(count_4):
+					self.tableWidget_4.setItem(i,0,QTableWidgetItem(str(count_1+count_2+count_3+i)))
+					self.tableWidget_4.setItem(i,1,QTableWidgetItem("text"))
+					self.tableWidget_4.setItem(i,2,QTableWidgetItem(str(i)))
+					self.tableWidget_4.setItem(i,5,QTableWidgetItem("375"))
+					self.tableWidget_4.setItem(i,10,QTableWidgetItem("0"))
+					self.tableWidget_4.setItem(i,12,QTableWidgetItem("0"))
+					self.tableWidget_4.setItem(i,14,QTableWidgetItem("0"))
+					self.tableWidget_4.setItem(i,15,QTableWidgetItem("text" + str(i+1)))
+					self.tableWidget_4.setItem(i,18,QTableWidgetItem("data.json"))
+					self.tableWidget_4.setItem(i,19,QTableWidgetItem("1"))
+					self.tableWidget_4.setItem(i,20,QTableWidgetItem("/text" + str(i+1)))
 		#初始化level表
 		if self.cbox_2.isChecked() == True:
 			count_5 = 1

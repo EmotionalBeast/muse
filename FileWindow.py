@@ -61,7 +61,7 @@ class MyFileWindow(QWidget, Ui_FileWindow):
 		#复制静态文件
 		for root,dirs,files in os.walk(path):
 			for file in files:
-				if root[-3:] == "png" and file[-3:] == "png":
+				if root[-3:].lower() == "png" and file[-3:] == "png":
 					old = root + "/" + file
 					new = self.getDirectory() + '/' + self.lineEdit_1.text() + "/in/" + file[:count] + "/" + "template_widget_" + file[:count] + ".png" 
 					shutil.copyfile(old,new)
