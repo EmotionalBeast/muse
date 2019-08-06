@@ -8,7 +8,6 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-# from PyQt5.QtWidgets import QWidget
 
 class Ui_PaintWindow(object):
 
@@ -17,12 +16,15 @@ class Ui_PaintWindow(object):
         Form.resize(270, 480)
         Form.setFixedSize(270, 480)
         
-        #定义界面控件
+        # 定义界面控件
         self.graphicsView = QtWidgets.QGraphicsView(Form)
         self.graphicsView.setGeometry(QtCore.QRect(0, 0, 270, 480))
         self.graphicsView.setObjectName("graphicsView")
         self.graphicsView.setStyleSheet("padding: 0px; border: 0px;")
-
+        
+        # 定义一个空场景
+        self.scene = QtWidgets.QGraphicsScene()
+        self.scene.setSceneRect(0,0,270,480)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)

@@ -115,30 +115,40 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 
 	#表格的可编辑性
 	def editable(self):
-		if self.cbox_1.isChecked():
-			self.tableWidget_1.setEditTriggers(QAbstractItemView.CurrentChanged)
-		self.tableWidget_2.setEditTriggers(QAbstractItemView.CurrentChanged)
-		self.tableWidget_3.setEditTriggers(QAbstractItemView.CurrentChanged)
-		if self.spinBox_3.value() != 0:
-			self.tableWidget_4.setEditTriggers(QAbstractItemView.CurrentChanged)
-		if self.cbox_2.isChecked():
-			self.tableWidget_5.setEditTriggers(QAbstractItemView.CurrentChanged)
-		if self.cbox_3.isChecked():
-			self.tableWidget_6.setEditTriggers(QAbstractItemView.CurrentChanged)
-		self.statusbar.showMessage("Editable")
+		if self.comBox_2.currentText() != "":
+			if self.cbox_1.isChecked():
+				self.tableWidget_1.setEditTriggers(QAbstractItemView.CurrentChanged)
+			if self.spinBox_1.value() != 0:
+				self.tableWidget_2.setEditTriggers(QAbstractItemView.CurrentChanged)
+			if self.spinBox_2.value() != 0:
+				self.tableWidget_3.setEditTriggers(QAbstractItemView.CurrentChanged)
+			if self.spinBox_3.value() != 0:
+				self.tableWidget_4.setEditTriggers(QAbstractItemView.CurrentChanged)
+			if self.cbox_2.isChecked():
+				self.tableWidget_5.setEditTriggers(QAbstractItemView.CurrentChanged)
+			if self.cbox_3.isChecked():
+				self.tableWidget_6.setEditTriggers(QAbstractItemView.CurrentChanged)
+			self.statusbar.showMessage("Editable")
+		else:
+			QMessageBox.information(self, "提示", "请选择json文件")
 
 	def nonEditable(self):
-		if self.cbox_1.isChecked():
-			self.tableWidget_1.setEditTriggers(QAbstractItemView.NoEditTriggers)
-		self.tableWidget_2.setEditTriggers(QAbstractItemView.NoEditTriggers)
-		self.tableWidget_3.setEditTriggers(QAbstractItemView.NoEditTriggers)
-		if self.spinBox_3.value() != 0 :
-			self.tableWidget_4.setEditTriggers(QAbstractItemView.NoEditTriggers)
-		if self.cbox_2.isChecked():
-			self.tableWidget_5.setEditTriggers(QAbstractItemView.NoEditTriggers)
-		if self.cbox_3.isChecked():
-			self.tableWidget_6.setEditTriggers(QAbstractItemView.NoEditTriggers)
-		self.statusbar.showMessage("Non Editable")
+		if self.comBox_2.currentText() != "":
+			if self.cbox_1.isChecked():
+				self.tableWidget_1.setEditTriggers(QAbstractItemView.NoEditTriggers)
+			if self.spinBox_1.value() != 0:
+				self.tableWidget_2.setEditTriggers(QAbstractItemView.NoEditTriggers)
+			if self.spinBox_2.value() != 0:
+				self.tableWidget_3.setEditTriggers(QAbstractItemView.NoEditTriggers)
+			if self.spinBox_3.value() != 0:
+				self.tableWidget_4.setEditTriggers(QAbstractItemView.NoEditTriggers)
+			if self.cbox_2.isChecked():
+				self.tableWidget_5.setEditTriggers(QAbstractItemView.NoEditTriggers)
+			if self.cbox_3.isChecked():
+				self.tableWidget_6.setEditTriggers(QAbstractItemView.NoEditTriggers)
+			self.statusbar.showMessage("Non Editable")
+		else:
+			QMessageBox.information(self, "提示", "请选择json文件")
 
 	#动态初始化界面的一些控件	
 	def initComBox(self):
@@ -1115,8 +1125,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_6.setItem(i,2,QTableWidgetItem("/"))
 
 	def saveTable(self):
-		self.nonEditable()
 		if self.comBox_2.currentText() != "":
+			self.nonEditable()
 			if self.checkValues():
 				if self.spinBox_1 != 0:
 					self.tableValues()
@@ -1497,29 +1507,19 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				if root[-5:-1] != 'text' and dir == "images":
 					imgPath.append(root + "/" + dir)
 
-		for path in imgPath:
-			for root,dirs,files in os.walk(path):
-				for file in files:
-					if file[-3:] == "png" and (file in img):
-						tempPathIn = root + "/" + file
-						str1 = file.rsplit(".",1)
-						tempPathOut = root + "/" + str1[0] + ".jpg"
-						im = Image.open(tempPathIn)
-						im = im.convert("RGB")
-						im.save(tempPathOut)
-						os.remove(tempPathIn)
+		if len(imgPath) != 0:
+			for path in imgPath:
+				for root,dirs,files in os.walk(path):
+					for file in files:
+						if file[-3:] == "png" and (file in img):
+							tempPathIn = root + "/" + file
+							str1 = file.rsplit(".",1)
+							tempPathOut = root + "/" + str1[0] + ".jpg"
+							im = Image.open(tempPathIn)
+							im = im.convert("RGB")
+							im.save(tempPathOut)
+							os.remove(tempPathIn)
 
-	def reduceSize(self):
-		imgPath = []
-		tempPath = self.comBox_2.currentText().rsplit("-",1)
-
-		for root,dirs,files in os.walk(self.path + "/" + tempPath[1] + "/images"):
-			for file in files:
-				if file[-3:] == "png"
-					imgPath.append(root + "/" + file)
-
-		for path in imgPath:
-			pass
 				
 		
 

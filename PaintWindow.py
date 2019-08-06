@@ -1,6 +1,7 @@
 # coding: utf-8
 import sys,json,os
-from PyQt5.QtWidgets import QWidget, QApplication, QFileDialog, QMessageBox, QGraphicsScene, QLabel, QGraphicsItem
+from PyQt5.QtWidgets import (QWidget, QApplication, QFileDialog, QMessageBox, 
+								QGraphicsScene, QLabel, QGraphicsItem, QGraphicsProxyWidget)
 from PyQt5.QtGui import QPixmap, QImage
 from PyQt5.QtCore import QRect, Qt
 from PaintWindowUi import Ui_PaintWindow
@@ -44,29 +45,61 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 				if "textId" in dic["elements"][i]:
 					self.text.append([dic["elements"][i]])
 
-	def setLayout(self):	
-		# 添加cell
-		# for i in range(len(self.cell)):
-		# 	left = self.cell[i]["constraints"]["left"]["percentage"] 
-		# 	right = self.cell[i]["constraints"]["right"]["percentage"]
-		# 	top = self.cell[i]["constraints"]["top"]["percentage"]
-		# 	height = self.cell[i]["constraints"]["height"]["percentage"]
-		# 	per = {"left":left, "right":right, "top":top, "height":height}
-		# 	self.setCell(**per)
+	def setLayout(self):
+		# 初始化graphicScene,添加cell
+		for i in range(len(self.cell)):
+			left = self.cell[i]["constraints"]["left"]["percentage"] 
+			right = self.cell[i]["constraints"]["right"]["percentage"]
+			top = self.cell[i]["constraints"]["top"]["percentage"]
+			height = self.cell[i]["constraints"]["height"]["percentage"]
+			cell_dic = {"left":left, "right":right, "top":top, "height":height}
+			self.setCell(i, **cell_dic)
 
-		# 添加背景
+		# 初始化graphicScene,添加背景
 		self.setBg()
  
-		# 添加文字
+		# 初始化graphicScene,添加文字
+		for i in range(len(self.text)):
+			font = self.text[i]['fontName']
+			size = self.text[i]['fontSize']
+			color = self.text[i]["textColor"]
+			content = self.text[i]["placeHolder"]
+			left = self.text[i]["constraints"]["left"]["percentage"]
+			right = self.text[i]["constraints"]["left"]["percentage"]
+			top = self.text[i]["constraints"]["left"]["percentage"]
+			text_dic = {"font":font, "size":size, "color":color, "content":content, "left":left, "right":right, "top":top}
+			self.setText(**text_dic)
+
+		# 将graphicsScene放置在当前的graphicView中
+		self.graphicsView.setScene(self.scene)
+
 		
 
-	def setCell(self, **per):
-		pass
-		# self.scene.addItem()
+	def setCell(self, count, **dic):
+		x = 270*dic["left"]
+		y = 480*dic["top"]
+		w = 270*(1-dic["left"]-dic["right"])
+		h =	480*dic["height"]
+		pic = "./resources/pictures/img_" + str(count+1) +".jpeg"
+		image = QImage()
+		image.load(pic)
+		pixmap = QPixmap.fromImage(image)
+		fitPixmap = pixmap.scaled(w, h)
+		self.scene.addPixmap(fitPixmap).setPos(x,y)
 
-	def setText(self, **per):
-		pass
-		# self.scene.addItem()
+	def setText(self, **dic):
+		x = 270*dic["left"]
+		y = 480*dic["top"]
+		w = 270*(1-dic["left"]-dic["right"])
+		h = 480*(1-dic["top"])
+		style = "font:" + dic["font"] + ";" + "font-size:" + str(dic["size"]) + "px;" + "color:#" + dic["color"]
+		label = QLabel()
+		label.setText(dic["content"])
+		label.setStyleSheet(style)
+		self.scene.addWidget().setPos(x, y)
+
+		
+
 
 	def setBg(self):
 		pic = self.path + "/template_widget_" + self.num + ".png"
@@ -74,10 +107,8 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		image.load(pic)
 		pixmap = QPixmap.fromImage(image)
 		fitPixmap = pixmap.scaled(270, 480, Qt.IgnoreAspectRatio, Qt.SmoothTransformation)
-		self.scene = QGraphicsScene()
 		self.scene.addPixmap(fitPixmap)
-
-		self.graphicsView.setScene(self.scene)
+		
 
 		
 
