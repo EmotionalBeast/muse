@@ -1,8 +1,8 @@
 # coding: utf-8
 import sys,json,os
 from PyQt5.QtWidgets import (QWidget, QApplication, QFileDialog, QMessageBox, 
-								QGraphicsScene, QLabel, QGraphicsItem, QGraphicsProxyWidget)
-from PyQt5.QtGui import QPixmap, QImage
+								QGraphicsScene, QLabel, QGraphicsItem, QGraphicsProxyWidget, QGraphicsSimpleTextItem)
+from PyQt5.QtGui import QPixmap, QImage, QFontDatabase
 from PyQt5.QtCore import QRect, Qt
 from PaintWindowUi import Ui_PaintWindow
 
@@ -43,7 +43,7 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 				if "mediaId" in dic["elements"][i]:
 					self.cell.append(dic["elements"][i])
 				if "textId" in dic["elements"][i]:
-					self.text.append([dic["elements"][i]])
+					self.text.append(dic["elements"][i])
 
 	def setLayout(self):
 		# 初始化graphicScene,添加cell
@@ -60,14 +60,15 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
  
 		# 初始化graphicScene,添加文字
 		for i in range(len(self.text)):
-			font = self.text[i]['fontName']
-			size = self.text[i]['fontSize']
+			font = self.text[i]["fontName"]
+			size = self.text[i]["fontSize"]
 			color = self.text[i]["textColor"]
 			content = self.text[i]["placeHolder"]
+			alignment = self.text[i]["textAlignment"]
 			left = self.text[i]["constraints"]["left"]["percentage"]
-			right = self.text[i]["constraints"]["left"]["percentage"]
-			top = self.text[i]["constraints"]["left"]["percentage"]
-			text_dic = {"font":font, "size":size, "color":color, "content":content, "left":left, "right":right, "top":top}
+			right = self.text[i]["constraints"]["right"]["percentage"]
+			top = self.text[i]["constraints"]["top"]["percentage"]
+			text_dic = {"font":font, "size":size, "color":color, "content":content, "alignment":alignment, "left":left, "right":right, "top":top}
 			self.setText(**text_dic)
 
 		# 将graphicsScene放置在当前的graphicView中
@@ -92,14 +93,20 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		y = 480*dic["top"]
 		w = 270*(1-dic["left"]-dic["right"])
 		h = 480*(1-dic["top"])
-		style = "font:" + dic["font"] + ";" + "font-size:" + str(dic["size"]) + "px;" + "color:#" + dic["color"]
 		label = QLabel()
+		label.resize(w, h)
 		label.setText(dic["content"])
-		label.setStyleSheet(style)
-		self.scene.addWidget().setPos(x, y)
-
+		if dic["alignment"] == "right":
+			label.setAlignment(Qt.AlignTop | Qt.AlignRight)
+		elif dic["alignment"] == "left":
+			label.setAlignment(Qt.AlignTop | Qt.AlignLeft)
+		else:
+			label.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
 		
-
+		font = "color: #" + dic["color"] + ";background-color: transparent" + ";font-size:" + str(int(dic["size"]*(540/750))) + "px"
+		label.setStyleSheet(font)
+		label.setWordWrap(True)
+		self.scene.addWidget(label).setPos(x, y)
 
 	def setBg(self):
 		pic = self.path + "/template_widget_" + self.num + ".png"
@@ -108,7 +115,17 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		pixmap = QPixmap.fromImage(image)
 		fitPixmap = pixmap.scaled(270, 480, Qt.IgnoreAspectRatio, Qt.SmoothTransformation)
 		self.scene.addPixmap(fitPixmap)
-		
+
+	def loadFont(self):
+		self.fonts = []
+		for root,dirs,files in os.walk("./resources/fonts"):
+			for file in files:
+				if file[-3:] == "tty":
+					num = QFontDatabase.addApplicationFont(root + "/" + file)
+					self.fonts.append(num)
+
+
+
 
 		
 
