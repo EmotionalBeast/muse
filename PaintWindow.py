@@ -19,6 +19,7 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		self.num = templatePath.rsplit("-",1)[1]
 		self.path = dic["directory"] + "/" + objPath + "/in/" + self.num
 
+		# self.loadFont()
 		self.analyseJson()
 		self.setLayout()
 
@@ -116,13 +117,13 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		fitPixmap = pixmap.scaled(270, 480, Qt.IgnoreAspectRatio, Qt.SmoothTransformation)
 		self.scene.addPixmap(fitPixmap)
 
-	def loadFont(self):
-		self.fonts = []
-		for root,dirs,files in os.walk("./resources/fonts"):
-			for file in files:
-				if file[-3:] == "tty":
-					num = QFontDatabase.addApplicationFont(root + "/" + file)
-					self.fonts.append(num)
+	# def loadFont(self):
+	# 	self.fonts = []
+	# 	for root,dirs,files in os.walk("./resources/fonts"):
+	# 		for file in files:
+	# 			if file[-3:] == "tty":
+	# 				num = QFontDatabase.addApplicationFont(root + "/" + file)
+	# 				self.fonts.append(num)
 
 
 
