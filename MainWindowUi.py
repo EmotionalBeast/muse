@@ -149,6 +149,7 @@ class Ui_MainWindow(object):
         self.actionEncrypt.setObjectName("actionEncrypt")
         self.actionCompress = QtWidgets.QAction(QtGui.QIcon('./resources/images/compress.png'), '&Compress', self)
         self.actionCompress.setObjectName("actionCompress")
+        
 
         
         #将动作信息添加到菜单栏

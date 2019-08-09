@@ -1490,6 +1490,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			QDesktopServices.openUrl(QUrl(pathOrigin))
 		else:
 			QMessageBox.information(self, "提示", "请选择素材组！")
+			
 
 	#转化指定图片的格式
 	def convertFormat(self):
@@ -1519,6 +1520,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 							im = im.convert("RGB")
 							im.save(tempPathOut)
 							os.remove(tempPathIn)
+
+
 
 				
 		
