@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c1b99dd4-c20f-4c8f-b941-ca4f922d6678" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/FileWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/FileWindow.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PaintWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/PaintWindow.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1087/template.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/1087/template_widget_1087.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/1192/template.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/1192/template_widget_1192.png" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,8 +21,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/FileWindow.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="501">
-              <caret line="63" column="83" lean-forward="true" selection-start-line="63" selection-start-column="83" selection-end-line="63" selection-end-column="83" />
+            <state relative-caret-position="511">
+              <caret line="84" column="71" lean-forward="true" selection-start-line="84" selection-start-column="71" selection-end-line="84" selection-end-column="71" />
               <folding>
                 <element signature="e#16#44#0" expanded="true" />
               </folding>
@@ -351,7 +353,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32953367" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.23108809" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.23108809" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32953367" />
@@ -525,8 +527,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/FileWindow.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="501">
-          <caret line="63" column="83" lean-forward="true" selection-start-line="63" selection-start-column="83" selection-end-line="63" selection-end-column="83" />
+        <state relative-caret-position="511">
+          <caret line="84" column="71" lean-forward="true" selection-start-line="84" selection-start-column="71" selection-end-line="84" selection-end-column="71" />
           <folding>
             <element signature="e#16#44#0" expanded="true" />
           </folding>
