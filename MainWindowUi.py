@@ -145,10 +145,8 @@ class Ui_MainWindow(object):
         self.actionQuit.setObjectName("actionQuit")
         self.actionPaint = QtWidgets.QAction(QtGui.QIcon('./resources/images/paint.png'), '&Paint', self)
         self.actionPaint.setObjectName("actionPaint")
-        self.actionEncrypt = QtWidgets.QAction(QtGui.QIcon('./resources/images/encrypt.png'), '&Encrypt', self)
-        self.actionEncrypt.setObjectName("actionEncrypt")
-        self.actionCompress = QtWidgets.QAction(QtGui.QIcon('./resources/images/compress.png'), '&Compress', self)
-        self.actionCompress.setObjectName("actionCompress")
+        self.actionEnCom = QtWidgets.QAction(QtGui.QIcon('./resources/images/EnCom.png'), '&EnCom', self)
+        self.actionEnCom.setObjectName("actionEnCom")
         
 
         
@@ -158,8 +156,7 @@ class Ui_MainWindow(object):
         self.menuFile.addAction(self.actionSetting)
         self.menuFile.addAction(self.actionQuit)
         self.menuTools.addAction(self.actionPaint)
-        self.menuTools.addAction(self.actionEncrypt)
-        self.menuTools.addAction(self.actionCompress)
+        self.menuTools.addAction(self.actionEnCom)
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuTools.menuAction())
 
@@ -172,8 +169,7 @@ class Ui_MainWindow(object):
         self.actionSetting.triggered.connect(self.openDirWindow)
         self.actionQuit.triggered.connect(QtWidgets.qApp.quit)
         self.actionPaint.triggered.connect(self.openPaintWindow)
-        self.actionEncrypt.triggered.connect(self.encryption)
-        self.actionCompress.triggered.connect(self.compressing)
+        self.actionEnCom.triggered.connect(self.EnCom)
 
         #工具栏的功能定义
         self.new.triggered.connect(self.openFileWindow)
@@ -218,10 +214,8 @@ class Ui_MainWindow(object):
         self.actionQuit.setShortcut(_translate("MainWindow", "Ctrl+Q"))
         self.actionPaint.setText(_translate("MainWindow", "展示"))
         self.actionPaint.setShortcut(_translate("MainWindow", "Ctrl+R"))
-        self.actionEncrypt.setText(_translate("MainWindow", "加密"))
-        self.actionEncrypt.setShortcut(_translate("MainWindow", "Ctrl+E"))
-        self.actionCompress.setText(_translate("MainWindow", "压缩"))
-        self.actionCompress.setShortcut(_translate("MainWindow", "Ctrl+K"))
+        self.actionEnCom.setText(_translate("MainWindow", "加密压缩"))
+        self.actionEnCom.setShortcut(_translate("MainWindow", "Ctrl+K"))
 
 
 

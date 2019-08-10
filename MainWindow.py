@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 #author: Jhin Yao
+"""
+重要的是saveTable和resolveJson方法
+"""
 
 import json, os, sys
 from PIL import Image
@@ -21,7 +24,6 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		self.setupUi(self)
 		self.myFileWindow = MyFileWindow()
 		self.myDirWindow = MyDirWindow()
-		# self.tabCount = 0
 		self.index = 0
 
 		with open("./resources/json/font.json", 'r') as lf:
@@ -1130,7 +1132,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			if self.checkValues():
 				if self.spinBox_1 != 0:
 					self.tableValues()
-					dic = {}
+					dic = {} #开始封装Json数据
 					temp = self.comBox_2.currentText()
 					dic["templateId"] = int(temp[self.count:])
 					dic["elements"] = []
@@ -1143,7 +1145,6 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					with open(path, "w") as df:
 						jsonStr = json.dumps(dic, sort_keys=True, indent=2, ensure_ascii=False)
 						df.write(jsonStr)
-
 					self.item = []
 					QMessageBox.information(self, "提示", "保存成功！")
 			else:
@@ -1431,7 +1432,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				item_5 = self.tableWidget_5.item(i,7).text()
 				item_6 = self.tableWidget_5.item(i,8).text()
 				item_7 = self.tableWidget_5.item(i,9).text()
-				item_8 = self.tableWidget_4.item(i,10).text()
+				item_8 = self.tableWidget_5.item(i,10).text()
 				level_dic["constraints"] = {"right":{
 															"percentage": float(item_1),
 															"constant": float(item_2)
@@ -1461,18 +1462,14 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 
 	#加密压缩功能
 	def encryption(self):
-		if self.comBox_1.currentText() != "":
-			pathIn = self.path
-			pathOut = self.path[:-2] + "out"
-			pathJar = "./resources/jar/encrypt.jar" 
-			command = "java -jar " + pathJar + " " + pathIn + " " + pathOut
-			os.system(command)
-			QMessageBox.information(self,"提示","加密到out文件夹成功！")
-		else:
-			QMessageBox.information(self, "提示", "请选择素材组！")
+		pathIn = self.path
+		pathOut = self.path[:-2] + "out"
+		pathJar = "./resources/jar/encrypt.jar" 
+		command = "java -jar " + pathJar + " " + pathIn + " " + pathOut
+		os.system(command)
+		QMessageBox.information(self,"提示","加密到out文件夹成功！")
 
 	def compressing(self):
-		self.encryption()
 		pathOut = self.path[:-2] + "out"
 		pathOrigin = self.path[:-2] + "origin"
 		for root,dirs,files in os.walk(pathOut):
@@ -1484,18 +1481,22 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					os.system(command)
 		QMessageBox.information(self, "提示", "已压缩到origin文件夹！")
 
+	def EnCom(self):
+		if self.comBox_1.currentText() != "":
+			self.encryption()
+			self.compressing()
+		else:
+			QMessageBox.information(self, "提示", "请选择素材组！")
+
 	def openOrigin(self):
 		if self.comBox_1.currentText() != "":
 			pathOrigin ="file:///" + self.path[:-2] + "origin/"
 			QDesktopServices.openUrl(QUrl(pathOrigin))
 		else:
 			QMessageBox.information(self, "提示", "请选择素材组！")
-			
 
 	#转化指定图片的格式
 	def convertFormat(self):
-		# tempPath = [root + "/" + dir for root,dirs,files in os.walk(self.path) for dir in dirs if root[-5:-1] != 'text' and dir == "images"]
-		# img = ["img_" +self.tableWidget_2.item(i, 2).text()[-1:]+ ".png" for i in range(self.spinBox_1.value())]
 		imgPath = []
 		img = []
 		tempPath = self.comBox_2.currentText().rsplit("-",1)
