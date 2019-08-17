@@ -116,8 +116,8 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 			label.setAlignment(Qt.AlignTop | Qt.AlignLeft)
 		else:
 			label.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
-		fontNum = int(dic["size"]*0.4)
-		font = "color: #" + dic["color"] + ";background-color: transparent" + ";font-size:" + str(fontNum) + "px"
+		fontNum = int(dic["size"]*0.48)
+		font = "color: #" + dic["color"] + ";background-color: transparent" + ";font-size:" + str(fontNum) + "px" 
 		label.setStyleSheet(font)
 		label.setWordWrap(True)
 		self.scene.addWidget(label).setPos(x, y)
