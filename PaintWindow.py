@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import (QWidget, QApplication, QFileDialog, QMessageBox,
 from PyQt5.QtGui import QPixmap, QImage, QFontDatabase
 from PyQt5.QtCore import QRect, Qt
 from PaintWindowUi import Ui_PaintWindow
+from PIL import Image, ImageFilter
 
 width = 360
 class MyPaintWindow(QWidget, Ui_PaintWindow):
@@ -38,6 +39,7 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 	def analyseJson(self):
 		self.cell = []
 		self.text = []
+		self.blur = []
 		dic = self.getJsonDic()
 		if dic != 0:
 			for i in range(len(dic["elements"])):
@@ -45,9 +47,14 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 					self.cell.append(dic["elements"][i])
 				if "textId" in dic["elements"][i]:
 					self.text.append(dic["elements"][i])
-
+				if "blur" in dic["elements"][i]:
+					self.blur.append(dic["elements"][i])
 	def setLayout(self):
 		# 初始化graphicScene,添加cell
+		#特殊模版，背景虚化
+		if len(self.blur) != 0:
+			self.setBlur()
+		#普通cell
 		for i in range(len(self.cell)):
 			left = self.cell[i]["constraints"]["left"]["percentage"] 
 			right = self.cell[i]["constraints"]["right"]["percentage"]
@@ -75,7 +82,13 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		# 将graphicsScene放置在当前的graphicView中
 		self.graphicsView.setScene(self.scene)
 
-		
+	def setBlur(self):
+		pic = "./resources/pictures/img_1.jpeg"
+		image = QImage()
+		image.load(pic)
+		pixmap = QPixmap.fromImage(image)
+		fitPixmap = pixmap.scaled(270, 480)
+		self.scene.addPixmap(fitPixmap).setPos(0,0)
 
 	def setCell(self, count, **dic):
 		x = 270*dic["left"]
@@ -103,8 +116,8 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 			label.setAlignment(Qt.AlignTop | Qt.AlignLeft)
 		else:
 			label.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
-		
-		font = "color: #" + dic["color"] + ";background-color: transparent" + ";font-size:" + str(int(dic["size"]*(540/750))) + "px"
+		fontNum = int(dic["size"]*0.4)
+		font = "color: #" + dic["color"] + ";background-color: transparent" + ";font-size:" + str(fontNum) + "px"
 		label.setStyleSheet(font)
 		label.setWordWrap(True)
 		self.scene.addWidget(label).setPos(x, y)
