@@ -1195,7 +1195,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 						self.info = "level表中第 " + str(i+1) + " 行第 " + str(j+1) + " 列未填值！"
 						return False
 
-		if self.cbox_2.isChecked() == True:
+		if self.cbox_3.isChecked() == True:
 			for i in range(1):
 				for j in range(self.tableWidget_6.columnCount()):
 					if self.tableWidget_6.item(i,j) == None or self.tableWidget_6.item(i,j).text() == "":
