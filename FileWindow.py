@@ -44,10 +44,10 @@ class MyFileWindow(QWidget, Ui_FileWindow):
 				for root,dirs,files in os.walk(tempPath):
 					for dir in dirs:
 						if dir[:4] == "text":
-							tempPath = pathIn + "/" + path[-len(self.lineEdit_2.text()):] + "/" + dir
-							os.mkdir(tempPath)
-							tempPath = pathIn + "/" + path[-len(self.lineEdit_2.text()):] + "/" + dir + "/images"
-							os.mkdir(tempPath)
+							tempPath1 = pathIn + "/" + path[-len(self.lineEdit_2.text()):] + "/" + dir
+							os.mkdir(tempPath1)
+							tempPath2 = pathIn + "/" + path[-len(self.lineEdit_2.text()):] + "/" + dir + "/images"
+							os.mkdir(tempPath2)
 				
 	def getDirectory(self):
 		with open("./resources/json/setting.json", "r") as lf:
