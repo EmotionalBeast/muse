@@ -519,7 +519,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		self.tableWidget_4.setHorizontalHeaderItem(14,item)
 		self.tabWidget.addTab(self.tab_4, "")
 		#设置列宽
-		self.tableWidget_4.setColumnWidth(3,230)
+		self.tableWidget_4.setColumnWidth(3,300)
 		self.tableWidget_4.setColumnWidth(7,600)
 		_translate = QtCore.QCoreApplication.translate
 		#文字表格的顶栏字段
@@ -610,7 +610,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		self.tableWidget_4.setHorizontalHeaderItem(20,item)
 		self.tabWidget.addTab(self.tab_4, "")
 		#设置列宽
-		self.tableWidget_4.setColumnWidth(3,230)
+		self.tableWidget_4.setColumnWidth(3,300)
 		self.tableWidget_4.setColumnWidth(7,600)
 		self.tableWidget_4.setColumnWidth(20,150)
 		_translate = QtCore.QCoreApplication.translate
@@ -1005,7 +1005,6 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 
 	#点击生成按钮的槽函数
 	def createTable(self):
-
 		self.initTable()
 		self.nonEditable()
 		count_1 = 0

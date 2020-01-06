@@ -40,14 +40,18 @@ class MyFileWindow(QWidget, Ui_FileWindow):
 				os.mkdir(tempPath)
 
 			for path in self.ai:
-				tempPath = path + "/android/text"
+				tempPath = path + "/text-a"
 				for root,dirs,files in os.walk(tempPath):
-					for dir in dirs:
-						if dir[:4] == "text":
-							tempPath1 = pathIn + "/" + path[-len(self.lineEdit_2.text()):] + "/" + dir
-							os.mkdir(tempPath1)
-							tempPath2 = pathIn + "/" + path[-len(self.lineEdit_2.text()):] + "/" + dir + "/images"
-							os.mkdir(tempPath2)
+					if len(dirs) == 0:
+						os.mkdir(pathIn + "/" + path[-len(self.lineEdit_2.text()):] + "/text1")
+						os.mkdir(pathIn + "/" + path[-len(self.lineEdit_2.text()):] + "/text1/images")
+					else:
+						for dir in dirs:
+							if dir[:4] == "text":
+								tempPath1 = pathIn + "/" + path[-len(self.lineEdit_2.text()):] + "/" + dir
+								os.mkdir(tempPath1)
+								tempPath2 = pathIn + "/" + path[-len(self.lineEdit_2.text()):] + "/" + dir + "/images"
+								os.mkdir(tempPath2)	
 				
 	def getDirectory(self):
 		with open("./resources/json/setting.json", "r") as lf:
@@ -65,10 +69,11 @@ class MyFileWindow(QWidget, Ui_FileWindow):
 					old = root + "/" + file
 					new = self.getDirectory() + '/' + self.lineEdit_1.text() + "/in/" + file[:count] + "/" + "template_widget_" + file[:count] + ".png" 
 					shutil.copyfile(old,new)
+
 		if len(self.ai) != 0:
-			#复制android文件夹下的文件
+			#复制image文件夹下的文件
 			for path in self.ai:
-				for root,dirs,files in os.walk(path + "/android/image"):
+				for root,dirs,files in os.walk(path + "/image"):
 					for file in files:
 						if file[-4:] == "json":
 							old = root + "/" + file
@@ -78,23 +83,38 @@ class MyFileWindow(QWidget, Ui_FileWindow):
 							old = root + "/" + file
 							new = self.getDirectory() + "/" + self.lineEdit_1.text() + "/in/" + path[-count:] + "/images/" + file
 							shutil.copyfile(old,new)
-				for root,dirs,files in os.walk(path + "/android/text"):
+				#复制android的文字json
+				for root,dirs,files in os.walk(path + "/text-a"):
 					for file in files:
 						if file[-4:] == "json":
 							old = root + "/" + file
-							new = self.getDirectory() + "/" + self.lineEdit_1.text() + "/in/" + path[-count:] + "/" + root[-5:] + "/" + file[:4] + "_a.json"
-							shutil.copyfile(old,new)
+							if root[-6:] == "text-a":
+								new = self.getDirectory() + "/" + self.lineEdit_1.text() + "/in/" + path[-count:] + "/text1/" + file[:4] + "_a.json"
+								shutil.copyfile(old,new)
+							else:
+								new = self.getDirectory() + "/" + self.lineEdit_1.text() + "/in/" + path[-count:] + "/" + root[-5:] + "/" + file[:4] + "_a.json"
+								shutil.copyfile(old,new)
+
 				#复制ios文件夹下的文件
-				for root,dirs,files in os.walk(path + "/ios/text"):
+				for root,dirs,files in os.walk(path + "/text-i"):
 					for file in files:
 						if file == "data.json":
 							old = root + "/" + file
-							new = self.getDirectory() + "/" + self.lineEdit_1.text() + "/in/" + path[-count:] + "/" + root[-5:] + "/" + file
-							shutil.copyfile(old,new)
+							if root[-6:] == "text-i":
+								new = self.getDirectory() + "/" + self.lineEdit_1.text() + "/in/" + path[-count:] + "/text1/" + file
+								shutil.copyfile(old,new)
+							else:
+								new = self.getDirectory() + "/" + self.lineEdit_1.text() + "/in/" + path[-count:] + "/" + root[-5:] + "/" + file
+								shutil.copyfile(old,new)
+
 						if file[-3:] == "png":
 							old = root + "/" + file
-							new = self.getDirectory() + "/" + self.lineEdit_1.text() + "/in/" + path[-count:] + "/" + root[-12:] + "/" + file
-							shutil.copyfile(old,new)
+							if root[-13:] == "text-i/images":
+								new = self.getDirectory() + "/" + self.lineEdit_1.text() + "/in/" + path[-count:] + "/text1/images/" + file
+								shutil.copyfile(old,new)
+							else:
+								new = self.getDirectory() + "/" + self.lineEdit_1.text() + "/in/" + path[-count:] + "/" + root[-12:] + "/" + file
+								shutil.copyfile(old,new)
 
 	def createJson(self):
 		path = self.getDirectory() + '/' + self.lineEdit_1.text() + "/in"
@@ -106,10 +126,14 @@ class MyFileWindow(QWidget, Ui_FileWindow):
 
 	def judgement(self):
 		self.ai = []
+		self.str_num = []
+		for i in range(int(self.lineEdit_2.text()), int(self.lineEdit_3.text())+1):
+			self.str_num.append(str(i))
+
 		path = self.lineEdit_4.text()
 		for root,dirs,files in os.walk(path):
 			for dir in dirs:
-				if dir.lower() == "android":
+				if dir == "image":
 					self.ai.append(root)
 		if len(self.ai) != 0:
 			return True
