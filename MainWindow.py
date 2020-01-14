@@ -1479,6 +1479,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					command = "7z a " + targetFile + " " + pathNeed
 					os.system(command)
 		QMessageBox.information(self, "提示", "已压缩到origin文件夹！")
+		self.cleanFile(pathOut)
 
 	def EnCom(self):
 		if self.comBox_1.currentText() != "":
@@ -1520,6 +1521,23 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 							im = im.convert("RGB")
 							im.save(tempPathOut)
 							os.remove(tempPathIn)
+
+	def createMV(self):
+		generate = "./resources/jar/generate.jar"
+		pathIn = self.path
+		command = "java -jar " + generate + " -an" + pathIn
+		os.system(command)
+
+	def cleanFile(self, path):
+		for root, dirs, files in os.walk(path):
+			for file in files:
+				f = root + "/" + file
+				os.remove(f)
+
+
+
+
+
 
 
 
