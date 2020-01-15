@@ -4,7 +4,7 @@
 重要的是saveTable和resolveJson方法
 """
 
-import json, os, sys
+import json, os, sys, shutil
 from PIL import Image
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QFileDialog, QMessageBox, 
 													QTableWidgetItem, QAbstractItemView, QComboBox)
@@ -1480,6 +1480,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					os.system(command)
 		QMessageBox.information(self, "提示", "已压缩到origin文件夹！")
 		self.cleanFile(pathOut)
+		os.mkdir(pathOut)
 
 	def EnCom(self):
 		if self.comBox_1.currentText() != "":
@@ -1523,16 +1524,44 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 							os.remove(tempPathIn)
 
 	def createMV(self):
-		generate = "./resources/jar/generate.jar"
-		pathIn = self.path
-		command = "java -jar " + generate + " -an" + pathIn
-		os.system(command)
+		pathMaterial = self.path[:-2] + "material"
+		if os.path.exists(pathMaterial):			
+			if self.comBox_1.currentText() != "":
+				self.cleanFile(self.path)
+				shutil.copytree(pathMaterial, self.path)
+				generate = "./resources/jar/generate.jar"
+				command = "java -jar " + generate + " -an " + self.path
+				os.system(command)
+				QMessageBox.information(self, "提示", "MV素材输出成功！")
+				self.encryption()
+				self.compressing()
+			else:
+				QMessageBox.information(self, "提示", "请选择MV素材组！")
+		else:
+			QMessageBox.information(self, "提示", "请选择MV素材组！")
+
+
+
 
 	def cleanFile(self, path):
-		for root, dirs, files in os.walk(path):
-			for file in files:
-				f = root + "/" + file
-				os.remove(f)
+		files = os.listdir(path)
+		for file in files:
+			filepath = os.path.join(path, file)
+			if os.path.isfile(filepath):
+				os.remove(filepath)
+			elif os.path.isdir(filepath):
+				self.cleanFile(filepath)
+			else:
+				continue
+		os.rmdir(path)
+
+
+	def copyFile(self):
+		pathMaterial = self.path[:-2] + "material"
+		shutil.copytree(self.path, pathMaterial)
+
+
+
 
 
 
