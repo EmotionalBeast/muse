@@ -1,3 +1,5 @@
 #过滤pyc文件
 *.pyc
 /__pycache__
+/.idea
+/.vscode
