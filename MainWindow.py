@@ -353,7 +353,11 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		item = QtWidgets.QTableWidgetItem()
 		self.tableWidget_2.setHorizontalHeaderItem(3, item)
 		item = QtWidgets.QTableWidgetItem()
-		self.tableWidget_2.setHorizontalHeaderItem(4, item)
+		self.tableWidget_2.setHorizont
+		
+		
+		
+		alHeaderItem(4, item)
 		item = QtWidgets.QTableWidgetItem()
 		self.tableWidget_2.setHorizontalHeaderItem(5, item)
 		item = QtWidgets.QTableWidgetItem()

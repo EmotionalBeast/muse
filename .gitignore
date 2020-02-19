@@ -1,4 +1,4 @@
-#过滤pyc文件
+#filter file
 *.pyc
 /__pycache__
 /.idea
