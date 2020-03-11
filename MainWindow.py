@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+ # -*- coding: utf-8 -*-
 #author: Jhin Yao
 """
 重要的是saveTable和resolveJson方法
@@ -277,7 +277,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		self.tab_2 = QtWidgets.QWidget()
 		self.tab_2.setObjectName("tab_2")
 		self.tableWidget_2 = QtWidgets.QTableWidget(self.tab_2)
-		self.tableWidget_2.setColumnCount(11)
+		self.tableWidget_2.setColumnCount(14)
 		self.tableWidget_2.setGeometry(QtCore.QRect(0, 0, 1000, 450))
 		self.tableWidget_2.setObjectName("tableWidget_2")
 
@@ -303,6 +303,12 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		self.tableWidget_2.setHorizontalHeaderItem(9, item)
 		item = QtWidgets.QTableWidgetItem()
 		self.tableWidget_2.setHorizontalHeaderItem(10, item)
+		item = QtWidgets.QTableWidgetItem()
+		self.tableWidget_2.setHorizontalHeaderItem(11, item)
+		item = QtWidgets.QTableWidgetItem()
+		self.tableWidget_2.setHorizontalHeaderItem(12, item)
+		item = QtWidgets.QTableWidgetItem()
+		self.tableWidget_2.setHorizontalHeaderItem(13, item)
 		self.tabWidget.addTab(self.tab_2, "")
 		#设置列宽
 		self.tableWidget_2.setColumnWidth(9,120)
@@ -331,6 +337,13 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		item.setText(_translate("MainWindow", "height_percentage"))
 		item = self.tableWidget_2.horizontalHeaderItem(10)
 		item.setText(_translate("MainWindow", "height_constant"))
+		item = self.tableWidget_2.horizontalHeaderItem(11)
+		item.setText(_translate("MainWindow", "filter"))
+		item = self.tableWidget_2.horizontalHeaderItem(12)
+		item.setText(_translate("MainWindow", "filterStrength"))
+		item = self.tableWidget_2.horizontalHeaderItem(13)
+		item.setText(_translate("MainWindow", "rotation"))
+
 		self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "Cell"))
 
 		self.tableWidget_2.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
@@ -485,7 +498,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		self.tab_4 = QtWidgets.QWidget()
 		self.tab_4.setObjectName("tab_4")
 		self.tableWidget_4 = QtWidgets.QTableWidget(self.tab_4)
-		self.tableWidget_4.setColumnCount(15)
+		self.tableWidget_4.setColumnCount(18)
 		self.tableWidget_4.setGeometry(QtCore.QRect(0, 0, 1000, 450))
 		self.tableWidget_4.setObjectName("tableWidget_4")
 
@@ -519,6 +532,12 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		self.tableWidget_4.setHorizontalHeaderItem(13, item)
 		item = QtWidgets.QTableWidgetItem()
 		self.tableWidget_4.setHorizontalHeaderItem(14,item)
+		item = QtWidgets.QTableWidgetItem()
+		self.tableWidget_4.setHorizontalHeaderItem(15,item)
+		item = QtWidgets.QTableWidgetItem()
+		self.tableWidget_4.setHorizontalHeaderItem(16,item)
+		item = QtWidgets.QTableWidgetItem()
+		self.tableWidget_4.setHorizontalHeaderItem(17,item)
 		self.tabWidget.addTab(self.tab_4, "")
 		#设置列宽
 		self.tableWidget_4.setColumnWidth(3,300)
@@ -555,6 +574,12 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		item.setText(_translate("MainWindow", "top_percentage"))
 		item = self.tableWidget_4.horizontalHeaderItem(14)
 		item.setText(_translate("MainWindow", "top_constant"))
+		item = self.tableWidget_4.horizontalHeaderItem(15)
+		item.setText(_translate("MainWindow", "textSpacing"))
+		item = self.tableWidget_4.horizontalHeaderItem(16)
+		item.setText(_translate("MainWindow", "lineSpacing"))
+		item = self.tableWidget_4.horizontalHeaderItem(17)
+		item.setText(_translate("MainWindow", "angle"))
 		self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("MainWindow", "Text"))
 
 		self.tableWidget_4.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
@@ -900,6 +925,18 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					self.tableWidget_2.setItem(i,8,QTableWidgetItem(str(self.cell_list[i]['constraints']['top']['constant'])))
 					self.tableWidget_2.setItem(i,9,QTableWidgetItem(str(self.cell_list[i]['constraints']['height']['percentage'])))
 					self.tableWidget_2.setItem(i,10,QTableWidgetItem(str(self.cell_list[i]['constraints']['height']['constant'])))
+					if "filter" in self.cell_list[i].keys():
+						self.tableWidget_2.setItem(i,11,QTableWidgetItem(self.cell_list[i]['filter']))
+					else:
+						self.tableWidget_2.setItem(i,11,QTableWidgetItem("0"))
+					if "filterStrength" in self.cell_list[i].keys():
+						self.tableWidget_2.setItem(i,12,QTableWidgetItem(str(self.cell_list[i]['filterStrength'])))
+					else:
+						self.tableWidget_2.setItem(i,12,QTableWidgetItem("0"))
+					if "rotation" in self.cell_list[i].keys():
+						self.tableWidget_2.setItem(i,13,QTableWidgetItem(str(self.cell_list[i]['rotation'])))
+					else:
+						self.tableWidget_2.setItem(i, 13, QTableWidgetItem("0"))
 			else:
 				self.tableWidget_2.setRowCount(self.spinBox_1.value())
 				for i in range(len(self.cell_list)):
@@ -955,6 +992,18 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					self.tableWidget_4.setItem(i,12,QTableWidgetItem(str(self.text_list[i]['constraints']['right']['constant'])))
 					self.tableWidget_4.setItem(i,13,QTableWidgetItem(str(self.text_list[i]['constraints']['top']['percentage'])))
 					self.tableWidget_4.setItem(i,14,QTableWidgetItem(str(self.text_list[i]['constraints']['top']['constant'])))
+					if "textSpacing" in self.text_list[i].keys():
+						self.tableWidget_4.setItem(i,15,QTableWidgetItem(self.text_list[i]['textSpacing']))
+					else:
+						self.tableWidget_4.setItem(i,15,QTableWidgetItem("0"))
+					if "lineSpacing" in self.text_list[i].keys():					
+						self.tableWidget_4.setItem(i,16,QTableWidgetItem(self.text_list[i]['lineSpacing']))
+					else:
+						self.tableWidget_4.setItem(i, 16, QTableWidgetItem("1"))
+					if "angle" in self.text_list[i].keys():
+						self.tableWidget_4.setItem(i,17,QTableWidgetItem(self.text_list[i]['angle']))
+					else:
+						self.tableWidget_4.setItem(i, 17, QTableWidgetItem("0"))
 			else:
 				self.tableWidget_4.setRowCount(self.spinBox_3.value())
 				self.initComBox()
@@ -1049,7 +1098,11 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_2.setItem(i,4,QTableWidgetItem("0"))
 				self.tableWidget_2.setItem(i,6,QTableWidgetItem("0"))
 				self.tableWidget_2.setItem(i,8,QTableWidgetItem("0"))
-				self.tableWidget_2.setItem(i,10,QTableWidgetItem("0"))			
+				self.tableWidget_2.setItem(i,10,QTableWidgetItem("0"))
+				self.tableWidget_2.setItem(i,11,QTableWidgetItem("0"))
+				self.tableWidget_2.setItem(i,12,QTableWidgetItem("0"))
+				self.tableWidget_2.setItem(i,13,QTableWidgetItem("0"))
+
 		else:
 			self.tableWidget_2.setRowCount(count_2)
 			for i in range(count_2):
@@ -1088,6 +1141,10 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					self.tableWidget_4.setItem(i,10,QTableWidgetItem("0"))
 					self.tableWidget_4.setItem(i,12,QTableWidgetItem("0"))
 					self.tableWidget_4.setItem(i,14,QTableWidgetItem("0"))
+					self.tableWidget_4.setItem(i,15,QTableWidgetItem("0"))
+					self.tableWidget_4.setItem(i,16,QTableWidgetItem("1"))
+					self.tableWidget_4.setItem(i,17,QTableWidgetItem("0"))
+
 			else:
 				self.tableWidget_4.setRowCount(count_4)
 				for i in range(count_4):
@@ -1136,6 +1193,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					dic = {} #开始封装Json数据
 					temp = self.comBox_2.currentText()
 					dic["templateId"] = int(temp[self.count:])
+					dic["version"] = "1.1"
 					dic["elements"] = []
 					if self.cbox_3.isChecked():
 						dic['animation'] = self.ani_dic
@@ -1246,6 +1304,10 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					cell_dic["id"] = self.tableWidget_2.item(i, 0).text()
 					cell_dic["type"] = self.tableWidget_2.item(i, 1).text()
 					cell_dic["mediaId"] = self.tableWidget_2.item(i, 2).text()
+					if self.tableWidget_2.item(i, 11).text() != "0":
+						cell_dic["filter"] = self.tableWidget_2.item(i, 11).text()
+						cell_dic["filterStrength"] = float(self.tableWidget_2.item(i, 12).text())
+					cell_dic["rotation"] = float(self.tableWidget_2.item(i, 13).text())
 					item_1 = self.tableWidget_2.item(i,3).text()
 					item_2 = self.tableWidget_2.item(i,4).text()
 					item_3 = self.tableWidget_2.item(i,5).text()
@@ -1358,6 +1420,9 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					text_dic['textColor'] = self.tableWidget_4.item(i, 6).text()
 					text_dic['placeHolder'] = self.tableWidget_4.item(i, 7).text()
 					text_dic['textAlignment'] = self.tableWidget_4.item(i, 8).text()
+					text_dic['textSpacing'] = float(self.tableWidget_4.item(i, 15).text())
+					text_dic['lineSpacing'] = float(self.tableWidget_4.item(i, 16).text())
+					text_dic['angle'] = float(self.tableWidget_4.item(i, 17).text())
 					item_1 = self.tableWidget_4.item(i,9).text()
 					item_2 = self.tableWidget_4.item(i,10).text()
 					item_3 = self.tableWidget_4.item(i,11).text()
