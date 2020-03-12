@@ -24,5 +24,6 @@ class MyDirWindow(QWidget, Ui_DirWindow):
 
 		QMessageBox.information(self, "提示", "修改成功！")
 		self.close()
+	 
 		
 

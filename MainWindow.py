@@ -993,15 +993,15 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					self.tableWidget_4.setItem(i,13,QTableWidgetItem(str(self.text_list[i]['constraints']['top']['percentage'])))
 					self.tableWidget_4.setItem(i,14,QTableWidgetItem(str(self.text_list[i]['constraints']['top']['constant'])))
 					if "textSpacing" in self.text_list[i].keys():
-						self.tableWidget_4.setItem(i,15,QTableWidgetItem(self.text_list[i]['textSpacing']))
+						self.tableWidget_4.setItem(i,15,QTableWidgetItem(str(self.text_list[i]['textSpacing'])))
 					else:
 						self.tableWidget_4.setItem(i,15,QTableWidgetItem("0"))
 					if "lineSpacing" in self.text_list[i].keys():					
-						self.tableWidget_4.setItem(i,16,QTableWidgetItem(self.text_list[i]['lineSpacing']))
+						self.tableWidget_4.setItem(i,16,QTableWidgetItem(str(self.text_list[i]['lineSpacing'])))
 					else:
 						self.tableWidget_4.setItem(i, 16, QTableWidgetItem("1"))
 					if "angle" in self.text_list[i].keys():
-						self.tableWidget_4.setItem(i,17,QTableWidgetItem(self.text_list[i]['angle']))
+						self.tableWidget_4.setItem(i,17,QTableWidgetItem(str(self.text_list[i]['angle'])))
 					else:
 						self.tableWidget_4.setItem(i, 17, QTableWidgetItem("0"))
 			else:
