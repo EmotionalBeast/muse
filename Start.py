@@ -2,7 +2,7 @@
 # author: Jhin Yao
 
 import sys
-from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QApplication, QWidget
 from MainWindow import MyMainWindow
 
 

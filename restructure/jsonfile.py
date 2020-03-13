@@ -2,7 +2,10 @@
 
 import json, sys, os, shutil
 
-class StoryChicJson(object):
+class JsonFile(object):
+    pass
+
+class StoryChicJson(JsonFile):
     def __init__(self, path):
         #定义属性
         self._jsonStr = ""
@@ -12,6 +15,9 @@ class StoryChicJson(object):
         self._text = []
         self._blur = {}
         self._level = {}
+        self._elements = []
+        self._version = "1.1"
+        self._templateId = ""
 
         #初始化
         self.readFile(path)
@@ -39,28 +45,34 @@ class StoryChicJson(object):
             if "contentMode" in items[i].keys():
                 self._level = items[i]
     
+    @property
     def getMediaContent(self):
         return self._media
 
+    @property
     def getBackgroundContent(self):
         return self._background
 
+    @property
     def getTextContent(self):
         return self._text
 
+    @property
     def getBlurContent(self):
         return self._blur
 
+    @property
     def getLevelContent(self):
         return self._level
     
-    def setMeidaContent(self, **dict):
+    
+    def setMeidaContent(self, *lis):
         pass
 
     def setBackgroundContent(self, **dict):
         pass
 
-    def setTextContent(self, **dict):
+    def setTextContent(self, *lis):
         pass
 
     def setBlurContent(self, **dict):
@@ -68,7 +80,12 @@ class StoryChicJson(object):
 
     def setLevelContent(self, **dict):
         pass
+    
 
+    
+
+class StoryVibeJson(JsonFile):
+    pass
 
 
 
