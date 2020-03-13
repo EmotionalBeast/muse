@@ -193,7 +193,7 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     
-
+    
     #设置控件的各种属性
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate

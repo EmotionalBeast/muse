@@ -2,14 +2,26 @@
 
 import json, sys, os, shutil
 
-class JsonFile(object):
-    pass
+class JsonFile(object):    
+    def __init__(self, path):
+        self._jsonStr = ""
+        self._dict = {}
+
+    def readFile(self, path):
+        with open(path, "r") as file:
+            self._jsonStr = file.read()
+            self._dict = json.loads(self._jsonStr, strict = False)
+    
+    def writeFile(self, path):
+        with open(path, "w") as file:
+            self._jsonStr = json.dumps(self._dict, sort_keys=True, indent=2, ensure_ascii=Flase)
+            file.write(self._jsonStr)
+
 
 class StoryChicJson(JsonFile):
     def __init__(self, path):
+        super(StoryChicJson, self).__init__(path)
         #定义属性
-        self._jsonStr = ""
-        self._dict = {}
         self._media = []
         self._background = {}
         self._text = []
@@ -22,14 +34,6 @@ class StoryChicJson(JsonFile):
         #初始化
         self.readFile(path)
         self.resolveJson()
-
-    def readFile(self, path):
-        with open(path, "r") as file:
-            self._jsonStr = file.read()
-            self._dict = json.loads(self._jsonStr, strict = False)
-
-    def writeFile(self, path):
-        pass
 
     def resolveJson(self):
         items = self._dict["elements"]

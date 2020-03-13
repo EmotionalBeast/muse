@@ -1607,9 +1607,6 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		else:
 			QMessageBox.information(self, "提示", "请选择MV素材组！")
 
-
-
-
 	def cleanFile(self, path):
 		files = os.listdir(path)
 		for file in files:
@@ -1621,7 +1618,6 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			else:
 				continue
 		os.rmdir(path)
-
 
 	def copyFile(self):
 		pathMaterial = self.path[:-2] + "material"

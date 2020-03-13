@@ -15,7 +15,8 @@ class BackgroundTable(BasicTable):
 		self.top_percentage = dict["constraints"]["top"]["percentage"]
 		self.bottom_constant = dict["constraints"]["bottom"]["constant"]
 		self.bottom_percentage = dict["constraints"]["bottom"]["percentage"]
-		
+	
+			
 
 class BlurTable(BasicTable):
 	def __init__(self, **dict):
@@ -34,6 +35,7 @@ class BlurTable(BasicTable):
 
 
 
+
 class LevelTable(BasicTable):
 	def __init__(self, **dict):
 		self.id = dict["id"]
@@ -49,5 +51,9 @@ class LevelTable(BasicTable):
 		self.width_percentage = dict["constraints"]["width"]["percentage"]
 
 
-
+class AnimateTable(BasicTable):
+    	def __init__(self, **dict):
+    		self.name = dict["name"]
+			self.resourceDirectory = dict["resourceDirectory"]
+			self.type = dict["type"]
 
