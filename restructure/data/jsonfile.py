@@ -14,7 +14,7 @@ class JsonFile(object):
     
     def writeFile(self, path):
         with open(path, "w") as file:
-            self._jsonStr = json.dumps(self._dict, sort_keys=True, indent=2, ensure_ascii=Flase)
+            self._jsonStr = json.dumps(self._dict, sort_keys=True, indent=2, ensure_ascii=False)
             file.write(self._jsonStr)
 
 
