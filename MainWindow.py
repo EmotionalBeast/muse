@@ -41,7 +41,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		with open("./resources/json/setting.json", "r") as lf:
 			jsonStr = lf.read()
 			dic = json.loads(jsonStr, strict = False)
-		self.path = dic["directory"] + "/" + text + "/in"
+		self.path = os.path.join(dic["directory"], text, "in")
 
 		for root,dirs,files in os.walk(self.path):
 			for dir in dirs:
@@ -1195,6 +1195,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					dic["templateId"] = int(temp[self.count:])
 					dic["version"] = "1.1"
 					dic["elements"] = []
+					# if self.cbox_4.isChecked():
+					# 	dic["background"] = "FFFFFF"
 					if self.cbox_3.isChecked():
 						dic['animation'] = self.ani_dic
 					for i in range(len(self.item)):
@@ -1596,7 +1598,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			if self.comBox_1.currentText() != "":
 				self.cleanFile(self.path)
 				shutil.copytree(pathMaterial, self.path)
-				generate = "./resources/jar/generate.jar"
+				generate =os.path.join(os.getcwd(),"resources", "jar", "generate.jar")
 				command = "java -jar " + generate + " -an " + self.path
 				os.system(command)
 				QMessageBox.information(self, "提示", "MV素材输出成功！")
@@ -1613,7 +1615,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			if self.comBox_1.currentText() != "":
 				self.cleanFile(self.path)
 				shutil.copytree(pathMaterial, self.path)
-				generate = "./resources/jar/generate.jar"
+				generate = os.path.join(os.getcwd(),"resources", "jar", "generate.jar")
 				command = "java -jar " + generate + " -an -vex " + self.path
 				os.system(command)
 				QMessageBox.information(self, "提示", "MV素材输出成功！")
