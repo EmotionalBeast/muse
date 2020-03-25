@@ -149,6 +149,8 @@ class Ui_MainWindow(object):
         self.actionEnCom.setObjectName("actionEnCom")
         self.actionMV = QtWidgets.QAction(QtGui.QIcon('./resources/images/MV.png'), '&MV', self)
         self.actionMV.setObjectName("actionMV")
+        self.actionBeatMV = QtWidgets.QAction(QtGui.QIcon("./resources/image/MV.png", '&MV', self))
+        self.actionMV.setObjectName("actionBeatMV")
         
 
         
@@ -160,6 +162,7 @@ class Ui_MainWindow(object):
         self.menuTools.addAction(self.actionPaint)
         self.menuTools.addAction(self.actionEnCom)
         self.menuTools.addAction(self.actionMV)
+        self.menuTools.addAction(self.actionBeatMV)
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuTools.menuAction())
 
@@ -174,6 +177,7 @@ class Ui_MainWindow(object):
         self.actionPaint.triggered.connect(self.openPaintWindow)
         self.actionEnCom.triggered.connect(self.EnCom)
         self.actionMV.triggered.connect(self.createMV)
+        self.actionBeatMV.triggered.connect(self.createBeatMV)
 
         #工具栏的功能定义
         self.new.triggered.connect(self.openFileWindow)
@@ -218,6 +222,8 @@ class Ui_MainWindow(object):
         self.actionQuit.setShortcut(_translate("MainWindow", "Ctrl+Q"))
         self.actionMV.setText(_translate("MainWindow", "MV素材"))
         self.actionMV.setShortcut(_translate("MainWindow", "Ctrl+M"))
+        self.actionBeatMV.setText(_translate("MainWindow", "BeatMV素材"))
+        self.actionBeatMV.setShortcut(_translate("MianWindow", "Ctrl+V"))
         self.actionPaint.setText(_translate("MainWindow", "展示"))
         self.actionPaint.setShortcut(_translate("MainWindow", "Ctrl+R"))
         self.actionEnCom.setText(_translate("MainWindow", "加密压缩"))
