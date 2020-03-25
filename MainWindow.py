@@ -48,7 +48,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				if self.path == root:
 					self.count = len(dir) * (-1)
 			for file in files:
-				if file == "template.json":
+				if file == "template.json" or file == "template_1_1.json":
 					name = file + "-" + root[self.count:]
 					list_3.append(name)
 					list_3.sort()
