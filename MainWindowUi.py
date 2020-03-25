@@ -149,7 +149,7 @@ class Ui_MainWindow(object):
         self.actionEnCom.setObjectName("actionEnCom")
         self.actionMV = QtWidgets.QAction(QtGui.QIcon('./resources/images/MV.png'), '&MV', self)
         self.actionMV.setObjectName("actionMV")
-        self.actionBeatMV = QtWidgets.QAction(QtGui.QIcon("./resources/image/MV.png", '&MV', self))
+        self.actionBeatMV = QtWidgets.QAction(QtGui.QIcon("./resources/images/MV.png"), '&BeatMV', self)
         self.actionMV.setObjectName("actionBeatMV")
         
 
