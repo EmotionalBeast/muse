@@ -39,6 +39,15 @@ if __name__ == "__main__":
         dic = json.loads(jsonStr, strict = False)
     path = os.path.join(Path(dic["directory"]), text, "in")
 
+    FONT_JSON_PATH = os.path.join(os.getcwd(), "resources", "json", "font.json")
+    SETTING_JSON_PATH = os.path.join(os.getcwd(), "resources", "json", "setting.json")
+    ENCRYPT_JAR_PATH = os.path.join(os.getcwd(), "resources", "jar", "encrypt.jar")
+    GENERATE_JAR_PATH = os.path.join(os.getcwd(), "resources", "jar", "generate.jar")
+    print(FONT_JSON_PATH)
+    print(SETTING_JSON_PATH)
+    print(ENCRYPT_JAR_PATH)
+    print(GENERATE_JAR_PATH)
+
     print(path)
     # unzip(path)
     # encrypt()

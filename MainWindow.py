@@ -1548,8 +1548,10 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		for root,dirs,files in os.walk(pathOut):
 			for dir in dirs:
 				if root == pathOut:
-					pathNeed = os.path.join(pathOut, dir)
-					targetFile = os.path.join(pathOrigin, dir, ".7z")
+					pathNeed = pathOut + "/" + dir + "/"
+					targetFile = pathOrigin + "/" + dir + ".7z"
+					print("pathNeed:", pathNeed)
+					print("targetFile:", targetFile)
 					command = "7z a " + targetFile + " " + pathNeed
 					os.system(command)
 		QMessageBox.information(self, "提示", "已压缩到origin文件夹！")
