@@ -90,9 +90,14 @@ class Ui_MainWindow(object):
         self.cbox_2.setObjectName("cbox_2")
 
         self.cbox_3 = QtWidgets.QCheckBox(self.centralwidget)
-        self.cbox_3.setGeometry(QtCore.QRect(700,50,100,30))
+        self.cbox_3.setGeometry(QtCore.QRect(700,50,80,30))
         self.cbox_3.setText("dynamic")
         self.cbox_3.setObjectName("cbox_3")
+
+        self.cbox_4 = QtWidgets.QCheckBox(self.centralwidget)
+        self.cbox_4.setGeometry(QtCore.QRect(790,50,80,30))
+        self.cbox_4.setText("bgColor")
+        self.cbox_4.setObjectName("cbox_3")
 
 
 

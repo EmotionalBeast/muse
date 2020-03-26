@@ -876,6 +876,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		else:
 			if "animation" in self.dic.keys():
 				self.cbox_3.setChecked(True)
+			if "background" in self.dic.keys():
+				self.cbox_4.setChecked(True)
 			item = self.dic["elements"]
 			for i in range(len(item)):
 				if "blur" in item[i].keys():
@@ -1200,8 +1202,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					dic["templateId"] = int(temp[self.count:])
 					dic["version"] = "1.1"
 					dic["elements"] = []
-					# if self.cbox_4.isChecked():
-					# 	dic["background"] = "FFFFFF"
+					if self.cbox_4.isChecked():
+						dic["background"] = "FFFFFF"
 					if self.cbox_3.isChecked():
 						dic['animation'] = self.ani_dic
 					for i in range(len(self.item)):
