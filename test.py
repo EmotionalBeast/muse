@@ -1,5 +1,6 @@
 #coding: utf-8
-import os, subprocess
+import os, subprocess,json
+from pathlib import Path
 # def unzip(path):
 #     for root,dirs,files in os.walk(path):
 #         for file in files:
@@ -31,7 +32,12 @@ import os, subprocess
                         
 
 if __name__ == "__main__":
-    path = os.path.join(os.getcwd(), "in", "out")
+    # path = os.path.join(os.getcwd(), "in", "out")
+    text = "beat"
+    with open("./resources/json/setting.json", "r") as lf:
+        jsonStr = lf.read()
+        dic = json.loads(jsonStr, strict = False)
+    path = os.path.join(Path(dic["directory"]), text, "in")
 
     print(path)
     # unzip(path)

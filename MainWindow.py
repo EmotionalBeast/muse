@@ -15,7 +15,12 @@ from MainWindowUi import Ui_MainWindow
 from PaintWindow import MyPaintWindow
 from DirWindow import MyDirWindow
 from FileWindow import MyFileWindow
+from pathlib import Path
 
+FONT_JSON_PATH = os.path.join(os.getcwd(), "resources", "json", "font.json")
+SETTING_JSON_PATH = os.path.join(os.getcwd(), "resources", "json", "setting.json")
+ENCRYPT_JAR_PATH = os.path.join(os.getcwd(), "resources", "jar", "encrypt.jar")
+GENERATE_JAR_PATH = os.path.join(os.getcwd(), "resources", "jar", "generate.jar")
 
 class MyMainWindow(QMainWindow,Ui_MainWindow):
 	#初始化
@@ -26,7 +31,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		self.myDirWindow = MyDirWindow()
 		self.index = 0
 
-		with open("./resources/json/font.json", 'r') as lf:
+		with open(FONT_JSON_PATH, 'r') as lf:
 			jsonStr = lf.read()
 			self.dict1 = json.loads(jsonStr, strict = False)
 		#反转字典，赋值给新的字典
@@ -38,10 +43,10 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		if self.comBox_2.count() != 0:
 			self.comBox_2.clear()
 		list_3 = []
-		with open("./resources/json/setting.json", "r") as lf:
+		with open(SETTING_JSON_PATH, "r") as lf:
 			jsonStr = lf.read()
 			dic = json.loads(jsonStr, strict = False)
-		self.path = os.path.join(dic["directory"], text, "in")
+		self.path = os.path.join(Path(dic["directory"]), text, "in")
 
 		for root,dirs,files in os.walk(self.path):
 			for dir in dirs:
@@ -57,7 +62,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		self.comBox_2.setCurrentIndex(-1)
 
 	def itemList(self):
-		with open("./resources/json/font.json", "r") as lf:
+		with open(FONT_JSON_PATH, "r") as lf:
 			jsonStr = lf.read()
 			dic = json.loads(jsonStr,strict = False)
 			list_1 = dic.keys()
@@ -65,7 +70,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 
 	def dirList(self):
 		list_2 = []
-		with open("./resources/json/setting.json", "r") as lf:
+		with open(SETTING_JSON_PATH, "r") as lf:
 			jsonStr = lf.read()
 			dic = json.loads(jsonStr, strict = False)
 		path = dic["directory"]
@@ -840,7 +845,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 	def readJson(self):
 		temp_1 = self.comBox_1.currentText()
 		temp_2 = self.comBox_2.currentText()
-		with open("./resources/json/setting.json", "r") as lf:
+		with open(SETTING_JSON_PATH, "r") as lf:
 			jsonStr = lf.read()
 			dic = json.loads(jsonStr, strict = False)
 		path = dic["directory"] + "/" + temp_1 + "/in/" + temp_2[self.count:] + "/template.json" 
@@ -1532,7 +1537,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 	def encryption(self):
 		pathIn = self.path
 		pathOut = self.path[:-2] + "out"
-		pathJar = "./resources/jar/encrypt.jar" 
+		pathJar = ENCRYPT_JAR_PATH
 		command = "java -jar " + pathJar + " " + pathIn + " " + pathOut
 		os.system(command)
 		QMessageBox.information(self,"提示","加密到out文件夹成功！")
@@ -1543,8 +1548,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		for root,dirs,files in os.walk(pathOut):
 			for dir in dirs:
 				if root == pathOut:
-					pathNeed = pathOut + "/" + dir + "/"
-					targetFile = pathOrigin + "/" + dir + ".7z"
+					pathNeed = os.path.join(pathOut, dir)
+					targetFile = os.path.join(pathOrigin, dir, ".7z")
 					command = "7z a " + targetFile + " " + pathNeed
 					os.system(command)
 		QMessageBox.information(self, "提示", "已压缩到origin文件夹！")
@@ -1560,7 +1565,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 
 	def openOrigin(self):
 		if self.comBox_1.currentText() != "":
-			pathOrigin ="file:///" + self.path[:-2] + "origin/"
+			pathOrigin ="file:///" + self.path[:-2] + "origin"
 			QDesktopServices.openUrl(QUrl(pathOrigin))
 		else:
 			QMessageBox.information(self, "提示", "请选择素材组！")

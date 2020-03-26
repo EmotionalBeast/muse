@@ -1,9 +1,10 @@
 # coding: utf-8
-import sys, json
+import sys, json, os
 from PyQt5.QtWidgets import QWidget, QApplication, QFileDialog, QMessageBox, QGraphicsScene, QLabel, QGraphicsItem
 from PyQt5.QtGui import QPixmap, QImage
 from PyQt5.QtCore import QRect, Qt
 from DirWindowUi import Ui_DirWindow
+from pathlib import Path
 
 
 class MyDirWindow(QWidget, Ui_DirWindow):
@@ -12,7 +13,7 @@ class MyDirWindow(QWidget, Ui_DirWindow):
 		self.setupUi(self)
 
 	def chooseDir(self):
-		directory = QFileDialog.getExistingDirectory(self, "选择工作路径", "./")
+		directory = QFileDialog.getExistingDirectory(self, "选择工作路径", os.getcwd())
 		self.lineEdit.setText(directory)
 
 	def comfirmDir(self):
