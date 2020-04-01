@@ -692,6 +692,107 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("MainWindow", "Text"))
 
 		self.tableWidget_4.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+	
+	def initNewDynamicTextTable(self):
+    	#文字的json参数列表
+		self.tab_4 = QtWidgets.QWidget()
+		self.tab_4.setObjectName("tab_4")
+		self.tableWidget_4 = QtWidgets.QTableWidget(self.tab_4)
+		self.tableWidget_4.setColumnCount(20)
+		self.tableWidget_4.setGeometry(QtCore.QRect(0, 0, 1000, 450))
+		self.tableWidget_4.setObjectName("tableWidget_4")
+
+		item = QtWidgets.QTableWidgetItem()
+		self.tableWidget_4.setHorizontalHeaderItem(0, item)
+		item = QtWidgets.QTableWidgetItem()
+		self.tableWidget_4.setHorizontalHeaderItem(1, item)
+		item = QtWidgets.QTableWidgetItem()
+		self.tableWidget_4.setHorizontalHeaderItem(2, item)
+		item = QtWidgets.QTableWidgetItem()
+		self.tableWidget_4.setHorizontalHeaderItem(3, item)
+		item = QtWidgets.QTableWidgetItem()
+		self.tableWidget_4.setHorizontalHeaderItem(4, item)
+		item = QtWidgets.QTableWidgetItem()
+		self.tableWidget_4.setHorizontalHeaderItem(5, item)
+		item = QtWidgets.QTableWidgetItem()
+		self.tableWidget_4.setHorizontalHeaderItem(6, item)
+		item = QtWidgets.QTableWidgetItem()
+		self.tableWidget_4.setHorizontalHeaderItem(7, item)
+		item = QtWidgets.QTableWidgetItem()
+		self.tableWidget_4.setHorizontalHeaderItem(8, item)
+		item = QtWidgets.QTableWidgetItem()
+		self.tableWidget_4.setHorizontalHeaderItem(9, item)
+		item = QtWidgets.QTableWidgetItem()
+		self.tableWidget_4.setHorizontalHeaderItem(10, item)
+		item = QtWidgets.QTableWidgetItem()
+		self.tableWidget_4.setHorizontalHeaderItem(11, item)
+		item = QtWidgets.QTableWidgetItem()
+		self.tableWidget_4.setHorizontalHeaderItem(12, item)
+		item = QtWidgets.QTableWidgetItem()
+		self.tableWidget_4.setHorizontalHeaderItem(13, item)
+		item = QtWidgets.QTableWidgetItem()
+		self.tableWidget_4.setHorizontalHeaderItem(14,item)
+		item = QtWidgets.QTableWidgetItem()
+		self.tableWidget_4.setHorizontalHeaderItem(15,item)
+		item = QtWidgets.QTableWidgetItem()
+		self.tableWidget_4.setHorizontalHeaderItem(16,item)
+		item = QtWidgets.QTableWidgetItem()
+		self.tableWidget_4.setHorizontalHeaderItem(17,item)
+		item = QtWidgets.QTableWidgetItem()
+		self.tableWidget_4.setHorizontalHeaderItem(18,item)
+		item = QtWidgets.QTableWidgetItem()
+		self.tableWidget_4.setHorizontalHeaderItem(19,item)
+		self.tabWidget.addTab(self.tab_4, "")
+		#设置列宽
+		self.tableWidget_4.setColumnWidth(3,300)
+		self.tableWidget_4.setColumnWidth(7,600)
+		self.tableWidget_4.setColumnWidth(20,150)
+		_translate = QtCore.QCoreApplication.translate
+		#文字表格的顶栏字段
+		item = self.tableWidget_4.horizontalHeaderItem(0)
+		item.setText(_translate("MainWindow", "id"))
+		item = self.tableWidget_4.horizontalHeaderItem(1)
+		item.setText(_translate("MainWindow", "type"))
+		item = self.tableWidget_4.horizontalHeaderItem(2)
+		item.setText(_translate("MainWindow", "textId"))
+		item = self.tableWidget_4.horizontalHeaderItem(3)
+		item.setText(_translate("MainWindow", "fontName"))
+		item = self.tableWidget_4.horizontalHeaderItem(4)
+		item.setText(_translate("MainWindow", "fontSize"))
+		item = self.tableWidget_4.horizontalHeaderItem(5)
+		item.setText(_translate("MainWindow", "canvasWidth"))
+		item = self.tableWidget_4.horizontalHeaderItem(6)
+		item.setText(_translate("MainWindow", "textColor"))
+		item = self.tableWidget_4.horizontalHeaderItem(7)
+		item.setText(_translate("MainWindow", "placeHolder"))
+		item = self.tableWidget_4.horizontalHeaderItem(8)
+		item.setText(_translate("MainWindow", "textAlignment"))
+		item = self.tableWidget_4.horizontalHeaderItem(9)
+		item.setText(_translate("MainWindow", "left_percentage"))
+		item = self.tableWidget_4.horizontalHeaderItem(10)
+		item.setText(_translate("MainWindow", "left_constant"))
+		item = self.tableWidget_4.horizontalHeaderItem(11)
+		item.setText(_translate("MainWindow", "right_percentage"))
+		item = self.tableWidget_4.horizontalHeaderItem(12)
+		item.setText(_translate("MainWindow", "right_constant"))
+		item = self.tableWidget_4.horizontalHeaderItem(13)
+		item.setText(_translate("MainWindow", "top_percentage"))
+		item = self.tableWidget_4.horizontalHeaderItem(14)
+		item.setText(_translate("MainWindow", "top_constant"))
+		item = self.tableWidget_4.horizontalHeaderItem(15)
+		item.setText(_translate("MainWindow", "sourcePath"))
+		item = self.tableWidget_4.horizontalHeaderItem(16)
+		item.setText(_translate("MainWindow", "textSpacing"))
+		item = self.tableWidget_4.horizontalHeaderItem(17)
+		item.setText(_translate("MainWindow", "lineSpacing"))
+		item = self.tableWidget_4.horizontalHeaderItem(18)
+		item.setText(_translate("MainWindow", "angle"))
+		item = self.tableWidget_4.horizontalHeaderItem(19)
+		item.setText(_translate("MainWindow", "startFrame"))
+
+		self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("MainWindow", "Text"))
+
+		self.tableWidget_4.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
 
 	def initLevelTable(self):
 		#分层图片的参数列表
@@ -859,6 +960,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				return 0
 
 	def resolveJson(self):
+		#reset
 		self.blur_list = []
 		self.cell_list = []
 		self.bg_list = []
@@ -868,6 +970,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		self.cbox_1.setChecked(False)
 		self.cbox_2.setChecked(False)
 		self.cbox_3.setChecked(False)
+		self.cbox_4.setChecked(False)
+		#value
 		self.dic = self.readJson()
 		if self.dic == 0:
 			self.spinBox_1.setValue(0)
@@ -897,7 +1001,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			self.spinBox_2.setValue(len(self.bg_list))
 			self.spinBox_3.setValue(len(self.text_list))
 
-	def initDate(self):
+	def initDate(self, content):
 		self.resolveJson()
 		self.initTable()
 		#赋值blur表

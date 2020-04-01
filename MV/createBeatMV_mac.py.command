@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- encoding: utf-8 -*-
 '''
 @File    :   mv_on_mac.py
@@ -20,10 +20,12 @@ PATH_IN = os.path.join(os.getcwd(), "in")
 PATH_OUT = os.path.join(os.getcwd(), "out")
 PATH_ORIGIN = os.path.join(os.getcwd(), "origin")
 
+
 def encryption(path):
     jarPath = os.path.join(path, "encrypt.jar")
     command = "java -jar " + jarPath + " " + PATH_IN + " " + PATH_OUT
-    if info := subprocess.check_call(comand, shell=True) == 0:
+    info = subprocess.check_call(comand, shell=True)
+    if info == 0:
         print("encrypt success!")
     else:
         if os.path.exists(PATH_IN) and os.path.exists(PATH_OUT):
@@ -36,7 +38,8 @@ def encryption(path):
 def createBeatMV(path):
     jarPath = os.path.join(path, "generate.jar")
     command = "java -jar " + jarPath + " -an -vex " + PATH_IN
-    if info := subprocess.check_call(command, shell=True) == 0:
+    info = subprocess.check_call(command, shell=True)
+    if  info == 0:
         print("Beat MV create success!")
     else:
         if os.path.exists(PATH_IN):
@@ -83,11 +86,18 @@ def cleanFile(path):
 
 if __name__ == "__main__":
     path = getcwd()
+    if os.path.exists(PATH_IN):
+        cleanFile(PATH_IN)
+        os.mkdir(PATH_IN)
+    else:
+        os.mkdir(PATH_IN)
+    if os.path.exists(PATH_OUT):
+        cleanFile(PATH_OUT)
+        os.mkdir(PATH_OUT)
+    else:
+        os.mkdir(PATH_OUT)
     shutil.copytree(PATH_IN, PATH_MATERIAL)
     createBeatMV(path)
     encryption(path)
     compress(path)
-    cleanFile(PATH_IN)
-    os.mkdir(PATH_IN)
     cleanFile(PATH_OUT)
-    os.mkdir(PATH_OUT)

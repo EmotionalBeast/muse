@@ -49,7 +49,7 @@ class Ui_MainWindow(object):
         self.label_2.setObjectName("label_2")
         self.comBox_2 = QtWidgets.QComboBox(self.centralwidget)
         self.comBox_2.setGeometry(QtCore.QRect(645, 10, 300, 30))
-        self.comBox_2.activated.connect(lambda: self.initDate())
+        self.comBox_2.activated.connect(lambda: self.initDate(self.comBox_2.currentText()))
         self.comBox_2.setObjectName("comBox_2")
 
         #选择素材的组件部分:blur,cell,background,text,picturelevel(控制图层）
@@ -91,13 +91,18 @@ class Ui_MainWindow(object):
 
         self.cbox_3 = QtWidgets.QCheckBox(self.centralwidget)
         self.cbox_3.setGeometry(QtCore.QRect(700,50,80,30))
-        self.cbox_3.setText("dynamic")
+        self.cbox_3.setText("animation_old")
         self.cbox_3.setObjectName("cbox_3")
 
         self.cbox_4 = QtWidgets.QCheckBox(self.centralwidget)
         self.cbox_4.setGeometry(QtCore.QRect(790,50,80,30))
         self.cbox_4.setText("bgColor")
         self.cbox_4.setObjectName("cbox_3")
+
+        # self.cbox_5 = QtWidgets.QCheckBox(self.centralwidget)
+        # self.cbox_5.setGeometry(QtCore.QRect(790,50,80,30))
+        # self.cbox_5.setText("animation_new")
+        # self.cbox_4.setObjectName("cbox_3")
 
 
 
