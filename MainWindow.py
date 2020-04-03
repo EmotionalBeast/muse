@@ -164,7 +164,11 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		with open(SETTING_JSON_PATH, "r") as lf:
 			jsonStr = lf.read()
 			dic = json.loads(jsonStr, strict = False)
-		path = dic["directory"] + "/" + temp_1 + "/in/" + temp_2[self.count:] + "/template.json" 
+		if temp_2[:13] == "template.json":
+			fileName = temp_2[:13]
+		else:
+			fileName = temp_2[:17] #template_1_1.json
+		path = os.path.join(dic["directory"], temp_1, "in", temp_2[self.count:], fileName)
 		with open(path, "r") as lf:
 			size = os.path.getsize(path)
 			if size != 0:
@@ -270,7 +274,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 						self.tableWidget_2.setItem(i,13,QTableWidgetItem(str(self.cell_list[i]['rotation'])))
 					else:
 						self.tableWidget_2.setItem(i, 13, QTableWidgetItem("0"))
-			else:
+			elif self.cbox_3.isChecked() == True and self.cbox_6.isChecked() == False: 
 				self.tableWidget_2.setRowCount(self.spinBox_1.value())
 				for i in range(len(self.cell_list)):
 					self.tableWidget_2.setItem(i,0,QTableWidgetItem(self.cell_list[i]['id']))
@@ -288,6 +292,26 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					self.tableWidget_2.setItem(i,12,QTableWidgetItem(str(self.cell_list[i]['constraints']['top']['constant'])))
 					self.tableWidget_2.setItem(i,13,QTableWidgetItem(str(self.cell_list[i]['constraints']['height']['percentage'])))
 					self.tableWidget_2.setItem(i,14,QTableWidgetItem(str(self.cell_list[i]['constraints']['height']['constant'])))
+			elif self.cbox_3.isChecked() == True and self.cbox_6.isChecked() == True:
+				self.tableWidget_2.setRowCount(self.spinBox_1.value())
+				for i in range(len(self.cell_list)):
+					self.tableWidget_2.setItem(i,0,QTableWidgetItem(self.cell_list[i]['id']))
+					self.tableWidget_2.setItem(i,1,QTableWidgetItem(self.cell_list[i]['type']))
+					self.tableWidget_2.setItem(i,2,QTableWidgetItem(self.cell_list[i]['imageId']))
+					self.tableWidget_2.setItem(i,3,QTableWidgetItem(self.cell_list[i]['mediaId']))
+					self.tableWidget_2.setItem(i,4,QTableWidgetItem(self.cell_list[i]['keyPath']))
+					self.tableWidget_2.setItem(i,5,QTableWidgetItem(str(self.cell_list[i]['contentSize'][0])))
+					self.tableWidget_2.setItem(i,6,QTableWidgetItem(str(self.cell_list[i]['contentSize'][1])))
+					self.tableWidget_2.setItem(i,7,QTableWidgetItem(str(self.cell_list[i]['constraints']['left']['percentage'])))
+					self.tableWidget_2.setItem(i,8,QTableWidgetItem(str(self.cell_list[i]['constraints']['left']['constant'])))
+					self.tableWidget_2.setItem(i,9,QTableWidgetItem(str(self.cell_list[i]['constraints']['right']['percentage'])))
+					self.tableWidget_2.setItem(i,10,QTableWidgetItem(str(self.cell_list[i]['constraints']['right']['constant'])))
+					self.tableWidget_2.setItem(i,11,QTableWidgetItem(str(self.cell_list[i]['constraints']['top']['percentage'])))
+					self.tableWidget_2.setItem(i,12,QTableWidgetItem(str(self.cell_list[i]['constraints']['top']['constant'])))
+					self.tableWidget_2.setItem(i,13,QTableWidgetItem(str(self.cell_list[i]['constraints']['height']['percentage'])))
+					self.tableWidget_2.setItem(i,14,QTableWidgetItem(str(self.cell_list[i]['constraints']['height']['constant'])))
+					self.tableWidget_2.setItem(i,15,QTableWidgetItem(str(self.cell_list[i]['ignore'])))
+    				
 
 		#赋值bg表
 		if self.spinBox_2.value() != 0:
@@ -364,7 +388,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					self.tableWidget_4.setItem(i,20,QTableWidgetItem(self.text_list[i]['animation']['resourceDirectory']))
 			elif self.cbox_3.isChecked() == True and self.cbox_5.isChecked() == True:
 				self.tableWidget_4.setRowCount(self.spinBox_3.value())
-				self.initCombox()
+				self.initComBox()
 				for i in range(len(self.text_list)):
 					self.tableWidget_4.setItem(i,0,QTableWidgetItem(self.text_list[i]['id']))
 					self.tableWidget_4.setItem(i,1,QTableWidgetItem(self.text_list[i]['type']))
@@ -382,9 +406,9 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					self.tableWidget_4.setItem(i,13,QTableWidgetItem(str(self.text_list[i]['constraints']['top']['percentage'])))
 					self.tableWidget_4.setItem(i,14,QTableWidgetItem(str(self.text_list[i]['constraints']['top']['constant'])))
 					self.tableWidget_4.setItem(i,15,QTableWidgetItem(self.text_list[i]['sourcePath']))
-					self.tableWidget_4.setItem(i,16,QTableWidgetItem(str(self.text_list[i]['textSpacing']))
+					self.tableWidget_4.setItem(i,16,QTableWidgetItem(str(self.text_list[i]['textSpacing'])))
 					self.tableWidget_4.setItem(i,17,QTableWidgetItem(str(self.text_list[i]['lineSpacing'])))
-					self.tableWidget_4.setItem(i,18,QTableWidgetItem(self.text_list[i]['angle']))
+					self.tableWidget_4.setItem(i,18,QTableWidgetItem(str(self.text_list[i]['angle'])))
 					self.tableWidget_4.setItem(i,19,QTableWidgetItem(str(self.text_list[i]['startFrame']))) 					
 
 		#赋值level表
@@ -460,7 +484,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_2.setItem(i,12,QTableWidgetItem("0"))
 				self.tableWidget_2.setItem(i,13,QTableWidgetItem("0"))
 
-		else:
+		elif self.cbox_3.isChecked() == True and self.cbox_6.isChecked() == False:
 			self.tableWidget_2.setRowCount(count_2)
 			for i in range(count_2):
 				self.tableWidget_2.setItem(i,0,QTableWidgetItem(str(count_1+i)))
@@ -470,13 +494,27 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_2.setItem(i,10,QTableWidgetItem("0"))
 				self.tableWidget_2.setItem(i,12,QTableWidgetItem("0"))
 				self.tableWidget_2.setItem(i,14,QTableWidgetItem("0"))
+		elif self.cbox_3.isChecked() == True and self.cbox_6.isChecked() == True:
+			self.tableWidget_2.setRowCount(count_2)
+			for i in range(count_2):
+				self.tableWidget_2.setItem(i,0,QTableWidgetItem(str(count_1+i)))
+				self.tableWidget_2.setItem(i,1,QTableWidgetItem("media"))
+				self.tableWidget_2.setItem(i,3,QTableWidgetItem(str(i)))
+				self.tableWidget_2.setItem(i,8,QTableWidgetItem("0"))
+				self.tableWidget_2.setItem(i,10,QTableWidgetItem("0"))
+				self.tableWidget_2.setItem(i,12,QTableWidgetItem("0"))
+				self.tableWidget_2.setItem(i,14,QTableWidgetItem("0"))
+
 		#初始化bg表
 		if count_3 != 0:
 			self.tableWidget_3.setRowCount(count_3)
 			for i in range(count_3):
 				self.tableWidget_3.setItem(i,0,QTableWidgetItem(str(count_1+count_2+i)))
 				self.tableWidget_3.setItem(i,1,QTableWidgetItem("image"))
-				self.tableWidget_3.setItem(i,2,QTableWidgetItem("template_widget_"+name[self.count:]+".png"))
+				if self.comBox_2.currentText()[:13] == "template.json":
+					self.tableWidget_3.setItem(i,2,QTableWidgetItem("template_widget_"+name[self.count:]+".png"))
+				else:
+					self.tableWidget_3.setItem(i,2,QTableWidgetItem("template_widget_"+name[self.count:]+"_1_1.png"))
 				self.tableWidget_3.setItem(i,3,QTableWidgetItem("0"))
 				self.tableWidget_3.setItem(i,4,QTableWidgetItem("0"))
 				self.tableWidget_3.setItem(i,5,QTableWidgetItem("0"))
@@ -519,7 +557,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			elif self.cbox_3.isChecked() == True and self.cbox_5.isChecked() == True:
 				self.tableWidget_4.setRowCount(count_4)
 				for i in range(count_4):
-    				self.tableWidget_4.setItem(i,0,QTableWidgetItem(str(count_1+count_2+count_3+i)))
+					self.tableWidget_4.setItem(i,0,QTableWidgetItem(str(count_1+count_2+count_3+i)))
 					self.tableWidget_4.setItem(i,1,QTableWidgetItem("animation_text"))
 					self.tableWidget_4.setItem(i,2,QTableWidgetItem(str(i)))
 					self.tableWidget_4.setItem(i,5,QTableWidgetItem("375"))
@@ -574,7 +612,10 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					for i in range(len(self.item)):
 						dic["elements"].append(self.item[i])
 					name = self.comBox_2.currentText()
-					path = self.path + "/" + name[self.count:] + "/" + name[:13]			
+					if name[13:] == "template.json":
+						path = os.path.join(self.path, name[self.count:], name[:13])
+					if name[17:] == "template_1_1.json":
+						path = os.path.join(self.path, name[self.count:], name[:17])		
 					with open(path, "w") as df:
 						jsonStr = json.dumps(dic, sort_keys=True, indent=2, ensure_ascii=False)
 						df.write(jsonStr)
@@ -708,7 +749,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 																}
 														}
 					self.item.append(cell_dic)
-			else:
+
+			elif self.cbox_3.isChecked() == True and self.cbox_6 == False:
 				for i in range(self.spinBox_1.value()):
 					cell_dic = {}
 					cell_dic["contentSize"] = []
@@ -745,6 +787,46 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 																}
 														}
 					self.item.append(cell_dic)
+			
+			elif self.cbox_3.isChecked() == True and self.cbox_6.isChecked() == True:
+				for i in range(self.spinBox_1.value()):
+					cell_dic = {}
+					cell_dic["contentSize"] = []
+					cell_dic["id"] = self.tableWidget_2.item(i, 0).text()
+					cell_dic["type"] = self.tableWidget_2.item(i, 1).text()
+					cell_dic["imageId"] = self.tableWidget_2.item(i, 2).text()
+					cell_dic["mediaId"] = self.tableWidget_2.item(i, 3).text()
+					cell_dic["keyPath"] = self.tableWidget_2.item(i,4).text()
+					cell_dic["contentSize"].append(int(self.tableWidget_2.item(i,5).text()))
+					cell_dic["contentSize"].append(int(self.tableWidget_2.item(i,6).text()))
+					item_1 = self.tableWidget_2.item(i,7).text()
+					item_2 = self.tableWidget_2.item(i,8).text()
+					item_3 = self.tableWidget_2.item(i,9).text()
+					item_4 = self.tableWidget_2.item(i,10).text()
+					item_5 = self.tableWidget_2.item(i,11).text()
+					item_6 = self.tableWidget_2.item(i,12).text()
+					item_7 = self.tableWidget_2.item(i,13).text()
+					item_8 = self.tableWidget_2.item(i,14).text()
+					cell_dic["constraints"] = {"left":{
+																"percentage": float(item_1),
+																"constant": float(item_2)
+																},
+														"right":{
+																"percentage": float(item_3),
+																"constant": float(item_4)
+																},
+														"top":{
+																"percentage": float(item_5),
+																"constant": float(item_6)
+																},
+														"height":{
+																"percentage": float(item_7),
+																"constant": float(item_8)
+																}
+														}
+					cell_dic["ignore"].append(int(self.tableWidget_2.item(i, 15).text()))
+					self.item.append(cell_dic)
+    				
 				
 
 		if self.spinBox_2.value() != 0:
@@ -818,7 +900,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 													 }
 					self.item.append(text_dic)
 
-			else:
+			elif self.cbox_3.isChecked() == True and self.cbox_5.isChecked() == False:
 				for i in range(self.spinBox_3.value()):
 					text_dic = {}
 					text_dic['contentSize'] = []
@@ -858,6 +940,46 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					item_9 = self.tableWidget_4.item(i,20).text()
 					text_dic['animation'] = {'name': item_7, 'type': int(item_8), 'resourceDirectory': item_9}
 					self.item.append(text_dic)
+			
+			elif self.cbox_3.isChecked() == True and self.cbox_6.isChecked() == True:
+				for i in range(self.spinBox_3.value()):
+					text_dic = {}
+					text_dic['contentSize'] = []
+					text_dic['id'] = self.tableWidget_4.item(i, 0).text()
+					text_dic['type'] = self.tableWidget_4.item(i, 1).text()
+					text_dic['textId'] = self.tableWidget_4.item(i, 2).text()
+					text_dic['fontName'] = self.dict1[self.tableWidget_4.cellWidget(i, 3).currentText()]
+					text_dic['fontSize'] = int(self.tableWidget_4.item(i, 4).text())
+					text_dic['canvasWidth'] = int(self.tableWidget_4.item(i, 5).text())
+					text_dic['textColor'] = self.tableWidget_4.item(i, 6).text()
+					text_dic['placeHolder'] = self.tableWidget_4.item(i, 7).text()
+					text_dic['textAlignment'] = self.tableWidget_4.item(i, 8).text()
+					item_1 = self.tableWidget_4.item(i,9).text()
+					item_2 = self.tableWidget_4.item(i,10).text()
+					item_3 = self.tableWidget_4.item(i,11).text()
+					item_4 = self.tableWidget_4.item(i,12).text()
+					item_5 = self.tableWidget_4.item(i,13).text()
+					item_6 = self.tableWidget_4.item(i,14).text()
+					text_dic['constraints'] = {"left":{
+													 "percentage": float(item_1),
+													 "constant": float(item_2)
+													 },
+													 "right":{
+													  "percentage": float(item_3),
+													  "constant": float(item_4)
+													  },
+													  "top":{
+													   "percentage": float(item_5),
+													   "constant": float(item_6)
+													  }
+													 }
+					text_dic["sourcePath"] = self.tableWidget_4.item(i,15).text()
+					text_dic["textSpacing"].append(float(self.tableWidget_4.item(i,16).text()))
+					text_dic["lineSpacing"].append(float(self.tableWidget_4.item(i,17).text()))
+					text_dic["angle"].append(float(self.tableWidget_4.item(i,18).text()))
+					text_dic["startFrame"].append(float(self.tableWidget_4.item(i,19).text()))
+					self.item.append(text_dic)
+    			 
 
 		if self.cbox_2.isChecked() == True:
 			for i in range(1):
@@ -918,8 +1040,9 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		for root,dirs,files in os.walk(pathOut):
 			for dir in dirs:
 				if root == pathOut:
-					pathNeed = pathOut + "/" + dir + "/"
-					targetFile = pathOrigin + "/" + dir + ".7z"
+					pathNeed = os.path.join(pathOut, dir)
+					tmp = dir + ".7z"
+					targetFile = os.path.join(pathOrigin, tmp)
 					print("pathNeed:", pathNeed)
 					print("targetFile:", targetFile)
 					command = "7z a " + targetFile + " " + pathNeed
@@ -951,19 +1074,20 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			tempStr = self.tableWidget_2.item(i, 2).text()
 			img.append("img_" + tempStr[-1:] + ".png")
 
-		for root,dirs,files in os.walk(self.path + "/" + tempPath[1]):
+		for root,dirs,files in os.walk(os.path.join(self.path, tempPath[1])):
 			for dir in dirs:
 				if root[-5:-1] != 'text' and dir == "images":
-					imgPath.append(root + "/" + dir)
+					imgPath.append(os.path.join(root, dir))
 
 		if len(imgPath) != 0:
 			for path in imgPath:
 				for root,dirs,files in os.walk(path):
 					for file in files:
 						if file[-3:] == "png" and (file in img):
-							tempPathIn = root + "/" + file
+							tempPathIn = os.path.join(root, file)
 							str1 = file.rsplit(".",1)
-							tempPathOut = root + "/" + str1[0] + ".jpg"
+							str2 = str1[0] + ".jpg"
+							tempPathOut = os.path.join(root, str2)
 							im = Image.open(tempPathIn)
 							im = im.convert("RGB")
 							im.save(tempPathOut)
@@ -1024,6 +1148,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 	def copyFile(self):
 		pathMaterial = self.path[:-2] + "material"
 		shutil.copytree(self.path, pathMaterial)
+
 
 
 

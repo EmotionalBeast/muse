@@ -527,6 +527,91 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "Cell"))
 
         self.tableWidget_2.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+    
+    def initIgnoreCellTable(self):
+        self.tab_2 = QtWidgets.QWidget()
+        self.tab_2.setObjectName("tab_2")
+        self.tableWidget_2 = QtWidgets.QTableWidget(self.tab_2)
+        self.tableWidget_2.setColumnCount(16)
+        self.tableWidget_2.setGeometry(QtCore.QRect(0, 0, 1000, 450))
+        self.tableWidget_2.setObjectName("tableWidget_2")
+
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_2.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_2.setHorizontalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_2.setHorizontalHeaderItem(2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_2.setHorizontalHeaderItem(3, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_2.setHorizontalHeaderItem(4, item)
+
+
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_2.setHorizontalHeaderItem(5, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_2.setHorizontalHeaderItem(6, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_2.setHorizontalHeaderItem(7, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_2.setHorizontalHeaderItem(8, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_2.setHorizontalHeaderItem(9, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_2.setHorizontalHeaderItem(10, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_2.setHorizontalHeaderItem(11, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_2.setHorizontalHeaderItem(12, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_2.setHorizontalHeaderItem(13, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_2.setHorizontalHeaderItem(14, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_2.setHorizontalHeaderItem(15, item)
+        self.tabWidget.addTab(self.tab_2, "")
+        #设置列宽
+        self.tableWidget_2.setColumnWidth(12,120)
+        self.tableWidget_2.setColumnWidth(13,120)
+        _translate = QtCore.QCoreApplication.translate
+        #cell顶栏字段
+        item = self.tableWidget_2.horizontalHeaderItem(0)
+        item.setText(_translate("MainWindow", "id"))
+        item = self.tableWidget_2.horizontalHeaderItem(1)
+        item.setText(_translate("MainWindow", "type"))
+        item = self.tableWidget_2.horizontalHeaderItem(2)
+        item.setText(_translate("MainWindow", "imageId"))
+        item = self.tableWidget_2.horizontalHeaderItem(3)
+        item.setText(_translate("MainWindow", "mediaId"))
+        item = self.tableWidget_2.horizontalHeaderItem(4)
+        item.setText(_translate("MainWindow", "keyPath"))
+        item = self.tableWidget_2.horizontalHeaderItem(5)
+        item.setText(_translate("MainWindow", "contentSize_w"))
+        item = self.tableWidget_2.horizontalHeaderItem(6)
+        item.setText(_translate("MainWindow", "contentSize_h"))
+        item = self.tableWidget_2.horizontalHeaderItem(7)
+        item.setText(_translate("MainWindow", "lelft_percentage"))
+        item = self.tableWidget_2.horizontalHeaderItem(8)
+        item.setText(_translate("MainWindow", "left_constant"))
+        item = self.tableWidget_2.horizontalHeaderItem(9)
+        item.setText(_translate("MainWindow", "right_percentage"))
+        item = self.tableWidget_2.horizontalHeaderItem(10)
+        item.setText(_translate("MainWindow", "right_constant"))
+        item = self.tableWidget_2.horizontalHeaderItem(11)
+        item.setText(_translate("MainWindow", "top_percentage"))
+        item = self.tableWidget_2.horizontalHeaderItem(12)
+        item.setText(_translate("MainWindow", "top_constant"))
+        item = self.tableWidget_2.horizontalHeaderItem(13)
+        item.setText(_translate("MainWindow", "height_percentage"))
+        item = self.tableWidget_2.horizontalHeaderItem(14)
+        item.setText(_translate("MainWindow", "height_constant"))
+        item = self.tableWidget_2.horizontalHeaderItem(15)
+        item.setText(_translate("MainWindow", "ignore"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "Cell"))
+
+        self.tableWidget_2.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+
 
     def initNormalBgTable(self):
         #背景图片的json参数列表
@@ -840,6 +925,7 @@ class Ui_MainWindow(object):
         #设置列宽
         self.tableWidget_4.setColumnWidth(3,300)
         self.tableWidget_4.setColumnWidth(7,600)
+        self.tableWidget_4.setColumnWidth(15,120)
         _translate = QtCore.QCoreApplication.translate
         #文字表格的顶栏字段
         item = self.tableWidget_4.horizontalHeaderItem(0)
@@ -985,6 +1071,7 @@ class Ui_MainWindow(object):
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
         self.tabWidget.setGeometry(QtCore.QRect(0, 130, 1000, 550))
         self.tabWidget.setObjectName("tabWidget")
+        #静态模版
         #初始化普通模版的table
         if self.cbox_1.isChecked() == False and self.cbox_2.isChecked() == False and self.cbox_3.isChecked() == False:
             if self.spinBox_1.value() != 0:
@@ -1011,26 +1098,43 @@ class Ui_MainWindow(object):
                 if self.spinBox_3.value() != 0:
                     self.initNormalTextTable()
 				
-
+        #动态模版
 		#初始化动态模板的table
         if self.cbox_1.isChecked() == False and self.cbox_2.isChecked() == False and self.cbox_3.isChecked() == True:
             if self.spinBox_1.value() != 0:
-                self.initDynamicCellTable()
+                #选择不同类型的media
+                if self.cbox_6.isChecked() == False:
+                    self.initDynamicCellTable()
+                if self.cbox_6.isChecked() == True:
+                    self.initIgnoreCellTable()
+
                 self.initNormalBgTable()
                 self.initDynamicTable()
+                #选择不同类型的text， text or animation_text
                 if self.spinBox_3.value() != 0:
-                    self.initDynamicTextTable()
+                    if self.cbox_5.isChecked() == False:
+                        self.initDynamicTextTable()
+                    if self.cbox_5.isChecked() == True:
+                        self.initCustomDynamicTextTable()
 				
 
 		#初始化图片有上下层次的动态模版
         if self.cbox_1.isChecked() == False and self.cbox_2.isChecked() == True and self.cbox_3.isChecked() == True:
             if self.spinBox_1.value() != 0:
-                self.initDynamicCellTable()
+                if self.cbox_6.isChecked() == False:
+                    self.initDynamicCellTable()
+                if self.cbox_6.isChecked() == True:
+                    self.initIgnoreCellTable()
+                
                 self.initNormalBgTable()
                 self.initDynamicTable()
                 self.initLevelTable()
+
                 if self.spinBox_3.value() != 0:
-                    self.initDynamicTextTable()
+                    if self.cbox_5.isChecked() == False:
+                        self.initDynamicTextTable()
+                    if self.cbox_5.isChecked() == True:
+                        self.initCustomDynamicTextTable()
 
         self.tabWidget.show()
         self.index +=1
