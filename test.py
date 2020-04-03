@@ -34,21 +34,31 @@ from pathlib import Path
 if __name__ == "__main__":
     # path = os.path.join(os.getcwd(), "in", "out")
     text = "beat"
-    with open("./resources/json/setting.json", "r") as lf:
-        jsonStr = lf.read()
-        dic = json.loads(jsonStr, strict = False)
-    path = os.path.join(Path(dic["directory"]), text, "in")
+    # with open("./resources/json/setting.json", "r") as lf:
+    #     jsonStr = lf.read()
+    #     dic = json.loads(jsonStr, strict = False)
+    # path = os.path.join(Path(dic["directory"]), text, "in")
 
-    FONT_JSON_PATH = os.path.join(os.getcwd(), "resources", "json", "font.json")
-    SETTING_JSON_PATH = os.path.join(os.getcwd(), "resources", "json", "setting.json")
-    ENCRYPT_JAR_PATH = os.path.join(os.getcwd(), "resources", "jar", "encrypt.jar")
-    GENERATE_JAR_PATH = os.path.join(os.getcwd(), "resources", "jar", "generate.jar")
-    print(FONT_JSON_PATH)
-    print(SETTING_JSON_PATH)
-    print(ENCRYPT_JAR_PATH)
-    print(GENERATE_JAR_PATH)
+    # FONT_JSON_PATH = os.path.join(os.getcwd(), "resources", "json", "font.json")
+    # SETTING_JSON_PATH = os.path.join(os.getcwd(), "resources", "json", "setting.json")
+    # ENCRYPT_JAR_PATH = os.path.join(os.getcwd(), "resources", "jar", "encrypt.jar")
+    # GENERATE_JAR_PATH = os.path.join(os.getcwd(), "resources", "jar", "generate.jar")
+    # print(FONT_JSON_PATH)
+    # print(SETTING_JSON_PATH)
+    # print(ENCRYPT_JAR_PATH)
+    # print(GENERATE_JAR_PATH)
 
-    print(path)
+    # print(path)
     # unzip(path)
     # encrypt()
     # modifyTemplate(path)
+
+def test():
+    a = 0
+    if a == 0:
+        b +=1
+    else:
+        b +=2
+    print(b)
+
+test()

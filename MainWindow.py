@@ -612,10 +612,10 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					for i in range(len(self.item)):
 						dic["elements"].append(self.item[i])
 					name = self.comBox_2.currentText()
-					if name[13:] == "template.json":
+					if name[:13] == "template.json":
 						path = os.path.join(self.path, name[self.count:], name[:13])
-					if name[17:] == "template_1_1.json":
-						path = os.path.join(self.path, name[self.count:], name[:17])		
+					else:
+						path = os.path.join(self.path, name[self.count:], name[:17])	
 					with open(path, "w") as df:
 						jsonStr = json.dumps(dic, sort_keys=True, indent=2, ensure_ascii=False)
 						df.write(jsonStr)
