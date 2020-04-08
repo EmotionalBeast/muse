@@ -750,7 +750,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 														}
 					self.item.append(cell_dic)
 
-			elif self.cbox_3.isChecked() == True and self.cbox_6 == False:
+			elif self.cbox_3.isChecked() == True and self.cbox_6.isChecked() == False:
 				for i in range(self.spinBox_1.value()):
 					cell_dic = {}
 					cell_dic["contentSize"] = []
@@ -824,7 +824,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 																"constant": float(item_8)
 																}
 														}
-					cell_dic["ignore"].append(int(self.tableWidget_2.item(i, 15).text()))
+					cell_dic["ignore"] = int(self.tableWidget_2.item(i, 15).text())
 					self.item.append(cell_dic)
     				
 				
@@ -941,10 +941,9 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					text_dic['animation'] = {'name': item_7, 'type': int(item_8), 'resourceDirectory': item_9}
 					self.item.append(text_dic)
 			
-			elif self.cbox_3.isChecked() == True and self.cbox_6.isChecked() == True:
+			elif self.cbox_3.isChecked() == True and self.cbox_5.isChecked() == True:
 				for i in range(self.spinBox_3.value()):
 					text_dic = {}
-					text_dic['contentSize'] = []
 					text_dic['id'] = self.tableWidget_4.item(i, 0).text()
 					text_dic['type'] = self.tableWidget_4.item(i, 1).text()
 					text_dic['textId'] = self.tableWidget_4.item(i, 2).text()
@@ -974,10 +973,10 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 													  }
 													 }
 					text_dic["sourcePath"] = self.tableWidget_4.item(i,15).text()
-					text_dic["textSpacing"].append(float(self.tableWidget_4.item(i,16).text()))
-					text_dic["lineSpacing"].append(float(self.tableWidget_4.item(i,17).text()))
-					text_dic["angle"].append(float(self.tableWidget_4.item(i,18).text()))
-					text_dic["startFrame"].append(float(self.tableWidget_4.item(i,19).text()))
+					text_dic["textSpacing"] = float(self.tableWidget_4.item(i,16).text())
+					text_dic["lineSpacing"]= float(self.tableWidget_4.item(i,17).text())
+					text_dic["angle"] = float(self.tableWidget_4.item(i,18).text())
+					text_dic["startFrame"] = float(self.tableWidget_4.item(i,19).text())
 					self.item.append(text_dic)
     			 
 
