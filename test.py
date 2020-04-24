@@ -53,12 +53,13 @@ if __name__ == "__main__":
     # encrypt()
     # modifyTemplate(path)
 
-def test():
-    a = 0
-    if a == 0:
-        b +=1
-    else:
-        b +=2
-    print(b)
+# def test():
+#     a = 0
+#     if a == 0:
+#         b +=1
+#     else:
+#         b +=2
+#     print(b)
 
-test()
+# test()
+print(1-1)

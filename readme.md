@@ -21,6 +21,13 @@
 3、mv素材的生成加密，压缩
 4、UI布局，重构构思
 
+Homebrew安装：
+/bin/zsh -c "$(curl -fsSL https://gitee.com/cukai/HomebrewCN/raw/master/Hombrew.sh)"
 
 相关库：
 PyQt5 shutil pillow json 
+
+2020/04/21
+1、汉化
+2、对齐方式
+3、

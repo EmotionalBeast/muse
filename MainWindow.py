@@ -65,7 +65,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		with open(FONT_JSON_PATH, "r") as lf:
 			jsonStr = lf.read()
 			dic = json.loads(jsonStr,strict = False)
-			list_1 = dic.keys()
+			list_1 = list(dic.keys())
+			list_1.sort()
 		return list_1
 
 	def dirList(self):
@@ -251,29 +252,30 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			if self.cbox_3.isChecked() == False:
 				self.tableWidget_2.setRowCount(self.spinBox_1.value())
 				for i in range(len(self.cell_list)):
-					self.tableWidget_2.setItem(i,0,QTableWidgetItem(self.cell_list[i]['id']))
-					self.tableWidget_2.setItem(i,1,QTableWidgetItem(self.cell_list[i]['type']))
-					self.tableWidget_2.setItem(i,2,QTableWidgetItem(self.cell_list[i]['mediaId']))
-					self.tableWidget_2.setItem(i,3,QTableWidgetItem(str(self.cell_list[i]['constraints']['left']['percentage'])))
-					self.tableWidget_2.setItem(i,4,QTableWidgetItem(str(self.cell_list[i]['constraints']['left']['constant'])))
-					self.tableWidget_2.setItem(i,5,QTableWidgetItem(str(self.cell_list[i]['constraints']['right']['percentage'])))
-					self.tableWidget_2.setItem(i,6,QTableWidgetItem(str(self.cell_list[i]['constraints']['right']['constant'])))
-					self.tableWidget_2.setItem(i,7,QTableWidgetItem(str(self.cell_list[i]['constraints']['top']['percentage'])))
-					self.tableWidget_2.setItem(i,8,QTableWidgetItem(str(self.cell_list[i]['constraints']['top']['constant'])))
-					self.tableWidget_2.setItem(i,9,QTableWidgetItem(str(self.cell_list[i]['constraints']['height']['percentage'])))
-					self.tableWidget_2.setItem(i,10,QTableWidgetItem(str(self.cell_list[i]['constraints']['height']['constant'])))
+					self.tableWidget_2.setItem(i,7,QTableWidgetItem(self.cell_list[i]['id']))
+					self.tableWidget_2.setItem(i,8,QTableWidgetItem(self.cell_list[i]['type']))
+					self.tableWidget_2.setItem(i,9,QTableWidgetItem(self.cell_list[i]['mediaId']))
+					self.tableWidget_2.setItem(i,0,QTableWidgetItem(str(round(self.cell_list[i]['constraints']['left']['percentage']*100,2))))
+					self.tableWidget_2.setItem(i,10,QTableWidgetItem(str(self.cell_list[i]['constraints']['left']['constant'])))
+					self.tableWidget_2.setItem(i,1,QTableWidgetItem(str(round(self.cell_list[i]['constraints']['right']['percentage']*100, 2))))
+					self.tableWidget_2.setItem(i,11,QTableWidgetItem(str(self.cell_list[i]['constraints']['right']['constant'])))
+					self.tableWidget_2.setItem(i,2,QTableWidgetItem(str(round(self.cell_list[i]['constraints']['top']['percentage']*100, 2))))
+					self.tableWidget_2.setItem(i,12,QTableWidgetItem(str(self.cell_list[i]['constraints']['top']['constant'])))
+					bottom = 1.0 - self.cell_list[i]['constraints']['top']['percentage'] - self.cell_list[i]['constraints']['height']['percentage']
+					self.tableWidget_2.setItem(i,3,QTableWidgetItem(str(round(bottom*100, 2))))
+					self.tableWidget_2.setItem(i,13,QTableWidgetItem(str(self.cell_list[i]['constraints']['height']['constant'])))
 					if "filter" in self.cell_list[i].keys():
-						self.tableWidget_2.setItem(i,11,QTableWidgetItem(self.cell_list[i]['filter']))
+						self.tableWidget_2.setItem(i,5,QTableWidgetItem(self.cell_list[i]['filter']))
 					else:
-						self.tableWidget_2.setItem(i,11,QTableWidgetItem("0"))
+						self.tableWidget_2.setItem(i,5,QTableWidgetItem("0"))
 					if "filterStrength" in self.cell_list[i].keys():
-						self.tableWidget_2.setItem(i,12,QTableWidgetItem(str(self.cell_list[i]['filterStrength'])))
+						self.tableWidget_2.setItem(i,6,QTableWidgetItem(str(self.cell_list[i]['filterStrength'])))
 					else:
-						self.tableWidget_2.setItem(i,12,QTableWidgetItem("0"))
+						self.tableWidget_2.setItem(i,6,QTableWidgetItem("0"))
 					if "rotation" in self.cell_list[i].keys():
-						self.tableWidget_2.setItem(i,13,QTableWidgetItem(str(self.cell_list[i]['rotation'])))
+						self.tableWidget_2.setItem(i,4,QTableWidgetItem(str(self.cell_list[i]['rotation'])))
 					else:
-						self.tableWidget_2.setItem(i, 13, QTableWidgetItem("0"))
+						self.tableWidget_2.setItem(i, 4, QTableWidgetItem("0"))
 			elif self.cbox_3.isChecked() == True and self.cbox_6.isChecked() == False: 
 				self.tableWidget_2.setRowCount(self.spinBox_1.value())
 				for i in range(len(self.cell_list)):
@@ -284,13 +286,13 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					self.tableWidget_2.setItem(i,4,QTableWidgetItem(self.cell_list[i]['keyPath']))
 					self.tableWidget_2.setItem(i,5,QTableWidgetItem(str(self.cell_list[i]['contentSize'][0])))
 					self.tableWidget_2.setItem(i,6,QTableWidgetItem(str(self.cell_list[i]['contentSize'][1])))
-					self.tableWidget_2.setItem(i,7,QTableWidgetItem(str(self.cell_list[i]['constraints']['left']['percentage'])))
+					self.tableWidget_2.setItem(i,7,QTableWidgetItem(str(round(self.cell_list[i]['constraints']['left']['percentage']*100,2))))
 					self.tableWidget_2.setItem(i,8,QTableWidgetItem(str(self.cell_list[i]['constraints']['left']['constant'])))
-					self.tableWidget_2.setItem(i,9,QTableWidgetItem(str(self.cell_list[i]['constraints']['right']['percentage'])))
+					self.tableWidget_2.setItem(i,9,QTableWidgetItem(str(round(self.cell_list[i]['constraints']['right']['percentage']*100,2))))
 					self.tableWidget_2.setItem(i,10,QTableWidgetItem(str(self.cell_list[i]['constraints']['right']['constant'])))
-					self.tableWidget_2.setItem(i,11,QTableWidgetItem(str(self.cell_list[i]['constraints']['top']['percentage'])))
+					self.tableWidget_2.setItem(i,11,QTableWidgetItem(str(round(self.cell_list[i]['constraints']['top']['percentage']*100,2))))
 					self.tableWidget_2.setItem(i,12,QTableWidgetItem(str(self.cell_list[i]['constraints']['top']['constant'])))
-					self.tableWidget_2.setItem(i,13,QTableWidgetItem(str(self.cell_list[i]['constraints']['height']['percentage'])))
+					self.tableWidget_2.setItem(i,13,QTableWidgetItem(str(round(self.cell_list[i]['constraints']['height']['percentage']*100, 2))))
 					self.tableWidget_2.setItem(i,14,QTableWidgetItem(str(self.cell_list[i]['constraints']['height']['constant'])))
 			elif self.cbox_3.isChecked() == True and self.cbox_6.isChecked() == True:
 				self.tableWidget_2.setRowCount(self.spinBox_1.value())
@@ -302,13 +304,13 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					self.tableWidget_2.setItem(i,4,QTableWidgetItem(self.cell_list[i]['keyPath']))
 					self.tableWidget_2.setItem(i,5,QTableWidgetItem(str(self.cell_list[i]['contentSize'][0])))
 					self.tableWidget_2.setItem(i,6,QTableWidgetItem(str(self.cell_list[i]['contentSize'][1])))
-					self.tableWidget_2.setItem(i,7,QTableWidgetItem(str(self.cell_list[i]['constraints']['left']['percentage'])))
+					self.tableWidget_2.setItem(i,7,QTableWidgetItem(str(round(self.cell_list[i]['constraints']['left']['percentage']*100,2))))
 					self.tableWidget_2.setItem(i,8,QTableWidgetItem(str(self.cell_list[i]['constraints']['left']['constant'])))
-					self.tableWidget_2.setItem(i,9,QTableWidgetItem(str(self.cell_list[i]['constraints']['right']['percentage'])))
+					self.tableWidget_2.setItem(i,9,QTableWidgetItem(str(round(self.cell_list[i]['constraints']['right']['percentage']*100,2))))
 					self.tableWidget_2.setItem(i,10,QTableWidgetItem(str(self.cell_list[i]['constraints']['right']['constant'])))
-					self.tableWidget_2.setItem(i,11,QTableWidgetItem(str(self.cell_list[i]['constraints']['top']['percentage'])))
+					self.tableWidget_2.setItem(i,11,QTableWidgetItem(str(round(self.cell_list[i]['constraints']['top']['percentage']*100,2))))
 					self.tableWidget_2.setItem(i,12,QTableWidgetItem(str(self.cell_list[i]['constraints']['top']['constant'])))
-					self.tableWidget_2.setItem(i,13,QTableWidgetItem(str(self.cell_list[i]['constraints']['height']['percentage'])))
+					self.tableWidget_2.setItem(i,13,QTableWidgetItem(str(round(self.cell_list[i]['constraints']['height']['percentage']*100,2))))
 					self.tableWidget_2.setItem(i,14,QTableWidgetItem(str(self.cell_list[i]['constraints']['height']['constant'])))
 					self.tableWidget_2.setItem(i,15,QTableWidgetItem(str(self.cell_list[i]['ignore'])))
     				
@@ -334,51 +336,52 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_4.setRowCount(self.spinBox_3.value())
 				self.initComBox()
 				for i in range(len(self.text_list)):
-					self.tableWidget_4.setItem(i,0,QTableWidgetItem(self.text_list[i]['id']))
-					self.tableWidget_4.setItem(i,1,QTableWidgetItem(self.text_list[i]['type']))
-					self.tableWidget_4.setItem(i,2,QTableWidgetItem(self.text_list[i]['textId']))
-					self.tableWidget_4.cellWidget(i,3).setCurrentText(self.dict2[self.text_list[i]["fontName"]])
-					self.tableWidget_4.setItem(i,4,QTableWidgetItem(str(self.text_list[i]['fontSize'])))
-					self.tableWidget_4.setItem(i,5,QTableWidgetItem(str(self.text_list[i]['canvasWidth'])))
-					self.tableWidget_4.setItem(i,6,QTableWidgetItem(self.text_list[i]['textColor']))
-					self.tableWidget_4.setItem(i,7,QTableWidgetItem(self.text_list[i]['placeHolder']))
-					self.tableWidget_4.setItem(i,8,QTableWidgetItem(self.text_list[i]['textAlignment']))
-					self.tableWidget_4.setItem(i,9,QTableWidgetItem(str(self.text_list[i]['constraints']['left']['percentage'])))
-					self.tableWidget_4.setItem(i,10,QTableWidgetItem(str(self.text_list[i]['constraints']['left']['constant'])))
-					self.tableWidget_4.setItem(i,11,QTableWidgetItem(str(self.text_list[i]['constraints']['right']['percentage'])))
-					self.tableWidget_4.setItem(i,12,QTableWidgetItem(str(self.text_list[i]['constraints']['right']['constant'])))
-					self.tableWidget_4.setItem(i,13,QTableWidgetItem(str(self.text_list[i]['constraints']['top']['percentage'])))
-					self.tableWidget_4.setItem(i,14,QTableWidgetItem(str(self.text_list[i]['constraints']['top']['constant'])))
+					self.tableWidget_4.setItem(i,11,QTableWidgetItem(self.text_list[i]['id']))
+					self.tableWidget_4.setItem(i,12,QTableWidgetItem(self.text_list[i]['type']))
+					self.tableWidget_4.setItem(i,13,QTableWidgetItem(self.text_list[i]['textId']))
+					self.tableWidget_4.cellWidget(i,0).setCurrentText(self.dict2[self.text_list[i]["fontName"]])
+					self.tableWidget_4.setItem(i,3,QTableWidgetItem(str(self.text_list[i]['fontSize'])))
+					self.tableWidget_4.setItem(i,14,QTableWidgetItem(str(self.text_list[i]['canvasWidth'])))
+					self.tableWidget_4.setItem(i,2,QTableWidgetItem(self.text_list[i]['textColor']))
+					self.tableWidget_4.setItem(i,6,QTableWidgetItem(self.text_list[i]['placeHolder']))
+					self.tableWidget_4.cellWidget(i,1).setCurrentText(self.text_list[i]['textAlignment'])
+					self.tableWidget_4.setItem(i,7,QTableWidgetItem(str(round(self.text_list[i]['constraints']['left']['percentage']*100,2))))
+					self.tableWidget_4.setItem(i,15,QTableWidgetItem(str(self.text_list[i]['constraints']['left']['constant'])))
+					self.tableWidget_4.setItem(i,8,QTableWidgetItem(str(round(self.text_list[i]['constraints']['right']['percentage']*100,2))))
+					self.tableWidget_4.setItem(i,16,QTableWidgetItem(str(self.text_list[i]['constraints']['right']['constant'])))
+					top = self.text_list[i]['constraints']['top']['percentage'] + self.text_list[i]['fontSize']/24*0.007
+					self.tableWidget_4.setItem(i,9,QTableWidgetItem(str(round(top*100,2))))
+					self.tableWidget_4.setItem(i,17,QTableWidgetItem(str(self.text_list[i]['constraints']['top']['constant'])))
 					if "textSpacing" in self.text_list[i].keys():
-						self.tableWidget_4.setItem(i,15,QTableWidgetItem(str(self.text_list[i]['textSpacing'])))
+						self.tableWidget_4.setItem(i,4,QTableWidgetItem(str(self.text_list[i]['textSpacing'])))
 					else:
-						self.tableWidget_4.setItem(i,15,QTableWidgetItem("0"))
+						self.tableWidget_4.setItem(i,4,QTableWidgetItem("0"))
 					if "lineSpacing" in self.text_list[i].keys():					
-						self.tableWidget_4.setItem(i,16,QTableWidgetItem(str(self.text_list[i]['lineSpacing'])))
+						self.tableWidget_4.setItem(i,5,QTableWidgetItem(str(self.text_list[i]['lineSpacing'])))
 					else:
-						self.tableWidget_4.setItem(i, 16, QTableWidgetItem("1"))
+						self.tableWidget_4.setItem(i, 5, QTableWidgetItem("1"))
 					if "angle" in self.text_list[i].keys():
-						self.tableWidget_4.setItem(i,17,QTableWidgetItem(str(self.text_list[i]['angle'])))
+						self.tableWidget_4.setItem(i,10,QTableWidgetItem(str(self.text_list[i]['angle'])))
 					else:
-						self.tableWidget_4.setItem(i, 17, QTableWidgetItem("0"))
+						self.tableWidget_4.setItem(i, 10, QTableWidgetItem("0"))
 			elif self.cbox_3.isChecked() == True and self.cbox_5.isChecked() == False:
 				self.tableWidget_4.setRowCount(self.spinBox_3.value())
 				self.initComBox()
 				for i in range(len(self.text_list)):
-					self.tableWidget_4.setItem(i,0,QTableWidgetItem(self.text_list[i]['id']))
-					self.tableWidget_4.setItem(i,1,QTableWidgetItem(self.text_list[i]['type']))
+					self.tableWidget_4.setItem(i,3,QTableWidgetItem(self.text_list[i]['id']))
+					self.tableWidget_4.setItem(i,8,QTableWidgetItem(self.text_list[i]['type']))
 					self.tableWidget_4.setItem(i,2,QTableWidgetItem(self.text_list[i]['textId']))
-					self.tableWidget_4.cellWidget(i,3).setCurrentText(self.dict2[self.text_list[i]["fontName"]])
+					self.tableWidget_4.cellWidget(i,0).setCurrentText(self.dict2[self.text_list[i]["fontName"]])
 					self.tableWidget_4.setItem(i,4,QTableWidgetItem(str(self.text_list[i]['fontSize'])))
 					self.tableWidget_4.setItem(i,5,QTableWidgetItem(str(self.text_list[i]['canvasWidth'])))
 					self.tableWidget_4.setItem(i,6,QTableWidgetItem(self.text_list[i]['textColor']))
 					self.tableWidget_4.setItem(i,7,QTableWidgetItem(self.text_list[i]['placeHolder']))
-					self.tableWidget_4.setItem(i,8,QTableWidgetItem(self.text_list[i]['textAlignment']))
-					self.tableWidget_4.setItem(i,9,QTableWidgetItem(str(self.text_list[i]['constraints']['left']['percentage'])))
+					self.tableWidget_4.cellWidget(i,1).setCurrentText(self.text_list[i]['textAlignment'])
+					self.tableWidget_4.setItem(i,9,QTableWidgetItem(str(round(self.text_list[i]['constraints']['left']['percentage']*100,2))))
 					self.tableWidget_4.setItem(i,10,QTableWidgetItem(str(self.text_list[i]['constraints']['left']['constant'])))
-					self.tableWidget_4.setItem(i,11,QTableWidgetItem(str(self.text_list[i]['constraints']['right']['percentage'])))
+					self.tableWidget_4.setItem(i,11,QTableWidgetItem(str(round(self.text_list[i]['constraints']['right']['percentage']*100,2))))
 					self.tableWidget_4.setItem(i,12,QTableWidgetItem(str(self.text_list[i]['constraints']['right']['constant'])))
-					self.tableWidget_4.setItem(i,13,QTableWidgetItem(str(self.text_list[i]['constraints']['top']['percentage'])))
+					self.tableWidget_4.setItem(i,13,QTableWidgetItem(str(round(self.text_list[i]['constraints']['top']['percentage']*100,2))))
 					self.tableWidget_4.setItem(i,14,QTableWidgetItem(str(self.text_list[i]['constraints']['top']['constant'])))
 					self.tableWidget_4.setItem(i,15,QTableWidgetItem(self.text_list[i]['keyPath']))
 					self.tableWidget_4.setItem(i,16,QTableWidgetItem(str(self.text_list[i]['contentSize'][0])))
@@ -390,20 +393,20 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_4.setRowCount(self.spinBox_3.value())
 				self.initComBox()
 				for i in range(len(self.text_list)):
-					self.tableWidget_4.setItem(i,0,QTableWidgetItem(self.text_list[i]['id']))
-					self.tableWidget_4.setItem(i,1,QTableWidgetItem(self.text_list[i]['type']))
+					self.tableWidget_4.setItem(i,3,QTableWidgetItem(self.text_list[i]['id']))
+					self.tableWidget_4.setItem(i,8,QTableWidgetItem(self.text_list[i]['type']))
 					self.tableWidget_4.setItem(i,2,QTableWidgetItem(self.text_list[i]['textId']))
-					self.tableWidget_4.cellWidget(i,3).setCurrentText(self.dict2[self.text_list[i]["fontName"]])
+					self.tableWidget_4.cellWidget(i,0).setCurrentText(self.dict2[self.text_list[i]["fontName"]])
 					self.tableWidget_4.setItem(i,4,QTableWidgetItem(str(self.text_list[i]['fontSize'])))
 					self.tableWidget_4.setItem(i,5,QTableWidgetItem(str(self.text_list[i]['canvasWidth'])))
 					self.tableWidget_4.setItem(i,6,QTableWidgetItem(self.text_list[i]['textColor']))
 					self.tableWidget_4.setItem(i,7,QTableWidgetItem(self.text_list[i]['placeHolder']))
-					self.tableWidget_4.setItem(i,8,QTableWidgetItem(self.text_list[i]['textAlignment']))
-					self.tableWidget_4.setItem(i,9,QTableWidgetItem(str(self.text_list[i]['constraints']['left']['percentage'])))
+					self.tableWidget_4.cellWidget(i,1).setCurrentText(self.text_list[i]['textAlignment'])
+					self.tableWidget_4.setItem(i,9,QTableWidgetItem(str(round(self.text_list[i]['constraints']['left']['percentage']*100,2))))
 					self.tableWidget_4.setItem(i,10,QTableWidgetItem(str(self.text_list[i]['constraints']['left']['constant'])))
-					self.tableWidget_4.setItem(i,11,QTableWidgetItem(str(self.text_list[i]['constraints']['right']['percentage'])))
+					self.tableWidget_4.setItem(i,11,QTableWidgetItem(str(round(self.text_list[i]['constraints']['right']['percentage']*100,2))))
 					self.tableWidget_4.setItem(i,12,QTableWidgetItem(str(self.text_list[i]['constraints']['right']['constant'])))
-					self.tableWidget_4.setItem(i,13,QTableWidgetItem(str(self.text_list[i]['constraints']['top']['percentage'])))
+					self.tableWidget_4.setItem(i,13,QTableWidgetItem(str(round(self.text_list[i]['constraints']['top']['percentage']*100,2))))
 					self.tableWidget_4.setItem(i,14,QTableWidgetItem(str(self.text_list[i]['constraints']['top']['constant'])))
 					self.tableWidget_4.setItem(i,15,QTableWidgetItem(self.text_list[i]['sourcePath']))
 					self.tableWidget_4.setItem(i,16,QTableWidgetItem(str(self.text_list[i]['textSpacing'])))
@@ -473,16 +476,16 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		if  self.cbox_3.isChecked() == False:
 			self.tableWidget_2.setRowCount(count_2)
 			for i in range(count_2):
-				self.tableWidget_2.setItem(i,0,QTableWidgetItem(str(count_1+i)))
-				self.tableWidget_2.setItem(i,1,QTableWidgetItem("media"))
-				self.tableWidget_2.setItem(i,2,QTableWidgetItem(str(i)))
-				self.tableWidget_2.setItem(i,4,QTableWidgetItem("0"))
-				self.tableWidget_2.setItem(i,6,QTableWidgetItem("0"))
-				self.tableWidget_2.setItem(i,8,QTableWidgetItem("0"))
+				self.tableWidget_2.setItem(i,7,QTableWidgetItem(str(count_1+i)))
+				self.tableWidget_2.setItem(i,8,QTableWidgetItem("media"))
+				self.tableWidget_2.setItem(i,9,QTableWidgetItem(str(i)))
 				self.tableWidget_2.setItem(i,10,QTableWidgetItem("0"))
 				self.tableWidget_2.setItem(i,11,QTableWidgetItem("0"))
 				self.tableWidget_2.setItem(i,12,QTableWidgetItem("0"))
 				self.tableWidget_2.setItem(i,13,QTableWidgetItem("0"))
+				self.tableWidget_2.setItem(i,5,QTableWidgetItem("0"))
+				self.tableWidget_2.setItem(i,6,QTableWidgetItem("0"))
+				self.tableWidget_2.setItem(i,4,QTableWidgetItem("0"))
 
 		elif self.cbox_3.isChecked() == True and self.cbox_6.isChecked() == False:
 			self.tableWidget_2.setRowCount(count_2)
@@ -529,22 +532,22 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			if self.cbox_3.isChecked() == False and self.cbox_5.isChecked() == False:
 				self.tableWidget_4.setRowCount(count_4)
 				for i in range(count_4):
-					self.tableWidget_4.setItem(i,0,QTableWidgetItem(str(count_1+count_2+count_3+i)))
-					self.tableWidget_4.setItem(i,1,QTableWidgetItem("text"))
-					self.tableWidget_4.setItem(i,2,QTableWidgetItem(str(i)))
-					self.tableWidget_4.setItem(i,5,QTableWidgetItem("375"))
-					self.tableWidget_4.setItem(i,10,QTableWidgetItem("0"))
-					self.tableWidget_4.setItem(i,12,QTableWidgetItem("0"))
-					self.tableWidget_4.setItem(i,14,QTableWidgetItem("0"))
+					self.tableWidget_4.setItem(i,11,QTableWidgetItem(str(count_1+count_2+count_3+i)))
+					self.tableWidget_4.setItem(i,12,QTableWidgetItem("text"))
+					self.tableWidget_4.setItem(i,13,QTableWidgetItem(str(i)))
+					self.tableWidget_4.setItem(i,14,QTableWidgetItem("375"))
 					self.tableWidget_4.setItem(i,15,QTableWidgetItem("0"))
-					self.tableWidget_4.setItem(i,16,QTableWidgetItem("1"))
+					self.tableWidget_4.setItem(i,16,QTableWidgetItem("0"))
 					self.tableWidget_4.setItem(i,17,QTableWidgetItem("0"))
+					self.tableWidget_4.setItem(i,4,QTableWidgetItem("0"))
+					self.tableWidget_4.setItem(i,5,QTableWidgetItem("1"))
+					self.tableWidget_4.setItem(i,10,QTableWidgetItem("0"))
 
 			elif self.cbox_3.isChecked() == True and self.cbox_5.isChecked() == False:
 				self.tableWidget_4.setRowCount(count_4)
 				for i in range(count_4):
-					self.tableWidget_4.setItem(i,0,QTableWidgetItem(str(count_1+count_2+count_3+i)))
-					self.tableWidget_4.setItem(i,1,QTableWidgetItem("text"))
+					self.tableWidget_4.setItem(i,3,QTableWidgetItem(str(count_1+count_2+count_3+i)))
+					self.tableWidget_4.setItem(i,8,QTableWidgetItem("text"))
 					self.tableWidget_4.setItem(i,2,QTableWidgetItem(str(i)))
 					self.tableWidget_4.setItem(i,5,QTableWidgetItem("375"))
 					self.tableWidget_4.setItem(i,10,QTableWidgetItem("0"))
@@ -557,8 +560,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			elif self.cbox_3.isChecked() == True and self.cbox_5.isChecked() == True:
 				self.tableWidget_4.setRowCount(count_4)
 				for i in range(count_4):
-					self.tableWidget_4.setItem(i,0,QTableWidgetItem(str(count_1+count_2+count_3+i)))
-					self.tableWidget_4.setItem(i,1,QTableWidgetItem("animation_text"))
+					self.tableWidget_4.setItem(i,3,QTableWidgetItem(str(count_1+count_2+count_3+i)))
+					self.tableWidget_4.setItem(i,8,QTableWidgetItem("animation_text"))
 					self.tableWidget_4.setItem(i,2,QTableWidgetItem(str(i)))
 					self.tableWidget_4.setItem(i,5,QTableWidgetItem("375"))
 					self.tableWidget_4.setItem(i,10,QTableWidgetItem("0"))
@@ -653,14 +656,19 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 
 		if self.spinBox_3.value() != 0:
 			for i in range(self.spinBox_3.value()):
-				for j in range(self.tableWidget_4.columnCount()-4):
-					if self.tableWidget_4.item(i,j+4) == None or self.tableWidget_4.item(i,j+4).text() == "":
+				for j in range(self.tableWidget_4.columnCount()-2):
+					if self.tableWidget_4.item(i,j+2) == None or self.tableWidget_4.item(i,j+2).text() == "":
 						self.info = "text表中第 "+str(i+1)+" 行第 "+str(j+1)+" 列未填值！"
 						return False
-				if self.tableWidget_4.cellWidget(i,3).currentText() == "":
+				if self.tableWidget_4.cellWidget(i,0).currentText() == "":
 					print("1")
-					self.info = "text表中第 "+str(i+1)+" 行第 4 列未填值！"
+					self.info = "text表中第 "+str(i+1)+" 行第 1 列未填值！"
 					return False
+				if self.tableWidget_4.cellWidget(i,1).currentText() == "":
+					print("1")
+					self.info = "text表中第 "+str(i+1)+" 行第 2 列未填值！"
+					return False
+				
 
 		if self.cbox_2.isChecked() == True:
 			for i in range(1):
@@ -716,35 +724,35 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			if self.cbox_3.isChecked() == False:
 				for i in range(self.spinBox_1.value()):
 					cell_dic = {}
-					cell_dic["id"] = self.tableWidget_2.item(i, 0).text()
-					cell_dic["type"] = self.tableWidget_2.item(i, 1).text()
-					cell_dic["mediaId"] = self.tableWidget_2.item(i, 2).text()
-					if self.tableWidget_2.item(i, 11).text() != "0":
-						cell_dic["filter"] = self.tableWidget_2.item(i, 11).text()
-						cell_dic["filterStrength"] = float(self.tableWidget_2.item(i, 12).text())
-					cell_dic["rotation"] = float(self.tableWidget_2.item(i, 13).text())
-					item_1 = self.tableWidget_2.item(i,3).text()
-					item_2 = self.tableWidget_2.item(i,4).text()
-					item_3 = self.tableWidget_2.item(i,5).text()
-					item_4 = self.tableWidget_2.item(i,6).text()
-					item_5 = self.tableWidget_2.item(i,7).text()
-					item_6 = self.tableWidget_2.item(i,8).text()
-					item_7 = self.tableWidget_2.item(i,9).text()
-					item_8 = self.tableWidget_2.item(i,10).text()
+					cell_dic["id"] = self.tableWidget_2.item(i, 7).text()
+					cell_dic["type"] = self.tableWidget_2.item(i, 8).text()
+					cell_dic["mediaId"] = self.tableWidget_2.item(i, 9).text()
+					if self.tableWidget_2.item(i, 5).text() != "0":
+						cell_dic["filter"] = self.tableWidget_2.item(i, 5).text()
+						cell_dic["filterStrength"] = float(self.tableWidget_2.item(i, 6).text())
+					cell_dic["rotation"] = float(self.tableWidget_2.item(i, 4).text())
+					item_1 = self.tableWidget_2.item(i,0).text()
+					item_2 = self.tableWidget_2.item(i,10).text()
+					item_3 = self.tableWidget_2.item(i,1).text()
+					item_4 = self.tableWidget_2.item(i,11).text()
+					item_5 = self.tableWidget_2.item(i,2).text()
+					item_6 = self.tableWidget_2.item(i,12).text()
+					item_7 = 100-float(self.tableWidget_2.item(i,3).text())-float(item_5)
+					item_8 = self.tableWidget_2.item(i,13).text()
 					cell_dic["constraints"] = {"left":{
-																"percentage": float(item_1),
+																"percentage": round(float(item_1)/100, 4),
 																"constant": float(item_2)
 																},
 														"right":{
-																"percentage": float(item_3),
+																"percentage": round(float(item_3)/100, 4),
 																"constant": float(item_4)
 																},
 														"top":{
-																"percentage": float(item_5),
+																"percentage": round(float(item_5)/100, 4),
 																"constant": float(item_6)
 																},
 														"height":{
-																"percentage": float(item_7),
+																"percentage": round(item_7/100, 4),
 																"constant": float(item_8)
 																}
 														}
@@ -770,19 +778,19 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					item_7 = self.tableWidget_2.item(i,13).text()
 					item_8 = self.tableWidget_2.item(i,14).text()
 					cell_dic["constraints"] = {"left":{
-																"percentage": float(item_1),
+																"percentage": round(float(item_1)/100, 4),
 																"constant": float(item_2)
 																},
 														"right":{
-																"percentage": float(item_3),
+																"percentage": round(float(item_3)/100, 4),
 																"constant": float(item_4)
 																},
 														"top":{
-																"percentage": float(item_5),
+																"percentage": round(float(item_5)/100, 4),
 																"constant": float(item_6)
 																},
 														"height":{
-																"percentage": float(item_7),
+																"percentage": round(float(item_7)/100, 4),
 																"constant": float(item_8)
 																}
 														}
@@ -808,19 +816,19 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					item_7 = self.tableWidget_2.item(i,13).text()
 					item_8 = self.tableWidget_2.item(i,14).text()
 					cell_dic["constraints"] = {"left":{
-																"percentage": float(item_1),
+																"percentage": round(float(item_1)/100, 4),
 																"constant": float(item_2)
 																},
 														"right":{
-																"percentage": float(item_3),
+																"percentage": round(float(item_3)/100,4),
 																"constant": float(item_4)
 																},
 														"top":{
-																"percentage": float(item_5),
+																"percentage": round(float(item_5)/100,4),
 																"constant": float(item_6)
 																},
 														"height":{
-																"percentage": float(item_7),
+																"percentage": round(float(item_7)/100,4),
 																"constant": float(item_8)
 																}
 														}
@@ -867,34 +875,35 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			if self.cbox_3.isChecked() == False:
 				for i in range(self.spinBox_3.value()):
 					text_dic = {}
-					text_dic['id'] = self.tableWidget_4.item(i, 0).text()
-					text_dic['type'] = self.tableWidget_4.item(i, 1).text()
-					text_dic['textId'] = self.tableWidget_4.item(i, 2).text()
-					text_dic['fontName'] = self.dict1[self.tableWidget_4.cellWidget(i, 3).currentText()]
-					text_dic['fontSize'] = int(self.tableWidget_4.item(i, 4).text())
-					text_dic['canvasWidth'] = int(self.tableWidget_4.item(i, 5).text())
-					text_dic['textColor'] = self.tableWidget_4.item(i, 6).text()
-					text_dic['placeHolder'] = self.tableWidget_4.item(i, 7).text()
-					text_dic['textAlignment'] = self.tableWidget_4.item(i, 8).text()
-					text_dic['textSpacing'] = float(self.tableWidget_4.item(i, 15).text())
-					text_dic['lineSpacing'] = float(self.tableWidget_4.item(i, 16).text())
-					text_dic['angle'] = float(self.tableWidget_4.item(i, 17).text())
-					item_1 = self.tableWidget_4.item(i,9).text()
-					item_2 = self.tableWidget_4.item(i,10).text()
-					item_3 = self.tableWidget_4.item(i,11).text()
-					item_4 = self.tableWidget_4.item(i,12).text()
-					item_5 = self.tableWidget_4.item(i,13).text()
-					item_6 = self.tableWidget_4.item(i,14).text()
+					text_dic['id'] = self.tableWidget_4.item(i, 11).text()
+					text_dic['type'] = self.tableWidget_4.item(i, 12).text()
+					text_dic['textId'] = self.tableWidget_4.item(i, 13).text()
+					text_dic['fontName'] = self.dict1[self.tableWidget_4.cellWidget(i, 0).currentText()]
+					fontSize = float(self.tableWidget_4.item(i, 3).text())
+					text_dic['fontSize'] = fontSize
+					text_dic['canvasWidth'] = int(self.tableWidget_4.item(i, 14).text())
+					text_dic['textColor'] = self.tableWidget_4.item(i, 2).text()
+					text_dic['placeHolder'] = self.tableWidget_4.item(i, 6).text()
+					text_dic['textAlignment'] = self.tableWidget_4.cellWidget(i, 1).currentText()
+					text_dic['textSpacing'] = float(self.tableWidget_4.item(i, 4).text())
+					text_dic['lineSpacing'] = float(self.tableWidget_4.item(i, 5).text())
+					text_dic['angle'] = float(self.tableWidget_4.item(i, 10).text())
+					item_1 = self.tableWidget_4.item(i,7).text()
+					item_2 = self.tableWidget_4.item(i,15).text()
+					item_3 = self.tableWidget_4.item(i,8).text()
+					item_4 = self.tableWidget_4.item(i,16).text()
+					item_5 = self.tableWidget_4.item(i,9).text()
+					item_6 = self.tableWidget_4.item(i,17).text()
 					text_dic['constraints'] = {"left":{
-													 "percentage": float(item_1),
+													 "percentage": round(float(item_1)/100,4),
 													 "constant": float(item_2)
 													 },
 													 "right":{
-													  "percentage": float(item_3),
+													  "percentage": round(float(item_3)/100,4),
 													  "constant": float(item_4)
 													  },
 													  "top":{
-													   "percentage": float(item_5),
+													   "percentage": round(float(item_5)/100 - fontSize/24*0.007,4),
 													   "constant": float(item_6)
 													  }
 													 }
@@ -904,15 +913,15 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				for i in range(self.spinBox_3.value()):
 					text_dic = {}
 					text_dic['contentSize'] = []
-					text_dic['id'] = self.tableWidget_4.item(i, 0).text()
-					text_dic['type'] = self.tableWidget_4.item(i, 1).text()
+					text_dic['id'] = self.tableWidget_4.item(i, 3).text()
+					text_dic['type'] = self.tableWidget_4.item(i, 8).text()
 					text_dic['textId'] = self.tableWidget_4.item(i, 2).text()
-					text_dic['fontName'] = self.dict1[self.tableWidget_4.cellWidget(i, 3).currentText()]
-					text_dic['fontSize'] = int(self.tableWidget_4.item(i, 4).text())
+					text_dic['fontName'] = self.dict1[self.tableWidget_4.cellWidget(i, 0).currentText()]
+					text_dic['fontSize'] = float(self.tableWidget_4.item(i, 4).text())
 					text_dic['canvasWidth'] = int(self.tableWidget_4.item(i, 5).text())
 					text_dic['textColor'] = self.tableWidget_4.item(i, 6).text()
 					text_dic['placeHolder'] = self.tableWidget_4.item(i, 7).text()
-					text_dic['textAlignment'] = self.tableWidget_4.item(i, 8).text()
+					text_dic['textAlignment'] = self.tableWidget_4.cellWidget(i, 1).currentText()
 					item_1 = self.tableWidget_4.item(i,9).text()
 					item_2 = self.tableWidget_4.item(i,10).text()
 					item_3 = self.tableWidget_4.item(i,11).text()
@@ -920,15 +929,15 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					item_5 = self.tableWidget_4.item(i,13).text()
 					item_6 = self.tableWidget_4.item(i,14).text()
 					text_dic['constraints'] = {"left":{
-													 "percentage": float(item_1),
+													 "percentage": round(float(item_1)/100,4),
 													 "constant": float(item_2)
 													 },
 													 "right":{
-													  "percentage": float(item_3),
+													  "percentage": round(float(item_3)/100,4),
 													  "constant": float(item_4)
 													  },
 													  "top":{
-													   "percentage": float(item_5),
+													   "percentage": round(float(item_5)/100,4),
 													   "constant": float(item_6)
 													  }
 													 }
@@ -944,15 +953,15 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			elif self.cbox_3.isChecked() == True and self.cbox_5.isChecked() == True:
 				for i in range(self.spinBox_3.value()):
 					text_dic = {}
-					text_dic['id'] = self.tableWidget_4.item(i, 0).text()
-					text_dic['type'] = self.tableWidget_4.item(i, 1).text()
+					text_dic['id'] = self.tableWidget_4.item(i, 3).text()
+					text_dic['type'] = self.tableWidget_4.item(i, 8).text()
 					text_dic['textId'] = self.tableWidget_4.item(i, 2).text()
-					text_dic['fontName'] = self.dict1[self.tableWidget_4.cellWidget(i, 3).currentText()]
-					text_dic['fontSize'] = int(self.tableWidget_4.item(i, 4).text())
+					text_dic['fontName'] = self.dict1[self.tableWidget_4.cellWidget(i, 0).currentText()]
+					text_dic['fontSize'] = float(self.tableWidget_4.item(i, 4).text())
 					text_dic['canvasWidth'] = int(self.tableWidget_4.item(i, 5).text())
 					text_dic['textColor'] = self.tableWidget_4.item(i, 6).text()
 					text_dic['placeHolder'] = self.tableWidget_4.item(i, 7).text()
-					text_dic['textAlignment'] = self.tableWidget_4.item(i, 8).text()
+					text_dic['textAlignment'] = self.tableWidget_4.cellWidget(i, 1).currentText()
 					item_1 = self.tableWidget_4.item(i,9).text()
 					item_2 = self.tableWidget_4.item(i,10).text()
 					item_3 = self.tableWidget_4.item(i,11).text()
@@ -960,15 +969,15 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					item_5 = self.tableWidget_4.item(i,13).text()
 					item_6 = self.tableWidget_4.item(i,14).text()
 					text_dic['constraints'] = {"left":{
-													 "percentage": float(item_1),
+													 "percentage": round(float(item_1)/100,4),
 													 "constant": float(item_2)
 													 },
 													 "right":{
-													  "percentage": float(item_3),
+													  "percentage": round(float(item_3)/100,4),
 													  "constant": float(item_4)
 													  },
 													  "top":{
-													   "percentage": float(item_5),
+													   "percentage": round(float(item_5)/100,4),
 													   "constant": float(item_6)
 													  }
 													 }

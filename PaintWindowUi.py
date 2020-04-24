@@ -33,7 +33,6 @@ class Ui_PaintWindow(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "效果展示"))
-        
 
 
 
