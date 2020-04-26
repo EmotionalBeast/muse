@@ -1101,7 +1101,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 							im.save(tempPathOut)
 							os.remove(tempPathIn)
 
-	def createMV(self):
+	def createChicMV(self):
 		pathMaterial = self.path[:-2] + "material"
 		if os.path.exists(pathMaterial):			
 			if self.comBox_1.currentText() != "":
@@ -1122,24 +1122,25 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			QMessageBox.information(self, "提示", "请选择MV素材组！")
 	
 	def createBeatMV(self):
-		pathMaterial = self.path[:-2] + "material"
-		if os.path.exists(pathMaterial):
-			if self.comBox_1.currentText() != "":
-				self.cleanFile(self.path)
-				shutil.copytree(pathMaterial, self.path)
-				generate = os.path.join(os.getcwd(),"resources", "jar", "generate.jar")
-				command = "java -jar " + generate + " -an -vex " + self.path
-				info = subprocess.check_call(command, shell=True)
-				if info == 0:
-					QMessageBox.information(self, "提示", "MV素材输出成功！")
-				else:
-					QMessageBox.information(self, "提示", info)
-				self.encryption()
-				self.compressing()
-			else:
-				QMessageBox.information(self, "提示", "请选择BeatMV素材组！")
-		else:
-			QMessageBox.information(self, "提示", "请选择BeatMV素材")
+		# pathMaterial = self.path[:-2] + "material"
+		# if os.path.exists(pathMaterial):
+		# 	if self.comBox_1.currentText() != "":
+		# 		self.cleanFile(self.path)
+		# 		shutil.copytree(pathMaterial, self.path)
+		# 		generate = os.path.join(os.getcwd(),"resources", "jar", "generate.jar")
+		# 		command = "java -jar " + generate + " -an -vex " + self.path
+		# 		info = subprocess.check_call(command, shell=True)
+		# 		if info == 0:
+		# 			QMessageBox.information(self, "提示", "MV素材输出成功！")
+		# 		else:
+		# 			QMessageBox.information(self, "提示", info)
+		# 		self.encryption()
+		# 		self.compressing()
+		# 	else:
+		# 		QMessageBox.information(self, "提示", "请选择BeatMV素材组！")
+		# else:
+		# 	QMessageBox.information(self, "提示", "请选择BeatMV素材")
+		pass 
 
 	def cleanFile(self, path):
 		files = os.listdir(path)

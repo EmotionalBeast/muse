@@ -213,7 +213,7 @@ class Ui_MainWindow(object):
         self.actionQuit.triggered.connect(QtWidgets.qApp.quit)
         self.actionPaint.triggered.connect(self.openPaintWindow)
         self.actionEnCom.triggered.connect(self.EnCom)
-        self.actionMV.triggered.connect(self.createMV)
+        self.actionMV.triggered.connect(self.createChicMV)
         self.actionBeatMV.triggered.connect(self.createBeatMV)
 
         #工具栏的功能定义

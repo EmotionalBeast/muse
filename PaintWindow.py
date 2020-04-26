@@ -7,7 +7,8 @@ from PyQt5.QtCore import QRect, Qt
 from PaintWindowUi import Ui_PaintWindow
 from PIL import Image, ImageFilter
 
-width = 360
+PROPORTION_16_9 = (750, 1334)
+PROPORTION_1_1 = (750, 750)
 class MyPaintWindow(QWidget, Ui_PaintWindow):
 	def __init__(self,objPath,templatePath):
 		super(MyPaintWindow,self).__init__()
@@ -40,6 +41,7 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		self.cell = []
 		self.text = []
 		self.blur = []
+		self.png = ""
 		dic = self.getJsonDic()
 		if dic != 0:
 			for i in range(len(dic["elements"])):
@@ -49,6 +51,9 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 					self.text.append(dic["elements"][i])
 				if "blur" in dic["elements"][i]:
 					self.blur.append(dic["elements"][i])
+				if "imageName" in dic["elements"][i]:
+    				self.png = dic["elements"][i]["imageName"]
+
 	def setLayout(self):
 		# 初始化graphicScene,添加cell
 		#特殊模版，背景虚化
