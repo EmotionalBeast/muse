@@ -341,10 +341,16 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					self.tableWidget_4.setItem(i,13,QTableWidgetItem(self.text_list[i]['textId']))
 					self.tableWidget_4.cellWidget(i,0).setCurrentText(self.dict2[self.text_list[i]["fontName"]])
 					self.tableWidget_4.setItem(i,3,QTableWidgetItem(str(self.text_list[i]['fontSize'])))
-					self.tableWidget_4.setItem(i,14,QTableWidgetItem(str(self.text_list[i]['canvasWidth'])))
+					if "canvasWidth" in self.text_list[i].keys():
+						self.tableWidget_4.setItem(i,14,QTableWidgetItem(str(self.text_list[i]['canvasWidth'])))
+					else:
+						self.tableWidget_4.setItem(i,14,QTableWidgetItem("375"))
 					self.tableWidget_4.setItem(i,2,QTableWidgetItem(self.text_list[i]['textColor']))
 					self.tableWidget_4.setItem(i,6,QTableWidgetItem(self.text_list[i]['placeHolder']))
-					self.tableWidget_4.cellWidget(i,1).setCurrentText(self.text_list[i]['textAlignment'])
+					if "textAlignment" in self.text_list[i].keys():
+						self.tableWidget_4.cellWidget(i,1).setCurrentText(self.text_list[i]['textAlignment'])
+					else:
+						self.tableWidget_4.cellWidget(i,1).setCurrentText("center")
 					self.tableWidget_4.setItem(i,7,QTableWidgetItem(str(round(self.text_list[i]['constraints']['left']['percentage']*100,2))))
 					self.tableWidget_4.setItem(i,15,QTableWidgetItem(str(self.text_list[i]['constraints']['left']['constant'])))
 					self.tableWidget_4.setItem(i,8,QTableWidgetItem(str(round(self.text_list[i]['constraints']['right']['percentage']*100,2))))
