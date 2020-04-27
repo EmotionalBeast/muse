@@ -13,18 +13,18 @@ class Ui_PaintWindow(object):
 
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(270, 480)
-        Form.setFixedSize(270, 480)
+        Form.resize(self.width, self.height)
+        Form.setFixedSize(self.width, self.height)
         
         # 定义界面控件
         self.graphicsView = QtWidgets.QGraphicsView(Form)
-        self.graphicsView.setGeometry(QtCore.QRect(0, 0, 270, 480))
+        self.graphicsView.setGeometry(QtCore.QRect(0, 0, self.width, self.height))
         self.graphicsView.setObjectName("graphicsView")
         self.graphicsView.setStyleSheet("padding: 0px; border: 0px;")
         
         # 定义一个空场景
         self.scene = QtWidgets.QGraphicsScene()
-        self.scene.setSceneRect(0,0,270,480)
+        self.scene.setSceneRect(0,0,self.width,self.height)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)

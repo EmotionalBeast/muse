@@ -2,32 +2,36 @@
 import sys,json,os
 from PyQt5.QtWidgets import (QWidget, QApplication, QFileDialog, QMessageBox, 
 								QGraphicsScene, QLabel, QGraphicsItem, QGraphicsProxyWidget, QGraphicsSimpleTextItem)
-from PyQt5.QtGui import QPixmap, QImage, QFontDatabase
+from PyQt5.QtGui import QPixmap, QImage, QFontDatabase, QMatrix4x4
 from PyQt5.QtCore import QRect, Qt
 from PaintWindowUi import Ui_PaintWindow
 from PIL import Image, ImageFilter
 
-PROPORTION_16_9 = (750, 1334)
-PROPORTION_1_1 = (750, 750)
+PROPORTION_16_9 = (375, 667)
+PROPORTION_1_1 = (375, 375)
+import os
+
 class MyPaintWindow(QWidget, Ui_PaintWindow):
 	def __init__(self,objPath,templatePath):
 		super(MyPaintWindow,self).__init__()
-		self.setupUi(self)
 		
 		# 读取setting.json,获取workspace路径
 		with open("./resources/json/setting.json") as lf:
 			jsonStr = lf.read()
 			dic = json.loads(jsonStr, strict = False)
 		self.num = templatePath.rsplit("-",1)[1]
+		self.template = templatePath.rsplit("-",1)[0]
 		self.path = dic["directory"] + "/" + objPath + "/in/" + self.num
 
 		# self.loadFont()
 		self.analyseJson()
+		self.setupUi(self)
 		self.setLayout()
 
 	# 获取已经保存的template.json
 	def getJsonDic(self):
-		with open(self.path + "/template.json") as lf:
+		path = os.path.join(self.path, self.template)
+		with open(path) as lf:
 			size = os.path.getsize(self.path)
 			if size != 0:
 				jsonStr = lf.read()
@@ -42,6 +46,8 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		self.text = []
 		self.blur = []
 		self.png = ""
+		self.width = 0
+		self.height = 0
 		dic = self.getJsonDic()
 		if dic != 0:
 			for i in range(len(dic["elements"])):
@@ -52,7 +58,12 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 				if "blur" in dic["elements"][i]:
 					self.blur.append(dic["elements"][i])
 				if "imageName" in dic["elements"][i]:
-    				self.png = dic["elements"][i]["imageName"]
+					self.png = dic["elements"][i]["imageName"]
+					tmp = self.png.split(".", 1)[0]
+					if tmp[-3:] == "1_1":
+						self.width, self.height = PROPORTION_1_1
+					else:
+						self.width, self.height = PROPORTION_16_9
 
 	def setLayout(self):
 		# 初始化graphicScene,添加cell
@@ -65,7 +76,8 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 			right = self.cell[i]["constraints"]["right"]["percentage"]
 			top = self.cell[i]["constraints"]["top"]["percentage"]
 			height = self.cell[i]["constraints"]["height"]["percentage"]
-			cell_dic = {"left":left, "right":right, "top":top, "height":height}
+			rotation = self.cell[i]["rotation"]
+			cell_dic = {"left":left, "right":right, "top":top, "height":height, "rotation":rotation}
 			self.setCell(i, **cell_dic)
 
 		# 初始化graphicScene,添加背景
@@ -92,14 +104,15 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		image = QImage()
 		image.load(pic)
 		pixmap = QPixmap.fromImage(image)
-		fitPixmap = pixmap.scaled(270, 480)
+		fitPixmap = pixmap.scaled(self.width, self.height)
 		self.scene.addPixmap(fitPixmap).setPos(0,0)
 
 	def setCell(self, count, **dic):
-		x = 270*dic["left"]
-		y = 480*dic["top"]
-		w = 270*(1-dic["left"]-dic["right"])
-		h =	480*dic["height"]
+		x = self.width * dic["left"]
+		y = self.height * dic["top"]
+		w = self.width * (1-dic["left"]-dic["right"])
+		h =	self.height * dic["height"]
+		r = dic["rotation"]
 		pic = "./resources/pictures/img_" + str(count+1) +".jpeg"
 		image = QImage()
 		image.load(pic)
@@ -108,10 +121,10 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		self.scene.addPixmap(fitPixmap).setPos(x,y)
 
 	def setText(self, **dic):
-		x = 270*dic["left"]
-		y = 480*dic["top"]
-		w = 270*(1-dic["left"]-dic["right"])
-		h = 480*(1-dic["top"])
+		x = self.width * dic["left"]
+		y = self.height * dic["top"]
+		w = self.width * (1-dic["left"]-dic["right"])
+		h = self.height * (1-dic["top"])
 		label = QLabel()
 		label.resize(w, h)
 		label.setText(dic["content"])
@@ -128,11 +141,11 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		self.scene.addWidget(label).setPos(x, y)
 
 	def setBg(self):
-		pic = self.path + "/template_widget_" + self.num + ".png"
+		png = os.path.join(self.path, self.png)
 		image = QImage()
-		image.load(pic)
+		image.load(png)
 		pixmap = QPixmap.fromImage(image)
-		fitPixmap = pixmap.scaled(270, 480, Qt.IgnoreAspectRatio, Qt.SmoothTransformation)
+		fitPixmap = pixmap.scaled(self.width, self.height, Qt.IgnoreAspectRatio, Qt.SmoothTransformation)
 		self.scene.addPixmap(fitPixmap)
 
 	# def loadFont(self):
