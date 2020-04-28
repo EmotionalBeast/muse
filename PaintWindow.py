@@ -2,8 +2,8 @@
 import sys,json,os
 from PyQt5.QtWidgets import (QWidget, QApplication, QFileDialog, QMessageBox, 
 								QGraphicsScene, QLabel, QGraphicsItem, QGraphicsProxyWidget, QGraphicsSimpleTextItem)
-from PyQt5.QtGui import QPixmap, QImage, QFontDatabase, QMatrix4x4
-from PyQt5.QtCore import QRect, Qt
+from PyQt5.QtGui import QPixmap, QImage, QFontDatabase
+from PyQt5.QtCore import QRect, Qt, QSize
 from PaintWindowUi import Ui_PaintWindow
 from PIL import Image, ImageFilter
 
@@ -116,9 +116,9 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		pic = "./resources/pictures/img_" + str(count+1) +".jpeg"
 		image = QImage()
 		image.load(pic)
-		pixmap = QPixmap.fromImage(image)
-		fitPixmap = pixmap.scaled(w, h)
-		self.scene.addPixmap(fitPixmap).setPos(x,y)
+		# pixmap = QPixmap.fromImage(image.scaled(QSize(w, h),Qt.IgnoreAspectRatio))
+		pixmap = QPixmap.fromImage(image.scaled(QSize(w, h),Qt.KeepAspectRatioByExpanding))
+		self.scene.addPixmap(pixmap).setPos(x,y)
 
 	def setText(self, **dic):
 		x = self.width * dic["left"]
