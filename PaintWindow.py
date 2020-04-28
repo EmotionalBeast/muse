@@ -2,7 +2,7 @@
 import sys,json,os
 from PyQt5.QtWidgets import (QWidget, QApplication, QFileDialog, QMessageBox, 
 								QGraphicsScene, QLabel, QGraphicsItem, QGraphicsProxyWidget, QGraphicsSimpleTextItem)
-from PyQt5.QtGui import QPixmap, QImage, QFontDatabase
+from PyQt5.QtGui import QPixmap, QImage, QFontDatabase, QFont
 from PyQt5.QtCore import QRect, Qt, QSize
 from PaintWindowUi import Ui_PaintWindow
 from PIL import Image, ImageFilter
@@ -113,12 +113,15 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		w = self.width * (1-dic["left"]-dic["right"])
 		h =	self.height * dic["height"]
 		r = dic["rotation"]
-		pic = "./resources/pictures/img_" + str(count+1) +".jpeg"
-		image = QImage()
-		image.load(pic)
-		# pixmap = QPixmap.fromImage(image.scaled(QSize(w, h),Qt.IgnoreAspectRatio))
-		pixmap = QPixmap.fromImage(image.scaled(QSize(w, h),Qt.KeepAspectRatioByExpanding))
-		self.scene.addPixmap(pixmap).setPos(x,y)
+		color = ["#F0F8FF", "#70DB93", "#5C3317", "#9F5F9F", "#B5A642", "#D9D919", "#A62AA2", "#8C7853", "#A67D3D"]
+		if count < 9:
+			style = "background-color:" + color[count]
+		else:
+			style = "background-color:" + color[count-9]
+		label = QLabel()
+		label.resize(w, h)
+		label.setStyleSheet(style)
+		self.scene.addWidget(label).setPos(x, y)
 
 	def setText(self, **dic):
 		x = self.width * dic["left"]
@@ -134,11 +137,12 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 			label.setAlignment(Qt.AlignTop | Qt.AlignLeft)
 		else:
 			label.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
-		fontNum = int(dic["size"]*0.48)
-		font = "color: #" + dic["color"] + ";background-color: transparent" + ";font-size:" + str(fontNum) + "px" 
-		label.setStyleSheet(font)
-		label.setWordWrap(True)
+		fontStyle = "color:#" + dic["color"] + ";background-color:transparent;" + "font-size:" + str(int(dic["size"])) + "px;" #font-family
+		print(fontStyle) 
+		print(x, y)
+		label.setStyleSheet(fontStyle)
 		self.scene.addWidget(label).setPos(x, y)
+
 
 	def setBg(self):
 		png = os.path.join(self.path, self.png)
