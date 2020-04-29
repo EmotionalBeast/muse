@@ -339,7 +339,10 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					self.tableWidget_4.setItem(i,11,QTableWidgetItem(self.text_list[i]['id']))
 					self.tableWidget_4.setItem(i,12,QTableWidgetItem(self.text_list[i]['type']))
 					self.tableWidget_4.setItem(i,13,QTableWidgetItem(self.text_list[i]['textId']))
-					self.tableWidget_4.cellWidget(i,0).setCurrentText(self.dict2[self.text_list[i]["fontName"]])
+					if self.text_list[i]["fontName"] in self.dict2.keys():
+						self.tableWidget_4.cellWidget(i,0).setCurrentText(self.dict2[self.text_list[i]["fontName"]])
+					else:
+						self.tableWidget_4.cellWidget(i, 0).setCurrentText(self.dict2["Perpetua"])
 					self.tableWidget_4.setItem(i,3,QTableWidgetItem(str(self.text_list[i]['fontSize'])))
 					if "canvasWidth" in self.text_list[i].keys():
 						self.tableWidget_4.setItem(i,14,QTableWidgetItem(str(self.text_list[i]['canvasWidth'])))
