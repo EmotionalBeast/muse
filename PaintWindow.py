@@ -7,8 +7,8 @@ from PyQt5.QtCore import QRect, Qt, QSize
 from PaintWindowUi import Ui_PaintWindow
 from PIL import Image, ImageFilter
 
-PROPORTION_16_9 = (375, 667)
-PROPORTION_1_1 = (375, 375)
+PROPORTION_16_9 = (450, 800)
+PROPORTION_1_1 = (450, 450)
 import os
 
 class MyPaintWindow(QWidget, Ui_PaintWindow):
