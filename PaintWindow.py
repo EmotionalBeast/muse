@@ -11,7 +11,7 @@ PROPORTION_16_9 = (450, 800)
 PROPORTION_1_1 = (450, 450)
 import os
 
-RESOURCES = os.path.join(os.getcwd(), "resources")
+RESOURCES = os.path.join(os.path.dirname(__file__), "resources")
 
 class MyPaintWindow(QWidget, Ui_PaintWindow):
 	def __init__(self,objPath,templatePath):
@@ -79,7 +79,10 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 			right = self.cell[i]["constraints"]["right"]["percentage"]
 			top = self.cell[i]["constraints"]["top"]["percentage"]
 			height = self.cell[i]["constraints"]["height"]["percentage"]
-			rotation = self.cell[i]["rotation"]
+			if "rotation" in self.cell[i].keys():
+				rotation = self.cell[i]["rotation"]
+			else:
+				rotation = 0
 			cell_dic = {"left":left, "right":right, "top":top, "height":height, "rotation":rotation}
 			self.setCell(i, **cell_dic)
 
@@ -117,6 +120,7 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		h =	self.height * dic["height"]
 		print(os.getcwd())
 		r = dic["rotation"]
+		print(r)
 		color = ["#70DB93", "#5C3317", "#9F5F9F", "#B5A642", "#D9D919", "#A62AA2", "#8C7853", "#A67D3D", "#F0F8FF"]
 		if count < 9:
 			style = "background-color:" + color[count]
@@ -150,6 +154,10 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 
 	def setBg(self):
 		png = os.path.join(self.path, self.png)
+		print(RESOURCES)
+		print(self.template)
+		print(self.png)
+		print(self.path)
 		image = QImage()
 		image.load(png)
 		pixmap = QPixmap.fromImage(image)
