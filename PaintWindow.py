@@ -11,20 +11,17 @@ PROPORTION_16_9 = (450, 800)
 PROPORTION_1_1 = (450, 450)
 import os
 
-RESOURCES = os.path.join(os.path.dirname(__file__), "resources")
-
 class MyPaintWindow(QWidget, Ui_PaintWindow):
 	def __init__(self,objPath,templatePath):
 		super(MyPaintWindow,self).__init__()
 		
 		# 读取setting.json,获取workspace路径
-		jsonPath = os.path.join(RESOURCES, "json", "setting.json")
-		with open(jsonPath) as lf:
+		with open("./resources/json/setting.json") as lf:
 			jsonStr = lf.read()
 			dic = json.loads(jsonStr, strict = False)
 		self.num = templatePath.rsplit("-",1)[1]
 		self.template = templatePath.rsplit("-",1)[0]
-		self.path = os.path.join(dic["directory"], objPath, "in", self.num)
+		self.path = dic["directory"] + "/" + objPath + "/in/" + self.num
 
 		# self.loadFont()
 		self.analyseJson()
@@ -33,7 +30,7 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 
 	# 获取已经保存的template.json
 	def getJsonDic(self):
-		path = os.path.join(self.path, self.template)
+		path = self.path + "/" + self.template
 		with open(path) as lf:
 			size = os.path.getsize(self.path)
 			if size != 0:
@@ -106,7 +103,7 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		self.graphicsView.setScene(self.scene)
 
 	def setBlur(self):
-		pic = os.path.join(RESOURCES, "pictures", "img_1.png")
+		pic = "./resources/pictures/img_1.png"
 		image = QImage()
 		image.load(pic)
 		pixmap = QPixmap.fromImage(image)
@@ -118,7 +115,6 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		y = self.height * dic["top"]
 		w = self.width * (1-dic["left"]-dic["right"])
 		h =	self.height * dic["height"]
-		print(os.getcwd())
 		r = dic["rotation"]
 		print(r)
 		color = ["#70DB93", "#5C3317", "#9F5F9F", "#B5A642", "#D9D919", "#A62AA2", "#8C7853", "#A67D3D", "#F0F8FF"]
@@ -153,11 +149,7 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 
 
 	def setBg(self):
-		png = os.path.join(self.path, self.png)
-		print(RESOURCES)
-		print(self.template)
-		print(self.png)
-		print(self.path)
+		png = self.path + "/" + self.png
 		image = QImage()
 		image.load(png)
 		pixmap = QPixmap.fromImage(image)

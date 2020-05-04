@@ -62,5 +62,7 @@ if __name__ == "__main__":
 #     print(b)
 
 # test()
-print(1-1)
-test = template_widget_1389_1_1.
+# print(1-1)
+# test = template_widget_1389_1_1.
+os.path.sep = "\\\\"
+print(os.path.sep)
