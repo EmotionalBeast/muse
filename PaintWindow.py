@@ -32,7 +32,7 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 	def getJsonDic(self):
 		path = self.path + "/" + self.template
 		with open(path) as lf:
-			size = os.path.getsize(self.path)
+			size = os.path.getsize(path)
 			if size != 0:
 				jsonStr = lf.read()
 				dic = json.loads(jsonStr, strict = False)
