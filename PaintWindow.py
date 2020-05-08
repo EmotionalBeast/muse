@@ -1,7 +1,7 @@
 # coding: utf-8
 import sys,json,os
 from PyQt5.QtWidgets import (QWidget, QApplication, QFileDialog, QMessageBox, 
-								QGraphicsScene, QLabel, QGraphicsItem, QGraphicsProxyWidget, QGraphicsSimpleTextItem)
+								QGraphicsScene, QLabel, QGraphicsItem, QGraphicsProxyWidget, QGraphicsSimpleTextItem, QFrame)
 from PyQt5.QtGui import QPixmap, QImage, QFontDatabase, QFont
 from PyQt5.QtCore import QRect, Qt, QSize
 from PaintWindowUi import Ui_PaintWindow
@@ -85,6 +85,19 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 
 		# 初始化graphicScene,添加背景
 		self.setBg()
+
+		#设置边框
+		for i in range(len(self.cell)):
+			left = self.cell[i]["constraints"]["left"]["percentage"] 
+			right = self.cell[i]["constraints"]["right"]["percentage"]
+			top = self.cell[i]["constraints"]["top"]["percentage"]
+			height = self.cell[i]["constraints"]["height"]["percentage"]
+			if "rotation" in self.cell[i].keys():
+				rotation = self.cell[i]["rotation"]
+			else:
+				rotation = 0
+			cell_dic = {"left":left, "right":right, "top":top, "height":height, "rotation":rotation}
+			self.setCellBorder(i, **cell_dic)
  
 		# 初始化graphicScene,添加文字
 		for i in range(len(self.text)):
@@ -98,6 +111,7 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 			top = self.text[i]["constraints"]["top"]["percentage"]
 			text_dic = {"font":font, "size":size, "color":color, "content":content, "alignment":alignment, "left":left, "right":right, "top":top}
 			self.setText(**text_dic)
+
 
 		# 将graphicsScene放置在当前的graphicView中
 		self.graphicsView.setScene(self.scene)
@@ -116,7 +130,6 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		w = self.width * (1-dic["left"]-dic["right"])
 		h =	self.height * dic["height"]
 		r = dic["rotation"]
-		print(r)
 		color = ["#70DB93", "#5C3317", "#9F5F9F", "#B5A642", "#D9D919", "#A62AA2", "#8C7853", "#A67D3D", "#F0F8FF"]
 		if count < 9:
 			style = "background-color:" + color[count]
@@ -126,6 +139,20 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		label.resize(w, h)
 		label.setStyleSheet(style)
 		self.scene.addWidget(label).setPos(x, y)
+	
+	def setCellBorder(self, count, **dic):
+		x = self.width * dic["left"]
+		y = self.height * dic["top"]
+		w = self.width * (1-dic["left"]-dic["right"])
+		h =	self.height * dic["height"]
+		r = dic["rotation"]
+		label = QLabel()
+		label.resize(w, h)
+		label.setFrameShape(QFrame.Box)
+		label.setStyleSheet("background-color:transparent")
+		self.scene.addWidget(label).setPos(x, y)
+
+
 
 	def setText(self, **dic):
 		x = self.width * dic["left"]

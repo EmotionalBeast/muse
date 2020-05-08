@@ -34,3 +34,4 @@ PyQt5 shutil pillow json
 2020/05/07
 1、自由添加删除表格一行数据
 2、背景有颜色值（16进制RGB）
+3、"background_line_color": "",
