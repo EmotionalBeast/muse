@@ -117,7 +117,7 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		self.graphicsView.setScene(self.scene)
 
 	def setBlur(self):
-		pic = "./resources/pictures/img_1.png"
+		pic = "./resources/pictures/img_1.jpeg"
 		image = QImage()
 		image.load(pic)
 		pixmap = QPixmap.fromImage(image)
@@ -149,9 +149,8 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		label = QLabel()
 		label.resize(w, h)
 		label.setFrameShape(QFrame.Box)
-		label.setStyleSheet("background-color:transparent")
+		label.setStyleSheet("border:1px solid red;background-color:transparent")
 		self.scene.addWidget(label).setPos(x, y)
-
 
 
 	def setText(self, **dic):
@@ -172,6 +171,7 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		print(fontStyle) 
 		print(x, y)
 		label.setStyleSheet(fontStyle)
+		# label.setFont()
 		self.scene.addWidget(label).setPos(x, y)
 
 
