@@ -115,6 +115,11 @@ class Ui_MainWindow(object):
         self.cbox_4.setText("背景可替换")
         self.cbox_4.setObjectName("cbox_4")
 
+        self.lineEdit_1 = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_1.setGeometry(QtCore.QRect(395,95,60,20))
+        self.lineEdit_1.setObjectName("lineEdit_1")
+        self.lineEdit_1.setText("FFFFFF")
+
         #第二行
         self.cbox_3 = QtWidgets.QCheckBox(self.centralwidget)
         self.cbox_3.setGeometry(QtCore.QRect(545,90,100,30))

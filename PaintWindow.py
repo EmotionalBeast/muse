@@ -48,8 +48,11 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		self.png = ""
 		self.width = 0
 		self.height = 0
+		self.background = ""
 		dic = self.getJsonDic()
 		if dic != 0:
+			if "background" in dic.keys():
+				self.background = dic["background"]
 			for i in range(len(dic["elements"])):
 				if "mediaId" in dic["elements"][i]:
 					self.cell.append(dic["elements"][i])
@@ -68,6 +71,8 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 	def setLayout(self):
 		# 初始化graphicScene,添加cell
 		#特殊模版，背景虚化
+		if self.background != "":
+			self.setBgColor()
 		if len(self.blur) != 0:
 			self.setBlur()
 		#普通cell
@@ -106,10 +111,11 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 			color = self.text[i]["textColor"]
 			content = self.text[i]["placeHolder"]
 			alignment = self.text[i]["textAlignment"]
+			angle = self.text[i]["angle"]
 			left = self.text[i]["constraints"]["left"]["percentage"]
 			right = self.text[i]["constraints"]["right"]["percentage"]
 			top = self.text[i]["constraints"]["top"]["percentage"]
-			text_dic = {"font":font, "size":size, "color":color, "content":content, "alignment":alignment, "left":left, "right":right, "top":top}
+			text_dic = {"font":font, "size":size, "color":color, "content":content, "alignment":alignment, "left":left, "right":right, "top":top, "angle":angle}
 			self.setText(**text_dic)
 
 
@@ -167,12 +173,14 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 			label.setAlignment(Qt.AlignTop | Qt.AlignLeft)
 		else:
 			label.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
-		fontStyle = "color:#" + dic["color"] + ";background-color:transparent;" + "font-size:" + str(int(dic["size"])) + "px;" #font-family
-		print(fontStyle) 
+		fontStyle = "color:#" + dic["color"] + ";background-color:transparent;" + "font-size:" + str(round(dic["size"]*1.2)) + "px;" #font-family
+		print(fontStyle)
 		print(x, y)
+		label.setWordWrap(True) #文本自动换行
 		label.setStyleSheet(fontStyle)
 		# label.setFont()
 		self.scene.addWidget(label).setPos(x, y)
+		
 
 
 	def setBg(self):
@@ -182,6 +190,13 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		pixmap = QPixmap.fromImage(image)
 		fitPixmap = pixmap.scaled(self.width, self.height, Qt.IgnoreAspectRatio, Qt.SmoothTransformation)
 		self.scene.addPixmap(fitPixmap)
+
+	def setBgColor(self):
+		color = "background-color:#" + self.background
+		label = QLabel()
+		label.resize(self.width, self.height)
+		label.setStyleSheet(color)
+		self.scene.addWidget(label).setPos(0, 0)
 
 	# def loadFont(self):
 	# 	self.fonts = []

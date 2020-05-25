@@ -1,4 +1,4 @@
- # -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 #author: Jhin Yao
 """
 重要的是saveTable和resolveJson方法
@@ -205,6 +205,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.cbox_3.setChecked(True)
 			if "background" in self.dic.keys():
 				self.cbox_4.setChecked(True)
+				self.lineEdit_1.setText(self.dic["background"])
 			item = self.dic["elements"]
 			for i in range(len(item)):
 				if "blur" in item[i].keys():
@@ -622,7 +623,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					dic["version"] = "1.1"
 					dic["elements"] = []
 					if self.cbox_4.isChecked():
-						dic["background"] = "FFFFFF"
+						dic["background"] = self.lineEdit_1.text()
 					if self.cbox_3.isChecked():
 						dic['animation'] = self.ani_dic
 					for i in range(len(self.item)):
