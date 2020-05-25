@@ -106,7 +106,7 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
  
 		# 初始化graphicScene,添加文字
 		for i in range(len(self.text)):
-			font = self.text[i]["fontName"]
+			fontName = self.text[i]["fontName"]
 			size = self.text[i]["fontSize"]
 			color = self.text[i]["textColor"]
 			content = self.text[i]["placeHolder"]
@@ -115,7 +115,7 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 			left = self.text[i]["constraints"]["left"]["percentage"]
 			right = self.text[i]["constraints"]["right"]["percentage"]
 			top = self.text[i]["constraints"]["top"]["percentage"]
-			text_dic = {"font":font, "size":size, "color":color, "content":content, "alignment":alignment, "left":left, "right":right, "top":top, "angle":angle}
+			text_dic = {"fontName":fontName, "size":size, "color":color, "content":content, "alignment":alignment, "left":left, "right":right, "top":top, "angle":angle}
 			self.setText(**text_dic)
 
 
@@ -174,13 +174,17 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		else:
 			label.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
 		fontStyle = "color:#" + dic["color"] + ";background-color:transparent;" + "font-size:" + str(round(dic["size"]*1.2)) + "px;" #font-family
-		print(fontStyle)
-		print(x, y)
 		label.setWordWrap(True) #文本自动换行
 		label.setStyleSheet(fontStyle)
-		# label.setFont()
+		label.setFont(self.getFont(dic["fontName"]))
 		self.scene.addWidget(label).setPos(x, y)
-		
+
+	def getFont(self,fontName):
+		fontId = QFontDatabase.addApplicationFont("./resources/fonts/570-CAI978.ttf")
+		print(fontId)
+		fontFamilies = QFontDatabase.applicationFontFamilies(fontId)
+		print(fontFamilies)
+		return QFont().setFamily(fontFamilies[0])	
 
 
 	def setBg(self):
