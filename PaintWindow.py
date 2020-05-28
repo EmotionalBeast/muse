@@ -6,6 +6,7 @@ from PyQt5.QtGui import QPixmap, QImage, QFontDatabase, QFont
 from PyQt5.QtCore import QRect, Qt, QSize
 from PaintWindowUi import Ui_PaintWindow
 from PIL import Image, ImageFilter
+from math import sqrt
 
 PROPORTION_16_9 = (450, 800)
 PROPORTION_1_1 = (450, 450)
@@ -23,7 +24,6 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		self.template = templatePath.rsplit("-",1)[0]
 		self.path = dic["directory"] + "/" + objPath + "/in/" + self.num
 
-		# self.loadFont()
 		self.analyseJson()
 		self.setupUi(self)
 		self.setLayout()
@@ -135,6 +135,7 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		y = self.height * dic["top"]
 		w = self.width * (1-dic["left"]-dic["right"])
 		h =	self.height * dic["height"]
+		max = sqrt(w*w + h*h)
 		r = dic["rotation"]
 		color = ["#70DB93", "#5C3317", "#9F5F9F", "#B5A642", "#D9D919", "#A62AA2", "#8C7853", "#A67D3D", "#F0F8FF"]
 		if count < 9:
@@ -142,26 +143,40 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		else:
 			style = "background-color:" + color[count-9]
 		label = QLabel()
+		label.resize(w, h)
 		label.setStyleSheet(style)
 		scene = QGraphicsScene()
 		scene.addWidget(label)
 		view = QGraphicsView(scene)
-		view.setGeometry(x, y, w, h)
-		# label.resize(w, h)
-		# label.setStyleSheet(style)
-		# self.scene.addWidget(label).setPos(x, y)
+		view.resize(max, max)
+		view.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+		view.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+		view.rotate(r)
+		view.setStyleSheet("background-color:transparent")
+		self.scene.addWidget(view).setPos(x-(max-w)/2, y-(max-h)/2)
+		
 	
 	def setCellBorder(self, count, **dic):
 		x = self.width * dic["left"]
 		y = self.height * dic["top"]
 		w = self.width * (1-dic["left"]-dic["right"])
 		h =	self.height * dic["height"]
+		max = sqrt(w*w + h*h)
 		r = dic["rotation"]
 		label = QLabel()
 		label.resize(w, h)
 		label.setFrameShape(QFrame.Box)
-		label.setStyleSheet("border:1px solid red;background-color:transparent")
-		self.scene.addWidget(label).setPos(x, y)
+		label.setStyleSheet("border:1px solid red;background-color:transparent") #transparent
+		scene = QGraphicsScene()
+		scene.addWidget(label)
+		view = QGraphicsView(scene)
+		view.resize(max, max)
+		view.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+		view.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+		view.rotate(r)
+		view.setStyleSheet("background-color:transparent")
+		self.scene.addWidget(view).setPos(x-(max-w)/2, y-(max-h)/2)
+
 
 
 	def setText(self, **dic):
@@ -169,6 +184,8 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		y = self.height * dic["top"]
 		w = self.width * (1-dic["left"]-dic["right"])
 		h = self.height * (1-dic["top"])
+		# max = sqrt(w*w + h*h)
+		# r = dic["angle"]
 		label = QLabel()
 		label.resize(w, h)
 		label.setText(dic["content"])
@@ -179,13 +196,21 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		else:
 			label.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
 		fontStyle = "color:#" + dic["color"] + ";background-color:transparent;" + "font-size:" + str(round(dic["size"]*1.2)) + "px;" #font-family
-		label.setWordWrap(True)    #文本自动换行
+		label.setWordWrap(True)    #文本自动换行 transparent
 		label.setStyleSheet(fontStyle)
 		label.setFont(QFont(dic["fontName"]))
+		# scene = QGraphicsScene()
+		# scene.addWidget(label)
+		# view = QGraphicsView(scene)
+		# view.resize(max, max)
+		# view.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+		# view.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+		# view.rotate(r)
+		# view.setStyleSheet("background-color:transparent")
+		# self.scene.addWidget(view).setPos(x-(max-w)/2, y-(max-h)/2)
 		self.scene.addWidget(label).setPos(x, y)
+
 		
-
-
 	def setBg(self):
 		png = self.path + "/" + self.png
 		image = QImage()
@@ -201,13 +226,8 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		label.setStyleSheet(color)
 		self.scene.addWidget(label).setPos(0, 0)
 
-	# def loadFont(self):
-	# 	self.fonts = []
-	# 	for root,dirs,files in os.walk("./resources/fonts"):
-	# 		for file in files:
-	# 			if file[-3:] == "tty":
-	# 				num = QFontDatabase.addApplicationFont(root + "/" + file)
-	# 				self.fonts.append(num)
+
+
 
 
 
