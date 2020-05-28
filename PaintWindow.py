@@ -1,7 +1,7 @@
 # coding: utf-8
 import sys,json,os
 from PyQt5.QtWidgets import (QWidget, QApplication, QFileDialog, QMessageBox, 
-								QGraphicsScene, QLabel, QGraphicsItem, QGraphicsProxyWidget, QGraphicsSimpleTextItem, QFrame)
+								QGraphicsScene, QGraphicsView, QLabel, QGraphicsItem, QGraphicsProxyWidget, QGraphicsSimpleTextItem, QFrame)
 from PyQt5.QtGui import QPixmap, QImage, QFontDatabase, QFont
 from PyQt5.QtCore import QRect, Qt, QSize
 from PaintWindowUi import Ui_PaintWindow
@@ -142,9 +142,14 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		else:
 			style = "background-color:" + color[count-9]
 		label = QLabel()
-		label.resize(w, h)
 		label.setStyleSheet(style)
-		self.scene.addWidget(label).setPos(x, y)
+		scene = QGraphicsScene()
+		scene.addWidget(label)
+		view = QGraphicsView(scene)
+		view.setGeometry(x, y, w, h)
+		# label.resize(w, h)
+		# label.setStyleSheet(style)
+		# self.scene.addWidget(label).setPos(x, y)
 	
 	def setCellBorder(self, count, **dic):
 		x = self.width * dic["left"]
@@ -174,17 +179,11 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		else:
 			label.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
 		fontStyle = "color:#" + dic["color"] + ";background-color:transparent;" + "font-size:" + str(round(dic["size"]*1.2)) + "px;" #font-family
-		label.setWordWrap(True) #文本自动换行
+		label.setWordWrap(True)    #文本自动换行
 		label.setStyleSheet(fontStyle)
-		label.setFont(self.getFont(dic["fontName"]))
+		label.setFont(QFont(dic["fontName"]))
 		self.scene.addWidget(label).setPos(x, y)
-
-	def getFont(self,fontName):
-		fontId = QFontDatabase.addApplicationFont("./resources/fonts/570-CAI978.ttf")
-		print(fontId)
-		fontFamilies = QFontDatabase.applicationFontFamilies(fontId)
-		print(fontFamilies)
-		return QFont().setFamily(fontFamilies[0])	
+		
 
 
 	def setBg(self):
