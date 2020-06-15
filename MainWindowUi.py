@@ -26,8 +26,8 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         #设置主窗口，主窗口分为菜单栏，工具栏，状态栏，标题栏
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1000, 770)
-        MainWindow.setFixedSize(1000, 770)
+        MainWindow.resize(1000, 800)
+        MainWindow.setFixedSize(1000, 800)
         MainWindow.setWindowIcon(QtGui.QIcon('./resources/images/tool.png'))
 
         #主体部分添加控件
@@ -36,7 +36,7 @@ class Ui_MainWindow(object):
 
         #添加tabWidget到centralWidget
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
-        self.tabWidget.setGeometry(QtCore.QRect(0, 220, 1000, 550))
+        self.tabWidget.setGeometry(QtCore.QRect(0, 250, 1000, 550))
         self.tabWidget.setObjectName("tabWidget")
 
 
@@ -88,6 +88,7 @@ class Ui_MainWindow(object):
         self.label_4.setObjectName("label_4")
         self.spinBox_2 = QtWidgets.QSpinBox(self.centralwidget)
         self.spinBox_2.setGeometry(QtCore.QRect(485, 50, 100, 30))
+        self.spinBox_2.setValue(1)
 
         self.label_5 = QtWidgets.QLabel(self.centralwidget)
         self.label_5.setGeometry(QtCore.QRect(685, 50, 60, 30))
@@ -100,47 +101,60 @@ class Ui_MainWindow(object):
 
         #增加RadioButton
         #第一行
+        self.label_6 = QtWidgets.QLabel(self.centralwidget)
+        self.label_6.setGeometry(QtCore.QRect(50, 150, 100, 30))
+        self.label_6.setText("静态属性:")
+        self.label_6.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_6.setObjectName("label_6")
         self.cbox_1 = QtWidgets.QCheckBox(self.centralwidget)
-        self.cbox_1.setGeometry(QtCore.QRect(45,90,100,30))
+        self.cbox_1.setGeometry(QtCore.QRect(155,110,100,30))
         self.cbox_1.setText("背景虚化")
         self.cbox_1.setObjectName("cbox_1")
+        self.spinBox_4 = QtWidgets.QSpinBox(self.centralwidget)
+        self.spinBox_4.setGeometry(QtCore.QRect(265, 110, 50, 30))
+        self.spinBox_4.setValue(1)
 
         self.cbox_2 = QtWidgets.QCheckBox(self.centralwidget)
-        self.cbox_2.setGeometry(QtCore.QRect(165,90,100,30))
+        self.cbox_2.setGeometry(QtCore.QRect(155,150,100,30))
         self.cbox_2.setText("图片重叠")
         self.cbox_2.setObjectName("cbox_2")
 
         self.cbox_4 = QtWidgets.QCheckBox(self.centralwidget)
-        self.cbox_4.setGeometry(QtCore.QRect(285,90,100,30))
+        self.cbox_4.setGeometry(QtCore.QRect(155,190,100,30))
         self.cbox_4.setText("背景可替换")
         self.cbox_4.setObjectName("cbox_4")
 
         self.lineEdit_1 = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEdit_1.setGeometry(QtCore.QRect(395,95,60,20))
+        self.lineEdit_1.setGeometry(QtCore.QRect(265,195,60,20))
         self.lineEdit_1.setObjectName("lineEdit_1")
         self.lineEdit_1.setText("FFFFFF")
 
         #第二行
+        self.label_7 = QtWidgets.QLabel(self.centralwidget)
+        self.label_7.setGeometry(QtCore.QRect(545,150,100,30))
+        self.label_7.setText("动态素材：")
+        self.label_7.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_7.setObjectName("label_7")
         self.cbox_3 = QtWidgets.QCheckBox(self.centralwidget)
-        self.cbox_3.setGeometry(QtCore.QRect(545,90,100,30))
+        self.cbox_3.setGeometry(QtCore.QRect(645,110,100,30))
         self.cbox_3.setText("动效素材")
         self.cbox_3.setObjectName("cbox_3")
 
 
         self.cbox_5 = QtWidgets.QCheckBox(self.centralwidget)
-        self.cbox_5.setGeometry(QtCore.QRect(665,90,110,30))
+        self.cbox_5.setGeometry(QtCore.QRect(645,150,110,30))
         self.cbox_5.setText("动效文字")
         self.cbox_5.setObjectName("cbox_5")
 
         self.cbox_6 = QtWidgets.QCheckBox(self.centralwidget)
-        self.cbox_6.setGeometry(QtCore.QRect(785,90,100,30))
+        self.cbox_6.setGeometry(QtCore.QRect(645,190,100,30))
         self.cbox_6.setText("忽略")
         self.cbox_6.setObjectName("cbox_6")
 
 
         #增加button
         self.pbtn_1 = QtWidgets.QPushButton(self.centralwidget)
-        self.pbtn_1.setGeometry(QtCore.QRect(45,140,150,60))
+        self.pbtn_1.setGeometry(QtCore.QRect(825,120,150,100))
         self.pbtn_1.setText("生成")
         self.pbtn_1.setObjectName("pbtn_1")
 
@@ -378,11 +392,11 @@ class Ui_MainWindow(object):
         self.tab_1 = QtWidgets.QWidget()
         self.tab_1.setObjectName("tab_1")
         self.tableWidget_1 = QtWidgets.QTableWidget(self.tab_1)
-        self.tableWidget_1.setColumnCount(12)
+        self.tableWidget_1.setColumnCount(13)
         self.tableWidget_1.setGeometry(QtCore.QRect(0, 0, 1000, 450))
         self.tableWidget_1.setObjectName("tableWidget_1")
 
-        for i in range(12):
+        for i in range(13):
             item = QtWidgets.QTableWidgetItem()
             self.tableWidget_1.setHorizontalHeaderItem(i, item)
         self.tabWidget.addTab(self.tab_1, "")
@@ -392,29 +406,31 @@ class Ui_MainWindow(object):
         #虚化背景表格的顶栏字段
         _translate = QtCore.QCoreApplication.translate
 
-        item = self.tableWidget_1.horizontalHeaderItem(0)
-        item.setText(_translate("MainWindow", "id"))
-        item = self.tableWidget_1.horizontalHeaderItem(1)
-        item.setText(_translate("MainWindow", "type"))
-        item = self.tableWidget_1.horizontalHeaderItem(2)
-        item.setText(_translate("MainWindow", "blur"))
-        item = self.tableWidget_1.horizontalHeaderItem(3)
-        item.setText(_translate("MainWindow", "refId"))
-        item = self.tableWidget_1.horizontalHeaderItem(4)
-        item.setText(_translate("MainWindow", "lelft_percentage"))
-        item = self.tableWidget_1.horizontalHeaderItem(5)
-        item.setText(_translate("MainWindow", "left_constant"))
-        item = self.tableWidget_1.horizontalHeaderItem(6)
-        item.setText(_translate("MainWindow", "right_percentage"))
         item = self.tableWidget_1.horizontalHeaderItem(7)
-        item.setText(_translate("MainWindow", "right_constant"))
+        item.setText(_translate("MainWindow", "总编号"))
         item = self.tableWidget_1.horizontalHeaderItem(8)
-        item.setText(_translate("MainWindow", "top_percentage"))
+        item.setText(_translate("MainWindow", "类型"))
+        item = self.tableWidget_1.horizontalHeaderItem(4)
+        item.setText(_translate("MainWindow", "虚化")) #1，10
+        item = self.tableWidget_1.horizontalHeaderItem(5)
+        item.setText(_translate("MainWindow", "关联编号"))
+        item = self.tableWidget_1.horizontalHeaderItem(6)
+        item.setText(_translate("MainWindow", "旋转角度"))
+        item = self.tableWidget_1.horizontalHeaderItem(0)
+        item.setText(_translate("MainWindow", "左边距离"))
         item = self.tableWidget_1.horizontalHeaderItem(9)
-        item.setText(_translate("MainWindow", "top_constant"))
+        item.setText(_translate("MainWindow", "left_constant"))
+        item = self.tableWidget_1.horizontalHeaderItem(1)
+        item.setText(_translate("MainWindow", "右边距离"))
         item = self.tableWidget_1.horizontalHeaderItem(10)
-        item.setText(_translate("MainWindow", "bottom_percentage"))
+        item.setText(_translate("MainWindow", "right_constant"))
+        item = self.tableWidget_1.horizontalHeaderItem(2)
+        item.setText(_translate("MainWindow", "顶部距离"))
         item = self.tableWidget_1.horizontalHeaderItem(11)
+        item.setText(_translate("MainWindow", "top_constant"))
+        item = self.tableWidget_1.horizontalHeaderItem(3)
+        item.setText(_translate("MainWindow", "底部距离"))
+        item = self.tableWidget_1.horizontalHeaderItem(12)
         item.setText(_translate("MainWindow", "bottom_constant"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_1), _translate("MainWindow", "背景虚化"))
 

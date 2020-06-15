@@ -228,26 +228,31 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			self.spinBox_1.setValue(len(self.cell_list))
 			self.spinBox_2.setValue(len(self.bg_list))
 			self.spinBox_3.setValue(len(self.text_list))
+			self.spinBox_4.setValue(len(self.blur_list))
 
 	def initData(self, content):
 		self.resolveJson()
 		self.initTable()
 		#赋值blur表
 		if self.cbox_1.isChecked() == True:
-			self.tableWidget_1.setRowCount(1)
+			self.tableWidget_1.setRowCount(self.spinBox_4.value())
 			for i in range(len(self.blur_list)):
-				self.tableWidget_1.setItem(i,0,QTableWidgetItem(self.blur_list[i]['id']))
-				self.tableWidget_1.setItem(i,1,QTableWidgetItem(self.blur_list[i]['type']))
-				self.tableWidget_1.setItem(i,2,QTableWidgetItem(str(self.blur_list[i]['blur'])))
-				self.tableWidget_1.setItem(i,3,QTableWidgetItem(self.blur_list[i]['refId']))
-				self.tableWidget_1.setItem(i,4,QTableWidgetItem(str(self.blur_list[i]['constraints']['left']['percentage'])))
-				self.tableWidget_1.setItem(i,5,QTableWidgetItem(str(self.blur_list[i]['constraints']['left']['constant'])))
-				self.tableWidget_1.setItem(i,6,QTableWidgetItem(str(self.blur_list[i]['constraints']['right']['percentage'])))
-				self.tableWidget_1.setItem(i,7,QTableWidgetItem(str(self.blur_list[i]['constraints']['right']['constant'])))
-				self.tableWidget_1.setItem(i,8,QTableWidgetItem(str(self.blur_list[i]['constraints']['top']['percentage'])))
-				self.tableWidget_1.setItem(i,9,QTableWidgetItem(str(self.blur_list[i]['constraints']['top']['constant'])))
-				self.tableWidget_1.setItem(i,10,QTableWidgetItem(str(self.blur_list[i]['constraints']['bottom']['percentage'])))
-				self.tableWidget_1.setItem(i,11,QTableWidgetItem(str(self.blur_list[i]['constraints']['bottom']['constant'])))
+				self.tableWidget_1.setItem(i,7,QTableWidgetItem(self.blur_list[i]['id']))
+				self.tableWidget_1.setItem(i,8,QTableWidgetItem(self.blur_list[i]['type']))
+				self.tableWidget_1.setItem(i,4,QTableWidgetItem(str(self.blur_list[i]['blur'])))
+				self.tableWidget_1.setItem(i,5,QTableWidgetItem(self.blur_list[i]['refId']))
+				if "rotation" in self.blur_list[i].keys():
+					self.tableWidget_1.setItem(i,6,QTableWidgetItem(self.blur_list[i]['rotation']))
+				else:
+					self.tableWidget_1.setItem(i, 6, QTableWidgetItem("1"))
+				self.tableWidget_1.setItem(i,0,QTableWidgetItem(str(self.blur_list[i]['constraints']['left']['percentage'])))
+				self.tableWidget_1.setItem(i,9,QTableWidgetItem(str(self.blur_list[i]['constraints']['left']['constant'])))
+				self.tableWidget_1.setItem(i,1,QTableWidgetItem(str(self.blur_list[i]['constraints']['right']['percentage'])))
+				self.tableWidget_1.setItem(i,10,QTableWidgetItem(str(self.blur_list[i]['constraints']['right']['constant'])))
+				self.tableWidget_1.setItem(i,2,QTableWidgetItem(str(self.blur_list[i]['constraints']['top']['percentage'])))
+				self.tableWidget_1.setItem(i,11,QTableWidgetItem(str(self.blur_list[i]['constraints']['top']['constant'])))
+				self.tableWidget_1.setItem(i,3,QTableWidgetItem(str(self.blur_list[i]['constraints']['bottom']['percentage'])))
+				self.tableWidget_1.setItem(i,12,QTableWidgetItem(str(self.blur_list[i]['constraints']['bottom']['constant'])))
 		#赋值cell表
 		if self.spinBox_1.value() != 0:
 			if self.cbox_3.isChecked() == False:
@@ -456,7 +461,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 	def createTable(self):
 		self.initTable()
 		self.nonEditable()
-		count_1 = 0
+		count_1 = self.spinBox_4.value()
 		count_2 = self.spinBox_1.value()
 		count_3 = self.spinBox_2.value()
 		count_4 = self.spinBox_3.value()
@@ -472,20 +477,16 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		name = self.comBox_2.currentText()
 		#初始化blur表
 		if self.cbox_1.isChecked() == True:
-			count_1 = 1
 			self.tableWidget_1.setRowCount(count_1)
 			for i in range(count_1):
-				self.tableWidget_1.setItem(i,0,QTableWidgetItem(str(i)))
-				self.tableWidget_1.setItem(i,1,QTableWidgetItem("image"))
-				self.tableWidget_1.setItem(i,3,QTableWidgetItem(str(i+1)))
-				self.tableWidget_1.setItem(i,4,QTableWidgetItem("0"))
-				self.tableWidget_1.setItem(i,5,QTableWidgetItem("0"))
+				self.tableWidget_1.setItem(i,7,QTableWidgetItem(str(i)))
+				self.tableWidget_1.setItem(i,8,QTableWidgetItem("image"))
+				# self.tableWidget_1.setItem(i,5,QTableWidgetItem(str(count_1)))
 				self.tableWidget_1.setItem(i,6,QTableWidgetItem("0"))
-				self.tableWidget_1.setItem(i,7,QTableWidgetItem("0"))
-				self.tableWidget_1.setItem(i,8,QTableWidgetItem("0"))
 				self.tableWidget_1.setItem(i,9,QTableWidgetItem("0"))
 				self.tableWidget_1.setItem(i,10,QTableWidgetItem("0"))
 				self.tableWidget_1.setItem(i,11,QTableWidgetItem("0"))
+				self.tableWidget_1.setItem(i,12,QTableWidgetItem("0"))
 		#初始化cell表
 		if  self.cbox_3.isChecked() == False:
 			self.tableWidget_2.setRowCount(count_2)
@@ -701,20 +702,21 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 
 	def tableValues(self):
 		if self.cbox_1.isChecked() == True:
-			for i in range(1):
+			for i in range(self.spinBox_4.value()):
 				blur_dic = {}
-				blur_dic["id"] = self.tableWidget_1.item(i, 0).text()
-				blur_dic["type"] = self.tableWidget_1.item(i, 1).text()
-				blur_dic["blur"] = int(self.tableWidget_1.item(i, 2).text())
-				blur_dic["refId"] = self.tableWidget_1.item(i,3).text()
-				item_1 = self.tableWidget_1.item(i,4).text()
-				item_2 = self.tableWidget_1.item(i,5).text()
-				item_3 = self.tableWidget_1.item(i,6).text()
-				item_4 = self.tableWidget_1.item(i,7).text()
-				item_5 = self.tableWidget_1.item(i,8).text()
-				item_6 = self.tableWidget_1.item(i,9).text()
-				item_7 = self.tableWidget_1.item(i,10).text()
-				item_8 = self.tableWidget_1.item(i,11).text()
+				blur_dic["id"] = self.tableWidget_1.item(i, 7).text()
+				blur_dic["type"] = self.tableWidget_1.item(i, 8).text()
+				blur_dic["blur"] = int(self.tableWidget_1.item(i, 4).text())
+				blur_dic["refId"] = self.tableWidget_1.item(i,5).text()
+				blur_dic["rotation"] = float(self.tableWidget_1.item(i, 6).text())
+				item_1 = self.tableWidget_1.item(i,0).text()
+				item_2 = self.tableWidget_1.item(i,9).text()
+				item_3 = self.tableWidget_1.item(i,1).text()
+				item_4 = self.tableWidget_1.item(i,10).text()
+				item_5 = self.tableWidget_1.item(i,2).text()
+				item_6 = self.tableWidget_1.item(i,11).text()
+				item_7 = self.tableWidget_1.item(i,3).text()
+				item_8 = self.tableWidget_1.item(i,12).text()
 				blur_dic["constraints"] = {"left":{
 															"percentage": float(item_1),
 															"constant": float(item_2)
