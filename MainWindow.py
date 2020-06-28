@@ -242,9 +242,9 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_1.setItem(i,4,QTableWidgetItem(str(self.blur_list[i]['blur'])))
 				self.tableWidget_1.setItem(i,5,QTableWidgetItem(self.blur_list[i]['refId']))
 				if "rotation" in self.blur_list[i].keys():
-					self.tableWidget_1.setItem(i,6,QTableWidgetItem(self.blur_list[i]['rotation']))
+					self.tableWidget_1.setItem(i,6,QTableWidgetItem(str(self.blur_list[i]['rotation'])))
 				else:
-					self.tableWidget_1.setItem(i, 6, QTableWidgetItem("1"))
+					self.tableWidget_1.setItem(i, 6, QTableWidgetItem("0"))
 				self.tableWidget_1.setItem(i,0,QTableWidgetItem(str(self.blur_list[i]['constraints']['left']['percentage'])))
 				self.tableWidget_1.setItem(i,9,QTableWidgetItem(str(self.blur_list[i]['constraints']['left']['constant'])))
 				self.tableWidget_1.setItem(i,1,QTableWidgetItem(str(self.blur_list[i]['constraints']['right']['percentage'])))
@@ -708,7 +708,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				blur_dic["type"] = self.tableWidget_1.item(i, 8).text()
 				blur_dic["blur"] = int(self.tableWidget_1.item(i, 4).text())
 				blur_dic["refId"] = self.tableWidget_1.item(i,5).text()
-				blur_dic["rotation"] = float(self.tableWidget_1.item(i, 6).text())
+				if self.tableWidget_1.item(i, 8).text() != "clone_image":
+					blur_dic["rotation"] = float(self.tableWidget_1.item(i, 6).text())
 				item_1 = self.tableWidget_1.item(i,0).text()
 				item_2 = self.tableWidget_1.item(i,9).text()
 				item_3 = self.tableWidget_1.item(i,1).text()
