@@ -40,7 +40,7 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 			else:
 				return 0
 
-	# 分解json
+	# 分解json 
 	def analyseJson(self):
 		self.cell = []
 		self.text = []
@@ -74,7 +74,17 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		if self.background != "":
 			self.setBgColor()
 		if len(self.blur) != 0:
-			self.setBlur()
+			for i in range(len(self.blur)):
+				left = self.blur[i]["constraints"]["left"]["percentage"]
+				right = self.blur[i]["constraints"]["right"]["percentage"]
+				top = self.blur[i]["constraints"]["top"]["percentage"]
+				bottom = self.blur[i]["constraints"]["bottom"]["percentage"]
+				if "rotation" in self.blur[i].keys():
+					rotation = self.blur[i]["rotation"]
+				else:
+					rotation = 0
+				blur_dic = {"left":left, "right":right, "top":top, "bottom":bottom, "rotation":rotation}
+				self.setBlur(i, **blur_dic)
 		#普通cell
 		for i in range(len(self.cell)):
 			left = self.cell[i]["constraints"]["left"]["percentage"] 
@@ -88,8 +98,9 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 			cell_dic = {"left":left, "right":right, "top":top, "height":height, "rotation":rotation}
 			self.setCell(i, **cell_dic)
 
+
 		# 初始化graphicScene,添加背景
-		self.setBg()
+		self.setPng()
 
 		#设置边框
 		for i in range(len(self.cell)):
@@ -117,18 +128,47 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 			top = self.text[i]["constraints"]["top"]["percentage"]
 			text_dic = {"fontName":fontName, "size":size, "color":color, "content":content, "alignment":alignment, "left":left, "right":right, "top":top, "angle":angle}
 			self.setText(**text_dic)
+		
+		if len(self.blur) != 0:
+			for i in range(len(self.blur)):
+				left = self.blur[i]["constraints"]["left"]["percentage"]
+				right = self.blur[i]["constraints"]["right"]["percentage"]
+				top = self.blur[i]["constraints"]["top"]["percentage"]
+				bottom = self.blur[i]["constraints"]["bottom"]["percentage"]
+				if "rotation" in self.blur[i].keys():
+					rotation = self.blur[i]["rotation"]
+				else:
+					rotation = 0
+				blur_dic = {"left":left, "right":right, "top":top, "bottom":bottom, "rotation":rotation}
+				self.setBlurBorder(i, **blur_dic)
+		
 
 
 		# 将graphicsScene放置在当前的graphicView中
 		self.graphicsView.setScene(self.scene)
 
-	def setBlur(self):
-		pic = "./resources/pictures/img_1.jpeg"
-		image = QImage()
-		image.load(pic)
-		pixmap = QPixmap.fromImage(image)
-		fitPixmap = pixmap.scaled(self.width, self.height)
-		self.scene.addPixmap(fitPixmap).setPos(0,0)
+	def setBlur(self, count, **dic):
+		x = self.width * dic["left"]
+		y = self.height * dic["top"]
+		w = self.width * (1-dic["left"]-dic["right"])
+		h =	self.height * (1-dic["top"]-dic["bottom"])
+		r = dic["rotation"]
+		max = sqrt(w*w + h*h)
+		color = ["#70DB93", "#5C3317", "#9F5F9F", "#B5A642", "#D9D919", "#A62AA2", "#8C7853", "#A67D3D", "#F0F8FF"]
+		style = "background-color:" + color[count]
+		label = QLabel()
+		label.resize(w, h)
+		label.setStyleSheet(style)
+		scene = QGraphicsScene()
+		scene.addWidget(label)
+		view = QGraphicsView(scene)
+		view.resize(max, max)
+		view.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+		view.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+		view.rotate(r)
+		view.setStyleSheet("background-color:transparent")
+		self.scene.addWidget(view).setPos(x-(max-w)/2, y-(max-h)/2)
+
 
 	def setCell(self, count, **dic):
 		x = self.width * dic["left"]
@@ -161,6 +201,27 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		y = self.height * dic["top"]
 		w = self.width * (1-dic["left"]-dic["right"])
 		h =	self.height * dic["height"]
+		max = sqrt(w*w + h*h)
+		r = dic["rotation"]
+		label = QLabel()
+		label.resize(w, h)
+		label.setFrameShape(QFrame.Box)
+		label.setStyleSheet("border:1px solid red;background-color:transparent") #transparent
+		scene = QGraphicsScene()
+		scene.addWidget(label)
+		view = QGraphicsView(scene)
+		view.resize(max, max)
+		view.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+		view.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+		view.rotate(r)
+		view.setStyleSheet("background-color:transparent")
+		self.scene.addWidget(view).setPos(x-(max-w)/2, y-(max-h)/2)
+	
+	def setBlurBorder(self, count, **dic):
+		x = self.width * dic["left"]
+		y = self.height * dic["top"]
+		w = self.width * (1-dic["left"]-dic["right"])
+		h =	self.height * (1-dic["top"]-dic["bottom"])
 		max = sqrt(w*w + h*h)
 		r = dic["rotation"]
 		label = QLabel()
@@ -211,7 +272,7 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		self.scene.addWidget(label).setPos(x, y)
 
 		
-	def setBg(self):
+	def setPng(self):
 		png = self.path + "/" + self.png
 		image = QImage()
 		image.load(png)

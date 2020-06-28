@@ -1176,6 +1176,9 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 	def copyFile(self):
 		pathMaterial = self.path[:-2] + "material"
 		shutil.copytree(self.path, pathMaterial)
+	
+	def moveTableRow(self):
+		pass
 
 
 
