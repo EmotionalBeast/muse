@@ -393,7 +393,7 @@ class Ui_MainWindow(object):
         self.tab_1.setObjectName("tab_1")
         self.tableWidget_1 = QtWidgets.QTableWidget(self.tab_1)
         self.tableWidget_1.setColumnCount(13)
-        self.tableWidget_1.setGeometry(QtCore.QRect(0, 0, 1000, 550))
+        self.tableWidget_1.setGeometry(QtCore.QRect(0, 0, 1000, 450))
         self.tableWidget_1.setObjectName("tableWidget_1")
 
         for i in range(13):
@@ -442,7 +442,7 @@ class Ui_MainWindow(object):
         self.tab_2.setObjectName("tab_2")
         self.tableWidget_2 = QtWidgets.QTableWidget(self.tab_2)
         self.tableWidget_2.setColumnCount(14)
-        self.tableWidget_2.setGeometry(QtCore.QRect(0, 0, 1000, 550))
+        self.tableWidget_2.setGeometry(QtCore.QRect(0, 0, 1000, 450))
         self.tableWidget_2.setObjectName("tableWidget_2")
 
         for i in range(14):
@@ -494,7 +494,7 @@ class Ui_MainWindow(object):
         self.tab_2.setObjectName("tab_2")
         self.tableWidget_2 = QtWidgets.QTableWidget(self.tab_2)
         self.tableWidget_2.setColumnCount(15)
-        self.tableWidget_2.setGeometry(QtCore.QRect(0, 0, 1000, 550))
+        self.tableWidget_2.setGeometry(QtCore.QRect(0, 0, 1000, 450))
         self.tableWidget_2.setObjectName("tableWidget_2")
 
         for i in range(15):
@@ -546,7 +546,7 @@ class Ui_MainWindow(object):
         self.tab_2.setObjectName("tab_2")
         self.tableWidget_2 = QtWidgets.QTableWidget(self.tab_2)
         self.tableWidget_2.setColumnCount(16)
-        self.tableWidget_2.setGeometry(QtCore.QRect(0, 0, 1000, 550))
+        self.tableWidget_2.setGeometry(QtCore.QRect(0, 0, 1000, 450))
         self.tableWidget_2.setObjectName("tableWidget_2")
 
         for i in range(16):
@@ -601,7 +601,7 @@ class Ui_MainWindow(object):
         self.tab_3.setObjectName("tab_3")
         self.tableWidget_3 = QtWidgets.QTableWidget(self.tab_3)
         self.tableWidget_3.setColumnCount(11)
-        self.tableWidget_3.setGeometry(QtCore.QRect(0, 0, 1000, 550))
+        self.tableWidget_3.setGeometry(QtCore.QRect(0, 0, 1000, 450))
         self.tableWidget_3.setObjectName("tableWidget_3")
 
         for i in range(11):
@@ -647,7 +647,7 @@ class Ui_MainWindow(object):
         self.tab_4.setObjectName("tab_4")
         self.tableWidget_4 = QtWidgets.QTableWidget(self.tab_4)
         self.tableWidget_4.setColumnCount(18)
-        self.tableWidget_4.setGeometry(QtCore.QRect(0, 0, 1000, 550))
+        self.tableWidget_4.setGeometry(QtCore.QRect(0, 0, 1000, 450))
         self.tableWidget_4.setObjectName("tableWidget_4")
 
         for i in range(18):
@@ -705,7 +705,7 @@ class Ui_MainWindow(object):
         self.tab_4.setObjectName("tab_4")
         self.tableWidget_4 = QtWidgets.QTableWidget(self.tab_4)
         self.tableWidget_4.setColumnCount(21)
-        self.tableWidget_4.setGeometry(QtCore.QRect(0, 0, 1000, 550))
+        self.tableWidget_4.setGeometry(QtCore.QRect(0, 0, 1000, 450))
         self.tableWidget_4.setObjectName("tableWidget_4")
 
         for i in range(21):
@@ -770,7 +770,7 @@ class Ui_MainWindow(object):
         self.tab_4.setObjectName("tab_4")
         self.tableWidget_4 = QtWidgets.QTableWidget(self.tab_4)
         self.tableWidget_4.setColumnCount(20)
-        self.tableWidget_4.setGeometry(QtCore.QRect(0, 0, 1000, 550))
+        self.tableWidget_4.setGeometry(QtCore.QRect(0, 0, 1000, 450))
         self.tableWidget_4.setObjectName("tableWidget_4")
 
         for i in range(20):
@@ -835,7 +835,7 @@ class Ui_MainWindow(object):
         self.tab_5.setObjectName("tab_5")
         self.tableWidget_5 = QtWidgets.QTableWidget(self.tab_5)
         self.tableWidget_5.setColumnCount(11)
-        self.tableWidget_5.setGeometry(QtCore.QRect(0, 0, 1000, 550))
+        self.tableWidget_5.setGeometry(QtCore.QRect(0, 0, 1000, 450))
         self.tableWidget_5.setObjectName("tableWidget_5")
 
         for i in range(11):
@@ -878,7 +878,7 @@ class Ui_MainWindow(object):
         self.tab_6.setObjectName("tab_6")
         self.tableWidget_6 = QtWidgets.QTableWidget(self.tab_6)
         self.tableWidget_6.setColumnCount(3)
-        self.tableWidget_6.setGeometry(QtCore.QRect(0, 0, 1000, 550))
+        self.tableWidget_6.setGeometry(QtCore.QRect(0, 0, 1000, 450))
         self.tableWidget_6.setObjectName("tableWidget_6")
 
         for i in range(3):
@@ -903,7 +903,7 @@ class Ui_MainWindow(object):
         if self.index > 0:
         	self.tabWidget.close()
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
-        self.tabWidget.setGeometry(QtCore.QRect(0, 220, 1000, 550))
+        self.tabWidget.setGeometry(QtCore.QRect(0, 250, 1000, 550))
         self.tabWidget.setObjectName("tabWidget")
         #静态模版
         #初始化普通模版的table
