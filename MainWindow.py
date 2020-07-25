@@ -16,6 +16,7 @@ from PaintWindow import MyPaintWindow
 from DirWindow import MyDirWindow
 from FileWindow import MyFileWindow
 from pathlib import Path
+from animation import AnimationData
 
 FONT_JSON_PATH = os.path.join(os.getcwd(), "resources", "json", "font.json")
 SETTING_JSON_PATH = os.path.join(os.getcwd(), "resources", "json", "setting.json")
@@ -231,6 +232,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			self.spinBox_4.setValue(len(self.blur_list))
 
 	def initData(self, content):
+		# self.handleData()
 		self.resolveJson()
 		self.initTable()
 		#赋值blur表
@@ -457,6 +459,14 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_6.setItem(i,1,QTableWidgetItem(str(self.dic['animation']['type'])))
 				self.tableWidget_6.setItem(i,2,QTableWidgetItem(self.dic['animation']['resourceDirectory']))
 
+	def handleData(self):
+		num = self.comBox_2.currentText().split("_")[1]
+		path1 = os.path.join(self.path, num, "ignore.txt")
+		path2 = os.path.join(self.path, num, "data.json")
+		an = AnimationData(path1, path2)
+		an.replaceNM()
+		self.NMDic = an.getJsonDic()
+
 	#点击生成按钮的槽函数
 	def createTable(self):
 		self.initTable()
@@ -522,6 +532,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_2.setItem(i,10,QTableWidgetItem("0"))
 				self.tableWidget_2.setItem(i,12,QTableWidgetItem("0"))
 				self.tableWidget_2.setItem(i,14,QTableWidgetItem("0"))
+				self.tableWidget_2.setItem(i,15,QTableWidgetItem("0"))
 
 		#初始化bg表
 		if count_3 != 0:
@@ -851,9 +862,13 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 														}
 					cell_dic["ignore"] = int(self.tableWidget_2.item(i, 15).text())
 					self.item.append(cell_dic)
-    				
-				
+					# for name in self.NMDic[cell_dic["imageid"]]:
+					# 	if name != cell_dic["keyPath"]:
+					# 		cell_dic["keyPath"] = name
+					# 		cell_dic["ignore"] = 1
+					# 		self.item.append(cell_dic)
 
+    				
 		if self.spinBox_2.value() != 0:
 			for i in range(self.spinBox_2.value()):
 				bg_dic = {}
@@ -1179,6 +1194,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 	
 	def moveTableRow(self):
 		pass
+
 
 
 
