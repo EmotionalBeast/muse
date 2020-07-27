@@ -18,9 +18,13 @@ class AnimationData(object):
 
     def getPictureName(self):
         img = []
-        with open(self.text, "r") as f:
+        with open(self.txt, "r") as f:
             content = f.read()
-            img = content.split("\n")
+            pic_list = content.split("\n")
+        
+        for name in pic_list:
+            tmp = name.replace("img", "image").split(".")[0]
+            img.append(tmp)
         return img
 
     def getJsonDic(self):
@@ -31,9 +35,11 @@ class AnimationData(object):
         return dic
 
     def replaceNM(self):
-        for layer in self.dic["layers"]:
-            if layer["refId"] in self.img:
-                layer["nm"] = self.getValue(layer["refId"])
+        for i in range(len(self.dic["layers"])):
+            if "refId" in self.dic["layers"][i].keys():
+                if self.dic["layers"][i]["refId"] in self.img:
+                    self.dic["layers"][i]["nm"] = self.getValue(self.dic["layers"][i]["refId"])
+                    print(self.dic["layers"][i]["nm"])
         
         with open(self.json, "w") as f:
             jsonStr = json.dumps(self.dic, sort_keys=True, indent=2, ensure_ascii=False)
@@ -58,6 +64,7 @@ class AnimationData(object):
         dic = {}
         for asset in self.dic["assets"]:
             if asset["id"] in self.img:
+                dic[asset["id"]] = []
                 dic[asset["id"]].append(asset["w"])
                 dic[asset["id"]].append(asset["h"])
         return dic

@@ -231,8 +231,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			self.spinBox_3.setValue(len(self.text_list))
 			self.spinBox_4.setValue(len(self.blur_list))
 
-	def initData(self, content):
-		# self.handleData()
+	def initData(self):
+		self.handleData()
 		self.resolveJson()
 		self.initTable()
 		#赋值blur表
@@ -306,23 +306,24 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			elif self.cbox_3.isChecked() == True and self.cbox_6.isChecked() == True:
 				self.tableWidget_2.setRowCount(self.spinBox_1.value())
 				for i in range(len(self.cell_list)):
-					self.tableWidget_2.setItem(i,8,QTableWidgetItem(self.cell_list[i]['id']))
-					self.tableWidget_2.setItem(i,10,QTableWidgetItem(self.cell_list[i]['type']))
-					self.tableWidget_2.setItem(i,4,QTableWidgetItem(self.cell_list[i]['imageId']))
-					self.tableWidget_2.setItem(i,9,QTableWidgetItem(self.cell_list[i]['mediaId']))
-					self.tableWidget_2.setItem(i,5,QTableWidgetItem(self.cell_list[i]['keyPath']))
-					self.tableWidget_2.setItem(i,6,QTableWidgetItem(str(self.cell_list[i]['contentSize'][0])))
-					self.tableWidget_2.setItem(i,7,QTableWidgetItem(str(self.cell_list[i]['contentSize'][1])))
-					self.tableWidget_2.setItem(i,0,QTableWidgetItem(str(round(self.cell_list[i]['constraints']['left']['percentage']*100,2))))
-					self.tableWidget_2.setItem(i,11,QTableWidgetItem(str(self.cell_list[i]['constraints']['left']['constant'])))
-					self.tableWidget_2.setItem(i,1,QTableWidgetItem(str(round(self.cell_list[i]['constraints']['right']['percentage']*100,2))))
-					self.tableWidget_2.setItem(i,12,QTableWidgetItem(str(self.cell_list[i]['constraints']['right']['constant'])))
-					self.tableWidget_2.setItem(i,2,QTableWidgetItem(str(round(self.cell_list[i]['constraints']['top']['percentage']*100,2))))
-					self.tableWidget_2.setItem(i,13,QTableWidgetItem(str(self.cell_list[i]['constraints']['top']['constant'])))
-					bottom = 1.0 - self.cell_list[i]['constraints']['height']['percentage'] - self.cell_list[i]['constraints']['top']['percentage']
-					self.tableWidget_2.setItem(i,3,QTableWidgetItem(str(round(bottom*100,2))))
-					self.tableWidget_2.setItem(i,14,QTableWidgetItem(str(self.cell_list[i]['constraints']['height']['constant'])))
-					self.tableWidget_2.setItem(i,15,QTableWidgetItem(str(self.cell_list[i]['ignore'])))
+					if self.cell_list[i]['ignore'] == 0:
+						self.tableWidget_2.setItem(i,8,QTableWidgetItem(self.cell_list[i]['id']))
+						self.tableWidget_2.setItem(i,10,QTableWidgetItem(self.cell_list[i]['type']))
+						self.tableWidget_2.setItem(i,4,QTableWidgetItem(self.cell_list[i]['imageId']))
+						self.tableWidget_2.setItem(i,9,QTableWidgetItem(self.cell_list[i]['mediaId']))
+						self.tableWidget_2.setItem(i,5,QTableWidgetItem(self.cell_list[i]['keyPath']))
+						self.tableWidget_2.setItem(i,6,QTableWidgetItem(str(self.cell_list[i]['contentSize'][0])))
+						self.tableWidget_2.setItem(i,7,QTableWidgetItem(str(self.cell_list[i]['contentSize'][1])))
+						self.tableWidget_2.setItem(i,0,QTableWidgetItem(str(round(self.cell_list[i]['constraints']['left']['percentage']*100,2))))
+						self.tableWidget_2.setItem(i,11,QTableWidgetItem(str(self.cell_list[i]['constraints']['left']['constant'])))
+						self.tableWidget_2.setItem(i,1,QTableWidgetItem(str(round(self.cell_list[i]['constraints']['right']['percentage']*100,2))))
+						self.tableWidget_2.setItem(i,12,QTableWidgetItem(str(self.cell_list[i]['constraints']['right']['constant'])))
+						self.tableWidget_2.setItem(i,2,QTableWidgetItem(str(round(self.cell_list[i]['constraints']['top']['percentage']*100,2))))
+						self.tableWidget_2.setItem(i,13,QTableWidgetItem(str(self.cell_list[i]['constraints']['top']['constant'])))
+						bottom = 1.0 - self.cell_list[i]['constraints']['height']['percentage'] - self.cell_list[i]['constraints']['top']['percentage']
+						self.tableWidget_2.setItem(i,3,QTableWidgetItem(str(round(bottom*100,2))))
+						self.tableWidget_2.setItem(i,14,QTableWidgetItem(str(self.cell_list[i]['constraints']['height']['constant'])))
+						self.tableWidget_2.setItem(i,15,QTableWidgetItem(str(self.cell_list[i]['ignore'])))
     				
 
 		#赋值bg表
@@ -460,12 +461,14 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_6.setItem(i,2,QTableWidgetItem(self.dic['animation']['resourceDirectory']))
 
 	def handleData(self):
-		num = self.comBox_2.currentText().split("_")[1]
+		num = self.comBox_2.currentText().split("-")[1]
 		path1 = os.path.join(self.path, num, "ignore.txt")
 		path2 = os.path.join(self.path, num, "data.json")
 		an = AnimationData(path1, path2)
 		an.replaceNM()
+		self.pictureName = an.getPictureName()
 		self.NMDic = an.getJsonDic()
+		self.contentSizeDic = an.getImageContentSize()
 
 	#点击生成按钮的槽函数
 	def createTable(self):
@@ -522,6 +525,13 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_2.setItem(i,12,QTableWidgetItem("0"))
 				self.tableWidget_2.setItem(i,13,QTableWidgetItem("0"))
 				self.tableWidget_2.setItem(i,14,QTableWidgetItem("0"))
+				if count_2 == len(self.pictureName):
+					name = self.pictureName[i]
+					refName = name.replace("_", "") + "a"
+					self.tableWidget_2.setItem(i,4,QTableWidgetItem(name))   #图片名称
+					self.tableWidget_2.setItem(i,5,QTableWidgetItem(refName))	#关联名称
+					self.tableWidget_2.setItem(i,6,QTableWidgetItem(self.contentSizeDic[name][0]))	#图片高度
+					self.tableWidget_2.setItem(i,7,QTableWidgetItem(self.contentSizeDic[name][1]))	#图片宽度
 		elif self.cbox_3.isChecked() == True and self.cbox_6.isChecked() == True:
 			self.tableWidget_2.setRowCount(count_2)
 			for i in range(count_2):
@@ -533,6 +543,13 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_2.setItem(i,13,QTableWidgetItem("0"))
 				self.tableWidget_2.setItem(i,14,QTableWidgetItem("0"))
 				self.tableWidget_2.setItem(i,15,QTableWidgetItem("0"))
+				if count_2 == len(self.pictureName):
+					name = self.pictureName[i]
+					refName = name.replace("_", "") + "a"
+					self.tableWidget_2.setItem(i,4,QTableWidgetItem(name))   #图片名称
+					self.tableWidget_2.setItem(i,5,QTableWidgetItem(refName))	#关联名称
+					self.tableWidget_2.setItem(i,6,QTableWidgetItem(self.contentSizeDic[name][0]))	#图片高度
+					self.tableWidget_2.setItem(i,7,QTableWidgetItem(self.contentSizeDic[name][1]))	#图片宽度
 
 		#初始化bg表
 		if count_3 != 0:
@@ -655,9 +672,9 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		else:
 			QMessageBox.information(self,"提示","请选择json文件！")
 
-		if self.cbox_3.isChecked() == True:
-			self.convertFormat()
-			QMessageBox.information(self, "提示", "jpg转化完成！")
+		# if self.cbox_3.isChecked() == True:
+		# 	self.convertFormat()
+		# 	QMessageBox.information(self, "提示", "jpg转化完成！")
 
 	def checkValues(self):
 		if self.cbox_1.isChecked() == True:
@@ -862,11 +879,11 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 														}
 					cell_dic["ignore"] = int(self.tableWidget_2.item(i, 15).text())
 					self.item.append(cell_dic)
-					# for name in self.NMDic[cell_dic["imageid"]]:
-					# 	if name != cell_dic["keyPath"]:
-					# 		cell_dic["keyPath"] = name
-					# 		cell_dic["ignore"] = 1
-					# 		self.item.append(cell_dic)
+					for name in self.NMDic[cell_dic["imageid"]]:
+						if name != cell_dic["keyPath"]:
+							cell_dic["keyPath"] = name
+							cell_dic["ignore"] = 1
+							self.item.append(cell_dic)
 
     				
 		if self.spinBox_2.value() != 0:
@@ -1113,7 +1130,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		img = []
 		tempPath = self.comBox_2.currentText().rsplit("-",1)
 		for i in range(self.spinBox_1.value()):
-			tempStr = self.tableWidget_2.item(i, 2).text()
+			tempStr = self.tableWidget_2.item(i, 4).text()
 			img.append("img_" + tempStr[-1:] + ".png")
 
 		for root,dirs,files in os.walk(os.path.join(self.path, tempPath[1])):

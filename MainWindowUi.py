@@ -63,7 +63,7 @@ class Ui_MainWindow(object):
         self.label_2.setObjectName("label_2")
         self.comBox_2 = QtWidgets.QComboBox(self.centralwidget)
         self.comBox_2.setGeometry(QtCore.QRect(645, 10, 300, 30))
-        self.comBox_2.activated.connect(lambda: self.initData(self.comBox_2.currentText()))
+        self.comBox_2.activated.connect(lambda: self.initData())
         self.comBox_2.setObjectName("comBox_2")
 
         #选择素材的组件部分:blur,cell,background,text,picturelevel(控制图层）
