@@ -17,6 +17,7 @@ from DirWindow import MyDirWindow
 from FileWindow import MyFileWindow
 from pathlib import Path
 from animation import AnimationData
+from copy import deepcopy
 
 FONT_JSON_PATH = os.path.join(os.getcwd(), "resources", "json", "font.json")
 SETTING_JSON_PATH = os.path.join(os.getcwd(), "resources", "json", "setting.json")
@@ -201,6 +202,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			self.spinBox_1.setValue(0)
 			self.spinBox_2.setValue(0)
 			self.spinBox_3.setValue(0)
+			if self.ignore:
+				self.cbox_6.setChecked(True)
 		else:
 			if "animation" in self.dic.keys():
 				self.cbox_3.setChecked(True)
@@ -213,7 +216,12 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					self.blur_list.append(item[i])
 					self.cbox_1.setChecked(True)
 				if "mediaId" in item[i].keys():
-					self.cell_list.append(item[i])
+					if "ignore" not in item[i].keys():
+						self.cell_list.append(item[i])
+					else:
+						if item[i]["ignore"] == 0:
+							self.cell_list.append(item[i])
+					 
 					if "ignore" in item[i].keys() and self.cbox_6.isChecked() == False:
     						self.cbox_6.setChecked(True)
 				if "imageName" in item[i].keys():
@@ -464,11 +472,14 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		num = self.comBox_2.currentText().split("-")[1]
 		path1 = os.path.join(self.path, num, "ignore.txt")
 		path2 = os.path.join(self.path, num, "data.json")
-		an = AnimationData(path1, path2)
-		an.replaceNM()
-		self.pictureName = an.getPictureName()
-		self.NMDic = an.getJsonDic()
-		self.contentSizeDic = an.getImageContentSize()
+		self.ignore = False
+		if os.path.exists(path1) and os.path.exists(path2):
+			an = AnimationData(path1, path2)
+			an.replaceNM()
+			self.pictureName = an.getPictureName()
+			self.NMDic = an.getLayersNM()
+			self.contentSizeDic = an.getImageContentSize()
+			self.ignore = an.ignore()
 
 	#点击生成按钮的槽函数
 	def createTable(self):
@@ -526,12 +537,12 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_2.setItem(i,13,QTableWidgetItem("0"))
 				self.tableWidget_2.setItem(i,14,QTableWidgetItem("0"))
 				if count_2 == len(self.pictureName):
-					name = self.pictureName[i]
-					refName = name.replace("_", "") + "a"
-					self.tableWidget_2.setItem(i,4,QTableWidgetItem(name))   #图片名称
+					imageName = self.pictureName[i]
+					refName = imageName.replace("_", "") + "a"
+					self.tableWidget_2.setItem(i,4,QTableWidgetItem(imageName))   #图片名称
 					self.tableWidget_2.setItem(i,5,QTableWidgetItem(refName))	#关联名称
-					self.tableWidget_2.setItem(i,6,QTableWidgetItem(self.contentSizeDic[name][0]))	#图片高度
-					self.tableWidget_2.setItem(i,7,QTableWidgetItem(self.contentSizeDic[name][1]))	#图片宽度
+					self.tableWidget_2.setItem(i,6,QTableWidgetItem(str(self.contentSizeDic[imageName][0])))	#图片高度
+					self.tableWidget_2.setItem(i,7,QTableWidgetItem(str(self.contentSizeDic[imageName][1])))	#图片宽度
 		elif self.cbox_3.isChecked() == True and self.cbox_6.isChecked() == True:
 			self.tableWidget_2.setRowCount(count_2)
 			for i in range(count_2):
@@ -544,12 +555,12 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_2.setItem(i,14,QTableWidgetItem("0"))
 				self.tableWidget_2.setItem(i,15,QTableWidgetItem("0"))
 				if count_2 == len(self.pictureName):
-					name = self.pictureName[i]
-					refName = name.replace("_", "") + "a"
-					self.tableWidget_2.setItem(i,4,QTableWidgetItem(name))   #图片名称
+					imageName = self.pictureName[i]
+					refName = imageName.replace("_", "") + "a"
+					self.tableWidget_2.setItem(i,4,QTableWidgetItem(imageName))   #图片名称
 					self.tableWidget_2.setItem(i,5,QTableWidgetItem(refName))	#关联名称
-					self.tableWidget_2.setItem(i,6,QTableWidgetItem(self.contentSizeDic[name][0]))	#图片高度
-					self.tableWidget_2.setItem(i,7,QTableWidgetItem(self.contentSizeDic[name][1]))	#图片宽度
+					self.tableWidget_2.setItem(i,6,QTableWidgetItem(str(self.contentSizeDic[imageName][0])))	#图片高度
+					self.tableWidget_2.setItem(i,7,QTableWidgetItem(str(self.contentSizeDic[imageName][1])))	#图片宽度
 
 		#初始化bg表
 		if count_3 != 0:
@@ -879,11 +890,13 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 														}
 					cell_dic["ignore"] = int(self.tableWidget_2.item(i, 15).text())
 					self.item.append(cell_dic)
-					for name in self.NMDic[cell_dic["imageid"]]:
-						if name != cell_dic["keyPath"]:
-							cell_dic["keyPath"] = name
-							cell_dic["ignore"] = 1
-							self.item.append(cell_dic)
+					for name in self.NMDic[cell_dic["imageId"]]:
+						dic = {}
+						dic = deepcopy(cell_dic)
+						if name != dic["keyPath"]:
+							dic["keyPath"] = name
+							dic["ignore"] = 1
+							self.item.append(dic)
 
     				
 		if self.spinBox_2.value() != 0:

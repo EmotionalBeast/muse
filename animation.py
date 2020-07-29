@@ -39,7 +39,6 @@ class AnimationData(object):
             if "refId" in self.dic["layers"][i].keys():
                 if self.dic["layers"][i]["refId"] in self.img:
                     self.dic["layers"][i]["nm"] = self.getValue(self.dic["layers"][i]["refId"])
-                    print(self.dic["layers"][i]["nm"])
         
         with open(self.json, "w") as f:
             jsonStr = json.dumps(self.dic, sort_keys=True, indent=2, ensure_ascii=False)
@@ -55,9 +54,17 @@ class AnimationData(object):
     
     def getLayersNM(self):
         dic = {}
+        index = []
         for layer in self.dic["layers"]:
-            if layer["refId"] in self.img:
-                dic[layer["refId"]].append(layer["nm"])
+            if "refId" in layer.keys():
+                if layer["refId"] not in index and layer["refId"] in self.img:
+                    index.append(layer["refId"])
+                    dic[layer["refId"]] = []
+
+        for layer in self.dic["layers"]:
+            if "refId" in layer.keys():
+                if layer["refId"] in self.img:
+                    dic[layer["refId"]].append(layer["nm"])
         return dic
     
     def getImageContentSize(self):
@@ -68,6 +75,14 @@ class AnimationData(object):
                 dic[asset["id"]].append(asset["w"])
                 dic[asset["id"]].append(asset["h"])
         return dic
+    
+    def ignore(self): #bool
+        dic = self.getLayersNM()
+        for image in dic.keys():
+            if len(dic[image]) > 1:
+                return True
+        return False
+
 
 
     
