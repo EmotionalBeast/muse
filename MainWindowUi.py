@@ -88,7 +88,7 @@ class Ui_MainWindow(object):
         self.label_4.setObjectName("label_4")
         self.spinBox_2 = QtWidgets.QSpinBox(self.centralwidget)
         self.spinBox_2.setGeometry(QtCore.QRect(485, 50, 100, 30))
-        self.spinBox_2.setValue(1)
+        # self.spinBox_2.setValue(1)
 
         self.label_5 = QtWidgets.QLabel(self.centralwidget)
         self.label_5.setGeometry(QtCore.QRect(685, 50, 60, 30))
@@ -107,15 +107,15 @@ class Ui_MainWindow(object):
         self.label_6.setAlignment(QtCore.Qt.AlignCenter)
         self.label_6.setObjectName("label_6")
         self.cbox_1 = QtWidgets.QCheckBox(self.centralwidget)
-        self.cbox_1.setGeometry(QtCore.QRect(155,110,100,30))
+        self.cbox_1.setGeometry(QtCore.QRect(155,150,100,30))
         self.cbox_1.setText("背景虚化")
         self.cbox_1.setObjectName("cbox_1")
         self.spinBox_4 = QtWidgets.QSpinBox(self.centralwidget)
         self.spinBox_4.setGeometry(QtCore.QRect(265, 110, 50, 30))
-        self.spinBox_4.setValue(1)
+        # self.spinBox_4.setValue(1)
 
         self.cbox_2 = QtWidgets.QCheckBox(self.centralwidget)
-        self.cbox_2.setGeometry(QtCore.QRect(155,150,100,30))
+        self.cbox_2.setGeometry(QtCore.QRect(265,150,100,30))
         self.cbox_2.setText("图片重叠")
         self.cbox_2.setObjectName("cbox_2")
 
@@ -128,6 +128,11 @@ class Ui_MainWindow(object):
         self.lineEdit_1.setGeometry(QtCore.QRect(265,195,60,20))
         self.lineEdit_1.setObjectName("lineEdit_1")
         self.lineEdit_1.setText("FFFFFF")
+
+        self.cbox_7 = QtWidgets.QCheckBox(self.centralwidget)
+        self.cbox_7.setGeometry(QtCore.QRect(155,110,100,30))
+        self.cbox_7.setText("图片复制")
+        self.cbox_7.setObjectName("cbox_7")
 
         #第二行
         self.label_7 = QtWidgets.QLabel(self.centralwidget)
@@ -392,45 +397,43 @@ class Ui_MainWindow(object):
         self.tab_1 = QtWidgets.QWidget()
         self.tab_1.setObjectName("tab_1")
         self.tableWidget_1 = QtWidgets.QTableWidget(self.tab_1)
-        self.tableWidget_1.setColumnCount(13)
+        self.tableWidget_1.setColumnCount(12)
         self.tableWidget_1.setGeometry(QtCore.QRect(0, 0, 1000, 450))
         self.tableWidget_1.setObjectName("tableWidget_1")
 
-        for i in range(13):
+        for i in range(12):
             item = QtWidgets.QTableWidgetItem()
             self.tableWidget_1.setHorizontalHeaderItem(i, item)
         self.tabWidget.addTab(self.tab_1, "")
         #设置列宽
+        self.tableWidget_1.setColumnWidth(9,120)
         self.tableWidget_1.setColumnWidth(10,120)
-        self.tableWidget_1.setColumnWidth(11,120)
         #虚化背景表格的顶栏字段
         _translate = QtCore.QCoreApplication.translate
 
-        item = self.tableWidget_1.horizontalHeaderItem(7)
+        item = self.tableWidget_1.horizontalHeaderItem(6)
         item.setText(_translate("MainWindow", "总编号"))
-        item = self.tableWidget_1.horizontalHeaderItem(8)
+        item = self.tableWidget_1.horizontalHeaderItem(7)
         item.setText(_translate("MainWindow", "类型"))
-        item = self.tableWidget_1.horizontalHeaderItem(4)
+        item = self.tableWidget_1.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "虚化")) #1，10
         item = self.tableWidget_1.horizontalHeaderItem(5)
         item.setText(_translate("MainWindow", "关联编号"))
-        item = self.tableWidget_1.horizontalHeaderItem(6)
-        item.setText(_translate("MainWindow", "旋转角度"))
-        item = self.tableWidget_1.horizontalHeaderItem(0)
-        item.setText(_translate("MainWindow", "左边距离"))
-        item = self.tableWidget_1.horizontalHeaderItem(9)
-        item.setText(_translate("MainWindow", "left_constant"))
         item = self.tableWidget_1.horizontalHeaderItem(1)
-        item.setText(_translate("MainWindow", "右边距离"))
-        item = self.tableWidget_1.horizontalHeaderItem(10)
-        item.setText(_translate("MainWindow", "right_constant"))
+        item.setText(_translate("MainWindow", "左边距离"))
+        item = self.tableWidget_1.horizontalHeaderItem(8)
+        item.setText(_translate("MainWindow", "left_constant"))
         item = self.tableWidget_1.horizontalHeaderItem(2)
-        item.setText(_translate("MainWindow", "顶部距离"))
-        item = self.tableWidget_1.horizontalHeaderItem(11)
-        item.setText(_translate("MainWindow", "top_constant"))
+        item.setText(_translate("MainWindow", "右边距离"))
+        item = self.tableWidget_1.horizontalHeaderItem(9)
+        item.setText(_translate("MainWindow", "right_constant"))
         item = self.tableWidget_1.horizontalHeaderItem(3)
+        item.setText(_translate("MainWindow", "顶部距离"))
+        item = self.tableWidget_1.horizontalHeaderItem(10)
+        item.setText(_translate("MainWindow", "top_constant"))
+        item = self.tableWidget_1.horizontalHeaderItem(4)
         item.setText(_translate("MainWindow", "底部距离"))
-        item = self.tableWidget_1.horizontalHeaderItem(12)
+        item = self.tableWidget_1.horizontalHeaderItem(11)
         item.setText(_translate("MainWindow", "bottom_constant"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_1), _translate("MainWindow", "背景虚化"))
 
@@ -899,6 +902,54 @@ class Ui_MainWindow(object):
 
         self.tableWidget_6.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
 
+    def initCloneImageTable(self):
+        self.tab_7 = QtWidgets.QWidget()
+        self.tab_7.setObjectName("tab_7")
+        self.tableWidget_7 = QtWidgets.QTableWidget(self.tab_7)
+        self.tableWidget_7.setColumnCount(13)
+        self.tableWidget_7.setGeometry(QtCore.QRect(0, 0, 1000, 450))
+        self.tableWidget_7.setObjectName("tableWidget_7")
+
+        for i in range(13):
+            item = QtWidgets.QTableWidgetItem()
+            self.tableWidget_7.setHorizontalHeaderItem(i, item)
+        self.tabWidget.addTab(self.tab_7, "")
+        #设置列宽
+        self.tableWidget_7.setColumnWidth(10,120)
+        self.tableWidget_7.setColumnWidth(11,120)
+        #虚化背景表格的顶栏字段
+        _translate = QtCore.QCoreApplication.translate
+
+        item = self.tableWidget_7.horizontalHeaderItem(7)
+        item.setText(_translate("MainWindow", "总编号"))
+        item = self.tableWidget_7.horizontalHeaderItem(8)
+        item.setText(_translate("MainWindow", "类型"))
+        item = self.tableWidget_7.horizontalHeaderItem(4)
+        item.setText(_translate("MainWindow", "虚化")) #1，10
+        item = self.tableWidget_7.horizontalHeaderItem(5)
+        item.setText(_translate("MainWindow", "关联编号"))
+        item = self.tableWidget_7.horizontalHeaderItem(6)
+        item.setText(_translate("MainWindow", "旋转角度"))
+        item = self.tableWidget_7.horizontalHeaderItem(0)
+        item.setText(_translate("MainWindow", "左边距离"))
+        item = self.tableWidget_7.horizontalHeaderItem(9)
+        item.setText(_translate("MainWindow", "left_constant"))
+        item = self.tableWidget_7.horizontalHeaderItem(1)
+        item.setText(_translate("MainWindow", "右边距离"))
+        item = self.tableWidget_7.horizontalHeaderItem(10)
+        item.setText(_translate("MainWindow", "right_constant"))
+        item = self.tableWidget_7.horizontalHeaderItem(2)
+        item.setText(_translate("MainWindow", "顶部距离"))
+        item = self.tableWidget_7.horizontalHeaderItem(11)
+        item.setText(_translate("MainWindow", "top_constant"))
+        item = self.tableWidget_7.horizontalHeaderItem(3)
+        item.setText(_translate("MainWindow", "底部距离"))
+        item = self.tableWidget_7.horizontalHeaderItem(12)
+        item.setText(_translate("MainWindow", "bottom_constant"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_7), _translate("MainWindow", "图片复制"))
+
+        self.tableWidget_7.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+
     def initTable(self):
         if self.index > 0:
         	self.tabWidget.close()
@@ -907,7 +958,7 @@ class Ui_MainWindow(object):
         self.tabWidget.setObjectName("tabWidget")
         #静态模版
         #初始化普通模版的table
-        if self.cbox_1.isChecked() == False and self.cbox_2.isChecked() == False and self.cbox_3.isChecked() == False:
+        if self.cbox_1.isChecked() == False and self.cbox_2.isChecked() == False and self.cbox_7.isChecked() == False and self.cbox_3.isChecked() == False:
             if self.spinBox_1.value() != 0:
                 self.initNormalCellTable()
                 if self.spinBox_3.value() != 0:
@@ -930,6 +981,15 @@ class Ui_MainWindow(object):
                 if self.spinBox_3.value() != 0:
                     self.initNormalTextTable()
                 self.initLevelTable()
+                self.initNormalBgTable()
+        
+        #初始化图片复制模版的table
+        if self.cbox_1.isChecked() ==False and self.cbox_2.isChecked() == False and self.cbox_7.isChecked() == True and self.cbox_3.isChecked() == False:
+            if self.spinBox_1.value() != 0:
+                self.initNormalCellTable()
+                if self.spinBox_3.value() != 0:
+                    self.initNormalTextTable()
+                self.initCloneImageTable()
                 self.initNormalBgTable()
                 
 				
