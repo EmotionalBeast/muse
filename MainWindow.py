@@ -138,6 +138,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_5.setEditTriggers(QAbstractItemView.CurrentChanged)
 			if self.cbox_3.isChecked():
 				self.tableWidget_6.setEditTriggers(QAbstractItemView.CurrentChanged)
+			if self.cbox_7.isChecked():
+				self.tableWidget_7.setEditTriggers(QAbstractItemView.CurrentChanged)
 			self.statusbar.showMessage("Editable")
 		else:
 			QMessageBox.information(self, "提示", "请选择json文件")
@@ -156,6 +158,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_5.setEditTriggers(QAbstractItemView.NoEditTriggers)
 			if self.cbox_3.isChecked():
 				self.tableWidget_6.setEditTriggers(QAbstractItemView.NoEditTriggers)
+			if self.cbox_7.isChecked():
+				self.tableWidget_7.setEditTriggers(QAbstractItemView.NoEditTriggers)
 			self.statusbar.showMessage("Non Editable")
 		else:
 			QMessageBox.information(self, "提示", "请选择json文件")
@@ -521,6 +525,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		name = self.comBox_2.currentText()
 		#初始化blur表
 		if self.cbox_1.isChecked() == True: 
+			self.tableWidget_1.setRowCount(1)
 			for i in range(1):
 				self.tableWidget_1.setItem(i,1,QTableWidgetItem("0"))
 				self.tableWidget_1.setItem(i,2,QTableWidgetItem("0"))
@@ -533,7 +538,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_1.setItem(i,9,QTableWidgetItem("0"))
 				self.tableWidget_1.setItem(i,10,QTableWidgetItem("0"))
 				self.tableWidget_1.setItem(i,11,QTableWidgetItem("0"))
-				count_1 = 0
+				count_1 = 1
 
 		#初始化cloneimage表
 		if self.cbox_7.isChecked() == True:

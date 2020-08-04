@@ -987,9 +987,9 @@ class Ui_MainWindow(object):
         if self.cbox_1.isChecked() ==False and self.cbox_2.isChecked() == False and self.cbox_7.isChecked() == True and self.cbox_3.isChecked() == False:
             if self.spinBox_1.value() != 0:
                 self.initNormalCellTable()
+                self.initCloneImageTable()
                 if self.spinBox_3.value() != 0:
                     self.initNormalTextTable()
-                self.initCloneImageTable()
                 self.initNormalBgTable()
                 
 				
