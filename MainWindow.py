@@ -278,13 +278,13 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_7.setItem(i,4,QTableWidgetItem(str(self.blur_list[i]['blur'])))
 				self.tableWidget_7.setItem(i,5,QTableWidgetItem(self.blur_list[i]['refId']))
 				self.tableWidget_7.setItem(i,6,QTableWidgetItem(str(self.blur_list[i]['rotation'])))
-				self.tableWidget_7.setItem(i,0,QTableWidgetItem(str(self.blur_list[i]['constraints']['left']['percentage'])))
+				self.tableWidget_7.setItem(i,0,QTableWidgetItem(str(round(self.blur_list[i]['constraints']['left']['percentage']*100, 2))))
 				self.tableWidget_7.setItem(i,9,QTableWidgetItem(str(self.blur_list[i]['constraints']['left']['constant'])))
-				self.tableWidget_7.setItem(i,1,QTableWidgetItem(str(self.blur_list[i]['constraints']['right']['percentage'])))
+				self.tableWidget_7.setItem(i,1,QTableWidgetItem(str(round(self.blur_list[i]['constraints']['right']['percentage']*100, 2))))
 				self.tableWidget_7.setItem(i,10,QTableWidgetItem(str(self.blur_list[i]['constraints']['right']['constant'])))
-				self.tableWidget_7.setItem(i,2,QTableWidgetItem(str(self.blur_list[i]['constraints']['top']['percentage'])))
+				self.tableWidget_7.setItem(i,2,QTableWidgetItem(str(round(self.blur_list[i]['constraints']['top']['percentage']*100, 2))))
 				self.tableWidget_7.setItem(i,11,QTableWidgetItem(str(self.blur_list[i]['constraints']['top']['constant'])))
-				self.tableWidget_7.setItem(i,3,QTableWidgetItem(str(self.blur_list[i]['constraints']['bottom']['percentage'])))
+				self.tableWidget_7.setItem(i,3,QTableWidgetItem(str(round(self.blur_list[i]['constraints']['bottom']['percentage']*100, 2))))
 				self.tableWidget_7.setItem(i,12,QTableWidgetItem(str(self.blur_list[i]['constraints']['bottom']['constant'])))
 
 		#赋值cell表
@@ -832,19 +832,19 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				item_7 = self.tableWidget_7.item(i,3).text()
 				item_8 = self.tableWidget_7.item(i,12).text()
 				blur_dic["constraints"] = {"left":{
-															"percentage": float(item_1),
+															"percentage": round(float(item_1)/100, 4),
 															"constant": float(item_2)
 															},
 													"right":{
-															"percentage": float(item_3),
+															"percentage": round(float(item_3)/100, 4),
 															"constant": float(item_4)
 															},
 													"top":{
-															"percentage": float(item_5),
+															"percentage": round(float(item_5)/100, 4),
 															"constant": float(item_6)
 															},
 													"bottom":{
-															"percentage": float(item_7),
+															"percentage": round(float(item_7)/100, 4),
 															"constant": float(item_8)
 															}
 													}
