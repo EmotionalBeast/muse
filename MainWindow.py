@@ -18,6 +18,7 @@ from FileWindow import MyFileWindow
 from pathlib import Path
 from animation import AnimationData
 from copy import deepcopy
+from threading import Thread
 
 FONT_JSON_PATH = os.path.join(os.getcwd(), "resources", "json", "font.json")
 SETTING_JSON_PATH = os.path.join(os.getcwd(), "resources", "json", "setting.json")
@@ -1179,6 +1180,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			QMessageBox.information(self,"提示","加密到out文件夹成功！")
 		else:
 			QMessageBox.information(self,"提示",info)
+		return info
 
 	def compressing(self):
 		pathOut = self.path[:-2] + "out"
@@ -1193,16 +1195,18 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					print("targetFile:", targetFile)
 					command = "7z a " + targetFile + " " + pathNeed
 					subprocess.call(command, shell=True)
-		QMessageBox.information(self, "提示", "已压缩到origin文件夹！")
 		self.cleanFile(pathOut)
 		os.mkdir(pathOut)
 
 	def EnCom(self):
 		if self.comBox_1.currentText() != "":
-			self.encryption()
-			self.compressing()
+			if self.encryption() == 0:
+				t = Thread(name="compressing", target=self.compressing, args=())
+				t.start()
+				QMessageBox.information(self, "提示", "已压缩到origin文件夹！")
 		else:
 			QMessageBox.information(self, "提示", "请选择素材组！")
+
 
 	def openOrigin(self):
 		if self.comBox_1.currentText() != "":
