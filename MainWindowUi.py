@@ -24,6 +24,7 @@ LEVEL = []
 class Ui_MainWindow(object):
     #在界面中添加控件
     def setupUi(self, MainWindow):
+        self.index = 0
         #设置主窗口，主窗口分为菜单栏，工具栏，状态栏，标题栏
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1000, 800)

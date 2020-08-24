@@ -32,7 +32,6 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		self.setupUi(self)
 		self.myFileWindow = MyFileWindow()
 		self.myDirWindow = MyDirWindow()
-		self.index = 0
 
 		with open(FONT_JSON_PATH, 'r') as lf:
 			jsonStr = lf.read()
@@ -207,7 +206,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		self.dic = self.readJson()
 		if self.dic == 0:
 			self.spinBox_1.setValue(0)
-			self.spinBox_2.setValue(1)
+			self.spinBox_2.setValue(0)
 			self.spinBox_3.setValue(0)
 			if self.ignore:
 				self.cbox_6.setChecked(True)
@@ -725,9 +724,9 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		else:
 			QMessageBox.information(self,"提示","请选择json文件！")
 
-		# if self.cbox_3.isChecked() == True:
-		# 	self.convertFormat()
-		# 	QMessageBox.information(self, "提示", "jpg转化完成！")
+		if self.cbox_3.isChecked() == True:
+			self.convertFormat()
+			QMessageBox.information(self, "提示", "jpg转化完成！")
 
 	def checkValues(self):
 		if self.cbox_1.isChecked() == True:
@@ -1201,7 +1200,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 	def EnCom(self):
 		if self.comBox_1.currentText() != "":
 			if self.encryption() == 0:
-				t = Thread(name="compressing", target=self.compressing, args=())
+				t = Thread(name="subthread_compressing", target=self.compressing, args=())
 				t.start()
 				QMessageBox.information(self, "提示", "已压缩到origin文件夹！")
 		else:
@@ -1221,13 +1220,14 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		img = []
 		tempPath = self.comBox_2.currentText().rsplit("-",1)
 		for i in range(self.spinBox_1.value()):
-			tempStr = self.tableWidget_2.item(i, 4).text()
-			img.append("img_" + tempStr[-1:] + ".png")
+			tempStr = self.tableWidget_2.item(i, 4).text().split("_")[1]
+			img.append("img_" + tempStr + ".png")
 
 		for root,dirs,files in os.walk(os.path.join(self.path, tempPath[1])):
 			for dir in dirs:
 				if root[-5:-1] != 'text' and dir == "images":
 					imgPath.append(os.path.join(root, dir))
+		
 
 		if len(imgPath) != 0:
 			for path in imgPath:
@@ -1256,8 +1256,10 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					QMessageBox.information(self, "提示", "MV素材输出成功！")
 				else:
 					QMessageBox.information(self, "提示", info)
-				self.encryption()
-				self.compressing()
+				if self.encryption() == 0:
+					t = Thread(name="subthread_compressing", target=self.compressing, args=())
+					t.start()
+					QMessageBox.information(self, "提示", "已压缩到origin文件夹！")
 			else:
 				QMessageBox.information(self, "提示", "请选择MV素材组！")
 		else:

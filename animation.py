@@ -21,6 +21,8 @@ class AnimationData(object):
         with open(self.txt, "r") as f:
             content = f.read()
             pic_list = content.split("\n")
+
+        pic_list = [i for i in pic_list if i != '']
         
         for name in pic_list:
             tmp = name.replace("img", "image").split(".")[0]
@@ -35,11 +37,19 @@ class AnimationData(object):
         return dic
 
     def replaceNM(self):
+        print(self.img)
         for i in range(len(self.dic["layers"])):
             if "refId" in self.dic["layers"][i].keys():
                 if self.dic["layers"][i]["refId"] in self.img:
                     self.dic["layers"][i]["nm"] = self.getValue(self.dic["layers"][i]["refId"])
-        
+
+        for i in range(len(self.dic["assets"])):
+            if "layers" in self.dic["assets"][i].keys():
+                for j in range(len(self.dic["assets"][i]["layers"])):
+                    if "refId" in self.dic["assets"][i]["layers"][j].keys():
+                        if self.dic["assets"][i]["layers"][j]["refId"] in self.img:
+                            self.dic["assets"][i]["layers"][j]["nm"] = self.getValue(self.dic["assets"][i]["layers"][j]["refId"])
+
         with open(self.json, "w") as f:
             jsonStr = json.dumps(self.dic, sort_keys=True, indent=2, ensure_ascii=False)
             f.write(jsonStr)
@@ -50,11 +60,13 @@ class AnimationData(object):
             if tmp not in self.index:
                 self.index.append(tmp)
                 return tmp
+        print(self.index)
         return None
     
     def getLayersNM(self):
         dic = {}
         index = []
+        #layer层
         for layer in self.dic["layers"]:
             if "refId" in layer.keys():
                 if layer["refId"] not in index and layer["refId"] in self.img:
@@ -65,6 +77,24 @@ class AnimationData(object):
             if "refId" in layer.keys():
                 if layer["refId"] in self.img:
                     dic[layer["refId"]].append(layer["nm"])
+        #assert层
+        for i in range(len(self.dic["assets"])):
+            if "layers" in self.dic["assets"][i].keys():
+                for j in range(len(self.dic["assets"][i]["layers"])):
+                    if "refId" in self.dic["assets"][i]["layers"][j].keys():
+                        refId = self.dic["assets"][i]["layers"][j]["refId"]
+                        if refId not in index and refId in self.img:
+                            index.append(refId)
+                            dic[refId] = []
+
+        for i in range(len(self.dic["assets"])):
+            if "layers" in self.dic["assets"][i].keys():
+                for j in range(len(self.dic["assets"][i]["layers"])):
+                    if "refId" in self.dic["assets"][i]["layers"][j].keys():
+                        refId = self.dic["assets"][i]["layers"][j]["refId"]
+                        if refId in self.img:
+                            dic[refId].append(self.dic["assets"][i]["layers"][j]["nm"])
+                            
         return dic
     
     def getImageContentSize(self):
