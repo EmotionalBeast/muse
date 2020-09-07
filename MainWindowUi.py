@@ -148,14 +148,21 @@ class Ui_MainWindow(object):
 
 
         self.cbox_5 = QtWidgets.QCheckBox(self.centralwidget)
-        self.cbox_5.setGeometry(QtCore.QRect(645,150,110,30))
+        self.cbox_5.setGeometry(QtCore.QRect(645,150,100,30))
         self.cbox_5.setText("动效文字")
         self.cbox_5.setObjectName("cbox_5")
 
         self.cbox_6 = QtWidgets.QCheckBox(self.centralwidget)
-        self.cbox_6.setGeometry(QtCore.QRect(645,190,100,30))
+        self.cbox_6.setGeometry(QtCore.QRect(755,150,100,30))
         self.cbox_6.setText("忽略")
         self.cbox_6.setObjectName("cbox_6")
+
+        self.cbox_8 = QtWidgets.QCheckBox(self.centralwidget)
+        self.cbox_8.setGeometry(QtCore.QRect(645,190,100,30))
+        self.cbox_8.setText("图片复制")
+        self.cbox_8.setObjectName("cbox_8")
+        self.spinBox_5 = QtWidgets.QSpinBox(self.centralwidget)
+        self.spinBox_5.setGeometry(QtCore.QRect(755, 190, 50, 30))
 
 
         #增加button
@@ -950,6 +957,63 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_7), _translate("MainWindow", "图片复制"))
 
         self.tableWidget_7.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+    
+    def initDynamicCloneImageTable(self):
+        self.tab_8 = QtWidgets.QWidget()
+        self.tab_8.setObjectName("tab_8")
+        self.tableWidget_8 = QtWidgets.QTableWidget(self.tab_8)
+        self.tableWidget_8.setColumnCount(17)
+        self.tableWidget_8.setGeometry(QtCore.QRect(0, 0, 1000, 450))
+        self.tableWidget_8.setObjectName("tableWidget_8")
+
+        for i in range(17):
+            item = QtWidgets.QTableWidgetItem()
+            self.tableWidget_8.setHorizontalHeaderItem(i, item)
+        self.tabWidget.addTab(self.tab_8, "")
+        #设置列宽
+        self.tableWidget_8.setColumnWidth(6,240)
+        # self.tableWidget_8.setColumnWidth(11,120)
+        #虚化背景表格的顶栏字段
+        _translate = QtCore.QCoreApplication.translate
+
+        item = self.tableWidget_8.horizontalHeaderItem(0)
+        item.setText(_translate("MainWindow", "左边距离"))
+        item = self.tableWidget_8.horizontalHeaderItem(1)
+        item.setText(_translate("MainWindow", "右边距离"))
+        item = self.tableWidget_8.horizontalHeaderItem(2)
+        item.setText(_translate("MainWindow", "顶部距离"))
+        item = self.tableWidget_8.horizontalHeaderItem(3)
+        item.setText(_translate("MainWindow", "底部距离"))
+        item = self.tableWidget_8.horizontalHeaderItem(4)
+        item.setText(_translate("MainWindow", "关联编号"))
+        item = self.tableWidget_8.horizontalHeaderItem(5)
+        item.setText(_translate("MainWindow", "图片名称"))
+        item = self.tableWidget_8.horizontalHeaderItem(6)
+        item.setText(_translate("MainWindow", "关联名称"))
+        item = self.tableWidget_8.horizontalHeaderItem(7)
+        item.setText(_translate("MainWindow", "图片宽度"))
+        item = self.tableWidget_8.horizontalHeaderItem(8)
+        item.setText(_translate("MainWindow", "图片长度"))       
+        item = self.tableWidget_8.horizontalHeaderItem(9)
+        item.setText(_translate("MainWindow", "滤镜名称"))       
+        item = self.tableWidget_8.horizontalHeaderItem(10)
+        item.setText(_translate("MainWindow", "总编号"))       
+        item = self.tableWidget_8.horizontalHeaderItem(11)
+        item.setText(_translate("MainWindow", "ignore"))       
+        item = self.tableWidget_8.horizontalHeaderItem(12)
+        item.setText(_translate("MainWindow", "类型"))       
+        item = self.tableWidget_8.horizontalHeaderItem(13)
+        item.setText(_translate("MainWindow", "left_constant"))
+        item = self.tableWidget_8.horizontalHeaderItem(14)
+        item.setText(_translate("MainWindow", "right_constant"))
+        item = self.tableWidget_8.horizontalHeaderItem(15)
+        item.setText(_translate("MainWindow", "top_constant"))
+        item = self.tableWidget_8.horizontalHeaderItem(16)
+        item.setText(_translate("MainWindow", "bottom_constant"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_8), _translate("MainWindow", "图片复制"))
+
+        self.tableWidget_8.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+    
 
     def initTable(self):
         if self.index > 0:
@@ -1000,16 +1064,23 @@ class Ui_MainWindow(object):
             if self.spinBox_1.value() != 0:
                 #选择不同类型的media
                 if self.cbox_6.isChecked() == False:
+                    if self.cbox_8.isChecked() == True:
+                        self.initDynamicCloneImageTable()
                     self.initDynamicCellTable()
+    
                 if self.cbox_6.isChecked() == True:
+                    if self.cbox_8.isChecked() == True:
+                        self.initDynamicCloneImageTable()
                     self.initIgnoreCellTable()
-
+                    
+                
                 #选择不同类型的text， text or animation_text
                 if self.spinBox_3.value() != 0:
                     if self.cbox_5.isChecked() == False:
                         self.initDynamicTextTable()
                     if self.cbox_5.isChecked() == True:
                         self.initCustomDynamicTextTable()
+                    
                 
                 self.initNormalBgTable()
                 self.initDynamicTable()

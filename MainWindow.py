@@ -140,6 +140,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_6.setEditTriggers(QAbstractItemView.CurrentChanged)
 			if self.cbox_7.isChecked():
 				self.tableWidget_7.setEditTriggers(QAbstractItemView.CurrentChanged)
+			if self.cbox_8.isChecked():
+				self.tableWidget_8.setEditTriggers(QAbstractItemView.CurrentChanged)
 			self.statusbar.showMessage("Editable")
 		else:
 			QMessageBox.information(self, "提示", "请选择json文件")
@@ -160,6 +162,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_6.setEditTriggers(QAbstractItemView.NoEditTriggers)
 			if self.cbox_7.isChecked():
 				self.tableWidget_7.setEditTriggers(QAbstractItemView.NoEditTriggers)
+			if self.cbox_8.isChecked():
+				self.tableWidget_8.setEditTriggers(QAbstractItemView.NoEditTriggers)
 			self.statusbar.showMessage("Non Editable")
 		else:
 			QMessageBox.information(self, "提示", "请选择json文件")
@@ -188,6 +192,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 	def resolveJson(self):
 		#reset
 		self.blur_list = []
+		self.art_list = []
 		self.cell_list = []
 		self.bg_list = []
 		self.text_list = []
@@ -224,6 +229,9 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 						self.cbox_7.setChecked(True)
 					if "rotation" not in item[i].keys() and self.cbox_1.isChecked() == False:
 						self.cbox_1.setChecked(True)
+				if "artFilter" in item[i].keys():
+					self.art_list.append(item[i])
+					self.cbox_8.setChecked(True)
 				if "mediaId" in item[i].keys():
 					if "ignore" not in item[i].keys():
 						self.cell_list.append(item[i])
@@ -248,6 +256,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			self.spinBox_3.setValue(len(self.text_list))
 			if self.cbox_7.isChecked() == True:
 				self.spinBox_4.setValue(len(self.blur_list))
+			if self.cbox_8.isChecked() == True:
+				self.spinBox_5.setValue(len(self.art_list))
 
 	def initData(self):
 		self.handleData()
@@ -257,20 +267,20 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		if self.cbox_1.isChecked() == True:
 			self.tableWidget_1.setRowCount(self.spinBox_4.value())
 			for i in range(len(self.blur_list)):
-				self.tableWidget_1.setItem(i,6,QTableWidgetItem(self.blur_list[i]['id']))
-				self.tableWidget_1.setItem(i,7,QTableWidgetItem(self.blur_list[i]['type']))
-				self.tableWidget_1.setItem(i,0,QTableWidgetItem(str(self.blur_list[i]['blur'])))
-				self.tableWidget_1.setItem(i,5,QTableWidgetItem(self.blur_list[i]['refId']))
-				self.tableWidget_1.setItem(i,1,QTableWidgetItem(str(self.blur_list[i]['constraints']['left']['percentage'])))
-				self.tableWidget_1.setItem(i,8,QTableWidgetItem(str(self.blur_list[i]['constraints']['left']['constant'])))
-				self.tableWidget_1.setItem(i,2,QTableWidgetItem(str(self.blur_list[i]['constraints']['right']['percentage'])))
-				self.tableWidget_1.setItem(i,9,QTableWidgetItem(str(self.blur_list[i]['constraints']['right']['constant'])))
-				self.tableWidget_1.setItem(i,3,QTableWidgetItem(str(self.blur_list[i]['constraints']['top']['percentage'])))
-				self.tableWidget_1.setItem(i,10,QTableWidgetItem(str(self.blur_list[i]['constraints']['top']['constant'])))
-				self.tableWidget_1.setItem(i,4,QTableWidgetItem(str(self.blur_list[i]['constraints']['bottom']['percentage'])))
-				self.tableWidget_1.setItem(i,11,QTableWidgetItem(str(self.blur_list[i]['constraints']['bottom']['constant'])))
+				self.tableWidget_1.setItem(i,6, QTableWidgetItem(self.blur_list[i]['id']))
+				self.tableWidget_1.setItem(i,7, QTableWidgetItem(self.blur_list[i]['type']))
+				self.tableWidget_1.setItem(i,0, QTableWidgetItem(str(self.blur_list[i]['blur'])))
+				self.tableWidget_1.setItem(i,5, QTableWidgetItem(self.blur_list[i]['refId']))
+				self.tableWidget_1.setItem(i,1, QTableWidgetItem(str(self.blur_list[i]['constraints']['left']['percentage'])))
+				self.tableWidget_1.setItem(i,8, QTableWidgetItem(str(self.blur_list[i]['constraints']['left']['constant'])))
+				self.tableWidget_1.setItem(i,2, QTableWidgetItem(str(self.blur_list[i]['constraints']['right']['percentage'])))
+				self.tableWidget_1.setItem(i,9, QTableWidgetItem(str(self.blur_list[i]['constraints']['right']['constant'])))
+				self.tableWidget_1.setItem(i,3, QTableWidgetItem(str(self.blur_list[i]['constraints']['top']['percentage'])))
+				self.tableWidget_1.setItem(i, 10, QTableWidgetItem(str(self.blur_list[i]['constraints']['top']['constant'])))
+				self.tableWidget_1.setItem(i, 4, QTableWidgetItem(str(self.blur_list[i]['constraints']['bottom']['percentage'])))
+				self.tableWidget_1.setItem(i, 11, QTableWidgetItem(str(self.blur_list[i]['constraints']['bottom']['constant'])))
 
-		if self.cbox_7.isChecked() == True:
+		if self.cbox_7.isChecked() == True and self.cbox_8.isChecked() == False:
 			self.tableWidget_7.setRowCount(self.spinBox_4.value())
 			for i in range(len(self.blur_list)):
 				self.tableWidget_7.setItem(i,7,QTableWidgetItem(self.blur_list[i]['id']))
@@ -287,6 +297,29 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_7.setItem(i,3,QTableWidgetItem(str(round(self.blur_list[i]['constraints']['bottom']['percentage']*100, 2))))
 				self.tableWidget_7.setItem(i,12,QTableWidgetItem(str(self.blur_list[i]['constraints']['bottom']['constant'])))
 
+		if self.cbox_7.isChecked() == False and self.cbox_8.isChecked() == True:
+			self.tableWidget_8.setRowCount(self.spinBox_5.value())
+			for i in range(len(self.art_list)):
+				self.tableWidget_8.setItem(i, 0, QTableWidgetItem(str(round(self.art_list[i]["constraints"]["left"]["percentage"]*100, 2))))
+				self.tableWidget_8.setItem(i, 1, QTableWidgetItem(str(round(self.art_list[i]["constraints"]["right"]["percentage"]*100, 2))))
+				self.tableWidget_8.setItem(i, 2, QTableWidgetItem(str(round(self.art_list[i]["constraints"]["top"]["percentage"]*100, 2))))
+				self.tableWidget_8.setItem(i, 3, QTableWidgetItem(str(round(self.art_list[i]["constraints"]["bottom"]["percentage"]*100, 2))))
+				self.tableWidget_8.setItem(i, 4, QTableWidgetItem(self.art_list[i]["refId"]))
+				self.tableWidget_8.setItem(i, 5, QTableWidgetItem(self.art_list[i]["imageId"]))
+				temp = ""
+				for name in self.art_list[i]["keyPathList"]:
+					temp = temp + name + ","
+				self.tableWidget_8.setItem(i, 6, QTableWidgetItem(temp))
+				self.tableWidget_8.setItem(i, 7, QTableWidgetItem(str(self.art_list[i]["contentSize"][0])))
+				self.tableWidget_8.setItem(i, 8, QTableWidgetItem(str(self.art_list[i]["contentSize"][1])))
+				self.tableWidget_8.setItem(i, 9, QTableWidgetItem(self.art_list[i]["artFilter"]))
+				self.tableWidget_8.setItem(i, 10, QTableWidgetItem(self.art_list[i]["id"]))
+				self.tableWidget_8.setItem(i, 11, QTableWidgetItem(str(self.art_list[i]["ignore"])))
+				self.tableWidget_8.setItem(i, 12, QTableWidgetItem(self.art_list[i]["type"]))
+				self.tableWidget_8.setItem(i, 13, QTableWidgetItem(str(self.art_list[i]['constraints']['left']['constant'])))
+				self.tableWidget_8.setItem(i, 14, QTableWidgetItem(str(self.art_list[i]['constraints']['right']['constant'])))
+				self.tableWidget_8.setItem(i, 15, QTableWidgetItem(str(self.art_list[i]['constraints']['top']['constant'])))
+				self.tableWidget_8.setItem(i, 16, QTableWidgetItem(str(self.art_list[i]['constraints']['bottom']['constant'])))
 		#赋值cell表
 		if self.spinBox_1.value() != 0:
 			if self.cbox_3.isChecked() == False:
@@ -509,7 +542,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 	def createTable(self):
 		self.initTable()
 		self.nonEditable()
-		count_1 = self.spinBox_4.value()
+		# count_1 = self.spinBox_4.value()
 		count_2 = self.spinBox_1.value()
 		count_3 = self.spinBox_2.value()
 		count_4 = self.spinBox_3.value()
@@ -541,7 +574,8 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				count_1 = 1
 
 		#初始化cloneimage表
-		if self.cbox_7.isChecked() == True:
+		if self.cbox_7.isChecked() == True and self.cbox_8.isChecked() == False:
+			count_1 = self.spinBox_4.value()
 			self.tableWidget_7.setRowCount(count_1)
 			for i in range(count_1):
 				self.tableWidget_7.setItem(i,7,QTableWidgetItem(str(i)))
@@ -551,6 +585,21 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_7.setItem(i,10,QTableWidgetItem("0"))
 				self.tableWidget_7.setItem(i,11,QTableWidgetItem("0"))
 				self.tableWidget_7.setItem(i,12,QTableWidgetItem("0"))
+		if self.cbox_7.isChecked() == False and self.cbox_8.isChecked() == True:
+			count_1 = self.spinBox_5.value()
+			self.tableWidget_8.setRowCount(count_1)
+			for i in range(count_1):
+				self.tableWidget_8.setItem(i, 0, QTableWidgetItem("0"))
+				self.tableWidget_8.setItem(i, 1, QTableWidgetItem("0"))
+				self.tableWidget_8.setItem(i, 2, QTableWidgetItem("0"))
+				self.tableWidget_8.setItem(i, 3, QTableWidgetItem("0"))
+				self.tableWidget_8.setItem(i, 10, QTableWidgetItem(str(i)))
+				self.tableWidget_8.setItem(i, 11, QTableWidgetItem("0"))
+				self.tableWidget_8.setItem(i, 12, QTableWidgetItem("clone_image"))
+				self.tableWidget_8.setItem(i, 13, QTableWidgetItem("0"))
+				self.tableWidget_8.setItem(i, 14, QTableWidgetItem("0"))
+				self.tableWidget_8.setItem(i, 15, QTableWidgetItem("0"))
+				self.tableWidget_8.setItem(i, 16, QTableWidgetItem("0"))
 
 		#初始化cell表
 		if  self.cbox_3.isChecked() == False:
@@ -598,10 +647,10 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				if count_2 == len(self.pictureName):
 					imageName = self.pictureName[i]
 					refName = imageName.replace("_", "") + "a"
-					self.tableWidget_2.setItem(i,4,QTableWidgetItem(imageName))   #图片名称
-					self.tableWidget_2.setItem(i,5,QTableWidgetItem(refName))	#关联名称
-					self.tableWidget_2.setItem(i,6,QTableWidgetItem(str(self.contentSizeDic[imageName][0])))	#图片高度
-					self.tableWidget_2.setItem(i,7,QTableWidgetItem(str(self.contentSizeDic[imageName][1])))	#图片宽度
+					self.tableWidget_2.setItem(i, 4, QTableWidgetItem(imageName))   #图片名称
+					self.tableWidget_2.setItem(i, 5, QTableWidgetItem(refName))	#关联名称
+					self.tableWidget_2.setItem(i, 6, QTableWidgetItem(str(self.contentSizeDic[imageName][0])))	#图片高度
+					self.tableWidget_2.setItem(i, 7, QTableWidgetItem(str(self.contentSizeDic[imageName][1])))	#图片宽度
 
 		#初始化bg表
 		if count_3 != 0:
@@ -815,7 +864,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 													}
 				self.item.append(blur_dic)
 
-		if self.cbox_7.isChecked() == True:
+		if self.cbox_7.isChecked() == True and self.cbox_8.isChecked() == False:
 			for i in range(self.spinBox_4.value()):
 				blur_dic = {}
 				blur_dic["id"] = self.tableWidget_7.item(i, 7).text()
@@ -849,6 +898,50 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 															}
 													}
 				self.item.append(blur_dic)
+		
+		if self.cbox_8.isChecked() == True and self.cbox_7.isChecked() == False:
+			for i in range(self.spinBox_5.value()):
+				art_dic = {}
+				art_dic["refId"] = self.tableWidget_8.item(i, 4).text()
+				art_dic["imageId"] = self.tableWidget_8.item(i, 5).text()
+				temp_1 = self.tableWidget_8.item(i, 6).text().replace(" ", "")
+				temp_2 = list(temp_1.split(","))
+				temp_3 = [i for i in temp_2 if i != '']
+				art_dic["keyPathList"] = temp_3
+				art_dic["contentSize"] = []
+				art_dic["contentSize"].append(int(self.tableWidget_8.item(i, 7).text()))
+				art_dic["contentSize"].append(int(self.tableWidget_8.item(i, 8).text()))
+				art_dic["artFilter"] = self.tableWidget_8.item(i, 9).text()
+				art_dic["id"] = self.tableWidget_8.item(i, 10).text()
+				art_dic["ignore"] = int(self.tableWidget_8.item(i, 11).text())
+				art_dic["type"] = self.tableWidget_8.item(i, 12).text()
+				item_1 = self.tableWidget_8.item(i,0).text()
+				item_2 = self.tableWidget_8.item(i,13).text()
+				item_3 = self.tableWidget_8.item(i,1).text()
+				item_4 = self.tableWidget_8.item(i,14).text()
+				item_5 = self.tableWidget_8.item(i,2).text()
+				item_6 = self.tableWidget_8.item(i,15).text()
+				item_7 = self.tableWidget_8.item(i,3).text()
+				item_8 = self.tableWidget_8.item(i,16).text()
+				art_dic["constraints"] = {"left":{
+															"percentage": round(float(item_1)/100, 4),
+															"constant": float(item_2)
+															},
+													"right":{
+															"percentage": round(float(item_3)/100, 4),
+															"constant": float(item_4)
+															},
+													"top":{
+															"percentage": round(float(item_5)/100, 4),
+															"constant": float(item_6)
+															},
+													"bottom":{
+															"percentage": round(float(item_7)/100, 4),
+															"constant": float(item_8)
+															}
+													}
+				self.item.append(art_dic)
+
 
 		if self.spinBox_1.value() != 0:
 			if self.cbox_3.isChecked() == False:

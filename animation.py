@@ -12,22 +12,30 @@ class AnimationData(object):
     def __init__(self, path1, path2):
         self.txt = path1
         self.json = path2
-        self.img = self.getPictureName()
+        self.img, self.clone_img = self.getPictureName()
         self.dic = self.getJsonDic()
         self.index = []
 
     def getPictureName(self):
         img = []
+        clone_img = []
         with open(self.txt, "r") as f:
             content = f.read()
-            pic_list = content.split("\n")
+            temp = content.split("\n")
 
-        pic_list = [i for i in pic_list if i != '']
+        temp = [i for i in temp if i != '']
+        pic_list = temp[0].split(" ")
+        pic_list = [i for i in pic_list if i != ""]
+        clone_list = temp[1].split(" ")
+        clone_list = [i for i in clone_list if i != ""]
         
         for name in pic_list:
             tmp = name.replace("img", "image").split(".")[0]
             img.append(tmp)
-        return img
+        for name in clone_list:
+            tmp = name.replace("img", "image").split(".")[1]
+            clone_img.append(tmp)
+        return img, clone_img
 
     def getJsonDic(self):
         dic = {}
@@ -38,6 +46,7 @@ class AnimationData(object):
 
     def replaceNM(self):
         print(self.img)
+        #self.img 原图
         for i in range(len(self.dic["layers"])):
             if "refId" in self.dic["layers"][i].keys():
                 if self.dic["layers"][i]["refId"] in self.img:
@@ -50,10 +59,23 @@ class AnimationData(object):
                         if self.dic["assets"][i]["layers"][j]["refId"] in self.img:
                             self.dic["assets"][i]["layers"][j]["nm"] = self.getValue(self.dic["assets"][i]["layers"][j]["refId"])
 
+        #self.clone 艺术滤镜图
+        for i in range(len(self.dic["layers"])):
+            if "refId" in self.dic["layers"][i].keys():
+                if self.dic["layers"][i]["refId"] in self.clone_img:
+                    self.dic["layers"][i]["nm"] = self.getValue(self.dic["layers"][i]["refId"])
+        
+        for i in range(len(self.dic["assets"])):
+            if "layers" in self.dic["assets"][i].keys():
+                for j in range(len(self.dic["assets"][i]["layers"])):
+                    if "refId" in self.dic["assets"][i]["layers"][j].keys():
+                        if self.dic["assets"][i]["layers"][j]["refId"] in self.clone_img:
+                            self.dic["assets"][i]["layers"][j]["nm"] = self.getValue(self.dic["assets"][i]["layers"][j]["refId"])
+
         with open(self.json, "w") as f:
             jsonStr = json.dumps(self.dic, sort_keys=True, indent=2, ensure_ascii=False)
             f.write(jsonStr)
-
+            
     def getValue(self, value):
         for c1 in CH:
             tmp = value.replace("_", "") + c1
