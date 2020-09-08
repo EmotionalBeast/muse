@@ -533,8 +533,10 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		if os.path.exists(path1) and os.path.exists(path2):
 			an = AnimationData(path1, path2)
 			an.replaceNM()
-			self.pictureName = an.getPictureName()
+			self.pictureName = an.img
+			self.CloneImgName = an.clone_img
 			self.NMDic = an.getLayersNM()
+			self.cloneNMDic = an.getCloneLayersNM()
 			self.contentSizeDic = an.getImageContentSize()
 			self.ignore = an.ignore()
 
@@ -585,6 +587,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_7.setItem(i,10,QTableWidgetItem("0"))
 				self.tableWidget_7.setItem(i,11,QTableWidgetItem("0"))
 				self.tableWidget_7.setItem(i,12,QTableWidgetItem("0"))
+
 		if self.cbox_7.isChecked() == False and self.cbox_8.isChecked() == True:
 			count_1 = self.spinBox_5.value()
 			self.tableWidget_8.setRowCount(count_1)
@@ -600,6 +603,13 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_8.setItem(i, 14, QTableWidgetItem("0"))
 				self.tableWidget_8.setItem(i, 15, QTableWidgetItem("0"))
 				self.tableWidget_8.setItem(i, 16, QTableWidgetItem("0"))
+				if count_1 == len(self.CloneImgName):
+					imageName = self.CloneImgName[i]
+					refName = imageName.replace("_", "") + "a"
+					self.tableWidget_8.setItem(i,5,QTableWidgetItem(imageName))   #图片名称
+					self.tableWidget_8.setItem(i,6,QTableWidgetItem(refName))	#关联名称
+					self.tableWidget_8.setItem(i,7,QTableWidgetItem(str(self.contentSizeDic[imageName][0])))	#图片高度
+					self.tableWidget_8.setItem(i,8,QTableWidgetItem(str(self.contentSizeDic[imageName][1])))	#图片宽度
 
 		#初始化cell表
 		if  self.cbox_3.isChecked() == False:

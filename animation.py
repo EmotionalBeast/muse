@@ -75,7 +75,7 @@ class AnimationData(object):
         with open(self.json, "w") as f:
             jsonStr = json.dumps(self.dic, sort_keys=True, indent=2, ensure_ascii=False)
             f.write(jsonStr)
-            
+
     def getValue(self, value):
         for c1 in CH:
             tmp = value.replace("_", "") + c1
@@ -119,10 +119,45 @@ class AnimationData(object):
                             
         return dic
     
+    def getCloneLayersNM(self):
+        dic = {}
+        index = []
+        #layer层
+        for layer in self.dic["layers"]:
+            if "refId" in layer.keys():
+                if layer["refId"] not in index and layer["refId"] in self.clone_img:
+                    index.append(layer["refId"])
+                    dic[layer["refId"]] = []
+
+        for layer in self.dic["layers"]:
+            if "refId" in layer.keys():
+                if layer["refId"] in self.clone_img:
+                    dic[layer["refId"]].append(layer["nm"])
+        #assert层
+        for i in range(len(self.dic["assets"])):
+            if "layers" in self.dic["assets"][i].keys():
+                for j in range(len(self.dic["assets"][i]["layers"])):
+                    if "refId" in self.dic["assets"][i]["layers"][j].keys():
+                        refId = self.dic["assets"][i]["layers"][j]["refId"]
+                        if refId not in index and refId in self.clone_img:
+                            index.append(refId)
+                            dic[refId] = []
+
+        for i in range(len(self.dic["assets"])):
+            if "layers" in self.dic["assets"][i].keys():
+                for j in range(len(self.dic["assets"][i]["layers"])):
+                    if "refId" in self.dic["assets"][i]["layers"][j].keys():
+                        refId = self.dic["assets"][i]["layers"][j]["refId"]
+                        if refId in self.clone_img:
+                            dic[refId].append(self.dic["assets"][i]["layers"][j]["nm"])
+                            
+        return dic
+
+    
     def getImageContentSize(self):
         dic = {}
         for asset in self.dic["assets"]:
-            if asset["id"] in self.img:
+            if asset["id"] in self.img or asset["id"] in self.clone_img:
                 dic[asset["id"]] = []
                 dic[asset["id"]].append(asset["w"])
                 dic[asset["id"]].append(asset["h"])
