@@ -205,6 +205,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		self.cbox_5.setChecked(False)
 		self.cbox_6.setChecked(False)
 		self.cbox_7.setChecked(False)
+		self.cbox_8.setChecked(False)
 		self.spinBox_4.setValue(0)
 
 		#value
@@ -213,6 +214,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			self.spinBox_1.setValue(0)
 			self.spinBox_2.setValue(0)
 			self.spinBox_3.setValue(0)
+			self.spinBox_5.setValue(0)
 			if self.ignore:
 				self.cbox_6.setChecked(True)
 		else:
@@ -605,9 +607,11 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_8.setItem(i, 16, QTableWidgetItem("0"))
 				if count_1 == len(self.CloneImgName):
 					imageName = self.CloneImgName[i]
-					refName = imageName.replace("_", "") + "a"
+					refNames = ""
+					for name in self.cloneNMDic[imageName]:
+						refNames = refNames + name + ","
 					self.tableWidget_8.setItem(i,5,QTableWidgetItem(imageName))   #图片名称
-					self.tableWidget_8.setItem(i,6,QTableWidgetItem(refName))	#关联名称
+					self.tableWidget_8.setItem(i,6,QTableWidgetItem(refNames))	#关联名称
 					self.tableWidget_8.setItem(i,7,QTableWidgetItem(str(self.contentSizeDic[imageName][0])))	#图片高度
 					self.tableWidget_8.setItem(i,8,QTableWidgetItem(str(self.contentSizeDic[imageName][1])))	#图片宽度
 

@@ -33,7 +33,7 @@ class AnimationData(object):
             tmp = name.replace("img", "image").split(".")[0]
             img.append(tmp)
         for name in clone_list:
-            tmp = name.replace("img", "image").split(".")[1]
+            tmp = name.replace("img", "image").split(".")[0]
             clone_img.append(tmp)
         return img, clone_img
 
@@ -45,7 +45,6 @@ class AnimationData(object):
         return dic
 
     def replaceNM(self):
-        print(self.img)
         #self.img 原图
         for i in range(len(self.dic["layers"])):
             if "refId" in self.dic["layers"][i].keys():
