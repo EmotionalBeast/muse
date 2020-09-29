@@ -267,7 +267,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		self.initTable()
 		#赋值blur表
 		if self.cbox_1.isChecked() == True:
-			self.tableWidget_1.setRowCount(self.spinBox_4.value())
+			self.tableWidget_1.setRowCount(1)
 			for i in range(len(self.blur_list)):
 				self.tableWidget_1.setItem(i,6, QTableWidgetItem(self.blur_list[i]['id']))
 				self.tableWidget_1.setItem(i,7, QTableWidgetItem(self.blur_list[i]['type']))
@@ -547,6 +547,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		self.initTable()
 		self.nonEditable()
 		# count_1 = self.spinBox_4.value()
+		count_1 = 0
 		count_2 = self.spinBox_1.value()
 		count_3 = self.spinBox_2.value()
 		count_4 = self.spinBox_3.value()
@@ -559,7 +560,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			self.tableWidget_4.setRowCount(count_4)	
 		#将comBox放到tablewidget中	
 			self.initComBox()
-		name = self.comBox_2.currentText()
+		name_ = self.comBox_2.currentText()
 		#初始化blur表
 		if self.cbox_1.isChecked() == True: 
 			self.tableWidget_1.setRowCount(1)
@@ -673,9 +674,9 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				self.tableWidget_3.setItem(i,0,QTableWidgetItem(str(count_1+count_2+i)))
 				self.tableWidget_3.setItem(i,1,QTableWidgetItem("image"))
 				if self.comBox_2.currentText()[:13] == "template.json":
-					self.tableWidget_3.setItem(i,2,QTableWidgetItem("template_widget_"+name[self.count:]+".png"))
+					self.tableWidget_3.setItem(i,2,QTableWidgetItem("template_widget_"+name_[self.count:]+".png"))
 				else:
-					self.tableWidget_3.setItem(i,2,QTableWidgetItem("template_widget_"+name[self.count:]+"_1_1.png"))
+					self.tableWidget_3.setItem(i,2,QTableWidgetItem("template_widget_"+name_[self.count:]+"_1_1.png"))
 				self.tableWidget_3.setItem(i,3,QTableWidgetItem("0"))
 				self.tableWidget_3.setItem(i,4,QTableWidgetItem("0"))
 				self.tableWidget_3.setItem(i,5,QTableWidgetItem("0"))
@@ -845,7 +846,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 
 	def tableValues(self):
 		if self.cbox_1.isChecked() == True:
-			for i in range(self.spinBox_4.value()):
+			for i in range(1):
 				blur_dic = {}
 				blur_dic["id"] = self.tableWidget_1.item(i, 6).text()
 				blur_dic["type"] = self.tableWidget_1.item(i, 7).text()
@@ -1329,6 +1330,11 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		for i in range(self.spinBox_1.value()):
 			tempStr = self.tableWidget_2.item(i, 4).text().split("_")[1]
 			img.append("img_" + tempStr + ".png")
+		
+		if self.cbox_8.isChecked() == True:
+			for i in range(self.spinBox_5.value()):
+				tempStr = self.tableWidget_8.item(i, 5).text().split("_")[1]
+				img.append("img_" + tempStr + ".png")
 
 		for root,dirs,files in os.walk(os.path.join(self.path, tempPath[1])):
 			for dir in dirs:

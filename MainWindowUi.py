@@ -159,7 +159,7 @@ class Ui_MainWindow(object):
 
         self.cbox_8 = QtWidgets.QCheckBox(self.centralwidget)
         self.cbox_8.setGeometry(QtCore.QRect(645,190,100,30))
-        self.cbox_8.setText("图片复制")
+        self.cbox_8.setText("艺术滤镜")
         self.cbox_8.setObjectName("cbox_8")
         self.spinBox_5 = QtWidgets.QSpinBox(self.centralwidget)
         self.spinBox_5.setGeometry(QtCore.QRect(755, 190, 50, 30))

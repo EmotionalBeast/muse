@@ -24,17 +24,23 @@ class AnimationData(object):
             temp = content.split("\n")
 
         temp = [i for i in temp if i != '']
-        pic_list = temp[0].split(" ")
-        pic_list = [i for i in pic_list if i != ""]
-        clone_list = temp[1].split(" ")
-        clone_list = [i for i in clone_list if i != ""]
+        print(temp)
+        if len(temp) == 1:
+            pic_list = temp[0].split(" ")
+            pic_list = [i for i in pic_list if i != ""]
+
+        if len(temp) == 2:
+            pic_list = temp[0].split(" ")
+            pic_list = [i for i in pic_list if i != ""]
+            clone_list = temp[1].split(" ")
+            clone_list = [i for i in clone_list if i != ""]
+            for name in clone_list:
+                tmp = name.replace("img", "image").split(".")[0]
+                clone_img.append(tmp)
         
         for name in pic_list:
             tmp = name.replace("img", "image").split(".")[0]
             img.append(tmp)
-        for name in clone_list:
-            tmp = name.replace("img", "image").split(".")[0]
-            clone_img.append(tmp)
         return img, clone_img
 
     def getJsonDic(self):
