@@ -1369,6 +1369,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					QMessageBox.information(self, "提示", "MV素材输出成功！")
 				else:
 					QMessageBox.information(self, "提示", info)
+				self.handlerFilter()
 				if self.encryption() == 0:
 					t = Thread(name="subthread_compressing", target=self.compressing, args=())
 					t.start()
@@ -1377,6 +1378,47 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				QMessageBox.information(self, "提示", "请选择MV素材组！")
 		else:
 			QMessageBox.information(self, "提示", "请选择MV素材组！")
+		
+	def handlerFilter(self):
+		pathIn = self.path[:-2] + "in"
+		for root, dirs, files in os.walk(pathIn):
+			for file in files:
+				if file == "config.json":
+					path = os.path.join(root, file)
+					filter_path = os.path.join(root, "filter.txt")
+					if os.path.exists(filter_path):
+						dic = self.getFilterName(filter_path)
+						self.replaceContentFilter(path, dic)
+
+	def getFilterName(self, path):
+		dic = {}
+		with open(path, "r") as f:
+			content = f.read()
+
+		lines = content.split("\n")
+		lines = [l for l in lines if l != "" and l != " "]
+		for line in lines:
+			temp = line.split(" ")
+			dic[temp[0]] = [temp[1], temp[2]]
+
+		return dic
+
+	def replaceContentFilter(self, path, dic):
+		with open(path, "r") as lf:
+			jsonStr = lf.read()
+			dic_1 = json.loads(jsonStr, strict = False)
+
+		for element in dic_1["elements"]:
+			if element["keyPath"].split("/")[1] in dic.keys():
+				element["type"] = "clone_media"
+				element["filterName"] = dic[element["keyPath"].split("/")[1]][0]
+				for element_1 in dic_1["elements"]:
+					if element_1["keyPath"].split("/")[1] == dic[element["keyPath"].split("/")[1]][1]:
+						element["refId"] = element_1["id"]
+
+		with open(path, "w") as df:
+			jsonStr = json.dumps(dic_1, sort_keys=True, indent=2, ensure_ascii=False)
+			df.write(jsonStr)
 	
 	def createBeatMV(self):
 		# pathMaterial = self.path[:-2] + "material"
