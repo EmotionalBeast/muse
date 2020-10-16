@@ -1411,7 +1411,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		for element in dic_1["elements"]:
 			if element["keyPath"].split("/")[1] in dic.keys():
 				element["type"] = "clone_media"
-				element["filterName"] = dic[element["keyPath"].split("/")[1]][0]
+				element["artFilter"] = dic[element["keyPath"].split("/")[1]][0]
 				for element_1 in dic_1["elements"]:
 					if element_1["keyPath"].split("/")[1] == dic[element["keyPath"].split("/")[1]][1]:
 						element["refId"] = element_1["id"]
