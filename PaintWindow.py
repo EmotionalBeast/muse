@@ -7,6 +7,14 @@ from PyQt5.QtCore import QRect, Qt, QSize
 from PaintWindowUi import Ui_PaintWindow
 from PIL import Image, ImageFilter
 from math import sqrt
+from pathlib import Path
+
+if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+    bundle_dir = Path(sys._MEIPASS)
+else:
+    bundle_dir = Path(__file__).parent
+
+SETTING_JSON_PATH = str(Path.cwd()/bundle_dir/"resources/json/setting.json")
 
 PROPORTION_16_9 = (450, 800)
 PROPORTION_1_1 = (450, 450)
@@ -17,7 +25,7 @@ class MyPaintWindow(QWidget, Ui_PaintWindow):
 		super(MyPaintWindow,self).__init__()
 		
 		# 读取setting.json,获取workspace路径
-		with open("./resources/json/setting.json") as lf:
+		with open(SETTING_JSON_PATH) as lf:
 			jsonStr = lf.read()
 			dic = json.loads(jsonStr, strict = False)
 		self.num = templatePath.rsplit("-",1)[1]

@@ -11,6 +11,31 @@ from PyQt5.QtWidgets import (QApplication, QMainWindow, QFileDialog, QMessageBox
 													QTableWidgetItem, QAbstractItemView, QComboBox)
 from PyQt5.QtGui import QColor
 
+from pathlib import Path
+import sys
+
+if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+    bundle_dir = Path(sys._MEIPASS)
+else:
+    bundle_dir = Path(__file__).parent
+
+NEW_PNG = str(Path.cwd()/bundle_dir/"resources/images/new.png")
+EDIT_PNG = str(Path.cwd()/bundle_dir/"resources/images/edit.png")
+ENCOM_PNG = str(Path.cwd()/bundle_dir/"resources/images/EnCom.png")
+ENCRYPT_PNG = str(Path.cwd()/bundle_dir/"resources/images/encrypt.png")
+MV_PNG = str(Path.cwd()/bundle_dir/"resources/images/MV.png")
+OPEN_PNG = str(Path.cwd()/bundle_dir/"resources/images/open.png")
+PAINT_PNG = str(Path.cwd()/bundle_dir/"resources/images/paint.png")
+QUIT_PNG = str(Path.cwd()/bundle_dir/"resources/images/quit.png")
+REFRESH_PNG = str(Path.cwd()/bundle_dir/"resources/images/refresh.png")
+RESIZE_PNG = str(Path.cwd()/bundle_dir/"resources/images/resize.png")
+SAVE_AS_PNG = str(Path.cwd()/bundle_dir/"resources/images/save_as.png")
+SAVE_PNG = str(Path.cwd()/bundle_dir/"resources/images/save.png")
+SETTING_PNG = str(Path.cwd()/bundle_dir/"resources/images/setting.png")
+TOOL_PNG = str(Path.cwd()/bundle_dir/"resources/images/tool.png")
+
+
+
 # import json, os
 NORMAL_CELL = []
 ANIMATION_CELL = []
@@ -29,7 +54,7 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1000, 800)
         MainWindow.setFixedSize(1000, 800)
-        MainWindow.setWindowIcon(QtGui.QIcon('./resources/images/tool.png'))
+        MainWindow.setWindowIcon(QtGui.QIcon(TOOL_PNG))
 
         #主体部分添加控件
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -191,11 +216,11 @@ class Ui_MainWindow(object):
         self.toolBar = QtWidgets.QToolBar(MainWindow)
         self.toolBar.setObjectName("toolBar")
         MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.toolBar)
-        self.new = QtWidgets.QAction(QtGui.QIcon('./resources/images/new.png'), '&new', self)
-        self.edit = QtWidgets.QAction(QtGui.QIcon('./resources/images/edit.png'),'&edit', self)
-        self.save = QtWidgets.QAction(QtGui.QIcon('./resources/images/save.png'), '&save', self)
-        self.refresh = QtWidgets.QAction(QtGui.QIcon('./resources/images/refresh.png'), '&refresh', self)
-        self.open = QtWidgets.QAction(QtGui.QIcon('./resources/images/open.png'), '&open', self)
+        self.new = QtWidgets.QAction(QtGui.QIcon(NEW_PNG), '&new', self)
+        self.edit = QtWidgets.QAction(QtGui.QIcon(EDIT_PNG),'&edit', self)
+        self.save = QtWidgets.QAction(QtGui.QIcon(SAVE_PNG), '&save', self)
+        self.refresh = QtWidgets.QAction(QtGui.QIcon(REFRESH_PNG), '&refresh', self)
+        self.open = QtWidgets.QAction(QtGui.QIcon(OPEN_PNG), '&open', self)
         self.toolBar.addAction(self.new)
         self.toolBar.addAction(self.edit)
         self.toolBar.addAction(self.save)
@@ -204,21 +229,21 @@ class Ui_MainWindow(object):
 
 
         #定义动作信息
-        self.actionNew = QtWidgets.QAction(QtGui.QIcon('./resources/images/new.png'), '&New', self)
+        self.actionNew = QtWidgets.QAction(QtGui.QIcon(NEW_PNG), '&New', self)
         self.actionNew.setObjectName("actionNew")
-        self.actionSave = QtWidgets.QAction(QtGui.QIcon('./resources/images/save_as.png'), '&Save', self)
+        self.actionSave = QtWidgets.QAction(QtGui.QIcon(SAVE_AS_PNG), '&Save', self)
         self.actionSave.setObjectName("actionSave")
-        self.actionSetting = QtWidgets.QAction(QtGui.QIcon('./resources/images/setting.png'), '&Setting', self)
+        self.actionSetting = QtWidgets.QAction(QtGui.QIcon(SETTING_PNG), '&Setting', self)
         self.actionSetting.setObjectName("actionSetting")
-        self.actionQuit = QtWidgets.QAction(QtGui.QIcon('./resources/images/quit.png'), '&Quit', self)
+        self.actionQuit = QtWidgets.QAction(QtGui.QIcon(QUIT_PNG), '&Quit', self)
         self.actionQuit.setObjectName("actionQuit")
-        self.actionPaint = QtWidgets.QAction(QtGui.QIcon('./resources/images/paint.png'), '&Paint', self)
+        self.actionPaint = QtWidgets.QAction(QtGui.QIcon(PAINT_PNG), '&Paint', self)
         self.actionPaint.setObjectName("actionPaint")
-        self.actionEnCom = QtWidgets.QAction(QtGui.QIcon('./resources/images/EnCom.png'), '&EnCom', self)
+        self.actionEnCom = QtWidgets.QAction(QtGui.QIcon(ENCOM_PNG), '&EnCom', self)
         self.actionEnCom.setObjectName("actionEnCom")
-        self.actionMV = QtWidgets.QAction(QtGui.QIcon('./resources/images/MV.png'), '&MV', self)
+        self.actionMV = QtWidgets.QAction(QtGui.QIcon(MV_PNG), '&MV', self)
         self.actionMV.setObjectName("actionMV")
-        self.actionBeatMV = QtWidgets.QAction(QtGui.QIcon("./resources/images/MV.png"), '&BeatMV', self)
+        self.actionBeatMV = QtWidgets.QAction(QtGui.QIcon(MV_PNG), '&BeatMV', self)
         self.actionMV.setObjectName("actionBeatMV")
         
 

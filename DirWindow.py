@@ -6,6 +6,11 @@ from PyQt5.QtCore import QRect, Qt
 from DirWindowUi import Ui_DirWindow
 from pathlib import Path
 
+if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+    bundle_dir = Path(sys._MEIPASS)
+else:
+    bundle_dir = Path(__file__).parent
+SETTING_JSON_PATH = str(Path.cwd()/bundle_dir/"resources/json/setting.json")
 
 class MyDirWindow(QWidget, Ui_DirWindow):
 	def __init__(self):
@@ -19,7 +24,7 @@ class MyDirWindow(QWidget, Ui_DirWindow):
 	def comfirmDir(self):
 		dic = {}
 		dic["directory"] = self.lineEdit.text()
-		with open("./resources/json/setting.json", 'w') as dump_f:
+		with open(SETTING_JSON_PATH, 'w') as dump_f:
 			jsonStr = json.dumps(dic,indent = 4)
 			dump_f.write(jsonStr)
 
