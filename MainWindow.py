@@ -19,11 +19,13 @@ from pathlib import Path
 from animation import AnimationData
 from copy import deepcopy
 from threading import Thread
+from ChicMV import ChicMv
 
 FONT_JSON_PATH = os.path.join(os.getcwd(), "resources", "json", "font.json")
 SETTING_JSON_PATH = os.path.join(os.getcwd(), "resources", "json", "setting.json")
 ENCRYPT_JAR_PATH = os.path.join(os.getcwd(), "resources", "jar", "encrypt.jar")
 GENERATE_JAR_PATH = os.path.join(os.getcwd(), "resources", "jar", "generate.jar")
+MUSIC_FORMAT = ["mp3", "aac"]
 
 class MyMainWindow(QMainWindow,Ui_MainWindow):
 	#初始化
@@ -1362,14 +1364,29 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			if self.comBox_1.currentText() != "":
 				self.cleanFile(self.path)
 				shutil.copytree(pathMaterial, self.path)
-				generate =os.path.join(os.getcwd(),"resources", "jar", "generate.jar")
-				command = "java -jar " + generate + " -an " + self.path
-				info = subprocess.check_call(command, shell=True)
-				if info == 0:
-					QMessageBox.information(self, "提示", "MV素材输出成功！")
-				else:
-					QMessageBox.information(self, "提示", info)
-				self.handlerFilter()
+				self.renameAudio()
+				for root, dirs, files in os.walk(self.path):
+					for dir in dirs:
+						if root == self.path:
+							dic = {}
+							path = os.path.join(root, dir)
+							filterFile = os.path.join(root, dir, "filter.txt")
+							noreplaceFile = os.path.join(root, dir, "noreplace.txt")
+							overlayFile = os.path.join(root, dir, "overlay.mp4")
+							overlay1File = os.path.join(root, dir, "overlay1.mp4")
+							aacFile = os.path.join(root, dir, "audio.aac")
+							mp3File = os.path.join(root, dir, "audio.mp3")
+							dic["filter"] = self.existFile(filterFile)
+							dic["noreplace"] = self.existFile(noreplaceFile)
+							dic["overlay"] = self.existFile(overlayFile)
+							dic["overlay1"] = self.existFile(overlay1File)
+							if self.existFile(aacFile) or self.existFile(mp3File):
+								dic["audio"] = True
+							else:
+								dic["audio"] = False
+							mv = ChicMv(path, dic)
+							mv.writeConfig()
+				QMessageBox.information(self, "提示", "MV素材输出成功！")
 				if self.encryption() == 0:
 					t = Thread(name="subthread_compressing", target=self.compressing, args=())
 					t.start()
@@ -1378,7 +1395,23 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 				QMessageBox.information(self, "提示", "请选择MV素材组！")
 		else:
 			QMessageBox.information(self, "提示", "请选择MV素材组！")
-		
+	
+	def existFile(self, path):
+		if os.path.exists(path):
+			return True
+		else:
+			return False
+	
+	def renameAudio(self):
+		for root,dirs,files in os.walk(self.path):
+			for file_ in files:
+				name = file_.split(".")
+				if name[1].lower() in MUSIC_FORMAT and name[0] != "audio":
+					old = os.path.join(root, file_)
+					new = os.path.join(root, "audio."+name[1])
+					os.rename(old, new)
+
+
 	def handlerFilter(self):
 		pathIn = self.path[:-2] + "in"
 		for root, dirs, files in os.walk(pathIn):
@@ -1419,27 +1452,6 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 		with open(path, "w") as df:
 			jsonStr = json.dumps(dic_1, sort_keys=True, indent=2, ensure_ascii=False)
 			df.write(jsonStr)
-	
-	def createBeatMV(self):
-		# pathMaterial = self.path[:-2] + "material"
-		# if os.path.exists(pathMaterial):
-		# 	if self.comBox_1.currentText() != "":
-		# 		self.cleanFile(self.path)
-		# 		shutil.copytree(pathMaterial, self.path)
-		# 		generate = os.path.join(os.getcwd(),"resources", "jar", "generate.jar")
-		# 		command = "java -jar " + generate + " -an -vex " + self.path
-		# 		info = subprocess.check_call(command, shell=True)
-		# 		if info == 0:
-		# 			QMessageBox.information(self, "提示", "MV素材输出成功！")
-		# 		else:
-		# 			QMessageBox.information(self, "提示", info)
-		# 		self.encryption()
-		# 		self.compressing()
-		# 	else:
-		# 		QMessageBox.information(self, "提示", "请选择BeatMV素材组！")
-		# else:
-		# 	QMessageBox.information(self, "提示", "请选择BeatMV素材")
-		pass 
 
 	def cleanFile(self, path):
 		files = os.listdir(path)

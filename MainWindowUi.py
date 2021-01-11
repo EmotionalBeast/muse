@@ -246,7 +246,7 @@ class Ui_MainWindow(object):
         self.actionPaint.triggered.connect(self.openPaintWindow)
         self.actionEnCom.triggered.connect(self.EnCom)
         self.actionMV.triggered.connect(self.createChicMV)
-        self.actionBeatMV.triggered.connect(self.createBeatMV)
+        # self.actionBeatMV.triggered.connect(self.createBeatMV)
 
         #工具栏的功能定义
         self.new.triggered.connect(self.openFileWindow)
