@@ -8,3 +8,4 @@ test*
 /dist
 /build
 setup.py
+Muse.spec

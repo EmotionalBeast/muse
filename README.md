@@ -35,3 +35,13 @@ PyQt5 shutil pillow json
 1、自由添加删除表格一行数据
 2、背景有颜色值（16进制RGB）
 3、"background_line_color": "",
+
+
+打包：
+使用pyinstaller打包
+	1、终端进入项目文件假
+	2、执行命令（--add-data 加入资源文件夹，-F 指定启动文件位置 -w 无黑窗log， -i 指定图片文件）
+	pyinstaller --add-data="resources:resources" -F -w -i ./Muse.icns ./Muse.py
+	3、清空上次打包缓存
+		删除build dist文件夹
+		删除Muse.spec文件夹

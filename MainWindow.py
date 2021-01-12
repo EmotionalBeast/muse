@@ -20,17 +20,9 @@ from animation import AnimationData
 from copy import deepcopy
 from threading import Thread
 from ChicMV import ChicMv
-from pathlib import Path
+from StaticFilePath import FONT_JSON_PATH, SETTING_JSON_PATH, ENCRYPT_JAR_PATH
 
 
-if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
-    bundle_dir = Path(sys._MEIPASS)
-else:
-    bundle_dir = Path(__file__).parent
-
-FONT_JSON_PATH = str(Path.cwd()/bundle_dir/"resources/json/font.json")
-SETTING_JSON_PATH = str(Path.cwd()/bundle_dir/"resources/json/setting.json")
-ENCRYPT_JAR_PATH = str(Path.cwd()/bundle_dir/"resources/jar/encrypt.jar")
 # GENERATE_JAR_PATH = str(Path.cwd()/bundle_dir/"resources/jar/generate.jar")
 MUSIC_FORMAT = ["mp3", "aac"]
 

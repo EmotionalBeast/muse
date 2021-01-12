@@ -4,13 +4,8 @@ from PyQt5.QtWidgets import QWidget, QApplication, QFileDialog, QMessageBox, QGr
 from PyQt5.QtGui import QPixmap, QImage
 from PyQt5.QtCore import QRect, Qt
 from DirWindowUi import Ui_DirWindow
-from pathlib import Path
+from StaticFilePath import SETTING_JSON_PATH
 
-if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
-    bundle_dir = Path(sys._MEIPASS)
-else:
-    bundle_dir = Path(__file__).parent
-SETTING_JSON_PATH = str(Path.cwd()/bundle_dir/"resources/json/setting.json")
 
 class MyDirWindow(QWidget, Ui_DirWindow):
 	def __init__(self):

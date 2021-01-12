@@ -8,15 +8,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import json, sys
-from pathlib import Path
-
-if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
-    bundle_dir = Path(sys._MEIPASS)
-else:
-    bundle_dir = Path(__file__).parent
-SETTING_JSON_PATH = str(Path.cwd()/bundle_dir/"resources/json/setting.json")
-
+import json
+from StaticFilePath import SETTING_JSON_PATH
 
 class Ui_DirWindow(object):
 

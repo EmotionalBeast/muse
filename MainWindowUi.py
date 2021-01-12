@@ -10,31 +10,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QFileDialog, QMessageBox, 
 													QTableWidgetItem, QAbstractItemView, QComboBox)
 from PyQt5.QtGui import QColor
-
-from pathlib import Path
-import sys
-
-if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
-    bundle_dir = Path(sys._MEIPASS)
-else:
-    bundle_dir = Path(__file__).parent
-
-NEW_PNG = str(Path.cwd()/bundle_dir/"resources/images/new.png")
-EDIT_PNG = str(Path.cwd()/bundle_dir/"resources/images/edit.png")
-ENCOM_PNG = str(Path.cwd()/bundle_dir/"resources/images/EnCom.png")
-ENCRYPT_PNG = str(Path.cwd()/bundle_dir/"resources/images/encrypt.png")
-MV_PNG = str(Path.cwd()/bundle_dir/"resources/images/MV.png")
-OPEN_PNG = str(Path.cwd()/bundle_dir/"resources/images/open.png")
-PAINT_PNG = str(Path.cwd()/bundle_dir/"resources/images/paint.png")
-QUIT_PNG = str(Path.cwd()/bundle_dir/"resources/images/quit.png")
-REFRESH_PNG = str(Path.cwd()/bundle_dir/"resources/images/refresh.png")
-RESIZE_PNG = str(Path.cwd()/bundle_dir/"resources/images/resize.png")
-SAVE_AS_PNG = str(Path.cwd()/bundle_dir/"resources/images/save_as.png")
-SAVE_PNG = str(Path.cwd()/bundle_dir/"resources/images/save.png")
-SETTING_PNG = str(Path.cwd()/bundle_dir/"resources/images/setting.png")
-TOOL_PNG = str(Path.cwd()/bundle_dir/"resources/images/tool.png")
-
-
+from StaticFilePath import (NEW_PNG, EDIT_PNG, ENCOM_PNG, ENCRYPT_PNG, MV_PNG, OPEN_PNG, PAINT_PNG, QUIT_PNG,
+                                        REFRESH_PNG, RESIZE_PNG, SAVE_AS_PNG, SAVE_PNG, SETTING_PNG, TOOL_PNG)
 
 # import json, os
 NORMAL_CELL = []
