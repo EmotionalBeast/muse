@@ -34,3 +34,7 @@ SAVE_AS_PNG = str(Path.cwd()/bundle_dir/"resources/images/save_as.png")
 SAVE_PNG = str(Path.cwd()/bundle_dir/"resources/images/save.png")
 SETTING_PNG = str(Path.cwd()/bundle_dir/"resources/images/setting.png")
 TOOL_PNG = str(Path.cwd()/bundle_dir/"resources/images/tool.png")
+
+#7z
+MAC_7z = str(Path.cwd()/bundle_dir/"resources/bin/7z")
+WIN_7z = str(Path.cwd()/bundle_dir/"resources/bin/7za.exe")

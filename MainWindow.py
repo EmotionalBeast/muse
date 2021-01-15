@@ -20,7 +20,7 @@ from animation import AnimationData
 from copy import deepcopy
 from threading import Thread
 from ChicMV import ChicMv
-from StaticFilePath import FONT_JSON_PATH, SETTING_JSON_PATH, ENCRYPT_JAR_PATH
+from StaticFilePath import FONT_JSON_PATH, SETTING_JSON_PATH, ENCRYPT_JAR_PATH, MAC_7z, WIN_7z
 
 
 # GENERATE_JAR_PATH = str(Path.cwd()/bundle_dir/"resources/jar/generate.jar")
@@ -1299,10 +1299,7 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 					pathNeed = os.path.join(pathOut, dir)
 					tmp = dir + ".7z"
 					targetFile = os.path.join(pathOrigin, tmp)
-					print("pathNeed:", pathNeed)
-					print("targetFile:", targetFile)
-					command = "7z a " + targetFile + " " + pathNeed
-					subprocess.call(command, shell=True)
+					subprocess.call([MAC_7z, "a", targetFile, pathNeed])
 		self.cleanFile(pathOut)
 		os.mkdir(pathOut)
 
