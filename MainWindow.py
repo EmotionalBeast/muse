@@ -1071,15 +1071,15 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 																"constant": float(item_8)
 																}
 														}
-					cell_dic["ignore"] = int(self.tableWidget_2.item(i, 15).text())
+					# cell_dic["ignore"] = int(self.tableWidget_2.item(i, 15).text())
 					self.item.append(cell_dic)
-					for name in self.NMDic[cell_dic["imageId"]]:
-						dic = {}
-						dic = deepcopy(cell_dic)
-						if name != dic["keyPath"]:
-							dic["keyPath"] = name
-							dic["ignore"] = 1
-							self.item.append(dic)
+					# for name in self.NMDic[cell_dic["imageId"]]:
+					# 	dic = {}
+					# 	dic = deepcopy(cell_dic)
+					# 	if name != dic["keyPath"]:
+					# 		dic["keyPath"] = name
+					# 		dic["ignore"] = 1
+					# 		self.item.append(dic)
 
     				
 		if self.spinBox_2.value() != 0:
