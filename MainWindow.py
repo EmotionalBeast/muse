@@ -21,6 +21,7 @@ from copy import deepcopy
 from threading import Thread
 from ChicMV import ChicMv
 from StaticFilePath import FONT_JSON_PATH, SETTING_JSON_PATH, ENCRYPT_JAR_PATH, MAC_7z, WIN_7z
+from p7z import SevenZip
 
 
 # GENERATE_JAR_PATH = str(Path.cwd()/bundle_dir/"resources/jar/generate.jar")
@@ -39,9 +40,10 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			self.dict1 = json.loads(jsonStr, strict = False)
 		#反转字典，赋值给新的字典
 		self.dict2 = {v:k for k,v in self.dict1.items()}
+		self.p7zip = SevenZip()
 
 
-	#将列表赋给comBox
+	#将列表赋给comBoxF
 	def templateList(self,text):
 		if self.comBox_2.count() != 0:
 			self.comBox_2.clear()
@@ -1297,9 +1299,10 @@ class MyMainWindow(QMainWindow,Ui_MainWindow):
 			for dir in dirs:
 				if root == pathOut:
 					pathNeed = os.path.join(pathOut, dir)
-					tmp = dir + ".7z"
-					targetFile = os.path.join(pathOrigin, tmp)
-					subprocess.call([MAC_7z, "a", targetFile, pathNeed])
+					# tmp = dir + ".7z"
+					targetFile = os.path.join(pathOrigin, dir)
+					# subprocess.call([MAC_7z, "a", targetFile, pathNeed])
+					self.p7zip.pack(targetFile, pathNeed)
 		self.cleanFile(pathOut)
 		os.mkdir(pathOut)
 
